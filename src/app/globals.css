@@ -1,0 +1,359 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ============================================================
+   KIRTI RANA — Brand Design System
+   Deep Navy #0B1F3A · Royal Blue #164E9A · Gold #C9A227 · Saffron #F28C28
+   ============================================================ */
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-inter);
+  --font-heading: var(--font-poppins);
+  --font-devanagari: var(--font-noto-devanagari);
+
+  /* Brand palette */
+  --color-navy: #0B1F3A;
+  --color-navy-700: #122A4D;
+  --color-navy-600: #1A3A63;
+  --color-royal: #164E9A;
+  --color-royal-600: #1A5BB0;
+  --color-royal-50: #EEF4FC;
+  --color-gold: #C9A227;
+  --color-gold-600: #B08D1F;
+  --color-gold-50: #FBF6E6;
+  --color-saffron: #F28C28;
+  --color-saffron-600: #D9771A;
+  --color-mist: #F7F8FA;
+  --color-ink: #111827;
+  --color-ink-600: #374151;
+
+  /* shadcn-compatible tokens (mapped to brand) */
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  /* Animations */
+  --animate-fade-up: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-fade-in: fade-in 0.8s ease both;
+  --animate-slide-up: slide-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-image-reveal: image-reveal 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-shimmer: shimmer 2.5s linear infinite;
+}
+
+:root {
+  --radius: 0.75rem;
+  --background: #FFFFFF;
+  --foreground: #111827;
+  --card: #FFFFFF;
+  --card-foreground: #111827;
+  --popover: #FFFFFF;
+  --popover-foreground: #111827;
+  --primary: #0B1F3A;
+  --primary-foreground: #FFFFFF;
+  --secondary: #F7F8FA;
+  --secondary-foreground: #0B1F3A;
+  --muted: #F1F3F7;
+  --muted-foreground: #4B5563;
+  --accent: #C9A227;
+  --accent-foreground: #0B1F3A;
+  --destructive: #B91C1C;
+  --border: #E5E7EB;
+  --input: #E5E7EB;
+  --ring: #164E9A;
+  --chart-1: #164E9A;
+  --chart-2: #C9A227;
+  --chart-3: #F28C28;
+  --chart-4: #0B1F3A;
+  --chart-5: #374151;
+  --sidebar: #0B1F3A;
+  --sidebar-foreground: #FFFFFF;
+  --sidebar-primary: #C9A227;
+  --sidebar-primary-foreground: #0B1F3A;
+  --sidebar-accent: #122A4D;
+  --sidebar-accent-foreground: #FFFFFF;
+  --sidebar-border: #1A3A63;
+  --sidebar-ring: #C9A227;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+    letter-spacing: -0.015em;
+  }
+  ::selection {
+    background-color: #C9A227;
+    color: #0B1F3A;
+  }
+}
+
+/* ============================================================
+   Typography helpers
+   ============================================================ */
+.font-heading {
+  font-family: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+}
+.font-devanagari {
+  font-family: var(--font-noto-devanagari), var(--font-inter), sans-serif;
+}
+
+/* ============================================================
+   Brand utilities
+   ============================================================ */
+.text-balance {
+  text-wrap: balance;
+}
+.text-pretty {
+  text-wrap: pretty;
+}
+
+/* Gold gradient text */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #E6C14B 0%, #C9A227 45%, #9A7A1A 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* Premium section eyebrow */
+.eyebrow {
+  font-family: var(--font-poppins), sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-weight: 600;
+  font-size: 0.72rem;
+}
+
+/* Subtle pattern background (Indian heritage grid) */
+.bg-heritage-grid {
+  background-image:
+    linear-gradient(to right, rgba(201, 162, 39, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(201, 162, 39, 0.06) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+.bg-navy-grid {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Gold hairline */
+.gold-hairline {
+  height: 3px;
+  width: 64px;
+  background: linear-gradient(90deg, #C9A227 0%, #F28C28 100%);
+  border-radius: 9999px;
+}
+
+/* Premium card shadow */
+.shadow-premium {
+  box-shadow: 0 1px 2px rgba(11, 31, 58, 0.04), 0 8px 24px -8px rgba(11, 31, 58, 0.12);
+}
+.shadow-premium-lg {
+  box-shadow: 0 1px 3px rgba(11, 31, 58, 0.05), 0 20px 48px -16px rgba(11, 31, 58, 0.22);
+}
+.shadow-gold-glow {
+  box-shadow: 0 10px 40px -12px rgba(201, 162, 39, 0.45);
+}
+
+/* ============================================================
+   Keyframe animations
+   ============================================================ */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(48px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes image-reveal {
+  from { opacity: 0; transform: scale(1.06); filter: blur(6px); }
+  to { opacity: 1; transform: scale(1); filter: blur(0); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(2deg); }
+}
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgba(201, 162, 39, 0.4); }
+  70% { box-shadow: 0 0 0 14px rgba(201, 162, 39, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(201, 162, 39, 0); }
+}
+@keyframes gradient-pan {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-float-slow { animation: float-slow 7s ease-in-out infinite; }
+.animate-pulse-ring { animation: pulse-ring 2.4s infinite; }
+
+/* Reveal-on-scroll: base hidden state, .is-visible triggers animation */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-36px);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal-left.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+.reveal-right {
+  opacity: 0;
+  transform: translateX(36px);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal-right.is-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.94);
+  transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal-scale.is-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Image hover zoom container */
+.img-zoom { overflow: hidden; }
+.img-zoom img {
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.img-zoom:hover img {
+  transform: scale(1.06);
+}
+
+/* ============================================================
+   Custom scrollbar
+   ============================================================ */
+.scrollbar-premium::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.scrollbar-premium::-webkit-scrollbar-track {
+  background: transparent;
+}
+.scrollbar-premium::-webkit-scrollbar-thumb {
+  background: rgba(11, 31, 58, 0.18);
+  border-radius: 9999px;
+}
+.scrollbar-premium::-webkit-scrollbar-thumb:hover {
+  background: rgba(11, 31, 58, 0.32);
+}
+
+/* ============================================================
+   Skip link + focus
+   ============================================================ */
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -100px;
+  z-index: 100;
+  background: #0B1F3A;
+  color: #fff;
+  padding: 0.6rem 1rem;
+  border-radius: 0.5rem;
+  transition: top 0.25s ease;
+}
+.skip-link:focus {
+  top: 1rem;
+}
+
+:focus-visible {
+  outline: 2px solid #C9A227;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ============================================================
+   Reduced motion
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal,
+  .reveal-left,
+  .reveal-right,
+  .reveal-scale {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
