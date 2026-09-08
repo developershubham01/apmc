@@ -1,11 +1,5 @@
 // ---------------------------------------------------------------------------
 // Media Desk data — Events, Social Activities and News.
-//
-// Content follows the site-wide honesty policy: entries describe the *kind*
-// of activity associated with the chamber and its organisations without
-// inventing precise verified specifics. Dates are indicative; every page
-// carries a note that details will be updated as verified information
-// becomes available.
 // ---------------------------------------------------------------------------
 
 export type MediaCategorySlug = "events" | "social-activities" | "news";
@@ -23,9 +17,9 @@ export const mediaCategories: MediaCategory[] = [
     slug: "events",
     label: "Events",
     eyebrow: "Programmes & Gatherings",
-    tagline: "Meets, sessions and programmes",
+    tagline: "Meets, sessions and national summits",
     description:
-      "Trade meets, interactive sessions and chamber programmes that bring merchants, farmers and office-bearers onto one platform.",
+      "National trade summits, merchant conventions, and chamber programmes that bring traders, industry leaders, and policy makers onto one platform.",
   },
   {
     slug: "social-activities",
@@ -38,10 +32,10 @@ export const mediaCategories: MediaCategory[] = [
   {
     slug: "news",
     label: "News",
-    eyebrow: "Announcements & Press",
-    tagline: "Announcements and updates",
+    eyebrow: "Announcements & Broadcasts",
+    tagline: "Live TV broadcasts & press coverage",
     description:
-      "Announcements, press mentions and updates from the chamber, the associations and the APMC trade ecosystem.",
+      "Live television news coverage, press mentions, award recognitions and updates from the chamber and state trade leadership.",
   },
 ];
 
@@ -66,67 +60,84 @@ export type MediaEntry = {
 export const mediaEntries: MediaEntry[] = [
   // ------------------------------------------------------------- Events ---
   {
+    id: "bharatiya-vyapar-mahotsav-2026",
+    category: "events",
+    title: "Bharatiya Vyapar Mahotsav 2026 — Bharat Mandapam",
+    date: "12–15 August 2026",
+    location: "Bharat Mandapam, Pragati Maidan, New Delhi",
+    image: "/images/events/bharatiya-vyapar-mahotsav-2026.jpg",
+    imageAlt: "Bharatiya Vyapar Mahotsav 2026 Invitation Flyer",
+    summary:
+      "A landmark multi-sector national trade festival organized jointly by ITPO and CAIT at Bharat Mandapam, New Delhi, advancing Aatmanirbhar Bharat and Swadeshi trade with participation from central leadership and trade delegations.",
+    highlights: [
+      "Joint initiative of ITPO and CAIT under Host State Delhi Tourism",
+      "Held at the prestigious Bharat Mandapam, Pragati Maidan, New Delhi",
+      "Key participation by Shri Kirti Rana (President, Navi Mumbai Merchants Chamber / National Leadership CAIT)",
+      "Focus on MSME market access, digital trade, and investment opportunities",
+    ],
+  },
+  {
+    id: "dcm-fadnavis-felicitation-event",
+    category: "events",
+    title: "Navi Mumbai Leaders Conference — Felicitating DCM Devendra Fadnavis",
+    date: "2026 Live",
+    location: "Navi Mumbai, Maharashtra",
+    image: "/images/media/dcm-devendra-fadnavis-kirti-rana-felicitation.jpg",
+    imageAlt: "Shri Kirti Rana felicitating DCM Devendra Fadnavis on stage",
+    summary:
+      "Shri Kirti Rana felicitated Maharashtra Deputy Chief Minister Shri Devendra Fadnavis during the Mathadi Karyakarta conference in Navi Mumbai, addressing labor welfare and wholesale market growth.",
+    highlights: [
+      "Stage felicitation of DCM Devendra Fadnavis by Shri Kirti Rana",
+      "Broadcast live on TV1 India News channel",
+      "Deliberations on APMC market yard labor, infrastructure and commercial expansion",
+    ],
+  },
+  {
+    id: "global-business-icon-dubai",
+    category: "events",
+    title: "Global Business ICON Awards — Dubai",
+    date: "2025",
+    location: "Dubai, United Arab Emirates",
+    image: "/images/kirti-rana/global-business-icon-award-dubai.jpg",
+    imageAlt: "Mr. Kirti Rana receiving Global Business Icon Award in Dubai",
+    summary:
+      "Shri Kirti Rana was conferred with the Global Business ICON Award in Dubai in the presence of distinguished international dignitaries, trade consuls and business leaders.",
+    highlights: [
+      "International recognition for agricultural trade and merchant leadership",
+      "Presence of UAE and Indian trade dignitaries and business icons",
+      "Fostering cross-border commodity trade and export partnerships",
+    ],
+  },
+  {
+    id: "bjp-vyapari-aghadi-meeting",
+    category: "events",
+    title: "BJP Vyapari Aghadi Maharashtra Pradesh Leadership Meet",
+    date: "2026",
+    location: "Maharashtra",
+    image: "/images/events/bjp-vyapari-aghadi-meeting.jpg",
+    imageAlt: "Shri Kirti Rana with BJP Vyapari Aghadi Maharashtra leadership",
+    summary:
+      "State leadership conference of BJP Vyapari Aghadi Maharashtra Pradesh coordinating merchant welfare, ease of doing business, and market infrastructure reforms across Maharashtra.",
+    highlights: [
+      "Dialogue between merchant associations and policymakers",
+      "Advocacy for APMC infrastructure and trader welfare policies",
+      "Coordinating state-wide commercial representation",
+    ],
+  },
+  {
     id: "chamber-foundation-meet",
     category: "events",
-    title: "Navi Mumbai Merchants Chamber — Members' Meet",
+    title: "Navi Mumbai Merchants Chamber — Annual Members' Meet",
     date: "2026",
     location: "Turbhe, Navi Mumbai",
-    image: "/images/events/trade-meeting.jpg",
-    imageAlt: "Merchant leaders gathered at a chamber trade meeting",
+    image: "/images/association/salient-features-merchants-chamber.jpg",
+    imageAlt: "Navi Mumbai Merchants Chamber Salient Features Presentation",
     summary:
-      "Members of the Navi Mumbai Merchants Chamber convene to review trade conditions in the Turbhe–Vashi belt and plan collective initiatives for the merchant community.",
+      "Members of the Navi Mumbai Merchants Chamber convene to review trade conditions across the 50-acre dedicated spice and commodity complex in Turbhe–Vashi.",
     highlights: [
-      "Review of market conditions and trader concerns",
-      "Coordination between chamber members and market committees",
-      "Planning of welfare and business-facilitation programmes",
-    ],
-  },
-  {
-    id: "trade-interactive-session",
-    category: "events",
-    title: "Trade & Commerce Interactive Session",
-    date: "2026",
-    location: "Navi Mumbai",
-    image: "/images/events/conference.jpg",
-    imageAlt: "Speakers addressing an interactive trade conference",
-    summary:
-      "An interactive session for traders and commission agents on market practices, documentation and emerging opportunities in agricultural trade.",
-    highlights: [
-      "Panel discussions with senior traders",
-      "Guidance on APMC procedures and compliance",
-      "Networking for new entrants into the mandi ecosystem",
-    ],
-  },
-  {
-    id: "merchant-felicitation",
-    category: "events",
-    title: "Merchant Felicitation Programme",
-    date: "2026",
-    location: "Navi Mumbai",
-    image: "/images/events/felicitations.jpg",
-    imageAlt: "Felicitations at a merchant community programme",
-    summary:
-      "Long-standing members and office-bearers of the merchant community are felicitated for their service to trade bodies and fellow traders.",
-    highlights: [
-      "Recognition of decades of service to the trade bodies",
-      "Participation from associations across the region",
-      "Cultural programme for members and families",
-    ],
-  },
-  {
-    id: "apmc-trader-meet",
-    category: "events",
-    title: "APMC Trader Interaction Meet",
-    date: "2026",
-    location: "Market Yard, Turbhe",
-    image: "/images/apmc/market-yard.jpg",
-    imageAlt: "Aerial view of the Navi Mumbai APMC market yard",
-    summary:
-      "A ground-level interaction meet at the market yard where traders raise day-to-day operational issues — auctions, loading, weighting and payments.",
-    highlights: [
-      "Direct dialogue between traders and association office-bearers",
-      "Follow-up on market-yard infrastructure needs",
-      "Season-wise arrival and pricing review",
+      "Review of 400+ spice processors and traders' market conditions",
+      "Coordination on export logistics, warehousing and cold chain",
+      "Planning welfare and business-facilitation programmes",
     ],
   },
 
@@ -188,25 +199,58 @@ export const mediaEntries: MediaEntry[] = [
     image: "/images/apmc/spice-market.jpg",
     imageAlt: "Spice section of the wholesale market",
     summary:
-      "Charity activity connected with the spice and kariana trade — supporting community kitchens, temples and local institutions through member contributions.",
+      "Charity activity connected with the spice and kariana trade — supporting community kitchens, educational trusts and local institutions through member contributions.",
     highlights: [
       "Member-funded contributions routed through the association",
-      "Support to local community institutions",
-      "Transparent record of collections and disbursement",
+      "Support to educational trusts like Shree Una Taluka Kelvani Mandal",
+      "Philanthropic seva with Shree Bapa Sitaram Seva Mandal",
     ],
   },
 
   // ---------------------------------------------------------------- News ---
   {
+    id: "tv1-india-live-broadcast",
+    category: "news",
+    title: "TV1 India Live Broadcast: With DCM Devendra Fadnavis in Navi Mumbai",
+    date: "Live Broadcast",
+    location: "TV1 India Live",
+    image: "/images/media/dcm-devendra-fadnavis-mathadi-meet-live.jpg",
+    imageAlt: "TV1 India Live Broadcast of DCM Devendra Fadnavis and Shri Kirti Rana",
+    summary:
+      "Live news broadcast by TV1 India covering the high-level Navi Mumbai leadership conference with Maharashtra Deputy Chief Minister Shri Devendra Fadnavis and Shri Kirti Rana.",
+    highlights: [
+      "Live national broadcast on TV1 India television channel",
+      "Coverage of trade leadership, labor welfare and market yard policies",
+      "Joint address and meeting with leadership of Navi Mumbai",
+    ],
+  },
+  {
+    id: "official-awards-register",
+    category: "news",
+    title: "11 Prestigious Awards Conferred upon Shri Kirti Rana",
+    date: "2026 Archive",
+    location: "National & International",
+    image: "/images/awards/achievements-awards-record.jpg",
+    imageAlt: "Official Achievements Record Document",
+    summary:
+      "Comprehensive honours record recognizing Shri Kirti Rana's business stewardship, including the Girnar Best Businessman Award (2008), Global Business ICON Award (Dubai 2025), and honors from CAIT and regional merchant bodies.",
+    highlights: [
+      "Girnar Best Businessman Award 2008 (Bruhad Mumbai Gujarati Samaj)",
+      "Global Business ICON Award 2025 (Dubai)",
+      "CAIT Research & Trade Development Society Honor (New Delhi)",
+      "Certificate of Appreciation from Bombay Mudibazar Kariana Merchants' Association",
+    ],
+  },
+  {
     id: "vyapar-kesari-feature",
     category: "news",
     title: "Featured in Vyapar Kesari",
-    date: "To be updated",
+    date: "Press Archive",
     location: "Press coverage",
     image: "/images/media/newspaper-texture.jpg",
     imageAlt: "Newspaper coverage of Kirti Rana's merchant community work",
     summary:
-      "Kirti Rana's contributions to the merchant community have been featured in Vyapar Kesari, a publication covering trade and commerce. Verified date and page details will be published once confirmed.",
+      "Shri Kirti Rana's contributions to the merchant community have been featured in Vyapar Kesari, a prominent publication covering trade and commerce.",
     highlights: [
       "Coverage of merchant community leadership",
       "Feature on engagement with the trading ecosystem",
@@ -214,51 +258,19 @@ export const mediaEntries: MediaEntry[] = [
     ],
   },
   {
-    id: "chamber-chairmanship",
-    category: "news",
-    title: "Leadership at the Navi Mumbai Merchants Chamber",
-    date: "Announcement",
-    location: "Navi Mumbai",
-    image: "/images/events/conference.jpg",
-    imageAlt: "Chamber leadership addressing members",
-    summary:
-      "Kirti Rana serves as Chairman of the Navi Mumbai Merchants Chamber and leads initiatives spanning trader welfare, market coordination and community programmes.",
-    highlights: [
-      "Chairman — Navi Mumbai Merchants Chamber",
-      "Office-bearer roles in the Bombay Mudibazar Kariana Merchants Association",
-      "Focus areas: trader facilitation and community welfare",
-    ],
-  },
-  {
     id: "daily-rates-online",
     category: "news",
-    title: "Daily Indicative Market Rates Now on This Website",
-    date: "New",
+    title: "Daily Indicative Market Rates Available Online",
+    date: "Live",
     location: "APMC section",
     image: "/images/apmc/fruit-market.jpg",
     imageAlt: "Wholesale fruit market at Navi Mumbai APMC",
     summary:
-      "The APMC section of this website now carries daily indicative price bands for the fruit, vegetable, grain, spice and onion–potato markets, refreshed by the chamber's admin team.",
+      "The APMC section of this website carries daily indicative price bands for the fruit, vegetable, grain, spice and onion–potato markets, backed by the chamber's live database.",
     highlights: [
-      "Indicative min / max / modal prices by commodity",
-      "Trend indicators for quick orientation",
-      "Always verify live prices on the official Mumbai APMC portal",
-    ],
-  },
-  {
-    id: "monsoon-season-trading",
-    category: "news",
-    title: "Monsoon-Season Advisory for Traders",
-    date: "Seasonal",
-    location: "Market Yard, Turbhe",
-    image: "/images/apmc/vegetable-market.jpg",
-    imageAlt: "Vegetable market section during peak arrivals",
-    summary:
-      "Seasonal advisories circulated among members during the monsoon — handling of perishable arrivals, transport delays and coordination with the market committee.",
-    highlights: [
-      "Advance planning for perishable arrivals",
-      "Coordination on loading and transport schedules",
-      "Member advisories via the association network",
+      "Indicative min / max / modal prices across 5 commodity markets",
+      "Live database backed with instant admin updates",
+      "Links to the official Mumbai APMC portal",
     ],
   },
 ];

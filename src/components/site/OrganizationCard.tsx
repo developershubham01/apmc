@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Building2, ChevronRight, Check } from "lucide-react";
 import type { Organization } from "@/data/organizations";
 import { ScrollReveal } from "./ScrollReveal";
@@ -58,14 +59,41 @@ export function OrganizationCard({
           </div>
         </div>
 
+        {/* Optional Image Banner if provided */}
+        {organization.image && detailed && (
+          <div className="relative aspect-[16/9] w-full overflow-hidden border-b border-border bg-navy">
+            <Image
+              src={organization.image}
+              alt={organization.name}
+              fill
+              className="object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+          </div>
+        )}
+
         {/* Body */}
         <div className="flex flex-1 flex-col px-6 py-6">
           <p className="text-sm italic text-royal">{organization.tagline}</p>
           <p className="mt-3 text-sm leading-relaxed text-ink-600">
             {detailed
               ? organization.description
-              : `${organization.description.slice(0, 150)}…`}
+              : `${organization.description.slice(0, 160)}…`}
           </p>
+
+          {/* Stats pills if available */}
+          {organization.stats && organization.stats.length > 0 && (
+            <div className="mt-4 flex flex-wrap gap-2">
+              {organization.stats.slice(0, 3).map((st) => (
+                <div
+                  key={st.label}
+                  className="rounded-lg border border-gold/30 bg-gold-50/50 px-2.5 py-1 text-xs"
+                >
+                  <span className="font-bold text-navy">{st.value}</span>{" "}
+                  <span className="text-ink-600 font-500">{st.label}</span>
+                </div>
+              ))}
+            </div>
+          )}
 
           <ul className="mt-5 space-y-2.5">
             {organization.highlights.slice(0, 4).map((h) => (

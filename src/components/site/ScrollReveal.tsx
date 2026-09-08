@@ -8,6 +8,7 @@ type RevealVariant = "up" | "left" | "right" | "scale";
 type ScrollRevealProps = {
   children: ReactNode;
   className?: string;
+  id?: string;
   variant?: RevealVariant;
   delay?: number;
   as?: ElementType;
@@ -25,6 +26,7 @@ const variantClass: Record<RevealVariant, string> = {
 export function ScrollReveal({
   children,
   className,
+  id,
   variant = "up",
   delay = 0,
   as: Tag = "div",
@@ -61,6 +63,7 @@ export function ScrollReveal({
   return (
     <Tag
       ref={ref as never}
+      id={id}
       className={cn(variantClass[variant], visible && "is-visible", className)}
       style={{ transitionDelay: `${delay}ms` }}
     >

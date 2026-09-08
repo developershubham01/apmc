@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { ExternalLink, MapPin, Store, ArrowUpRight, Newspaper } from "lucide-react";
+import Image from "next/image";
+import { ExternalLink, MapPin, Store, ArrowUpRight, Newspaper, Building2 } from "lucide-react";
 import { footerQuickLinks, footerOrganizations, siteConfig } from "@/data/site";
 import { NewsletterForm } from "./NewsletterForm";
 
@@ -7,32 +8,37 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="mt-auto relative bg-navy text-white">
+    <footer className="mt-auto relative bg-navy-950 text-white">
       {/* Top gold accent */}
       <div
         aria-hidden
-        className="h-1 w-full bg-gradient-to-r from-gold via-saffron to-gold"
+        className="h-1 w-full bg-gradient-to-r from-gold via-amber-300 to-gold shadow-gold-glow"
       />
       <div className="bg-navy-grid">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14 lg:py-16">
           <div className="grid gap-10 lg:gap-8 md:grid-cols-2 lg:grid-cols-4">
-            {/* Brand */}
+            {/* Brand with Official Logo */}
             <div className="lg:col-span-1">
               <div className="flex items-center gap-3">
-                <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-white/5 ring-1 ring-gold/40 text-gold font-heading font-700">
-                  KR
-                </span>
+                <div className="relative h-12 w-12 shrink-0 rounded-full bg-white p-0.5 shadow-gold-glow ring-2 ring-gold/60">
+                  <Image
+                    src="/images/logo.png"
+                    alt="Navi Mumbai Merchants Chamber Logo"
+                    fill
+                    className="object-contain"
+                  />
+                </div>
                 <div className="leading-tight">
-                  <p className="font-heading text-lg font-700 tracking-wide">
+                  <p className="font-heading text-lg font-800 tracking-wide text-white">
                     KIRTI RANA
                   </p>
-                  <p className="text-[0.66rem] uppercase tracking-[0.18em] text-white/55">
-                    Est. Business Leadership
+                  <p className="text-[0.66rem] uppercase tracking-[0.18em] text-gold font-600">
+                    Navi Mumbai Merchants&apos; Chamber
                   </p>
                 </div>
               </div>
               <p className="mt-5 text-sm leading-relaxed text-white/70 max-w-xs">
-                {siteConfig.tagline}
+                President — Navi Mumbai Merchants Chamber (30+ Years, 400+ Members, 50-Acre Spice Complex).
               </p>
               <p className="mt-4 flex items-start gap-2 text-sm text-white/60">
                 <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
@@ -171,17 +177,17 @@ export function Footer() {
           {/* Bottom bar */}
           <div className="mt-10 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-white/10 pt-6">
             <p className="text-xs text-white/55 text-center sm:text-left">
-              © {year} Kirti Rana. All Rights Reserved.
+              © {year} Shri Kirti Rana • Navi Mumbai Merchants Chamber. All Rights Reserved.
             </p>
             <p className="text-xs text-white/45">
-              Business Leadership • Merchant Community • Agriculture &amp; Trade
+              30+ Years Business Leadership • Agriculture &amp; Trade • 50-Acre Complex
             </p>
             <Link
               href="/admin/enquiries"
               className="text-xs text-white/35 transition-colors hover:text-gold"
               aria-label="Admin area (restricted)"
             >
-              Admin
+              Admin Control Centre
             </Link>
           </div>
         </div>

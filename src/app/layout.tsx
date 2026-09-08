@@ -89,7 +89,8 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: "/favicon.svg",
+    icon: "/images/logo.png",
+    apple: "/images/logo-192.png",
   },
 };
 

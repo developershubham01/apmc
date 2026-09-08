@@ -1,161 +1,275 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Building2, ChevronRight, Wheat, Sparkles } from "lucide-react";
+import Image from "next/image";
+import {
+  ArrowRight,
+  Building2,
+  ChevronRight,
+  Wheat,
+  Sparkles,
+  Award,
+  Trophy,
+  ShieldCheck,
+  Globe2,
+  Tv,
+} from "lucide-react";
 import { ScrollReveal } from "./ScrollReveal";
+import { cn } from "@/lib/utils";
+
+const heroSlides = [
+  {
+    id: "dubai",
+    src: "/images/kirti-rana/global-business-icon-award-dubai.jpg",
+    label: "Global Icon Award (Dubai)",
+    tag: "Dubai 2025",
+    badge: "🏆 Global Business ICON Awardee",
+    caption: "Shri Kirti Rana receiving the Global Business ICON Award in Dubai",
+  },
+  {
+    id: "fadnavis",
+    src: "/images/media/dcm-devendra-fadnavis-kirti-rana-felicitation.jpg",
+    label: "With DCM Devendra Fadnavis",
+    tag: "TV1 Live",
+    badge: "🤝 Felicitating DCM Devendra Fadnavis",
+    caption: "Felicitating DCM Devendra Fadnavis at Navi Mumbai Leaders Conference",
+  },
+  {
+    id: "portrait",
+    src: "/images/kirti-rana/portrait-lead.jpg",
+    label: "Leadership Portrait",
+    tag: "President",
+    badge: "🏛️ Navi Mumbai Merchants Chamber",
+    caption: "President — Navi Mumbai Merchants Chamber (30+ Years Legacy)",
+  },
+  {
+    id: "mahotsav",
+    src: "/images/events/bharatiya-vyapar-mahotsav-2026.jpg",
+    label: "Vyapar Mahotsav 2026",
+    tag: "New Delhi",
+    badge: "🇮🇳 Bharat Mandapam, New Delhi",
+    caption: "Bharatiya Vyapar Mahotsav 2026 — CAIT & ITPO Initiative",
+  },
+];
 
 export function Hero() {
+  const [activeSlide, setActiveSlide] = useState(0);
+  const current = heroSlides[activeSlide];
+
   return (
     <section
-      className="relative overflow-hidden bg-white"
+      className="relative overflow-hidden bg-navy-950 text-white min-h-[90vh] flex items-center pt-24 pb-16 lg:py-28"
       aria-label="Kirti Rana — introduction"
     >
-      {/* Background layers */}
-      <div aria-hidden className="absolute inset-0 bg-heritage-grid opacity-70" />
+      {/* Background Architectural Layer */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/images/hero/hero-chamber-bg.jpg"
+          alt="Navi Mumbai Merchants Chamber Architectural Background"
+          fill
+          priority
+          quality={90}
+          className="object-cover object-center opacity-25 scale-105 filter blur-[1px]"
+        />
+        {/* Layered Gradient Overlays */}
+        <div className="absolute inset-0 bg-gradient-to-r from-navy-950 via-navy-950/90 to-navy-900/80" />
+        <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-transparent to-navy-950/70" />
+        <div aria-hidden className="absolute inset-0 bg-heritage-grid opacity-20" />
+      </div>
+
+      {/* Ambient Lighting Orbs */}
       <div
         aria-hidden
-        className="absolute -left-40 top-0 h-[520px] w-[520px] rounded-full bg-royal-50 blur-3xl opacity-60"
+        className="absolute -left-32 top-1/4 h-[480px] w-[480px] rounded-full bg-gold/15 blur-[120px] pointer-events-none"
       />
       <div
         aria-hidden
-        className="absolute -right-32 bottom-0 h-[460px] w-[460px] rounded-full bg-gold-50 blur-3xl opacity-70"
+        className="absolute -right-32 bottom-1/4 h-[520px] w-[520px] rounded-full bg-royal/25 blur-[140px] pointer-events-none"
       />
 
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid items-center gap-10 lg:gap-12 py-12 lg:py-20 lg:grid-cols-2">
-          {/* LEFT */}
-          <div className="order-2 lg:order-1">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 w-full">
+        <div className="grid items-center gap-10 lg:gap-14 lg:grid-cols-12">
+          {/* LEFT: Content & Badging */}
+          <div className="lg:col-span-7">
+            {/* Top Official Association Pill */}
             <ScrollReveal variant="up">
-              <span className="eyebrow inline-flex items-center gap-2 rounded-full border border-gold/30 bg-gold-50 px-4 py-1.5 text-gold-600">
-                <Sparkles className="h-3.5 w-3.5" />
-                Business Leadership • Merchant Community • Agriculture &amp; Trade
-              </span>
+              <div className="inline-flex items-center gap-2.5 rounded-full border border-gold/40 bg-navy-900/90 px-4 py-1.5 shadow-gold-glow backdrop-blur-md">
+                <div className="relative h-6 w-6 shrink-0 rounded-full overflow-hidden bg-white p-0.5 ring-1 ring-gold shadow-sm">
+                  <Image src="/images/logo.png" alt="Navi Mumbai Merchants Chamber Logo" fill className="object-contain" />
+                </div>
+                <span className="text-xs font-700 tracking-wide text-gold uppercase">
+                  Navi Mumbai Merchants&apos; Chamber
+                </span>
+                <span className="hidden sm:inline-block h-3 w-px bg-gold/40" />
+                <span className="hidden sm:inline-flex items-center gap-1 text-[0.7rem] font-600 text-white/80">
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                  Estd. 30+ Years
+                </span>
+              </div>
             </ScrollReveal>
 
+            {/* Main Title */}
             <ScrollReveal variant="up" delay={80}>
-              <h1 className="mt-6 font-heading font-800 tracking-tight text-navy text-5xl sm:text-6xl lg:text-7xl leading-[0.95]">
+              <h1 className="mt-5 font-heading font-800 tracking-tight text-white text-5xl sm:text-6xl lg:text-7xl leading-[0.95]">
                 KIRTI RANA
               </h1>
             </ScrollReveal>
 
+            {/* Designations with Icons */}
             <ScrollReveal variant="up" delay={160}>
-              <div className="mt-5 flex flex-col gap-2">
-                <p className="flex items-center gap-2 text-base sm:text-lg font-500 text-royal">
-                  <span className="inline-block h-2 w-2 rounded-full bg-gold" />
-                  Chairman — Navi Mumbai Merchants Chamber
-                </p>
-                <p className="flex items-center gap-2 text-base sm:text-lg font-500 text-royal">
-                  <span className="inline-block h-2 w-2 rounded-full bg-gold" />
-                  Chairman — Bombay Mudibazar Kariana Merchants Association
-                </p>
+              <div className="mt-5 flex flex-col gap-2.5">
+                <div className="flex items-center gap-2.5 text-base sm:text-lg font-600 text-amber-300">
+                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-gold/20 text-gold border border-gold/40">
+                    <Building2 className="h-3.5 w-3.5" />
+                  </span>
+                  <span>President / Chairman — Navi Mumbai Merchants Chamber</span>
+                </div>
+                <div className="flex items-center gap-2.5 text-base sm:text-lg font-600 text-white/90">
+                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-white/10 text-white/80 border border-white/20">
+                    <ShieldCheck className="h-3.5 w-3.5 text-gold" />
+                  </span>
+                  <span>National Leadership — Confederation of All India Traders (CAIT)</span>
+                </div>
+                <div className="flex items-center gap-2.5 text-sm sm:text-base font-500 text-white/75">
+                  <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-white/5 text-white/60 border border-white/15">
+                    <Wheat className="h-3.5 w-3.5 text-amber-400" />
+                  </span>
+                  <span>Chairman — Bombay Mudibazar Kariana Merchants Association</span>
+                </div>
               </div>
             </ScrollReveal>
 
+            {/* Bio Description */}
             <ScrollReveal variant="up" delay={240}>
-              <p className="mt-6 max-w-xl text-pretty text-base sm:text-lg leading-relaxed text-ink-600">
-                An established presence in Navi Mumbai&apos;s business and
-                merchant community, representing leadership, business
-                development and the interests of traders and enterprises.
+              <p className="mt-6 max-w-2xl text-pretty text-base sm:text-lg leading-relaxed text-white/80">
+                Pioneering leader of Maharashtra and India&apos;s wholesale agricultural and spice trade.
+                Leading <strong>400+ spice processors, exporters and cold chain owners</strong> across a dedicated{" "}
+                <strong>50-acre commercial complex</strong> at Navi Mumbai APMC, Turbhe.
               </p>
             </ScrollReveal>
 
+            {/* CTAs */}
             <ScrollReveal variant="up" delay={320}>
-              <div className="mt-8 flex flex-col sm:flex-row gap-3">
+              <div className="mt-8 flex flex-wrap items-center gap-3">
                 <Link
                   href="/about"
-                  className="group inline-flex items-center justify-center gap-2 rounded-xl bg-navy px-6 py-3.5 text-sm font-600 text-white shadow-premium transition-all hover:bg-navy-700 hover:shadow-premium-lg hover:-translate-y-0.5"
+                  className="group inline-flex items-center justify-center gap-2 rounded-xl bg-gold px-6 py-3.5 text-sm font-700 text-navy shadow-gold-glow transition-all hover:bg-gold-400 hover:shadow-lg hover:-translate-y-0.5"
                 >
                   Explore Profile
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Link>
                 <Link
-                  href="/organizations"
-                  className="group inline-flex items-center justify-center gap-2 rounded-xl border border-navy/15 bg-white px-6 py-3.5 text-sm font-600 text-navy transition-all hover:border-gold hover:text-royal hover:-translate-y-0.5"
+                  href="/achievements"
+                  className="group inline-flex items-center justify-center gap-2 rounded-xl border border-gold/50 bg-white/10 px-5 py-3.5 text-sm font-600 text-white backdrop-blur-md transition-all hover:bg-white/20 hover:border-gold hover:-translate-y-0.5"
                 >
-                  View Organizations
+                  <Trophy className="h-4 w-4 text-gold" />
+                  11 Verified Honours
                   <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Link>
+                <Link
+                  href="/organizations"
+                  className="group inline-flex items-center justify-center gap-2 rounded-xl border border-white/20 bg-black/30 px-5 py-3.5 text-sm font-600 text-white/85 backdrop-blur-md transition-all hover:bg-white/10 hover:text-white hover:-translate-y-0.5"
+                >
+                  Organizations
                 </Link>
               </div>
             </ScrollReveal>
 
+            {/* Quick Metrics Bar */}
             <ScrollReveal variant="up" delay={400}>
-              <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-3 border-t border-border pt-6">
-                <Stat value="2" label="Chamber Chairmanships" />
-                <span aria-hidden className="hidden sm:block h-8 w-px bg-border" />
-                <Stat value="APMC" label="Turbhe • Navi Mumbai" />
-                <span aria-hidden className="hidden sm:block h-8 w-px bg-border" />
-                <Stat value="Agro" label="Kisan Kirti Agro Pvt. Ltd." />
+              <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-4 border-t border-white/15 pt-6">
+                <MetricCard value="30+ Yrs" label="Chamber Legacy" />
+                <MetricCard value="400+" label="Merchant Network" />
+                <MetricCard value="50 Acres" label="Dedicated Complex" />
+                <MetricCard value="11+" label="Honours & Awards" />
               </div>
             </ScrollReveal>
           </div>
 
-          {/* RIGHT — Portrait */}
-          <div className="order-1 lg:order-2">
-            <ScrollReveal variant="scale" delay={120}>
+          {/* RIGHT: High-Impact Image Card & Slide Switcher */}
+          <div className="lg:col-span-5">
+            <ScrollReveal variant="scale" delay={140}>
               <div className="relative mx-auto max-w-md lg:max-w-none">
-                {/* Decorative outer frame */}
+                {/* Decorative Glowing Border */}
                 <div
                   aria-hidden
-                  className="absolute -inset-3 rounded-[2rem] bg-gradient-to-br from-gold/30 via-transparent to-royal/20 blur-xl"
-                />
-                <div
-                  aria-hidden
-                  className="absolute -right-4 -top-4 h-24 w-24 rounded-2xl border-2 border-gold/40 rotate-12"
-                />
-                <div
-                  aria-hidden
-                  className="absolute -left-4 -bottom-4 h-20 w-20 rounded-full border-2 border-royal/30"
+                  className="absolute -inset-3 rounded-[2.2rem] bg-gradient-to-br from-gold/40 via-royal/30 to-gold/20 blur-xl opacity-70"
                 />
 
-                {/* Portrait card */}
-                <div className="relative overflow-hidden rounded-[1.75rem] border-2 border-gold/50 bg-gradient-to-br from-navy via-navy-700 to-royal shadow-premium-lg">
-                  <div className="relative aspect-[4/5] w-full">
-                    {/* Monogram portrait (placeholder until verified photo) */}
-                    <div aria-hidden className="absolute inset-0 bg-navy-grid opacity-40" />
+                {/* Main Image Showcase Card */}
+                <div className="relative overflow-hidden rounded-3xl border-2 border-gold/60 bg-navy-900 shadow-2xl">
+                  {/* Photo Container with uncropped, clean framing */}
+                  <div className="relative aspect-[4/4.8] w-full overflow-hidden bg-navy-950">
+                    <Image
+                      src={current.src}
+                      alt={current.caption}
+                      fill
+                      priority
+                      quality={95}
+                      className="object-contain object-center transition-all duration-700"
+                      sizes="(max-width: 1024px) 100vw, 45vw"
+                    />
                     <div
                       aria-hidden
-                      className="absolute inset-0"
-                      style={{
-                        background:
-                          "radial-gradient(80% 60% at 50% 18%, rgba(201,162,39,0.28) 0%, transparent 60%)",
-                      }}
+                      className="absolute inset-0 bg-gradient-to-t from-navy-950 via-transparent to-black/30"
                     />
-                    <div className="relative flex h-full flex-col items-center justify-center px-6 py-10 text-center">
-                      <div className="relative">
-                        <span
-                          aria-hidden
-                          className="absolute -inset-4 rounded-full border border-gold/30 animate-pulse-ring"
-                        />
-                        <span className="relative inline-flex h-36 w-36 sm:h-44 sm:w-44 items-center justify-center rounded-full bg-white/5 ring-2 ring-gold/50 backdrop-blur">
-                          <span className="font-heading text-6xl sm:text-7xl font-800 text-gold-gradient">
-                            KR
-                          </span>
-                        </span>
+
+                    {/* Floating Top Badge */}
+                    <div className="absolute top-4 left-4 right-4 flex items-center justify-between pointer-events-none">
+                      <span className="inline-flex items-center gap-1.5 rounded-full border border-gold/50 bg-navy-950/90 px-3 py-1 text-[0.72rem] font-700 uppercase tracking-wider text-gold shadow-md backdrop-blur-md">
+                        <Sparkles className="h-3 w-3 text-gold" />
+                        {current.tag}
+                      </span>
+                      <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white/15 backdrop-blur-md border border-white/30">
+                        <Award className="h-4 w-4 text-gold" />
                       </div>
-                      <p className="mt-8 font-heading text-2xl font-700 text-white">
-                        Kirti Rana
+                    </div>
+
+                    {/* Bottom Caption Overlay */}
+                    <div className="absolute bottom-3 left-3 right-3 rounded-2xl border border-white/15 bg-navy-950/85 p-3.5 backdrop-blur-lg">
+                      <p className="text-xs font-700 text-gold uppercase tracking-wider">
+                        {current.badge}
                       </p>
-                      <p className="mt-2 text-sm text-gold/90 uppercase tracking-[0.18em]">
-                        Chairman
-                      </p>
-                      <p className="mt-1 text-xs text-white/60 max-w-[16rem]">
-                        Navi Mumbai Merchants Chamber
+                      <p className="mt-1 text-xs font-500 text-white/90 leading-snug line-clamp-2">
+                        {current.caption}
                       </p>
                     </div>
                   </div>
 
-                  {/* Bottom emblem bar */}
-                  <div className="relative flex items-center justify-center gap-3 border-t border-white/10 bg-black/20 px-6 py-4">
-                    <Wheat className="h-4 w-4 text-gold" />
-                    <span className="text-[0.7rem] uppercase tracking-[0.22em] text-white/70">
-                      Agriculture • Trade • Heritage
-                    </span>
-                    <Building2 className="h-4 w-4 text-gold" />
+                  {/* Interactive Slide Thumbnail Tabs */}
+                  <div className="grid grid-cols-4 gap-1 border-t border-white/15 bg-navy-950/95 p-2">
+                    {heroSlides.map((slide, idx) => (
+                      <button
+                        key={slide.id}
+                        type="button"
+                        onClick={() => setActiveSlide(idx)}
+                        className={cn(
+                          "relative flex flex-col items-center justify-center rounded-xl p-1.5 text-center transition-all",
+                          activeSlide === idx
+                            ? "bg-gold/20 border border-gold text-gold shadow-sm"
+                            : "bg-white/5 border border-transparent text-white/60 hover:bg-white/10 hover:text-white"
+                        )}
+                        aria-label={`View ${slide.label}`}
+                      >
+                        <span className="text-[0.62rem] font-700 uppercase tracking-tight truncate w-full">
+                          {slide.tag}
+                        </span>
+                        {activeSlide === idx && (
+                          <span className="mt-0.5 h-1 w-4 rounded-full bg-gold shadow-gold-glow" />
+                        )}
+                      </button>
+                    ))}
                   </div>
                 </div>
 
-                {/* Floating badge */}
-                <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 rounded-full bg-white px-5 py-2.5 shadow-premium ring-1 ring-border">
-                  <span className="text-xs font-600 text-navy whitespace-nowrap">
-                    Navi Mumbai APMC • Turbhe
+                {/* Floating Bottom Seal */}
+                <div className="absolute -bottom-5 left-1/2 -translate-x-1/2 flex items-center gap-2.5 rounded-full border border-gold/40 bg-navy-900/95 px-5 py-2 shadow-2xl backdrop-blur-md">
+                  <div className="relative h-6 w-6 rounded-full overflow-hidden bg-white p-0.5 ring-1 ring-gold/80 shadow-sm">
+                    <Image src="/images/logo.png" alt="Navi Mumbai Merchants Chamber Seal" fill className="object-contain" />
+                  </div>
+                  <span className="text-xs font-700 text-white whitespace-nowrap">
+                    Navi Mumbai APMC • 50-Acre Trade Complex
                   </span>
                 </div>
               </div>
@@ -164,26 +278,30 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Bottom wave divider */}
-      <div aria-hidden className="relative">
+      {/* Elegant Wave Divider */}
+      <div aria-hidden className="absolute bottom-0 inset-x-0">
         <svg
-          className="block w-full h-[40px] sm:h-[60px] text-mist"
-          viewBox="0 0 1440 60"
+          className="block w-full h-[32px] sm:h-[48px] text-white"
+          viewBox="0 0 1440 48"
           preserveAspectRatio="none"
           fill="currentColor"
         >
-          <path d="M0,40 C240,10 480,10 720,30 C960,50 1200,50 1440,20 L1440,60 L0,60 Z" />
+          <path d="M0,32 C360,10 720,45 1080,20 C1260,8 1380,25 1440,32 L1440,48 L0,48 Z" />
         </svg>
       </div>
     </section>
   );
 }
 
-function Stat({ value, label }: { value: string; label: string }) {
+function MetricCard({ value, label }: { value: string; label: string }) {
   return (
-    <div className="flex flex-col">
-      <span className="font-heading text-xl font-700 text-navy">{value}</span>
-      <span className="text-xs text-ink-600/80">{label}</span>
+    <div className="rounded-xl border border-white/10 bg-white/5 p-3.5 text-center backdrop-blur-sm transition-all hover:bg-white/10 hover:border-gold/30">
+      <span className="block font-heading text-xl sm:text-2xl font-800 text-gold-gradient">
+        {value}
+      </span>
+      <span className="mt-0.5 block text-[0.72rem] font-500 uppercase tracking-wider text-white/70">
+        {label}
+      </span>
     </div>
   );
 }
