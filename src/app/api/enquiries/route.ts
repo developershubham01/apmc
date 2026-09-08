@@ -33,6 +33,9 @@ const enquirySchema = z.object({
     .min(10, "Message must be at least 10 characters")
     .max(5000, "Message is too long"),
   category: z.enum(CATEGORIES).default("General Enquiries"),
+  // Note: the honeypot `website` field is intentionally NOT in this schema.
+  // It is checked separately in POST before validation so bots receive a
+  // fake-success response instead of a validation error.
 });
 
 // ---------------------------------------------------------------------------
@@ -63,6 +66,13 @@ function getClientIp(req: NextRequest): string {
     req.headers.get("x-real-ip") ||
     "unknown"
   );
+}
+
+/** Validate the admin key supplied via the `x-admin-key` header. */
+function isAuthorized(req: NextRequest): boolean {
+  const adminKey = process.env.ADMIN_KEY ?? "";
+  if (!adminKey) return false;
+  return req.headers.get("x-admin-key") === adminKey;
 }
 
 export async function POST(req: NextRequest) {
@@ -97,6 +107,25 @@ export async function POST(req: NextRequest) {
 
     const { name, email, phone, subject, message, category } = parsed.data;
 
+    // Honeypot check BEFORE validation: if the hidden field was filled by a
+    // bot, discard the submission silently but answer with fake success so
+    // the bot believes it worked and does not retry with another payload.
+    const honeypotValue =
+      typeof (body as Record<string, unknown>)?.website === "string"
+        ? ((body as Record<string, unknown>).website as string).trim()
+        : "";
+    if (honeypotValue.length > 0) {
+      return NextResponse.json(
+        {
+          ok: true,
+          id: `skip-${Date.now()}`,
+          createdAt: new Date().toISOString(),
+          message: "Enquiry received.",
+        },
+        { status: 201 }
+      );
+    }
+
     const enquiry = await db.enquiry.create({
       data: {
         name,
@@ -127,27 +156,49 @@ export async function POST(req: NextRequest) {
   }
 }
 
-export async function GET() {
-  try {
-    const [enquiries, total] = await Promise.all([
-      db.enquiry.findMany({
-        orderBy: { createdAt: "desc" },
-        take: 100,
-        select: {
-          id: true,
-          name: true,
-          email: true,
-          phone: true,
-          subject: true,
-          category: true,
-          status: true,
-          createdAt: true,
-        },
-      }),
-      db.enquiry.count(),
-    ]);
+export async function GET(req: NextRequest) {
+  if (!isAuthorized(req)) {
+    return NextResponse.json(
+      { error: "Unauthorized. A valid admin key is required." },
+      { status: 401 }
+    );
+  }
 
-    return NextResponse.json({ ok: true, total, count: enquiries.length, enquiries });
+  try {
+    const [enquiries, total, newCount, inProgressCount, resolvedCount] =
+      await Promise.all([
+        db.enquiry.findMany({
+          orderBy: { createdAt: "desc" },
+          take: 200,
+          select: {
+            id: true,
+            name: true,
+            email: true,
+            phone: true,
+            subject: true,
+            category: true,
+            status: true,
+            createdAt: true,
+          },
+        }),
+        db.enquiry.count(),
+        db.enquiry.count({ where: { status: "new" } }),
+        db.enquiry.count({ where: { status: "in-progress" } }),
+        db.enquiry.count({ where: { status: "resolved" } }),
+      ]);
+
+    return NextResponse.json({
+      ok: true,
+      total,
+      count: enquiries.length,
+      stats: {
+        total,
+        new: newCount,
+        inProgress: inProgressCount,
+        resolved: resolvedCount,
+      },
+      enquiries,
+    });
   } catch (err) {
     console.error("[GET /api/enquiries] Failed to list enquiries:", err);
     return NextResponse.json(

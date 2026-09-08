@@ -28,6 +28,8 @@ export function ContactForm() {
   const [loading, setLoading] = useState(false);
   const [type, setType] = useState<EnquiryType>("Business Enquiries");
   const [form, setForm] = useState(EMPTY_FORM);
+  // Honeypot: hidden from real users; bots tend to fill every field.
+  const [honeypot, setHoneypot] = useState("");
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -43,7 +45,7 @@ export function ContactForm() {
       const res = await fetch("/api/enquiries", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, category: type }),
+        body: JSON.stringify({ ...form, category: type, website: honeypot }),
       });
 
       const data = (await res.json().catch(() => null)) as
@@ -175,6 +177,22 @@ export function ContactForm() {
           placeholder="Write your message here..."
           className="w-full rounded-xl border border-border bg-white px-4 py-3 text-sm text-ink shadow-sm transition-colors placeholder:text-ink-600/40 focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/30"
         />
+      </div>
+
+      <div className="relative">
+        {/* Honeypot field — visually hidden, ignored by keyboard users */}
+        <div aria-hidden className="absolute left-[-9999px] top-[-9999px] h-0 w-0 overflow-hidden">
+          <label htmlFor="website">Website</label>
+          <input
+            id="website"
+            name="website"
+            type="text"
+            tabIndex={-1}
+            autoComplete="off"
+            value={honeypot}
+            onChange={(e) => setHoneypot(e.target.value)}
+          />
+        </div>
       </div>
 
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">

@@ -147,6 +147,13 @@ export function Footer() {
             <p className="text-xs text-white/45">
               Business Leadership • Merchant Community • Agriculture &amp; Trade
             </p>
+            <Link
+              href="/admin/enquiries"
+              className="text-xs text-white/35 transition-colors hover:text-gold"
+              aria-label="Admin area (restricted)"
+            >
+              Admin
+            </Link>
           </div>
         </div>
       </div>

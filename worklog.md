@@ -34,3 +34,37 @@ Unresolved issues / risks / next steps (priority order):
 3. No dark mode (design is intentionally light navy/gold) — leave as is unless requested.
 4. Consider email notification (e.g. SMTP/Resend) on new enquiry, plus a honeypot/spam-check field.
 5. Gallery/Media pages use static data only — could add pagination or category filters if content grows.
+
+---
+Task ID: cron-review-2
+Agent: webDevReview (cron, every 15 min)
+Task: Assess status, QA, continue development — focus on admin enquiries dashboard (top priority from round 1) + anti-spam.
+
+Work Log:
+- Reviewed worklog from round 1; dev server healthy; site stable with no console errors.
+- Implemented worklog priority #1: **Admin Enquiries Dashboard** at /admin/enquiries:
+  - `src/app/api/enquiries/route.ts`: GET now requires `x-admin-key` header (validated against ADMIN_KEY in .env) and returns aggregated stats (total/new/inProgress/resolved) alongside the list.
+  - New `src/app/api/enquiries/[id]/route.ts`: GET single (with full message body), PATCH status (new | in-progress | resolved), DELETE — all admin-key protected, 401/404/422 handled.
+  - `ADMIN_KEY=kirti-admin-2026` added to .env.
+  - `src/components/admin/AdminDashboard.tsx` (client): key-gate screen (password input, wrong-key error state, key persisted in localStorage, "Lock" to sign out), navy header bar, 4 stat cards (Total/New/In Progress/Resolved with brand-colored icon chips), status filter tabs + search + category dropdown, enquiry cards with gold/orange/green status badges + relative timestamps, detail Dialog (shadcn) with full message, reference id chip, contextual actions (Reopen / In Progress / Resolve / Delete with inline confirm). Loading skeletons + empty states included.
+  - `src/app/admin/enquiries/page.tsx`: server wrapper with noindex robots metadata.
+  - Discreet "Admin" link added to footer bottom bar.
+- Implemented worklog priority #4 (partial): **honeypot anti-spam**:
+  - Hidden `website` field in ContactForm (off-screen, tabIndex=-1, aria-hidden).
+  - POST /api/enquiries checks the raw honeypot BEFORE zod validation; if filled → fake 201 success response (id starts with `skip-`), nothing stored.
+- Verified via agent-browser E2E:
+  - API: GET without key → 401; with key → stats+list; PATCH no key → 401; PATCH with key → status updated; honeypot bot POST → fake 201, total unchanged; normal POST → stored.
+  - UI: gate renders, wrong key shows error, correct key unlocks; stats matched DB (4 total / 3 new / 1 in-progress); dialog shows full message; Resolve updated badge + stats live (resolved 0→1); Delete flow with confirm removed row (total 4→3); contact form regression passed (success card + reference + toast).
+- `bun run lint` clean; dev.log shows no errors.
+
+Stage Summary:
+- Project status: STABLE with expanded functionality. Public site unchanged visually (only footer Admin link added); new admin area fully operational.
+- Admin access: key `kirti-admin-2026` (in .env as ADMIN_KEY), URL /admin/enquiries (noindex).
+- DB now has 3 enquiries (1 new, 1 in-progress, 1 resolved) + 1 fresh regression submission.
+
+Unresolved issues / risks / next steps (priority order):
+1. Admin key gate is client-side convenience over an API-key check — fine for demo, but consider NextAuth session-based auth for production.
+2. Email notification on new enquiry (SMTP/Resend) — still open.
+3. MarketRates still static sample data (worklog round-1 item #2).
+4. Admin: add pagination + CSV export if enquiry volume grows; showhoneypot-blocked count in stats (currently silently skipped).
+5. Gallery/Media static content enhancements (filters/pagination) if content grows.
