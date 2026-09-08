@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { rateGroups } from "@/data/rates";
 
@@ -6,6 +6,36 @@ import { rateGroups } from "@/data/rates";
 // the database (auto-seeded on first request). The bundled data acts as both
 // the seed source and the canonical list of groups.
 const groupMeta = rateGroups.map(({ slug, label, note }) => ({ slug, label, note }));
+
+// ---------------------------------------------------------------------------
+// Lightweight in-memory rate limiter for the public endpoint: max 60 requests
+// per IP per minute. Protects the DB-backed read path from abusive polling.
+// ---------------------------------------------------------------------------
+const RATE_LIMIT_WINDOW_MS = 60 * 1000;
+const RATE_LIMIT_MAX = 60;
+const rateBuckets = new Map<string, number[]>();
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const hits = (rateBuckets.get(ip) ?? []).filter(
+    (ts) => now - ts < RATE_LIMIT_WINDOW_MS
+  );
+  if (hits.length >= RATE_LIMIT_MAX) {
+    rateBuckets.set(ip, hits);
+    return true;
+  }
+  hits.push(now);
+  rateBuckets.set(ip, hits);
+  return false;
+}
+
+function getClientIp(req: NextRequest): string {
+  return (
+    req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+    req.headers.get("x-real-ip") ||
+    "unknown"
+  );
+}
 
 async function ensureSeeded(): Promise<void> {
   const count = await db.marketRate.count();
@@ -28,8 +58,15 @@ async function ensureSeeded(): Promise<void> {
   await db.marketRate.createMany({ data: rows });
 }
 
-export async function GET() {
+export async function GET(req: NextRequest) {
   try {
+    if (isRateLimited(getClientIp(req))) {
+      return NextResponse.json(
+        { error: "Too many requests. Please slow down." },
+        { status: 429, headers: { "Retry-After": "60" } }
+      );
+    }
+
     await ensureSeeded();
 
     const [rows, latest] = await Promise.all([

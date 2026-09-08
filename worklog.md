@@ -98,3 +98,37 @@ Unresolved issues / risks / next steps (priority order):
 3. Email notification on new enquiry (SMTP/Resend) — still open.
 4. Rate limiting for /api/rates (public endpoint) if abuse becomes a concern.
 5. Admin pagination when enquiries exceed 200 (current GET take limit).
+
+---
+Task ID: cron-review-4
+Agent: webDevReview (cron, every 15 min)
+Task: Assess status, QA, continue development — admin Rates editor (#1), email-notification gap mitigation + newsletter (#2/#3), rates API rate limiting (#4), admin pagination (#5).
+
+Work Log:
+- Reviewed worklog rounds 1-3; dev server healthy; swept all 10 pages (all 200, zero console errors) — baseline stable, no bug fixes needed.
+- Implemented priority #1: **Admin Market Rates editor** (top of backlog):
+  - New `GET/PATCH/POST /api/rates/admin` (admin-key protected): GET returns all rows with ids grouped by market (auto-seeds if empty); PATCH updates one row (zod: int≥0, min≤max, min≤modal≤max → 422 otherwise, 404 unknown id); POST `{action:"touch"}` bumps updatedAt of every row.
+  - Fixed a Prisma 6 API bug caught in testing: `updateMany({}, {data})` two-arg form → "Argument data is missing" 500; corrected to single-arg `updateMany({ data })`.
+  - Refactored the 800-line AdminDashboard into a tabbed **Control Centre** shell + 3 panels: `EnquiriesPanel.tsx` (moved logic, adminKey prop + onAuthError 401 handling), `RatesPanel.tsx`, `SubscribersPanel.tsx`. Admin page metadata retitled "Control Centre | Admin".
+  - RatesPanel UX: per-group sections with column header row (desktop), inline min/max/modal number inputs + trend select per row, dirty-row gold highlight + "EDITED" badge + unsaved-changes counter, client-side validation messages (min>max etc.), per-row Save with spinner → green "Saved" flash, "Mark board refreshed" bulk action.
+- Implemented priority #3 mitigation (no SMTP/Resend in sandbox, so direct email remains open): **Newsletter subscription** feature:
+  - Prisma `Subscriber` model (unique email, source, createdAt) + `bun run db:push` + dev-server restart (applied the round-3 lesson proactively).
+  - `POST /api/subscribe`: zod email + lowercase transform, honeypot `website` field (fake 201), 4 req/10min rate limit, idempotent duplicates → 200 "already on the list".
+  - `NewsletterForm.tsx` (client) embedded in a new footer **newsletter band** ("Market Updates & Chamber News") — glassy navy card with gold ring/underline, success card + error alert states.
+- Admin Subscribers tab: `GET /api/subscribers` + `DELETE /api/subscribers/[id]` (admin-key), panel with search, pager (10/page), monogram avatars, source chips, inline delete confirm, CSV export.
+- Implemented priority #4: rate limiting on public `GET /api/rates` (60 req/min/IP, 429 + Retry-After).
+- Implemented priority #5: client-side pagination in EnquiriesPanel (8/page, numbered buttons with gap ellipsis, prev/next, aria-current, resets on filter change, result range "Showing X–Y of Z").
+- E2E verified via agent-browser: admin login → 3 tabs; pagination 8+1 cards across 2 pages both directions; rates edit (Tomato modal 28→42, trend Rising) → Saved flash → live on public /apmc under "Market database" badge → restored via editor (second save round); subscribers tab lists rows, footer form success card → count 2→3 in admin; invalid newsletter email → 422 alert in footer; honeypot + duplicate subscribe paths verified by curl; enquiry 429 UX shows graceful message; mobile (390px) footer band stacks full-width and rates editor rows stack with labels.
+- `bun run lint` clean; dev.log has no errors.
+
+Stage Summary:
+- Project status: STABLE and notably more capable. Admin is now a 3-section Control Centre (Enquiries + Market Rates editor + Subscribers); site gains a newsletter funnel; rates pipeline is admin-editable end-to-end.
+- Test data: DB has 9 enquiries (4 pre-existing + 5 seeded demos for pagination) and 3 subscribers (2 curl tests + 1 browser test) — safe to delete if unwanted.
+- Backlog items closed this round: #1 rates editor, #3 (newsletter as email-gap mitigation; direct email still open), #4 rates rate limiting, #5 admin pagination.
+
+Unresolved issues / risks / next steps (priority order):
+1. Email delivery (SMTP/Resend) for enquiry alerts + newsletter sends — no provider credentials in sandbox; data layer is now ready for it.
+2. NextAuth session auth for admin (shared key remains the demo auth).
+3. Honeypot-blocked and rate-limited counts are not surfaced anywhere (silently skipped) — could add a small stats line.
+4. Subscriber "unsubscribe" token flow for compliance if the newsletter ever sends for real.
+5. Consider optimistic UI / batch save (save all dirty rows at once) in RatesPanel if editors find per-row saving tedious.

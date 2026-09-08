@@ -1,0 +1,800 @@
+     1→"use client";
+     2→
+     3→import { useCallback, useEffect, useMemo, useState } from "react";
+     4→import {
+     5→  Inbox,
+     6→  RefreshCw,
+     7→  LogOut,
+     8→  Lock,
+     9→  Loader2,
+    10→  Search,
+    11→  Mail,
+    12→  Phone,
+    13→  Tag,
+    14→  Clock,
+    15→  CircleDot,
+    16→  CheckCircle2,
+    17→  Timer,
+    18→  Trash2,
+    19→  ArrowLeft,
+    20→  ShieldAlert,
+    21→  Download,
+    22→  Table2,
+    23→} from "lucide-react";
+    24→import {
+    25→  Dialog,
+    26→  DialogContent,
+    27→  DialogHeader,
+    28→  DialogTitle,
+    29→  DialogDescription,
+    30→} from "@/components/ui/dialog";
+    31→import { cn } from "@/lib/utils";
+    32→
+    33→const STORAGE_KEY = "kr-admin-key";
+    34→
+    35→type EnquiryStatus = "new" | "in-progress" | "resolved";
+    36→
+    37→type Enquiry = {
+    38→  id: string;
+    39→  name: string;
+    40→  email: string;
+    41→  phone: string | null;
+    42→  subject: string | null;
+    43→  category: string;
+    44→  status: EnquiryStatus;
+    45→  createdAt: string;
+    46→};
+    47→
+    48→type Stats = { total: number; new: number; inProgress: number; resolved: number };
+    49→
+    50→const statusMeta: Record<
+    51→  EnquiryStatus,
+    52→  { label: string; className: string; dot: string }
+    53→> = {
+    54→  new: {
+    55→    label: "New",
+    56→    className: "bg-gold-50 text-gold-600 ring-1 ring-gold/40",
+    57→    dot: "bg-gold",
+    58→  },
+    59→  "in-progress": {
+    60→    label: "In Progress",
+    61→    className: "bg-orange-50 text-saffron-600 ring-1 ring-saffron/40",
+    62→    dot: "bg-saffron",
+    63→  },
+    64→  resolved: {
+    65→    label: "Resolved",
+    66→    className: "bg-green-50 text-green-700 ring-1 ring-green-600/30",
+    67→    dot: "bg-green-600",
+    68→  },
+    69→};
+    70→
+    71→function relativeTime(iso: string): string {
+    72→  const then = new Date(iso).getTime();
+    73→  const diff = Date.now() - then;
+    74→  const mins = Math.floor(diff / 60000);
+    75→  if (mins < 1) return "just now";
+    76→  if (mins < 60) return `${mins} min ago`;
+    77→  const hours = Math.floor(mins / 60);
+    78→  if (hours < 24) return `${hours} hr ago`;
+    79→  const days = Math.floor(hours / 24);
+    80→  if (days < 7) return `${days} day${days > 1 ? "s" : ""} ago`;
+    81→  return new Date(iso).toLocaleDateString("en-IN", {
+    82→    day: "numeric",
+    83→    month: "short",
+    84→    year: "numeric",
+    85→  });
+    86→}
+    87→
+    88→export function AdminDashboard() {
+    89→  const [adminKey, setAdminKey] = useState<string | null>(null);
+    90→  const [keyInput, setKeyInput] = useState("");
+    91→  const [authError, setAuthError] = useState<string | null>(null);
+    92→  const [authLoading, setAuthLoading] = useState(false);
+    93→  const [booted, setBooted] = useState(false);
+    94→
+    95→  const [enquiries, setEnquiries] = useState<Enquiry[]>([]);
+    96→  const [stats, setStats] = useState<Stats | null>(null);
+    97→  const [loading, setLoading] = useState(false);
+    98→  const [loadError, setLoadError] = useState<string | null>(null);
+    99→
+   100→  const [statusFilter, setStatusFilter] = useState<"all" | EnquiryStatus>("all");
+   101→  const [categoryFilter, setCategoryFilter] = useState<string>("all");
+   102→  const [search, setSearch] = useState("");
+   103→
+   104→  const [selected, setSelected] = useState<Enquiry | null>(null);
+   105→  const [detail, setDetail] = useState<(Enquiry & { message?: string }) | null>(null);
+   106→  const [actionBusy, setActionBusy] = useState<string | null>(null);
+   107→  const [confirmDelete, setConfirmDelete] = useState(false);
+   108→
+   109→  const loadEnquiries = useCallback(async (key: string) => {
+   110→    setLoading(true);
+   111→    setLoadError(null);
+   112→    try {
+   113→      const res = await fetch("/api/enquiries", {
+   114→        headers: { "x-admin-key": key },
+   115→      });
+   116→      if (res.status === 401) {
+   117→        window.localStorage.removeItem(STORAGE_KEY);
+   118→        setAdminKey(null);
+   119→        return;
+   120→      }
+   121→      if (!res.ok) throw new Error("Request failed");
+   122→      const data = await res.json();
+   123→      setEnquiries(data.enquiries ?? []);
+   124→      setStats(data.stats ?? null);
+   125→    } catch {
+   126→      setLoadError("Failed to load enquiries. Please refresh.");
+   127→    } finally {
+   128→      setLoading(false);
+   129→    }
+   130→  }, []);
+   131→
+   132→  const verifyKey = useCallback(
+   133→    async (key: string) => {
+   134→      setAuthLoading(true);
+   135→      setAuthError(null);
+   136→      try {
+   137→        const res = await fetch("/api/enquiries", {
+   138→          headers: { "x-admin-key": key },
+   139→        });
+   140→        if (res.status === 401) {
+   141→          setAuthError("Incorrect admin key. Please try again.");
+   142→          window.localStorage.removeItem(STORAGE_KEY);
+   143→          setAdminKey(null);
+   144→          return;
+   145→        }
+   146→        if (!res.ok) throw new Error("Request failed");
+   147→        window.localStorage.setItem(STORAGE_KEY, key);
+   148→        setAdminKey(key);
+   149→      } catch {
+   150→        setAuthError("Could not reach the server. Please try again.");
+   151→      } finally {
+   152→        setAuthLoading(false);
+   153→      }
+   154→    },
+   155→    []
+   156→  );
+   157→
+   158→  // Restore saved key on mount
+   159→  useEffect(() => {
+   160→    const saved = window.localStorage.getItem(STORAGE_KEY);
+   161→    setBooted(true);
+   162→    if (saved) verifyKey(saved);
+   163→  }, [verifyKey]);
+   164→
+   165→  useEffect(() => {
+   166→    if (adminKey) loadEnquiries(adminKey);
+   167→  }, [adminKey, loadEnquiries]);
+   168→
+   169→  const openDetail = (enquiry: Enquiry) => {
+   170→    setSelected(enquiry);
+   171→    setDetail({ ...enquiry, message: undefined });
+   172→    setConfirmDelete(false);
+   173→    // Fetch full detail (message body) using list data — the API returns
+   174→    // message only in single-item responses, so lazily fetch it.
+   175→    if (adminKey) {
+   176→      fetch(`/api/enquiries/${enquiry.id}`, {
+   177→        headers: { "x-admin-key": adminKey },
+   178→      })
+   179→        .then((r) => (r.ok ? r.json() : null))
+   180→        .then((d) => {
+   181→          if (d?.ok && d.enquiry) {
+   182→            setDetail(d.enquiry);
+   183→            setSelected(d.enquiry);
+   184→          }
+   185→        })
+   186→        .catch(() => {
+   187→          /* keep list-level data */
+   188→        });
+   189→    }
+   190→  };
+   191→
+   192→  const updateStatus = async (enquiry: Enquiry, status: EnquiryStatus) => {
+   193→    if (!adminKey) return;
+   194→    setActionBusy(enquiry.id + status);
+   195→    try {
+   196→      const res = await fetch(`/api/enquiries/${enquiry.id}`, {
+   197→        method: "PATCH",
+   198→        headers: {
+   199→          "Content-Type": "application/json",
+   200→          "x-admin-key": adminKey,
+   201→        },
+   202→        body: JSON.stringify({ status }),
+   203→      });
+   204→      if (!res.ok) throw new Error();
+   205→      setEnquiries((prev) =>
+   206→        prev.map((e) => (e.id === enquiry.id ? { ...e, status } : e))
+   207→      );
+   208→      setDetail((d) => (d && d.id === enquiry.id ? { ...d, status } : d));
+   209→      setSelected((s) => (s && s.id === enquiry.id ? { ...s, status } : s));
+   210→      loadEnquiries(adminKey); // refresh stats
+   211→    } catch {
+   212→      setLoadError("Could not update the enquiry status.");
+   213→    } finally {
+   214→      setActionBusy(null);
+   215→    }
+   216→  };
+   217→
+   218→  const deleteEnquiry = async (enquiry: Enquiry) => {
+   219→    if (!adminKey) return;
+   220→    setActionBusy(enquiry.id + "delete");
+   221→    try {
+   222→      const res = await fetch(`/api/enquiries/${enquiry.id}`, {
+   223→        method: "DELETE",
+   224→        headers: { "x-admin-key": adminKey },
+   225→      });
+   226→      if (!res.ok) throw new Error();
+   227→      setEnquiries((prev) => prev.filter((e) => e.id !== enquiry.id));
+   228→      setDetail(null);
+   229→      setSelected(null);
+   230→      setConfirmDelete(false);
+   231→      loadEnquiries(adminKey);
+   232→    } catch {
+   233→      setLoadError("Could not delete the enquiry.");
+   234→    } finally {
+   235→      setActionBusy(null);
+   236→    }
+   237→  };
+   238→
+   239→  const logout = () => {
+   240→    window.localStorage.removeItem(STORAGE_KEY);
+   241→    setAdminKey(null);
+   242→    setKeyInput("");
+   243→    setEnquiries([]);
+   244→    setStats(null);
+   245→  };
+   246→
+   247→  const exportCsv = () => {
+   248→    const headers = [
+   249→      "Reference",
+   250→      "Name",
+   251→      "Email",
+   252→      "Phone",
+   253→      "Subject",
+   254→      "Category",
+   255→      "Status",
+   256→      "Created At",
+   257→    ];
+   258→    const escape = (v: string | null) => {
+   259→      const s = (v ?? "").replace(/"/g, '""');
+   260→      return `"${s}"`;
+   261→    };
+   262→    const lines = enquiries.map((e) =>
+   263→      [
+   264→        e.id,
+   265→        e.name,
+   266→        e.email,
+   267→        e.phone,
+   268→        e.subject,
+   269→        e.category,
+   270→        e.status,
+   271→        new Date(e.createdAt).toISOString(),
+   272→      ]
+   273→        .map(escape)
+   274→        .join(",")
+   275→    );
+   276→    const csv = [headers.map(escape).join(","), ...lines].join("\r\n");
+   277→    const blob = new Blob([`\uFEFF${csv}`], { type: "text/csv;charset=utf-8;" });
+   278→    const url = URL.createObjectURL(blob);
+   279→    const a = document.createElement("a");
+   280→    a.href = url;
+   281→    a.download = `enquiries-${new Date().toISOString().slice(0, 10)}.csv`;
+   282→    document.body.appendChild(a);
+   283→    a.click();
+   284→    a.remove();
+   285→    URL.revokeObjectURL(url);
+   286→  };
+   287→
+   288→  const categories = useMemo(
+   289→    () => Array.from(new Set(enquiries.map((e) => e.category))),
+   290→    [enquiries]
+   291→  );
+   292→
+   293→  const filtered = useMemo(() => {
+   294→    return enquiries.filter((e) => {
+   295→      if (statusFilter !== "all" && e.status !== statusFilter) return false;
+   296→      if (categoryFilter !== "all" && e.category !== categoryFilter) return false;
+   297→      if (search) {
+   298→        const q = search.toLowerCase();
+   299→        return (
+   300→          e.name.toLowerCase().includes(q) ||
+   301→          e.email.toLowerCase().includes(q) ||
+   302→          (e.subject ?? "").toLowerCase().includes(q)
+   303→        );
+   304→      }
+   305→      return true;
+   306→    });
+   307→  }, [enquiries, statusFilter, categoryFilter, search]);
+   308→
+   309→  // ------------------------------------------------------------------ Gate
+   310→  if (!booted) {
+   311→    return (
+   312→      <div className="flex min-h-[70vh] items-center justify-center">
+   313→        <Loader2 className="h-6 w-6 animate-spin text-royal" />
+   314→      </div>
+   315→    );
+   316→  }
+   317→
+   318→  if (!adminKey) {
+   319→    return (
+   320→      <div className="flex min-h-[70vh] items-center justify-center px-4 py-16">
+   321→        <div className="w-full max-w-md">
+   322→          <div className="rounded-2xl border border-border bg-white p-8 shadow-premium-lg">
+   323→            <div className="text-center">
+   324→              <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-navy to-royal text-gold shadow-premium ring-1 ring-gold/40">
+   325→                <Lock className="h-6 w-6" />
+   326→              </span>
+   327→              <h1 className="mt-5 font-heading text-2xl font-700 text-navy">
+   328→                Admin Access
+   329→              </h1>
+   330→              <p className="mt-2 text-sm text-ink-600">
+   331→                Enter the admin key to open the enquiries dashboard.
+   332→              </p>
+   333→            </div>
+   334→
+   335→            <form
+   336→              className="mt-7 space-y-4"
+   337→              onSubmit={(e) => {
+   338→                e.preventDefault();
+   339→                if (keyInput.trim()) verifyKey(keyInput.trim());
+   340→              }}
+   341→            >
+   342→              <div>
+   343→                <label
+   344→                  htmlFor="admin-key"
+   345→                  className="mb-2 block text-xs font-600 uppercase tracking-[0.12em] text-royal"
+   346→                >
+   347→                  Admin Key
+   348→                </label>
+   349→                <input
+   350→                  id="admin-key"
+   351→                  type="password"
+   352→                  autoFocus
+   353→                  value={keyInput}
+   354→                  onChange={(e) => setKeyInput(e.target.value)}
+   355→                  placeholder="••••••••••••"
+   356→                  className="w-full rounded-xl border border-border bg-white px-4 py-3 text-sm text-ink shadow-sm transition-colors placeholder:text-ink-600/40 focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/30"
+   357→                />
+   358→              </div>
+   359→
+   360→              {authError && (
+   361→                <p className="flex items-center gap-2 rounded-xl bg-red-50 px-3.5 py-2.5 text-xs font-500 text-red-700 ring-1 ring-red-200">
+   362→                  <ShieldAlert className="h-4 w-4 shrink-0" />
+   363→                  {authError}
+   364→                </p>
+   365→              )}
+   366→
+   367→              <button
+   368→                type="submit"
+   369→                disabled={authLoading || !keyInput.trim()}
+   370→                className="flex w-full items-center justify-center gap-2 rounded-xl bg-navy px-6 py-3.5 text-sm font-600 text-white shadow-premium transition-all hover:bg-navy-700 disabled:opacity-60"
+   371→              >
+   372→                {authLoading ? (
+   373→                  <>
+   374→                    <Loader2 className="h-4 w-4 animate-spin" />
+   375→                    Verifying...
+   376→                  </>
+   377→                ) : (
+   378→                  <>
+   379→                    <Lock className="h-4 w-4" />
+   380→                    Unlock Dashboard
+   381→                  </>
+   382→                )}
+   383→              </button>
+   384→            </form>
+   385→          </div>
+   386→          <p className="mt-4 text-center text-xs text-ink-600/70">
+   387→            Area restricted to authorised administrators.
+   388→          </p>
+   389→        </div>
+   390→      </div>
+   391→    );
+   392→  }
+   393→
+   394→  const statCards = stats
+   395→    ? [
+   396→        { label: "Total", value: stats.total, Icon: Inbox, accent: "text-royal bg-royal-50" },
+   397→        { label: "New", value: stats.new, Icon: CircleDot, accent: "text-gold-600 bg-gold-50" },
+   398→        { label: "In Progress", value: stats.inProgress, Icon: Timer, accent: "text-saffron-600 bg-orange-50" },
+   399→        { label: "Resolved", value: stats.resolved, Icon: CheckCircle2, accent: "text-green-700 bg-green-50" },
+   400→      ]
+   401→    : [];
+   402→
+   403→  // -------------------------------------------------------------- Dashboard
+   404→  return (
+   405→    <div className="min-h-[70vh]">
+   406→      {/* Header bar */}
+   407→      <div className="bg-navy bg-navy-grid">
+   408→        <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-8 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
+   409→          <div>
+   410→            <p className="text-xs uppercase tracking-[0.18em] text-gold">
+   411→              Administration
+   412→            </p>
+   413→            <h1 className="mt-1 font-heading text-2xl font-700 text-white sm:text-3xl">
+   414→              Enquiries Dashboard
+   415→            </h1>
+   416→            <p className="mt-1 text-sm text-white/60">
+   417→              Review, track and resolve incoming website enquiries.
+   418→            </p>
+   419→          </div>
+   420→          <div className="flex items-center gap-2.5">
+   421→            <button
+   422→              type="button"
+   423→              onClick={exportCsv}
+   424→              disabled={enquiries.length === 0}
+   425→              className="inline-flex items-center gap-2 rounded-xl bg-gold px-4 py-2.5 text-xs font-700 text-navy shadow-premium transition hover:bg-gold-600 disabled:opacity-60"
+   426→            >
+   427→              <Download className="h-4 w-4" />
+   428→              Export CSV
+   429→            </button>
+   430→            <button
+   431→              type="button"
+   432→              onClick={() => adminKey && loadEnquiries(adminKey)}
+   433→              disabled={loading}
+   434→              className="inline-flex items-center gap-2 rounded-xl bg-white/10 px-4 py-2.5 text-xs font-600 text-white ring-1 ring-white/20 transition hover:bg-white/20 disabled:opacity-60"
+   435→            >
+   436→              <RefreshCw className={cn("h-4 w-4", loading && "animate-spin")} />
+   437→              Refresh
+   438→            </button>
+   439→            <button
+   440→              type="button"
+   441→              onClick={logout}
+   442→              className="inline-flex items-center gap-2 rounded-xl bg-white/10 px-4 py-2.5 text-xs font-600 text-white ring-1 ring-white/20 transition hover:bg-white/20"
+   443→            >
+   444→              <LogOut className="h-4 w-4" />
+   445→              Lock
+   446→            </button>
+   447→          </div>
+   448→        </div>
+   449→      </div>
+   450→
+   451→      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+   452→        {/* Stats */}
+   453→        <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
+   454→          {statCards.map(({ label, value, Icon, accent }) => (
+   455→            <div
+   456→              key={label}
+   457→              className="flex items-center gap-4 rounded-2xl border border-border bg-white p-5 shadow-premium transition-shadow hover:shadow-premium-lg"
+   458→            >
+   459→              <span
+   460→                className={cn(
+   461→                  "flex h-11 w-11 shrink-0 items-center justify-center rounded-xl",
+   462→                  accent
+   463→                )}
+   464→              >
+   465→                <Icon className="h-5 w-5" />
+   466→              </span>
+   467→              <div className="min-w-0">
+   468→                <p className="text-xs font-600 uppercase tracking-[0.1em] text-ink-600/80">
+   469→                  {label}
+   470→                </p>
+   471→                <p className="font-heading text-2xl font-700 tabular-nums text-navy">
+   472→                  {value}
+   473→                </p>
+   474→              </div>
+   475→            </div>
+   476→          ))}
+   477→          {!stats &&
+   478→            Array.from({ length: 4 }).map((_, i) => (
+   479→              <div
+   480→                key={i}
+   481→                className="h-[92px] animate-pulse rounded-2xl border border-border bg-mist"
+   482→              />
+   483→            ))}
+   484→        </div>
+   485→
+   486→        {/* Filters */}
+   487→        <div className="mt-8 flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+   488→          <div
+   489→            role="tablist"
+   490→            aria-label="Filter by status"
+   491→            className="flex w-fit gap-1 rounded-xl bg-mist p-1 ring-1 ring-border"
+   492→          >
+   493→            {(["all", "new", "in-progress", "resolved"] as const).map((s) => (
+   494→              <button
+   495→                key={s}
+   496→                role="tab"
+   497→                aria-selected={statusFilter === s}
+   498→                onClick={() => setStatusFilter(s)}
+   499→                className={cn(
+   500→                  "rounded-lg px-3.5 py-2 text-xs font-600 capitalize transition-all sm:text-sm",
+   501→                  statusFilter === s
+   502→                    ? "bg-navy text-white shadow-premium"
+   503→                    : "text-ink-600 hover:text-royal"
+   504→                )}
+   505→              >
+   506→                {s === "all" ? "All" : statusMeta[s].label}
+   507→              </button>
+   508→            ))}
+   509→          </div>
+   510→
+   511→          <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+   512→            <div className="relative">
+   513→              <Search className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-600/50" />
+   514→              <input
+   515→                type="search"
+   516→                value={search}
+   517→                onChange={(e) => setSearch(e.target.value)}
+   518→                placeholder="Search name, email, subject..."
+   519→                aria-label="Search enquiries"
+   520→                className="w-full rounded-xl border border-border bg-white py-2.5 pl-10 pr-4 text-sm text-ink shadow-sm transition-colors placeholder:text-ink-600/40 focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/30 sm:w-72"
+   521→              />
+   522→            </div>
+   523→            <select
+   524→              value={categoryFilter}
+   525→              onChange={(e) => setCategoryFilter(e.target.value)}
+   526→              aria-label="Filter by category"
+   527→              className="rounded-xl border border-border bg-white px-3.5 py-2.5 text-sm font-500 text-ink shadow-sm transition-colors focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/30"
+   528→            >
+   529→              <option value="all">All categories</option>
+   530→              {categories.map((c) => (
+   531→                <option key={c} value={c}>
+   532→                  {c}
+   533→                </option>
+   534→              ))}
+   535→            </select>
+   536→          </div>
+   537→        </div>
+   538→
+   539→        {loadError && (
+   540→          <p className="mt-6 flex items-center gap-2 rounded-xl bg-red-50 px-4 py-3 text-sm font-500 text-red-700 ring-1 ring-red-200">
+   541→            <ShieldAlert className="h-4 w-4 shrink-0" />
+   542→            {loadError}
+   543→          </p>
+   544→        )}
+   545→
+   546→        {/* Result count */}
+   547→        {stats && (
+   548→          <p className="mt-6 flex items-center gap-2 text-xs font-500 text-ink-600/80">
+   549→            <Table2 className="h-3.5 w-3.5 text-royal" />
+   550→            Showing <span className="font-700 text-navy">{filtered.length}</span> of{" "}
+   551→            <span className="font-700 text-navy">{stats.total}</span> enquiries
+   552→            {(statusFilter !== "all" || categoryFilter !== "all" || search) && " (filtered)"}
+   553→          </p>
+   554→        )}
+   555→
+   556→        {/* List */}
+   557→        <div className="mt-6 space-y-3">
+   558→          {loading && enquiries.length === 0 &&
+   559→            Array.from({ length: 3 }).map((_, i) => (
+   560→              <div
+   561→                key={i}
+   562→                className="h-28 animate-pulse rounded-2xl border border-border bg-mist"
+   563→              />
+   564→            ))}
+   565→
+   566→          {!loading && filtered.length === 0 && (
+   567→            <div className="rounded-2xl border border-dashed border-border bg-mist/50 px-6 py-16 text-center">
+   568→              <Inbox className="mx-auto h-10 w-10 text-ink-600/30" />
+   569→              <p className="mt-4 font-heading text-lg font-600 text-navy">
+   570→                No enquiries found
+   571→              </p>
+   572→              <p className="mt-1 text-sm text-ink-600">
+   573→                {enquiries.length === 0
+   574→                  ? "New enquiries from the contact form will appear here."
+   575→                  : "Try changing the filters or search query."}
+   576→              </p>
+   577→            </div>
+   578→          )}
+   579→
+   580→          {filtered.map((enquiry) => (
+   581→            <button
+   582→              key={enquiry.id}
+   583→              type="button"
+   584→              onClick={() => openDetail(enquiry)}
+   585→              className={cn(
+   586→                "block w-full rounded-2xl border bg-white p-5 text-left shadow-premium transition-all hover:-translate-y-0.5 hover:shadow-premium-lg",
+   587→                selected?.id === enquiry.id
+   588→                  ? "border-gold/60 ring-1 ring-gold/40"
+   589→                  : "border-border"
+   590→              )}
+   591→            >
+   592→              <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+   593→                <div className="min-w-0">
+   594→                  <div className="flex flex-wrap items-center gap-2">
+   595→                    <p className="font-heading text-base font-700 text-navy">
+   596→                      {enquiry.name}
+   597→                    </p>
+   598→                    <span
+   599→                      className={cn(
+   600→                        "inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-[0.68rem] font-700",
+   601→                        statusMeta[enquiry.status].className
+   602→                      )}
+   603→                    >
+   604→                      <span
+   605→                        className={cn(
+   606→                          "h-1.5 w-1.5 rounded-full",
+   607→                          statusMeta[enquiry.status].dot
+   608→                        )}
+   609→                      />
+   610→                      {statusMeta[enquiry.status].label}
+   611→                    </span>
+   612→                    <span className="inline-flex items-center gap-1 rounded-full bg-mist px-2.5 py-0.5 text-[0.68rem] font-600 text-ink-600 ring-1 ring-border">
+   613→                      <Tag className="h-3 w-3" />
+   614→                      {enquiry.category}
+   615→                    </span>
+   616→                  </div>
+   617→                  <p className="mt-1.5 truncate text-sm font-600 text-royal">
+   618→                    {enquiry.subject || "(No subject)"}
+   619→                  </p>
+   620→                  <p className="mt-1 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-ink-600/80">
+   621→                    <span className="inline-flex items-center gap-1">
+   622→                      <Mail className="h-3 w-3" />
+   623→                      {enquiry.email}
+   624→                    </span>
+   625→                    {enquiry.phone && (
+   626→                      <span className="inline-flex items-center gap-1">
+   627→                        <Phone className="h-3 w-3" />
+   628→                        {enquiry.phone}
+   629→                      </span>
+   630→                    )}
+   631→                  </p>
+   632→                </div>
+   633→                <p className="flex shrink-0 items-center gap-1.5 text-xs font-500 text-ink-600/70">
+   634→                  <Clock className="h-3.5 w-3.5" />
+   635→                  {relativeTime(enquiry.createdAt)}
+   636→                </p>
+   637→              </div>
+   638→            </button>
+   639→          ))}
+   640→        </div>
+   641→      </div>
+   642→
+   643→      {/* Detail dialog */}
+   644→      <Dialog
+   645→        open={!!detail}
+   646→        onOpenChange={(open) => {
+   647→          if (!open) {
+   648→            setDetail(null);
+   649→            setConfirmDelete(false);
+   650→          }
+   651→        }}
+   652→      >
+   653→        <DialogContent className="max-w-xl overflow-hidden p-0">
+   654→          {detail && (
+   655→            <>
+   656→              <DialogHeader className="space-y-0 bg-navy px-6 py-5 text-left">
+   657→                <DialogTitle className="font-heading text-lg font-700 text-white">
+   658→                  {detail.name}
+   659→                </DialogTitle>
+   660→                <DialogDescription className="mt-1 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-white/70">
+   661→                  <span className="inline-flex items-center gap-1">
+   662→                    <Mail className="h-3 w-3" />
+   663→                    {detail.email}
+   664→                  </span>
+   665→                  {detail.phone && (
+   666→                    <span className="inline-flex items-center gap-1">
+   667→                      <Phone className="h-3 w-3" />
+   668→                      {detail.phone}
+   669→                    </span>
+   670→                  )}
+   671→                  <span className="inline-flex items-center gap-1">
+   672→                    <Clock className="h-3 w-3" />
+   673→                    {relativeTime(detail.createdAt)}
+   674→                  </span>
+   675→                </DialogDescription>
+   676→              </DialogHeader>
+   677→
+   678→              <div className="max-h-[50vh] overflow-y-auto px-6 py-5 scrollbar-premium">
+   679→                <div className="flex flex-wrap items-center gap-2">
+   680→                  <span
+   681→                    className={cn(
+   682→                      "inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-700",
+   683→                      statusMeta[detail.status].className
+   684→                    )}
+   685→                  >
+   686→                    <span
+   687→                      className={cn(
+   688→                        "h-1.5 w-1.5 rounded-full",
+   689→                        statusMeta[detail.status].dot
+   690→                      )}
+   691→                    />
+   692→                    {statusMeta[detail.status].label}
+   693→                  </span>
+   694→                  <span className="inline-flex items-center gap-1 rounded-full bg-mist px-2.5 py-1 text-xs font-600 text-ink-600 ring-1 ring-border">
+   695→                    <Tag className="h-3 w-3" />
+   696→                    {detail.category}
+   697→                  </span>
+   698→                  <span className="inline-flex items-center gap-1 rounded-full bg-royal-50 px-2.5 py-1 font-mono text-[0.68rem] text-royal ring-1 ring-royal/20">
+   699→                    {detail.id}
+   700→                  </span>
+   701→                </div>
+   702→
+   703→                <h3 className="mt-4 text-xs font-700 uppercase tracking-[0.12em] text-royal">
+   704→                  Subject
+   705→                </h3>
+   706→                <p className="mt-1.5 text-sm font-600 text-navy">
+   707→                  {detail.subject || "(No subject)"}
+   708→                </p>
+   709→
+   710→                <h3 className="mt-5 text-xs font-700 uppercase tracking-[0.12em] text-royal">
+   711→                  Message
+   712→                </h3>
+   713→                <p className="mt-1.5 whitespace-pre-wrap rounded-xl bg-mist p-4 text-sm leading-relaxed text-ink">
+   714→                  {detail.message ??
+   715→                    "Loading full message... (if this persists, the detail request failed — refresh and reopen.)"}
+   716→                </p>
+   717→              </div>
+   718→
+   719→              <div className="flex flex-wrap items-center gap-2 border-t border-border bg-mist/60 px-6 py-4">
+   720→                {detail.status !== "new" && (
+   721→                  <button
+   722→                    type="button"
+   723→                    onClick={() => updateStatus(detail, "new")}
+   724→                    disabled={actionBusy === detail.id + "new"}
+   725→                    className="inline-flex items-center gap-1.5 rounded-xl bg-white px-3.5 py-2 text-xs font-600 text-ink-600 ring-1 ring-border transition hover:text-royal disabled:opacity-60"
+   726→                  >
+   727→                    <ArrowLeft className="h-3.5 w-3.5" />
+   728→                    Reopen
+   729→                  </button>
+   730→                )}
+   731→                {detail.status !== "in-progress" && (
+   732→                  <button
+   733→                    type="button"
+   734→                    onClick={() => updateStatus(detail, "in-progress")}
+   735→                    disabled={actionBusy === detail.id + "in-progress"}
+   736→                    className="inline-flex items-center gap-1.5 rounded-xl bg-saffron px-3.5 py-2 text-xs font-600 text-white transition hover:bg-saffron-600 disabled:opacity-60"
+   737→                  >
+   738→                    <Timer className="h-3.5 w-3.5" />
+   739→                    In Progress
+   740→                  </button>
+   741→                )}
+   742→                {detail.status !== "resolved" && (
+   743→                  <button
+   744→                    type="button"
+   745→                    onClick={() => updateStatus(detail, "resolved")}
+   746→                    disabled={actionBusy === detail.id + "resolved"}
+   747→                    className="inline-flex items-center gap-1.5 rounded-xl bg-green-700 px-3.5 py-2 text-xs font-600 text-white transition hover:bg-green-800 disabled:opacity-60"
+   748→                  >
+   749→                    <CheckCircle2 className="h-3.5 w-3.5" />
+   750→                    Resolve
+   751→                  </button>
+   752→                )}
+   753→
+   754→                <span className="flex-1" />
+   755→
+   756→                {confirmDelete ? (
+   757→                  <span className="flex items-center gap-2">
+   758→                    <span className="text-xs font-600 text-red-700">
+   759→                      Delete permanently?
+   760→                    </span>
+   761→                    <button
+   762→                      type="button"
+   763→                      onClick={() => deleteEnquiry(detail)}
+   764→                      disabled={actionBusy === detail.id + "delete"}
+   765→                      className="inline-flex items-center gap-1.5 rounded-xl bg-red-700 px-3.5 py-2 text-xs font-600 text-white transition hover:bg-red-800 disabled:opacity-60"
+   766→                    >
+   767→                      {actionBusy === detail.id + "delete" ? (
+   768→                        <Loader2 className="h-3.5 w-3.5 animate-spin" />
+   769→                      ) : (
+   770→                        <Trash2 className="h-3.5 w-3.5" />
+   771→                      )}
+   772→                      Yes, delete
+   773→                    </button>
+   774→                    <button
+   775→                      type="button"
+   776→                      onClick={() => setConfirmDelete(false)}
+   777→                      className="rounded-xl bg-white px-3 py-2 text-xs font-600 text-ink-600 ring-1 ring-border"
+   778→                    >
+   779→                      Cancel
+   780→                    </button>
+   781→                  </span>
+   782→                ) : (
+   783→                  <button
+   784→                    type="button"
+   785→                    onClick={() => setConfirmDelete(true)}
+   786→                    className="inline-flex items-center gap-1.5 rounded-xl bg-white px-3.5 py-2 text-xs font-600 text-red-700 ring-1 ring-red-200 transition hover:bg-red-50"
+   787→                  >
+   788→                    <Trash2 className="h-3.5 w-3.5" />
+   789→                    Delete
+   790→                  </button>
+   791→                )}
+   792→              </div>
+   793→            </>
+   794→          )}
+   795→        </DialogContent>
+   796→      </Dialog>
+   797→    </div>
+   798→  );
+   799→}
+   800→

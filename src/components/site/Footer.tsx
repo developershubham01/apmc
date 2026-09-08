@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { ExternalLink, MapPin, Store, ArrowUpRight } from "lucide-react";
+import { ExternalLink, MapPin, Store, ArrowUpRight, Newspaper } from "lucide-react";
 import { footerQuickLinks, footerOrganizations, siteConfig } from "@/data/site";
+import { NewsletterForm } from "./NewsletterForm";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -139,8 +140,36 @@ export function Footer() {
             </div>
           </div>
 
+          {/* Newsletter band */}
+          <div className="mt-12 overflow-hidden rounded-2xl bg-white/5 ring-1 ring-gold/25">
+            <div className="grid gap-6 p-6 sm:p-7 lg:grid-cols-[1.1fr_1.4fr] lg:items-center lg:gap-10">
+              <div className="flex items-start gap-4">
+                <span
+                  aria-hidden
+                  className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gold/15 ring-1 ring-gold/40 text-gold sm:flex"
+                >
+                  <Newspaper className="h-5 w-5" />
+                </span>
+                <div>
+                  <h3 className="font-heading text-base font-700 text-white sm:text-lg">
+                    Market Updates &amp; Chamber News
+                  </h3>
+                  <p className="mt-1 text-sm leading-relaxed text-white/60">
+                    Monthly APMC price round-ups, chamber events and trade circulars —
+                    straight to your inbox. No spam, unsubscribe anytime.
+                  </p>
+                </div>
+              </div>
+              <NewsletterForm />
+            </div>
+            <div
+              aria-hidden
+              className="h-0.5 w-full bg-gradient-to-r from-transparent via-gold/60 to-transparent"
+            />
+          </div>
+
           {/* Bottom bar */}
-          <div className="mt-12 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-white/10 pt-6">
+          <div className="mt-10 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-white/10 pt-6">
             <p className="text-xs text-white/55 text-center sm:text-left">
               © {year} Kirti Rana. All Rights Reserved.
             </p>
