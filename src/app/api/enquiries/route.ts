@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { db } from "@/lib/db";
+import { bumpStat, getSiteStats, SITE_STATS } from "@/lib/site-stats";
+import { pushNotification } from "@/lib/notify";
 
 const CATEGORIES = [
   "Business Enquiries",
@@ -79,6 +81,7 @@ export async function POST(req: NextRequest) {
   try {
     const ip = getClientIp(req);
     if (isRateLimited(ip)) {
+      await bumpStat(SITE_STATS.rateLimited);
       return NextResponse.json(
         {
           error:
@@ -115,6 +118,7 @@ export async function POST(req: NextRequest) {
         ? ((body as Record<string, unknown>).website as string).trim()
         : "";
     if (honeypotValue.length > 0) {
+      await bumpStat(SITE_STATS.honeypotBlocked);
       return NextResponse.json(
         {
           ok: true,
@@ -136,6 +140,17 @@ export async function POST(req: NextRequest) {
         category,
       },
       select: { id: true, createdAt: true },
+    });
+
+    // Mail-outbox pattern: record an admin notification for the new enquiry
+    // (stands in for an SMTP email alert until a provider is connected).
+    await pushNotification({
+      type: "enquiry",
+      title: `New enquiry from ${name}`,
+      body: subject
+        ? `${subject} — ${message.slice(0, 120)}`
+        : message.slice(0, 140),
+      refId: enquiry.id,
     });
 
     return NextResponse.json(
@@ -165,7 +180,7 @@ export async function GET(req: NextRequest) {
   }
 
   try {
-    const [enquiries, total, newCount, inProgressCount, resolvedCount] =
+    const [enquiries, total, newCount, inProgressCount, resolvedCount, security] =
       await Promise.all([
         db.enquiry.findMany({
           orderBy: { createdAt: "desc" },
@@ -185,6 +200,7 @@ export async function GET(req: NextRequest) {
         db.enquiry.count({ where: { status: "new" } }),
         db.enquiry.count({ where: { status: "in-progress" } }),
         db.enquiry.count({ where: { status: "resolved" } }),
+        getSiteStats([SITE_STATS.honeypotBlocked, SITE_STATS.rateLimited]),
       ]);
 
     return NextResponse.json({
@@ -196,6 +212,10 @@ export async function GET(req: NextRequest) {
         new: newCount,
         inProgress: inProgressCount,
         resolved: resolvedCount,
+      },
+      security: {
+        honeypotBlocked: security[SITE_STATS.honeypotBlocked],
+        rateLimited: security[SITE_STATS.rateLimited],
       },
       enquiries,
     });

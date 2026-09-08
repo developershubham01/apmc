@@ -14,6 +14,8 @@ type PageHeaderProps = {
   description?: React.ReactNode;
   crumbs?: Crumb[];
   align?: "left" | "center";
+  /** Optional lucide icon rendered as a gold chip beside the heading. */
+  icon?: React.ComponentType<{ className?: string }>;
 };
 
 export function PageHeader({
@@ -22,6 +24,7 @@ export function PageHeader({
   description,
   crumbs = [],
   align = "left",
+  icon: Icon,
 }: PageHeaderProps) {
   return (
     <section className="relative overflow-hidden bg-navy text-white">
@@ -84,11 +87,25 @@ export function PageHeader({
             align === "center" && "items-center text-center"
           )}
         >
-          {eyebrow && (
-            <span className="eyebrow inline-flex items-center gap-2 text-gold">
-              <span aria-hidden className="inline-block h-px w-6 bg-gold/60" />
-              {eyebrow}
-            </span>
+          {(Icon || eyebrow) && (
+            <div
+              className={cn(
+                "flex items-center gap-3",
+                align === "center" && "flex-col"
+              )}
+            >
+              {Icon && (
+                <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white/10 text-gold ring-1 ring-gold/40 backdrop-blur-sm">
+                  <Icon className="h-5 w-5" />
+                </span>
+              )}
+              {eyebrow && (
+                <span className="eyebrow inline-flex items-center gap-2 text-gold">
+                  <span aria-hidden className="inline-block h-px w-6 bg-gold/60" />
+                  {eyebrow}
+                </span>
+              )}
+            </div>
           )}
           <h1 className="font-heading font-800 text-4xl sm:text-5xl lg:text-6xl leading-[1.05] text-balance">
             {title}

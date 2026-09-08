@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { db } from "@/lib/db";
+import { bumpStat, SITE_STATS } from "@/lib/site-stats";
+import { pushNotification } from "@/lib/notify";
 
 const subscribeSchema = z.object({
   email: z
@@ -49,6 +51,7 @@ export async function POST(req: NextRequest) {
   try {
     const ip = getClientIp(req);
     if (isRateLimited(ip)) {
+      await bumpStat(SITE_STATS.rateLimited);
       return NextResponse.json(
         { error: "Too many attempts. Please try again in a few minutes." },
         { status: 429 }
@@ -69,6 +72,7 @@ export async function POST(req: NextRequest) {
         ? ((body as Record<string, unknown>).website as string).trim()
         : "";
     if (honeypotValue.length > 0) {
+      await bumpStat(SITE_STATS.honeypotBlocked);
       return NextResponse.json(
         { ok: true, id: `skip-${Date.now()}`, message: "Subscribed." },
         { status: 201 }
@@ -101,6 +105,13 @@ export async function POST(req: NextRequest) {
     const subscriber = await db.subscriber.create({
       data: { email, source: source || "footer" },
       select: { id: true, createdAt: true },
+    });
+
+    await pushNotification({
+      type: "subscriber",
+      title: "New newsletter subscriber",
+      body: `${email} joined the market-updates list.`,
+      refId: subscriber.id,
     });
 
     return NextResponse.json(

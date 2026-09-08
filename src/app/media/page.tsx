@@ -7,18 +7,49 @@ import {
   ChevronRight,
   Quote,
   Info,
+  ArrowRight,
+  CalendarRange,
+  HeartHandshake,
+  Megaphone,
 } from "lucide-react";
 import { PageHeader } from "@/components/site/PageHeader";
 import { SectionHeading } from "@/components/site/SectionHeading";
 import { ScrollReveal } from "@/components/site/ScrollReveal";
 import { LightboxImage } from "@/components/site/LightboxImage";
 import { CTASection } from "@/components/site/CTASection";
+import { MediaCategoryBar } from "@/components/site/MediaCategoryBar";
+import {
+  mediaCategories,
+  entriesFor,
+  type MediaCategorySlug,
+} from "@/data/media";
 
 export const metadata: Metadata = {
   title: "Media & Press Coverage | Kirti Rana",
   description:
-    "Media and press coverage of Kirti Rana — featured in Vyapar Kesari for contributions to the merchant community and trade.",
+    "Media desk of Kirti Rana — events, social activities, news and press coverage including the Vyapar Kesari feature for contributions to the merchant community and trade.",
   alternates: { canonical: "/media" },
+};
+
+const categoryMeta: Record<
+  MediaCategorySlug,
+  { Icon: typeof Newspaper; image: string; imageAlt: string }
+> = {
+  events: {
+    Icon: CalendarRange,
+    image: "/images/events/trade-meeting.jpg",
+    imageAlt: "Merchant leaders at a chamber trade meeting",
+  },
+  "social-activities": {
+    Icon: HeartHandshake,
+    image: "/images/events/community.jpg",
+    imageAlt: "Community welfare gathering",
+  },
+  news: {
+    Icon: Megaphone,
+    image: "/images/apmc/fruit-market.jpg",
+    imageAlt: "Wholesale fruit market at the APMC yard",
+  },
 };
 
 const mediaFeatures = [
@@ -41,7 +72,70 @@ export default function MediaPage() {
         title="Media & Press Coverage"
         description="Press coverage of Kirti Rana's work in the merchant community and agricultural trade. Featured publications and coverage are documented here."
         crumbs={[{ label: "Media" }]}
+        icon={Newspaper}
       />
+
+      {/* Section selector (dropdown + quick pills) */}
+      <MediaCategoryBar />
+
+      {/* Media Desk — category cards */}
+      <section className="bg-white py-14 lg:py-20" aria-label="Media desk sections">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <SectionHeading
+            eyebrow="Explore the Media Desk"
+            title="Events, Social Activities & News"
+            description="The media desk is organised into three sections. Use the dropdown above or open a section below to browse it in full."
+          />
+
+          <div className="mt-12 grid gap-6 md:grid-cols-3">
+            {mediaCategories.map((category, i) => {
+              const { Icon, image, imageAlt } = categoryMeta[category.slug];
+              const count = entriesFor(category.slug).length;
+              return (
+                <ScrollReveal key={category.slug} variant="up" delay={i * 80}>
+                  <Link
+                    href={`/media/${category.slug}`}
+                    className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-white shadow-premium transition-all hover:-translate-y-1 hover:border-gold/50 hover:shadow-premium-lg"
+                  >
+                    <div className="relative h-40 overflow-hidden">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={image}
+                        alt={imageAlt}
+                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        loading="lazy"
+                      />
+                      <div
+                        aria-hidden
+                        className="absolute inset-0 bg-gradient-to-t from-navy/80 via-navy/20 to-transparent"
+                      />
+                      <span className="absolute bottom-3 left-4 inline-flex items-center gap-1.5 rounded-full bg-white/95 px-2.5 py-1 text-[0.66rem] font-700 uppercase tracking-[0.12em] text-navy ring-1 ring-gold/40">
+                        <Icon className="h-3 w-3 text-gold-600" />
+                        {count} {count === 1 ? "entry" : "entries"}
+                      </span>
+                    </div>
+                    <div className="flex flex-1 flex-col p-5">
+                      <p className="text-[0.66rem] font-700 uppercase tracking-[0.16em] text-royal">
+                        {category.eyebrow}
+                      </p>
+                      <h3 className="mt-1.5 font-heading text-xl font-700 text-navy transition-colors group-hover:text-royal">
+                        {category.label}
+                      </h3>
+                      <p className="mt-2 flex-1 text-sm leading-relaxed text-ink-600">
+                        {category.description}
+                      </p>
+                      <span className="mt-4 inline-flex items-center gap-2 text-sm font-600 text-royal">
+                        Open section
+                        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                      </span>
+                    </div>
+                  </Link>
+                </ScrollReveal>
+              );
+            })}
+          </div>
+        </div>
+      </section>
 
       {/* Featured coverage */}
       <section className="bg-white py-16 lg:py-24">

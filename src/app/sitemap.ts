@@ -11,6 +11,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/board",
     "/gallery",
     "/media",
+    "/media/events",
+    "/media/social-activities",
+    "/media/news",
     "/contact",
   ];
   const now = new Date();
