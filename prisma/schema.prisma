@@ -45,3 +45,19 @@ model Enquiry {
   @@index([createdAt])
   @@index([status])
 }
+
+model MarketRate {
+  id        String   @id @default(cuid())
+  groupSlug String
+  commodity String
+  variety   String
+  unit      String
+  min       Int
+  max       Int
+  modal     Int
+  trend     String   @default("steady")
+  sortOrder Int      @default(0)
+  updatedAt DateTime @updatedAt
+
+  @@index([groupSlug, sortOrder])
+}

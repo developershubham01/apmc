@@ -68,3 +68,33 @@ Unresolved issues / risks / next steps (priority order):
 3. MarketRates still static sample data (worklog round-1 item #2).
 4. Admin: add pagination + CSV export if enquiry volume grows; showhoneypot-blocked count in stats (currently silently skipped).
 5. Gallery/Media static content enhancements (filters/pagination) if content grows.
+
+---
+Task ID: cron-review-3
+Agent: webDevReview (cron, every 15 min)
+Task: Assess status, QA, continue development — dynamic rates pipeline (priority #3) + admin CSV export (priority #4).
+
+Work Log:
+- Reviewed worklog rounds 1-2; dev server healthy; confirmed gallery category filters were already implemented upstream (round-2 item #5 closed, no work needed).
+- Implemented priority #3: **DB-backed dynamic Market Rates pipeline**:
+  - New `MarketRate` Prisma model (groupSlug, commodity, variety, unit, min/max/modal, trend, sortOrder, updatedAt + composite index) and `bun run db:push`.
+  - New `GET /api/rates`: auto-seeds from bundled `src/data/rates.ts` on first request, returns groups+rows+latest updatedAt with no-store cache header. Note: first call 500'd because the long-running dev server held a stale Prisma Client — fixed by restarting the dev server (worth remembering after any schema change).
+  - `MarketRates.tsx` upgraded: renders bundled data instantly, then fetches `/api/rates`; on success swaps in DB rows + real timestamp; shows source badge — green "Market database" (live) vs gray "Reference data" (fallback); spinner while loading; graceful fallback to bundled data on API failure.
+  - End-to-end proof: updated Tomato modal 28→45 + trend via Prisma script → API reflected change → UI showed ₹45 / Rising under "Market database" badge → restored original values afterwards.
+- Implemented priority #4: **Admin CSV export + result count**:
+  - Gold "Export CSV" button in dashboard header: client-side CSV generation (proper quoting/escaping, UTF-8 BOM for Excel, dated filename `enquiries-YYYY-MM-DD.csv`).
+  - "Showing X of Y enquiries (filtered)" count line that reacts to status/category/search filters.
+- Verified via agent-browser: rates section shows "8 September 2026" + Market database badge; tab switching intact; admin login → export click → file downloaded to ~/Downloads and content verified (all 4 enquiries, headers correct); zero console errors.
+- `bun run lint` clean; dev.log shows no errors.
+
+Stage Summary:
+- Project status: STABLE. Rates are now a true full-stack pipeline (DB → API → UI with fallback), admin gains data-export capability.
+- Artifacts: MarketRate model, /api/rates (auto-seed), MarketRates rewrite, AdminDashboard export + count.
+- Lesson learned: restart dev server after `db:push` (stale global Prisma client otherwise).
+
+Unresolved issues / risks / next steps (priority order):
+1. Rates admin editor: no UI yet to edit MarketRate rows (currently DB/Prisma only) — add an admin "Rates" tab with inline edit + "update all timestamps" action.
+2. NextAuth session auth for admin (replaces shared key) — still open.
+3. Email notification on new enquiry (SMTP/Resend) — still open.
+4. Rate limiting for /api/rates (public endpoint) if abuse becomes a concern.
+5. Admin pagination when enquiries exceed 200 (current GET take limit).

@@ -18,6 +18,8 @@ import {
   Trash2,
   ArrowLeft,
   ShieldAlert,
+  Download,
+  Table2,
 } from "lucide-react";
 import {
   Dialog,
@@ -242,6 +244,47 @@ export function AdminDashboard() {
     setStats(null);
   };
 
+  const exportCsv = () => {
+    const headers = [
+      "Reference",
+      "Name",
+      "Email",
+      "Phone",
+      "Subject",
+      "Category",
+      "Status",
+      "Created At",
+    ];
+    const escape = (v: string | null) => {
+      const s = (v ?? "").replace(/"/g, '""');
+      return `"${s}"`;
+    };
+    const lines = enquiries.map((e) =>
+      [
+        e.id,
+        e.name,
+        e.email,
+        e.phone,
+        e.subject,
+        e.category,
+        e.status,
+        new Date(e.createdAt).toISOString(),
+      ]
+        .map(escape)
+        .join(",")
+    );
+    const csv = [headers.map(escape).join(","), ...lines].join("\r\n");
+    const blob = new Blob([`\uFEFF${csv}`], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `enquiries-${new Date().toISOString().slice(0, 10)}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  };
+
   const categories = useMemo(
     () => Array.from(new Set(enquiries.map((e) => e.category))),
     [enquiries]
@@ -377,6 +420,15 @@ export function AdminDashboard() {
           <div className="flex items-center gap-2.5">
             <button
               type="button"
+              onClick={exportCsv}
+              disabled={enquiries.length === 0}
+              className="inline-flex items-center gap-2 rounded-xl bg-gold px-4 py-2.5 text-xs font-700 text-navy shadow-premium transition hover:bg-gold-600 disabled:opacity-60"
+            >
+              <Download className="h-4 w-4" />
+              Export CSV
+            </button>
+            <button
+              type="button"
               onClick={() => adminKey && loadEnquiries(adminKey)}
               disabled={loading}
               className="inline-flex items-center gap-2 rounded-xl bg-white/10 px-4 py-2.5 text-xs font-600 text-white ring-1 ring-white/20 transition hover:bg-white/20 disabled:opacity-60"
@@ -488,6 +540,16 @@ export function AdminDashboard() {
           <p className="mt-6 flex items-center gap-2 rounded-xl bg-red-50 px-4 py-3 text-sm font-500 text-red-700 ring-1 ring-red-200">
             <ShieldAlert className="h-4 w-4 shrink-0" />
             {loadError}
+          </p>
+        )}
+
+        {/* Result count */}
+        {stats && (
+          <p className="mt-6 flex items-center gap-2 text-xs font-500 text-ink-600/80">
+            <Table2 className="h-3.5 w-3.5 text-royal" />
+            Showing <span className="font-700 text-navy">{filtered.length}</span> of{" "}
+            <span className="font-700 text-navy">{stats.total}</span> enquiries
+            {(statusFilter !== "all" || categoryFilter !== "all" || search) && " (filtered)"}
           </p>
         )}
 

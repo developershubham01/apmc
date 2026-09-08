@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   TrendingUp,
   TrendingDown,
@@ -8,9 +8,12 @@ import {
   ExternalLink,
   Info,
   CalendarDays,
+  Database,
+  FileText,
+  Loader2,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { rateGroups, formatINR } from "@/data/rates";
+import { rateGroups as bundledGroups, ratesUpdatedAt, formatINR, type RateGroup } from "@/data/rates";
 
 const trendMeta = {
   up: { Icon: TrendingUp, className: "text-green-700 bg-green-100", label: "Rising" },
@@ -18,9 +21,49 @@ const trendMeta = {
   steady: { Icon: Minus, className: "text-ink-600 bg-mist", label: "Steady" },
 } as const;
 
+function formatUpdatedAt(iso: string | null): string {
+  if (!iso) return ratesUpdatedAt;
+  const d = new Date(iso);
+  return d.toLocaleDateString("en-IN", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
+}
+
 export function MarketRates() {
+  // Bundled data renders instantly (SSEO/first paint); API data replaces it
+  // when available so the section always shows something useful.
+  const [groups, setGroups] = useState<RateGroup[]>(bundledGroups);
+  const [updatedAt, setUpdatedAt] = useState<string | null>(null);
+  const [source, setSource] = useState<"database" | "bundled">("bundled");
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch("/api/rates")
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data) => {
+        if (cancelled || !data?.ok) return;
+        if (Array.isArray(data.groups) && data.groups.length > 0) {
+          setGroups(data.groups);
+          setUpdatedAt(data.updatedAt ?? null);
+          setSource(data.source === "database" ? "database" : "bundled");
+        }
+      })
+      .catch(() => {
+        /* keep bundled data */
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   const [active, setActive] = useState(0);
-  const group = rateGroups[active];
+  const group = groups[Math.min(active, groups.length - 1)];
 
   return (
     <div className="overflow-hidden rounded-2xl border border-border bg-white shadow-premium">
@@ -30,7 +73,7 @@ export function MarketRates() {
         aria-label="Market rate sections"
         className="flex gap-1 overflow-x-auto border-b border-border bg-navy px-3 py-2.5 scrollbar-premium"
       >
-        {rateGroups.map((g, i) => (
+        {groups.map((g, i) => (
           <button
             key={g.slug}
             role="tab"
@@ -50,10 +93,29 @@ export function MarketRates() {
 
       {/* Panel meta */}
       <div className="flex flex-col gap-2 border-b border-border bg-mist/60 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-6">
-        <p className="flex items-center gap-2 text-xs font-500 text-ink-600">
-          <CalendarDays className="h-3.5 w-3.5 text-gold-600" />
-          Indicative rates updated <span className="font-700 text-navy">{group.updated}</span>
-        </p>
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
+          <p className="flex items-center gap-2 text-xs font-500 text-ink-600">
+            <CalendarDays className="h-3.5 w-3.5 text-gold-600" />
+            Indicative rates updated <span className="font-700 text-navy">{formatUpdatedAt(updatedAt)}</span>
+          </p>
+          <span
+            className={cn(
+              "inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[0.68rem] font-700 ring-1",
+              source === "database"
+                ? "bg-green-50 text-green-700 ring-green-600/25"
+                : "bg-mist text-ink-600 ring-border"
+            )}
+          >
+            {loading ? (
+              <Loader2 className="h-3 w-3 animate-spin" />
+            ) : source === "database" ? (
+              <Database className="h-3 w-3" />
+            ) : (
+              <FileText className="h-3 w-3" />
+            )}
+            {source === "database" ? "Market database" : "Reference data"}
+          </span>
+        </div>
         <a
           href="https://www.mumbaiapmc.org/en/market-price-en/daily-market-price-en"
           target="_blank"
@@ -92,7 +154,7 @@ export function MarketRates() {
           </thead>
           <tbody>
             {group.rows.map((row) => {
-              const trend = trendMeta[row.trend];
+              const trend = trendMeta[row.trend as keyof typeof trendMeta] ?? trendMeta.steady;
               const TrendIcon = trend.Icon;
               return (
                 <tr
