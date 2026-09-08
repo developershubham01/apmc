@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { cn } from "@/lib/utils";
 import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
+import { BackToTop } from "@/components/site/BackToTop";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -124,6 +125,7 @@ export default function RootLayout({
           <Footer />
         </div>
         <Toaster />
+        <BackToTop />
       </body>
     </html>
   );

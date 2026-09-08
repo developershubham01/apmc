@@ -16,6 +16,7 @@ import { PageHeader } from "@/components/site/PageHeader";
 import { SectionHeading } from "@/components/site/SectionHeading";
 import { ScrollReveal } from "@/components/site/ScrollReveal";
 import { MarketCard } from "@/components/site/MarketCard";
+import { MarketRates } from "@/components/site/MarketRates";
 import { CTASection } from "@/components/site/CTASection";
 import { markets } from "@/data/markets";
 import { siteConfig } from "@/data/site";
@@ -143,6 +144,20 @@ export default function ApmcPage() {
               <MarketCard key={market.slug} market={market} index={i} />
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Daily Indicative Rates */}
+      <section id="market-rates" className="bg-white py-16 lg:py-24 scroll-mt-24">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <SectionHeading
+            eyebrow="Daily Indicative Rates"
+            title="Today's Wholesale Price Bands"
+            description="Orientation-level indicative price bands across the five commodity markets. Figures are sample data — always confirm live auction prices on the official portal."
+          />
+          <ScrollReveal className="mt-12">
+            <MarketRates />
+          </ScrollReveal>
         </div>
       </section>
 

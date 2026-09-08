@@ -122,19 +122,16 @@ export default function ContactPage() {
                     Contact Details
                   </h3>
                   <p className="mt-3 text-sm leading-relaxed text-ink-600">
-                    Verified email and phone details will be updated here once
-                    available. The enquiry form uses a mailto fallback in the
-                    meantime.
+                    Submit the enquiry form and our team will respond using the
+                    details you share. Every enquiry is recorded with a unique
+                    reference so it can be tracked to a resolution.
                   </p>
                   <div className="mt-4 flex items-start gap-2 rounded-xl bg-white/60 p-3">
                     <Info className="mt-0.5 h-4 w-4 shrink-0 text-gold-600" />
                     <p className="text-xs text-ink-600">
-                      For production, integrate EmailJS or Formspree by
-                      replacing the mailto handler in{" "}
-                      <code className="rounded bg-mist px-1 py-0.5 text-[0.7rem]">
-                        ContactForm.tsx
-                      </code>
-                      .
+                      Enquiries are reviewed on working days. For urgent trade
+                      matters, please mention your organisation and preferred
+                      contact window in the message.
                     </p>
                   </div>
                 </div>

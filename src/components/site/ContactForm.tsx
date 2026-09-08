@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { Send, CheckCircle2, Mail, Loader2 } from "lucide-react";
+import { Send, CheckCircle2, ShieldCheck, Loader2, RotateCcw } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useToast } from "@/hooks/use-toast";
 
 type EnquiryType = "Business Enquiries" | "Organization Enquiries" | "General Enquiries";
 
@@ -12,17 +13,21 @@ const enquiryTypes: EnquiryType[] = [
   "General Enquiries",
 ];
 
+const EMPTY_FORM = {
+  name: "",
+  phone: "",
+  email: "",
+  subject: "",
+  message: "",
+};
+
 export function ContactForm() {
+  const { toast } = useToast();
   const [submitted, setSubmitted] = useState(false);
+  const [reference, setReference] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [type, setType] = useState<EnquiryType>("Business Enquiries");
-  const [form, setForm] = useState({
-    name: "",
-    phone: "",
-    email: "",
-    subject: "",
-    message: "",
-  });
+  const [form, setForm] = useState(EMPTY_FORM);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -30,58 +35,88 @@ export function ContactForm() {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
-    // Static site fallback: build a mailto link.
-    // Replace the recipient address below with the verified email,
-    // OR integrate EmailJS/Formspree for serverless submission.
-    const recipient = "contact@kirtirana.in"; // placeholder — update with verified address
-    const subjectLine = `[${type}] ${form.subject || "Website Enquiry"}`;
-    const body = [
-      `Enquiry Type: ${type}`,
-      `Name: ${form.name}`,
-      `Phone: ${form.phone}`,
-      `Email: ${form.email}`,
-      "",
-      "Message:",
-      form.message,
-    ].join("\n");
+    try {
+      const res = await fetch("/api/enquiries", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...form, category: type }),
+      });
 
-    const mailto = `mailto:${recipient}?subject=${encodeURIComponent(
-      subjectLine
-    )}&body=${encodeURIComponent(body)}`;
+      const data = (await res.json().catch(() => null)) as
+        | { ok?: boolean; id?: string; error?: string }
+        | null;
 
-    // Simulate brief processing for UX, then open mail client
-    setTimeout(() => {
-      setLoading(false);
+      if (!res.ok || !data?.ok) {
+        const errorMessage =
+          data?.error ?? "Something went wrong. Please try again later.";
+        toast({
+          title: "Could not send enquiry",
+          description: errorMessage,
+          variant: "destructive",
+        });
+        setLoading(false);
+        return;
+      }
+
+      setReference(data.id ?? null);
       setSubmitted(true);
-      window.location.href = mailto;
-    }, 600);
+      setForm(EMPTY_FORM);
+      toast({
+        title: "Enquiry sent successfully",
+        description: "Thank you for reaching out. We will get back to you shortly.",
+      });
+    } catch {
+      toast({
+        title: "Network error",
+        description:
+          "We could not reach the server. Please check your connection and try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (submitted) {
     return (
-      <div className="rounded-2xl border border-gold/40 bg-gold-50/50 p-8 text-center">
-        <CheckCircle2 className="mx-auto h-12 w-12 text-gold-600" />
+      <div className="relative overflow-hidden rounded-2xl border border-gold/40 bg-gold-50/50 p-8 text-center">
+        <span
+          aria-hidden
+          className="pointer-events-none absolute -right-10 -top-10 h-36 w-36 rounded-full bg-gold/10 blur-2xl"
+        />
+        <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-white shadow-premium ring-1 ring-gold/40">
+          <CheckCircle2 className="h-9 w-9 text-gold-600" />
+        </span>
         <h3 className="mt-4 font-heading text-xl font-700 text-navy">
-          Enquiry Prepared
+          Enquiry Received
         </h3>
-        <p className="mt-2 text-sm text-ink-600">
-          Your email client should have opened with your enquiry. If it
-          didn&apos;t, please email us directly with the details you provided.
+        <p className="mt-2 text-sm leading-relaxed text-ink-600">
+          Thank you for reaching out. Our team will review your enquiry and get
+          back to you shortly.
         </p>
-        <button
-          type="button"
-          onClick={() => {
-            setSubmitted(false);
-            setForm({ name: "", phone: "", email: "", subject: "", message: "" });
-          }}
-          className="mt-5 inline-flex items-center gap-2 rounded-xl bg-navy px-5 py-2.5 text-sm font-600 text-white transition hover:bg-navy-700"
-        >
-          Send Another Enquiry
-        </button>
+        {reference && (
+          <p className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-white px-3.5 py-1.5 text-xs font-600 text-royal ring-1 ring-border">
+            <ShieldCheck className="h-3.5 w-3.5 text-gold-600" />
+            Reference: <span className="font-mono tracking-wide">{reference}</span>
+          </p>
+        )}
+        <div className="mt-6">
+          <button
+            type="button"
+            onClick={() => {
+              setSubmitted(false);
+              setReference(null);
+            }}
+            className="inline-flex items-center gap-2 rounded-xl bg-navy px-5 py-2.5 text-sm font-600 text-white transition hover:bg-navy-700"
+          >
+            <RotateCcw className="h-4 w-4" />
+            Send Another Enquiry
+          </button>
+        </div>
       </div>
     );
   }
@@ -134,6 +169,7 @@ export function ContactForm() {
           name="message"
           required
           rows={5}
+          minLength={10}
           value={form.message}
           onChange={handleChange}
           placeholder="Write your message here..."
@@ -143,8 +179,8 @@ export function ContactForm() {
 
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <p className="flex items-center gap-1.5 text-xs text-ink-600/70">
-          <Mail className="h-3.5 w-3.5" />
-          This form opens your email client (mailto). No data is stored.
+          <ShieldCheck className="h-3.5 w-3.5 text-gold-600" />
+          Your enquiry is sent securely and stored only for follow-up.
         </p>
         <button
           type="submit"
@@ -154,7 +190,7 @@ export function ContactForm() {
           {loading ? (
             <>
               <Loader2 className="h-4 w-4 animate-spin" />
-              Preparing...
+              Sending...
             </>
           ) : (
             <>
