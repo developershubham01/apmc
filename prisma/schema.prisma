@@ -70,3 +70,25 @@ model Subscriber {
 
   @@index([createdAt])
 }
+
+// In-app notification feed (mail-outbox pattern): new enquiries and
+// subscribers land here so admins see activity even without SMTP email.
+model Notification {
+  id        String   @id @default(cuid())
+  type      String   @default("enquiry") // enquiry | subscriber
+  title     String
+  body      String
+  refId     String?
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([isRead, createdAt])
+}
+
+// Tiny key/value counters for security telemetry (honeypot blocks,
+// rate-limited bursts) surfaced in the admin control centre.
+model SiteStat {
+  key       String   @id
+  value     Int      @default(0)
+  updatedAt DateTime @updatedAt
+}
