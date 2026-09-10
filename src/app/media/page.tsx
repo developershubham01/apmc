@@ -98,7 +98,6 @@ export default function MediaPage() {
                     className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-white shadow-premium transition-all hover:-translate-y-1 hover:border-gold/50 hover:shadow-premium-lg"
                   >
                     <div className="relative h-40 overflow-hidden">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={image}
                         alt={imageAlt}

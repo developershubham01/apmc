@@ -1,39 +1,122 @@
 // ============================================================
 // Board of Directors — Navi Mumbai Merchants Chamber
 // ============================================================
-// NOTE TO DEVELOPERS / CONTENT TEAM:
-// These names and designations have been transcribed from the
-// supplied newspaper reference image.
-// Please verify all names and designations with the organization
-// before production deployment.
-// ============================================================
+
+export type BoardCategory = "chairman" | "office-bearer" | "director";
 
 export type BoardMember = {
+  id?: string;
   name: string;
   designation: string;
-  // Photo path — left undefined because no verified photograph is
-  // available yet. The BoardMemberCard renders an elegant monogram
-  // avatar when no image is supplied.
+  category?: BoardCategory;
   image?: string;
+  sortOrder?: number;
+};
+
+export const determineBoardCategory = (designation: string): BoardCategory => {
+  if (/chairman/i.test(designation)) return "chairman";
+  if (/secretary|treasurer|vice/i.test(designation)) return "office-bearer";
+  return "director";
 };
 
 export const boardMembers: BoardMember[] = [
-  { name: "Kirti Rana", designation: "Chairman" },
-  { name: "Jayesh Sheth", designation: "Vice-Chairman" },
-  { name: "Amarshi Karia", designation: "Vice-Chairman" },
-  { name: "Vinesh Shah", designation: "Hon. Secretary" },
-  { name: "Tejas Parekh", designation: "Jt. Secretary" },
-  { name: "Amrutlal Savla", designation: "Treasurer" },
-  { name: "Ramniklal Chheda", designation: "Director" },
-  { name: "Anil Damani", designation: "Director" },
-  { name: "Divesh Shah", designation: "Director" },
-  { name: "Mukesh Shah", designation: "Director" },
-  { name: "Gopal Ahuja", designation: "Director" },
-  { name: "Yogesh Trivedi", designation: "Director" },
-  { name: "Mahesh Bhanushali", designation: "Director" },
-  { name: "Bhavesh Shethia", designation: "Director" },
-  { name: "Kantilal Shah", designation: "Director" },
-  { name: "Vishal Shah", designation: "Director" },
+  {
+    name: "Kirti Rana",
+    designation: "Chairman",
+    category: "chairman",
+    image: "/images/kirti-rana/portrait-lead.jpg",
+    sortOrder: 0,
+  },
+  {
+    name: "Jayesh Sheth",
+    designation: "Vice-Chairman",
+    category: "office-bearer",
+    sortOrder: 1,
+  },
+  {
+    name: "Amarshi Karia",
+    designation: "Vice-Chairman",
+    category: "office-bearer",
+    sortOrder: 2,
+  },
+  {
+    name: "Vinesh Shah",
+    designation: "Hon. Secretary",
+    category: "office-bearer",
+    sortOrder: 3,
+  },
+  {
+    name: "Tejas Parekh",
+    designation: "Jt. Secretary",
+    category: "office-bearer",
+    sortOrder: 4,
+  },
+  {
+    name: "Amrutlal Savla",
+    designation: "Treasurer",
+    category: "office-bearer",
+    sortOrder: 5,
+  },
+  {
+    name: "Ramniklal Chheda",
+    designation: "Director",
+    category: "director",
+    sortOrder: 6,
+  },
+  {
+    name: "Anil Damani",
+    designation: "Director",
+    category: "director",
+    sortOrder: 7,
+  },
+  {
+    name: "Divesh Shah",
+    designation: "Director",
+    category: "director",
+    sortOrder: 8,
+  },
+  {
+    name: "Mukesh Shah",
+    designation: "Director",
+    category: "director",
+    sortOrder: 9,
+  },
+  {
+    name: "Gopal Ahuja",
+    designation: "Director",
+    category: "director",
+    sortOrder: 10,
+  },
+  {
+    name: "Yogesh Trivedi",
+    designation: "Director",
+    category: "director",
+    sortOrder: 11,
+  },
+  {
+    name: "Mahesh Bhanushali",
+    designation: "Director",
+    category: "director",
+    sortOrder: 12,
+  },
+  {
+    name: "Bhavesh Shethia",
+    designation: "Director",
+    category: "director",
+    sortOrder: 13,
+  },
+  {
+    name: "Kantilal Shah",
+    designation: "Director",
+    category: "director",
+    sortOrder: 14,
+  },
+  {
+    name: "Vishal Shah",
+    designation: "Director",
+    category: "director",
+    sortOrder: 15,
+  },
 ];
 
 // Derive initials for monogram avatars

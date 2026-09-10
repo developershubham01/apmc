@@ -1,13 +1,17 @@
 import type { Metadata, Viewport } from "next";
-import { Poppins, Inter, Noto_Sans_Devanagari } from "next/font/google";
+import { Plus_Jakarta_Sans, Inter, Noto_Sans_Devanagari, Noto_Sans_Gujarati } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster";
 import { cn } from "@/lib/utils";
 import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
 import { BackToTop } from "@/components/site/BackToTop";
+import { LanguageProvider } from "@/context/LanguageContext";
+import { GoogleTranslateScript } from "@/components/site/GoogleTranslateScript";
+import { CopyProtection } from "@/components/site/CopyProtection";
+import { CookieConsent } from "@/components/site/CookieConsent";
 
-const poppins = Poppins({
+const jakartaSans = Plus_Jakarta_Sans({
   variable: "--font-poppins",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
@@ -17,13 +21,21 @@ const poppins = Poppins({
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
   display: "swap",
 });
 
 const notoDevanagari = Noto_Sans_Devanagari({
   variable: "--font-noto-devanagari",
   subsets: ["devanagari"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
+});
+
+const notoGujarati = Noto_Sans_Gujarati({
+  variable: "--font-noto-gujarati",
+  subsets: ["gujarati"],
+  weight: ["400", "500", "600", "700", "800"],
   display: "swap",
 });
 
@@ -109,24 +121,72 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         className={cn(
-          poppins.variable,
+          jakartaSans.variable,
           inter.variable,
           notoDevanagari.variable,
+          notoGujarati.variable,
           "antialiased bg-background text-foreground font-sans"
         )}
       >
-        <a href="#main-content" className="skip-link">
-          Skip to content
-        </a>
-        <div className="flex min-h-screen flex-col">
-          <Navbar />
-          <main id="main-content" className="flex-1 pt-[76px]">
-            {children}
-          </main>
-          <Footer />
-        </div>
-        <Toaster />
-        <BackToTop />
+        <LanguageProvider>
+          <a href="#main-content" className="skip-link">
+            Skip to content
+          </a>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@graph": [
+                  {
+                    "@type": "Organization",
+                    "@id": "https://kirtirana.in/#organization",
+                    "name": "Navi Mumbai Merchants Chamber",
+                    "url": "https://kirtirana.in",
+                    "logo": "https://kirtirana.in/images/logo.png",
+                    "description": "The apex commercial body representing 400+ wholesale merchants, processors and exporters across Asia's premier 50-acre APMC Turbhe complex.",
+                    "address": {
+                      "@type": "PostalAddress",
+                      "streetAddress": "Central Facility Building, APMC Market-I, Phase-II, Sector 19, Turbhe",
+                      "addressLocality": "Navi Mumbai",
+                      "addressRegion": "Maharashtra",
+                      "postalCode": "400705",
+                      "addressCountry": "IN"
+                    },
+                    "leader": {
+                      "@type": "Person",
+                      "@id": "https://kirtirana.in/#person",
+                      "name": "Shri Kirti Rana",
+                      "jobTitle": "President & Chairman",
+                      "description": "President of Navi Mumbai Merchants Chamber, trade veteran with 30+ years of leadership in agricultural commodities and wholesale market infrastructure."
+                    }
+                  },
+                  {
+                    "@type": "WebSite",
+                    "@id": "https://kirtirana.in/#website",
+                    "url": "https://kirtirana.in",
+                    "name": "Navi Mumbai Merchants Chamber & Shri Kirti Rana Official Portal",
+                    "publisher": {
+                      "@id": "https://kirtirana.in/#organization"
+                    }
+                  }
+                ]
+              }),
+            }}
+          />
+          <div className="flex min-h-screen flex-col">
+            <Navbar />
+            <main id="main-content" className="flex-1">
+              {children}
+            </main>
+            <Footer />
+          </div>
+          <Toaster />
+          <BackToTop />
+          <GoogleTranslateScript />
+          <CopyProtection />
+          <CookieConsent />
+        </LanguageProvider>
       </body>
     </html>
   );

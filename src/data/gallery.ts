@@ -17,16 +17,37 @@ export type GalleryItem = {
 
 export const galleryFilters: ("ALL" | GalleryCategory)[] = [
   "ALL",
+  "BOARD",
   "KIRTI RANA",
-  "BUSINESS",
   "ORGANIZATIONS",
   "EVENTS",
   "APMC",
-  "BOARD",
+  "BUSINESS",
   "MEDIA",
 ];
 
 export const galleryItems: GalleryItem[] = [
+  {
+    src: "/images/events/board-meeting.jpg",
+    alt: "Navi Mumbai Merchants Chamber Executive Board of Directors Meeting",
+    category: "BOARD",
+    caption: "Executive Board of Directors Meeting — Navi Mumbai Merchants Chamber",
+    span: "wide",
+  },
+  {
+    src: "/images/kirti-rana/portrait-lead.jpg",
+    alt: "Shri Kirti Rana — Chairman, Navi Mumbai Merchants Chamber Board of Directors",
+    category: "BOARD",
+    caption: "Shri Kirti Rana — Chairman of the Board of Directors",
+    span: "normal",
+  },
+  {
+    src: "/images/association/chamber-headquarters.jpg",
+    alt: "Navi Mumbai Merchants Chamber Boardroom & Administrative Headquarters",
+    category: "BOARD",
+    caption: "Chamber Boardroom & Administrative Complex — Turbhe APMC",
+    span: "wide",
+  },
   {
     src: "/images/kirti-rana/global-business-icon-award-dubai.jpg",
     alt: "Mr. Kirti Rana receiving the Global Business Icon Award in Dubai",

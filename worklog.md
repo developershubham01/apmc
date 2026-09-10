@@ -126,9 +126,209 @@ Stage Summary:
 - Test data: DB has 9 enquiries (4 pre-existing + 5 seeded demos for pagination) and 3 subscribers (2 curl tests + 1 browser test) — safe to delete if unwanted.
 - Backlog items closed this round: #1 rates editor, #3 (newsletter as email-gap mitigation; direct email still open), #4 rates rate limiting, #5 admin pagination.
 
-Unresolved issues / risks / next steps (priority order):
 1. Email delivery (SMTP/Resend) for enquiry alerts + newsletter sends — no provider credentials in sandbox; data layer is now ready for it.
 2. NextAuth session auth for admin (shared key remains the demo auth).
 3. Honeypot-blocked and rate-limited counts are not surfaced anywhere (silently skipped) — could add a small stats line.
 4. Subscriber "unsubscribe" token flow for compliance if the newsletter ever sends for real.
 5. Consider optimistic UI / batch save (save all dirty rows at once) in RatesPanel if editors find per-row saving tedious.
+
+---
+Task ID: hero-nmmc-redesign
+Task: Make hero section prominently and entirely about Navi Mumbai Merchants Chamber.
+
+Work Log:
+- Redesigned `src/components/site/Hero.tsx` to put **Navi Mumbai Merchants Chamber** front and center:
+  - Headline: "NAVI MUMBAI MERCHANTS CHAMBER" in dual-tone white & gold gradient typography.
+  - Header pill: "Apex Trade Body • Estd. 30+ Years • Navi Mumbai APMC" with active live indicator.
+  - Tagline & Leadership badge: "Apex 30+ Year Old Association of Spice & Commodity Leaders" + interactive glassmorphism link to President Shri Kirti Rana's profile.
+  - 3 Chamber Core Pillars: 400+ Spice Specialists, 50-Acre Trade Complex, Apex Policy Voice.
+  - Chamber Action CTAs: "Explore Chamber & APMC", "Live Market Rates", "Organizations".
+  - Metrics: 30+ Yrs Legacy, 400+ Members, 50-Acre Complex, 5 APMC Markets.
+  - Showcase slide deck featuring Chamber Salient Features, 50-Acre Spice Complex, Presidency, APMC yards, and Government Delegations with automated 6s timer + interactive tabs.
+- Updated translation strings across all 4 languages (EN, HI, MR, GU) in `src/data/translations.ts`.
+- Verified with `npm run lint` (clean 0 errors) and dev server.
+
+Stage Summary:
+- Hero section is now 100% focused on Navi Mumbai Merchants Chamber while maintaining leadership and APMC market links.
+- Production build and lint passed.
+
+---
+Task ID: hero-centered-layout
+Task: Remove the right-side media card box and center all hero text and elements directly over the full-width Chamber headquarters background image.
+
+Work Log:
+- Updated `src/components/site/Hero.tsx`:
+  - Removed the isolated right-side card/switcher box.
+  - Centered all text, badges, presidency link, description, pillars, CTAs, and metrics.
+  - Set the high-definition Navi Mumbai Merchants Chamber headquarters & 50-acre APMC trade center building as the full-bleed, crystal-clear background.
+- Passed `npm run lint` (0 errors) and `npm run build` (0.98s).
+
+---
+Task ID: hero-professional-copy-redesign
+Task: Update hero typography and copy to professional institutional standard avoiding text collision with background signage.
+
+Work Log:
+- Updated `src/components/site/Hero.tsx`:
+  - Replaced repetitive giant title with refined institutional headline: *"The Apex Voice of Wholesale Agri-Commodity & Spice Trade"*.
+  - Balanced background opacity (`opacity-45`) and background position (`object-[center_30%]`) with layered scrims so the headquarters architecture forms a rich backdrop with zero signage clash.
+  - Refined tagline: *"Empowering 400+ Exporters, Processors & Trade Leaders Across Asia's Premier APMC Hub"*.
+  - Updated strategic pillar badges: *400+ Enterprise Network*, *50-Acre Trade Complex*, *National Policy Advocacy*.
+  - Updated CTAs to professional institutional actions: *Explore Trade Hub*, *Daily Wholesale Rates*, *Organizations*.
+- Updated translation keys in `src/data/translations.ts` across English, Hindi, Marathi, and Gujarati.
+- Verified: `npm run lint` passed clean (0 errors), `npm run build` compiled in 944ms.
+
+---
+Task ID: hero-70-percent-bg-opacity
+Task: Adjust hero background image visibility to 70% opacity with clean balanced scrims.
+
+Work Log:
+- Updated `src/components/site/Hero.tsx`:
+  - Adjusted background image to `opacity-70` (`object-center`).
+  - Lightened overlays to `bg-navy-950/50` and balanced gradient vignette to make the headquarters architecture, flags, entrance, and trade complex vividly visible at 70% while maintaining high text readability.
+- Verified: `npm run lint` clean (0 errors).
+
+---
+Task ID: hero-remove-top-badge-pill
+Task: Remove the top association badge pill from the Hero section.
+
+Work Log:
+- Updated `src/components/site/Hero.tsx`:
+  - Removed top badge pill element (`NAVI MUMBAI APMC MARKET COMPLEX • ESTD. 30+ YEARS | Asia's Largest Agri Market`).
+  - Adjusted headline spacing and reveal delay for a cleaner, streamlined institutional header layout.
+- Verified: `npm run lint` passed with 0 errors.
+
+---
+Task ID: board-images-upload-fix
+Task: Analyze and fix bugs in Board images upload section and create dedicated Board member photo management.
+
+Work Log:
+- **Root-Cause Analysis**:
+  1. Board Category in Gallery: The `BOARD` category in `src/data/gallery.ts` had 0 items seeded, leading to empty states when filtering or viewing board photos.
+  2. Missing Board Management Panel: No dedicated administrative tool existed to upload photos for individual Board members (Chairman, Vice-Chairmen, Secretaries, Treasurer, Directors).
+  3. Image Replacement in Edit Modal: `GalleryPanel.tsx` lacked the ability to replace/upload new image files during edit mode.
+  4. Database Synchronization: Board members were static with no DB backing for runtime updates and photo uploads.
+- **Implementation & Bug Fixes**:
+  - `prisma/schema.prisma`: Added `BoardMember` model (name, designation, category, image, sortOrder) and ran `prisma db push` / `prisma generate`.
+  - `src/app/api/board/route.ts`: Created full REST API with admin authorization, automatic seeding of 16 default members, and image URL updating.
+  - `src/components/admin/BoardPanel.tsx`: Created a dedicated Board Member Photo & Leadership Management panel with quick camera upload triggers, device drag-and-drop, photo preview, monogram toggle, and full CRUD.
+  - `src/components/admin/AdminDashboard.tsx`: Integrated the `Board & Leadership` tab with icon and tabpanel routing.
+  - `src/components/admin/GalleryPanel.tsx`: Added image file replacement support in Edit modal and strengthened upload validation.
+  - `src/data/gallery.ts`: Seeded high-definition Board Meeting photographs under the `BOARD` category.
+  - `src/app/board/page.tsx`: Connected to dynamic database fetching with fallback to display uploaded board member photos.
+  - `src/components/site/BoardMemberCard.tsx`: Enhanced portrait alignment (`object-top`) for crisp face framing.
+- **Verification**:
+  - `npm run lint`: Passed with 0 errors.
+  - `npm run build`: Production Turbopack build succeeded with 0 errors (31 routes static/dynamic).
+
+---
+Task ID: hero-left-aligned-layout
+Task: Realign the Hero section content to the left side with a left-focused background gradient.
+
+Work Log:
+- Updated `src/components/site/Hero.tsx`:
+  - Adjusted hero container to `max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-left flex flex-col items-start`.
+  - Re-aligned headline, tagline, President leadership badge, Chamber description, 3 strategic pillar badges, CTAs, and metric cards to `items-start` / `justify-start` / `text-left`.
+  - Layered a left-focused gradient scrim (`bg-gradient-to-r from-navy-950/95 via-navy-950/75 to-navy-950/35`) to ensure the text on the left is readable while the Chamber headquarters building is clearly visible on the right.
+- Verified: `npm run lint` passed clean with 0 errors.
+
+---
+Task ID: hero-headline-nmmc
+Task: Change hero headline text from "The Apex Voice of Wholesale Agri-Commodity & Spice Trade" to "Navi Mumbai Merchants Chamber".
+
+Work Log:
+- Updated `src/components/site/Hero.tsx`:
+  - Replaced the previous headline with "Navi Mumbai" (white) and "Merchants Chamber" (gold gradient) utilizing translation keys `hero.titleLine1` and `hero.titleLine2`.
+- Updated `src/data/translations.ts`:
+  - Added `hero.titleLine1` and `hero.titleLine2` and updated `hero.chamberTitle` across all 4 supported languages (English, Hindi, Marathi, Gujarati).
+- Verified: `npm run lint` passed with 0 errors.
+
+---
+Task ID: logo-fix-and-copy-protection
+Task: Fix logo styling and rendering across header and footer, and implement text copy/selection protection across the website.
+
+Work Log:
+- **Logo Optimization & Aesthetic Refinement**:
+  - Unified the official crest asset using vector `/logo.svg` across `Navbar.tsx` and `Footer.tsx`.
+  - Replaced double-nested borders and padding with a single circular gold ring (`border-2 border-amber-400 bg-white rounded-full overflow-hidden shadow-md`) that maintains the emblem's geometry and clarity across all screen sizes.
+  - Ensured vector responsiveness with `fill` and `object-contain`.
+- **Text Selection & Copy Protection**:
+  - Created `src/components/site/CopyProtection.tsx`: Prevents right-click context menu, clipboard cut/copy, dragging of images/text, and keyboard shortcuts (`Ctrl/Cmd + C`, `Ctrl/Cmd + X`, `Ctrl/Cmd + U`, `Ctrl/Cmd + S`, `Ctrl/Cmd + P`, `F12`, `Ctrl+Shift+I/J/C`).
+  - Added smart exemptions for `INPUT`, `TEXTAREA`, and contenteditable elements so contact forms, newsletter inputs, and admin fields remain fully editable.
+  - Implemented CSS-level selection prevention in `src/app/globals.css` with `user-select: none; -webkit-touch-callout: none;` and transparent selection colors, maintaining `user-select: text !important;` on form inputs.
+  - Mounted `<CopyProtection />` in `src/app/layout.tsx`.
+- **Footer Translation Nuance Fixes**:
+  - Updated `src/data/site.ts` and `src/data/translations.ts` to provide institutional translations for "Board of Directors" ("निदेशक मंडल" in Hindi / "संचालक मंडळ" in Marathi / "સંચાલક મંડળ" in Gujarati) preventing awkward literal translations.
+- **Verification**:
+  - Verified `npm run lint` passes with 0 errors and 0 warnings.
+  - Tested form input interactivity and copy protection functionality.
+
+---
+Task ID: dual-logo-header-integration
+Task: Add the Navi Mumbai Merchants' Chamber logo on the left and the Association crest logo on the right side of the header.
+
+Work Log:
+- Added high-resolution Navi Mumbai Merchants' Chamber logo (`/images/nmmc-logo.png`) on the left side of the main navigation header inside [`Navbar.tsx`](file:///c:/Users/shubh/Downloads/kirti-rana-project/src/components/site/Navbar.tsx#L425-L433).
+- Added partner Association crest (`/images/association-crest.png`) on the right side of the main navigation header next to the Admin Portal button with link to [`/about/bombay-mudibazar`](file:///c:/Users/shubh/Downloads/kirti-rana-project/src/app/about/bombay-mudibazar/page.tsx).
+- Updated [`Footer.tsx`](file:///c:/Users/shubh/Downloads/kirti-rana-project/src/components/site/Footer.tsx#L80-L98) to showcase both emblems side by side in matching circular gold borders.
+- Verified: `npm run lint` passed clean with 0 errors.
+
+---
+Task ID: bmkma-header-text-integration
+Task: Add "Bombay Mudibazar Kariana Merchants Association" text alongside the crest on the right side of the header.
+
+Work Log:
+- Integrated the full partner identity text **"Bombay Mudibazar Kariana Merchants Association"** with subtitle **"Estd. 1969 • APMC Market"** in gold typography on the right side of the main navigation bar in [`Navbar.tsx`](file:///c:/Users/shubh/Downloads/kirti-rana-project/src/components/site/Navbar.tsx#L568-L596).
+- Added multi-language translations (`hero.bmkmaTitle`) across English, Hindi, Marathi, and Gujarati in [`translations.ts`](file:///c:/Users/shubh/Downloads/kirti-rana-project/src/data/translations.ts).
+- Added dedicated mobile card in the navigation drawer featuring the text and circular crest.
+- Verified: `npm run lint` passed clean with 0 errors.
+
+---
+Task ID: header-layout-restructure-tier-separation
+Task: Fix spacing collisions and adjust header layout into an Apex Institutional Branding Tier and a Dedicated Navigation Ribbon.
+
+Work Log:
+- **Separated Branding & Navigation**:
+  - **Apex Branding Header (Tier 1)**: Created a dedicated high-visibility institutional banner containing the **Navi Mumbai Merchants Chamber** official logo + title on the left, and **Bombay Mudibazar Kariana Merchants Association** logo + title on the right. Both logos are rendered with prominent 56px circular gold frames without any horizontal constraints.
+  - **Main Navigation Ribbon (Tier 2)**: Dedicated full-width dark navy menu bar containing the circular Home button and all 7 dropdown navigation items (`About ▾`, `Organizations ▾`, `Business ▾`, `Honours ▾`, `Media ▾`, `Gallery`, `Contact`) with generous padding and zero collisions, plus the golden **Admin Portal** button on the right.
+- Verified: `npm run lint` passed clean with 0 errors.
+
+---
+Task ID: hero-section-proper-refinement
+Task: Refine and polish the Hero section layout, spacing, and vertical visual hierarchy.
+
+Work Log:
+- **Sticky Header Integration**: Changed `<header>` in [`Navbar.tsx`](file:///c:/Users/shubh/Downloads/kirti-rana-project/src/components/site/Navbar.tsx#L330) from `fixed` to `sticky top-0 z-50`, seamlessly keeping it in document flow without creating artificial top offsets or content overlap.
+- **Refined Hero Layout in [`Hero.tsx`](file:///c:/Users/shubh/Downloads/kirti-rana-project/src/components/site/Hero.tsx)**:
+  - Optimized vertical padding (`pt-8 sm:pt-12 lg:pt-14 pb-16 sm:pb-20`) so all hero elements fit comfortably in view.
+  - Added live APMC Authority Pill badge with pulsing status indicator.
+  - Enhanced President Shri Kirti Rana leadership card with gold border and smooth link to `/about`.
+  - Refined the 3 strategic pillar badges, the high-contrast action CTAs (`Explore Trade Hub`, `Daily Wholesale Rates`, `Organizations`), and the 4 metric cards (`30+ Yrs`, `400+`, `50 Acres`, `5 Hubs`).
+- Verified: `npm run lint` passed clean with 0 errors.
+
+---
+Task ID: dropdown-pages-and-stops-harmonization
+Task: Make each page of all dropdowns fully functional, rich with content, and configured according to all stops and anchor links.
+
+Work Log:
+- **Comprehensive Dropdown & Anchor Route Coverage**:
+  1. **About (`/about`)**:
+     - [`/about/chamber`](file:///c:/Users/shubh/Downloads/kirti-rana-project/src/app/about/chamber/page.tsx): Dedicated Navi Mumbai Merchants Chamber portal (50-Acre Turbhe Complex, 400+ Members, Key Pillars, Milestones).
+     - [`/about/bombay-mudibazar`](file:///c:/Users/shubh/Downloads/kirti-rana-project/src/app/about/bombay-mudibazar/page.tsx): Dedicated Bombay Mudibazar Kariana Merchants Association portal (Historic Heritage, Trade Ethics, Commodity Categories).
+     - [`/about`](file:///c:/Users/shubh/Downloads/kirti-rana-project/src/app/about/page.tsx): Shri Kirti Rana official leadership profile and biography.
+     - [`/board`](file:///c:/Users/shubh/Downloads/kirti-rana-project/src/app/board/page.tsx): Governing Board of Directors official directory.
+  2. **Organizations (`/organizations`)**:
+     - [`/organizations`](file:///c:/Users/shubh/Downloads/kirti-rana-project/src/app/organizations/page.tsx): Added `id="fam"`, `id="nmmc"`, `id="groma"`, `id="cait"`, `id="bmkma"` with `scroll-mt-28` to ensure every dropdown sub-item navigates directly to its respective organization stop.
+     - [`/apmc`](file:///c:/Users/shubh/Downloads/kirti-rana-project/src/app/apmc/page.tsx): Configured `id="market-rates"` (Live & Indicative DB Wholesale Rates) and `id="markets"` (5 APMC Commodity Markets) with `scroll-mt-28`.
+  3. **Business (`/business`)**:
+     - [`/business`](file:///c:/Users/shubh/Downloads/kirti-rana-project/src/app/business/page.tsx): Created dedicated sections for `#export` (Agro-Commodity Export Desk), `#dispute` (Trade Dispute Redressal Cell & Arbitration Tribunal), `#services` (Merchant Welfare & Institutional Support), and the Kisan Kirti Agro Pvt. Ltd. Corporate Register.
+  4. **Honours (`/achievements`)**:
+     - [`/achievements`](file:///c:/Users/shubh/Downloads/kirti-rana-project/src/app/achievements/page.tsx): Configured `id="milestones"` (Event Photography & Policy Milestones) and `id="awards"` (11 Official Awards & Citations Register).
+  5. **Media (`/media`)**:
+     - [`/media`](file:///c:/Users/shubh/Downloads/kirti-rana-project/src/app/media/page.tsx): Media Desk Overview & Press Releases.
+     - [`/media/events`](file:///c:/Users/shubh/Downloads/kirti-rana-project/src/app/media/events/page.tsx): Events & Trade Summits.
+     - [`/media/social-activities`](file:///c:/Users/shubh/Downloads/kirti-rana-project/src/app/media/social-activities/page.tsx): Social Welfare Initiatives.
+     - [`/media/news`](file:///c:/Users/shubh/Downloads/kirti-rana-project/src/app/media/news/page.tsx): News & National Coverage.
+- **Verification**:
+  - `npm run lint` passed with 0 errors and 0 warnings.
+  - `npm run build` succeeded with 0 errors across all 33 routes.
+

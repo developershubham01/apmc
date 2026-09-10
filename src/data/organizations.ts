@@ -121,6 +121,62 @@ export const organizations: Organization[] = [
     ],
     image: "/images/events/bjp-vyapari-aghadi-meeting.jpg",
   },
+  {
+    slug: "federation-of-associations-of-maharashtra",
+    name: "Federation of Associations of Maharashtra (FAM)",
+    shortName: "FAM",
+    role: "Senior Trade Leader / Apex Council",
+    designation: "Apex Council",
+    tagline: "Apex Commercial Federation Representing 750+ Trade Bodies",
+    description:
+      "Federation of Associations of Maharashtra (FAM) is the premier umbrella body uniting over 750 trade and commercial associations representing over 1.5 million traders across Maharashtra. Shri Kirti Rana actively participates in state and national representations concerning GST simplification, local body taxes, and market regulation.",
+    stats: [
+      { value: "750+", label: "Affiliated Associations" },
+      { value: "1.5M+", label: "Traders Represented" },
+      { value: "Statewide", label: "Maharashtra Coverage" },
+    ],
+    highlights: [
+      "Apex collective voice for wholesale and retail trade in Maharashtra",
+      "High-level representations to State Finance Ministry and Central GST Council",
+      "Unified coordination during market reforms and statutory disputes",
+      "Promotion of commercial harmony and modern supply chain infrastructure",
+    ],
+    focus: [
+      "Statewide commercial advocacy",
+      "GST & regulatory compliance",
+      "Trader grievance redressal",
+      "Commercial consensus building",
+    ],
+    image: "/images/association/salient-features-merchants-chamber.jpg",
+  },
+  {
+    slug: "grain-rice-oilseeds-merchants-association",
+    name: "Grain, Rice & Oilseeds Merchants Association (GROMA)",
+    shortName: "GROMA",
+    role: "Senior Member & Advisor",
+    designation: "Senior Advisor",
+    tagline: "Premier Wholesale Grain & Agri-Commodity Association Established in 1947",
+    description:
+      "Established in 1947, GROMA represents the foundational grain, pulse, and edible oilseed merchants of Maharashtra. Operating prominently out of the Navi Mumbai APMC Grain Market, GROMA oversees daily wholesale auctions, supply stabilization, and farmer-to-merchant linkages across the country.",
+    stats: [
+      { value: "1947", label: "Year Established" },
+      { value: "Market-II", label: "APMC Grain Complex" },
+      { value: "National", label: "Grain Supply Network" },
+    ],
+    highlights: [
+      "Over 75 years of continuous service to India's staple foodgrain trade",
+      "Key stakeholder in APMC Market-II Grain & Pulse wholesale operations",
+      "Collaborative policy initiatives ensuring national food security and price stability",
+      "Robust merchant welfare, warehousing and transport facilitation",
+    ],
+    focus: [
+      "Grain & pulse wholesale",
+      "Edible oilseeds trade",
+      "Market-II yard logistics",
+      "Price stabilization & supply",
+    ],
+    image: "/images/apmc/grain-market.jpg",
+  },
 ];
 
 export const getOrganization = (slug: string) =>

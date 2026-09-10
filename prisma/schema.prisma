@@ -92,3 +92,54 @@ model SiteStat {
   value     Int      @default(0)
   updatedAt DateTime @updatedAt
 }
+
+model GalleryItem {
+  id        String   @id @default(cuid())
+  src       String
+  alt       String
+  category  String   @default("KIRTI RANA")
+  caption   String?
+  span      String?  @default("normal")
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([category])
+  @@index([sortOrder])
+}
+
+model MediaItem {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  category    String   @default("news") // news | events | social-activities
+  title       String
+  date        String
+  location    String?
+  image       String
+  imageAlt    String
+  summary     String
+  highlights  String   @default("[]") // JSON string array
+  content     String?
+  sourceUrl   String?
+  isPublished Boolean  @default(true)
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([category])
+  @@index([isPublished])
+}
+
+model BoardMember {
+  id          String   @id @default(cuid())
+  name        String
+  designation String
+  category    String   @default("director") // chairman | office-bearer | director
+  image       String?
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([category])
+  @@index([sortOrder])
+}

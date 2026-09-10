@@ -29,7 +29,6 @@ export function PageHeader({
   return (
     <section className="relative overflow-hidden bg-navy text-white">
       {/* Background layers */}
-      <div aria-hidden className="absolute inset-0 bg-navy-grid opacity-50" />
       <div
         aria-hidden
         className="absolute -right-24 -top-24 h-80 w-80 rounded-full bg-royal/30 blur-3xl"
@@ -44,7 +43,7 @@ export function PageHeader({
         className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-gold via-saffron to-gold"
       />
 
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14 lg:py-20">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-32 pb-14 lg:pt-36 lg:pb-20">
         {/* Breadcrumbs */}
         <nav aria-label="Breadcrumb" className="mb-6">
           <ol

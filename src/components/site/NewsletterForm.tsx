@@ -98,7 +98,7 @@ export function NewsletterForm() {
         <button
           type="submit"
           disabled={state === "loading"}
-          className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-gold px-5 py-3 text-sm font-700 text-navy shadow-premium transition-all hover:bg-gold-600 disabled:opacity-60"
+          className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 px-6 py-3 text-sm font-black text-slate-950 shadow-md transition-all hover:brightness-110 active:scale-95 disabled:opacity-60"
         >
           {state === "loading" ? (
             <>

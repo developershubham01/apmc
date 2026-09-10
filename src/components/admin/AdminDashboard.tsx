@@ -9,19 +9,27 @@ import {
   ShieldAlert,
   LineChart,
   Users,
+  Image as ImageIcon,
+  Newspaper,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { GalleryPanel } from "./GalleryPanel";
+import { BoardPanel } from "./BoardPanel";
+import { MediaPanel } from "./MediaPanel";
 import { EnquiriesPanel } from "./EnquiriesPanel";
 import { RatesPanel } from "./RatesPanel";
 import { SubscribersPanel } from "./SubscribersPanel";
 
 const STORAGE_KEY = "kr-admin-key";
 
-type AdminTab = "enquiries" | "rates" | "subscribers";
+type AdminTab = "board" | "gallery" | "media" | "enquiries" | "rates" | "subscribers";
 
 const tabs: { id: AdminTab; label: string; Icon: typeof Inbox }[] = [
-  { id: "enquiries", label: "Enquiries", Icon: Inbox },
+  { id: "board", label: "Board & Leadership", Icon: Users },
+  { id: "gallery", label: "Photos & Gallery", Icon: ImageIcon },
+  { id: "media", label: "News & Media", Icon: Newspaper },
   { id: "rates", label: "Market Rates", Icon: LineChart },
+  { id: "enquiries", label: "Enquiries", Icon: Inbox },
   { id: "subscribers", label: "Subscribers", Icon: Users },
 ];
 
@@ -31,7 +39,7 @@ export function AdminDashboard() {
   const [authError, setAuthError] = useState<string | null>(null);
   const [authLoading, setAuthLoading] = useState(false);
   const [booted, setBooted] = useState(false);
-  const [tab, setTab] = useState<AdminTab>("enquiries");
+  const [tab, setTab] = useState<AdminTab>("gallery");
 
   const verifyKey = useCallback(async (key: string) => {
     setAuthLoading(true);
@@ -73,7 +81,7 @@ export function AdminDashboard() {
     window.localStorage.removeItem(STORAGE_KEY);
     setAdminKey(null);
     setKeyInput("");
-    setTab("enquiries");
+    setTab("gallery");
   };
 
   // ------------------------------------------------------------------ Gate
@@ -87,7 +95,7 @@ export function AdminDashboard() {
 
   if (!adminKey) {
     return (
-      <div className="flex min-h-[70vh] items-center justify-center px-4 py-16">
+      <div className="flex min-h-[70vh] items-center justify-center px-4 pt-28 pb-16 sm:pt-32">
         <div className="w-full max-w-md">
           <div className="rounded-2xl border border-border bg-white p-8 shadow-premium-lg">
             <div className="text-center">
@@ -165,7 +173,7 @@ export function AdminDashboard() {
   return (
     <div className="min-h-[70vh]">
       {/* Header bar */}
-      <div className="bg-navy bg-navy-grid">
+      <div className="bg-navy pt-24 sm:pt-28">
         <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-8 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
           <div>
             <p className="text-xs uppercase tracking-[0.18em] text-gold">
@@ -175,7 +183,7 @@ export function AdminDashboard() {
               Control Centre
             </h1>
             <p className="mt-1 text-sm text-white/60">
-              Enquiries, market rates and newsletter subscribers — all in one place.
+              Photos, news broadcasts, market rates, enquiries and newsletter subscribers.
             </p>
           </div>
           <div className="flex items-center gap-2.5">
@@ -196,7 +204,7 @@ export function AdminDashboard() {
         <div
           role="tablist"
           aria-label="Admin sections"
-          className="flex w-fit gap-1 rounded-2xl bg-mist p-1.5 ring-1 ring-border"
+          className="flex flex-wrap gap-1.5 rounded-2xl bg-mist p-1.5 ring-1 ring-border"
         >
           {tabs.map(({ id, label, Icon }) => (
             <button
@@ -219,11 +227,20 @@ export function AdminDashboard() {
 
         {/* Panels */}
         <div className="mt-8" role="tabpanel">
-          {tab === "enquiries" && (
-            <EnquiriesPanel adminKey={adminKey} onAuthError={handleAuthError} />
+          {tab === "board" && (
+            <BoardPanel adminKey={adminKey} onAuthError={handleAuthError} />
+          )}
+          {tab === "gallery" && (
+            <GalleryPanel adminKey={adminKey} onAuthError={handleAuthError} />
+          )}
+          {tab === "media" && (
+            <MediaPanel adminKey={adminKey} onAuthError={handleAuthError} />
           )}
           {tab === "rates" && (
             <RatesPanel adminKey={adminKey} onAuthError={handleAuthError} />
+          )}
+          {tab === "enquiries" && (
+            <EnquiriesPanel adminKey={adminKey} onAuthError={handleAuthError} />
           )}
           {tab === "subscribers" && (
             <SubscribersPanel adminKey={adminKey} onAuthError={handleAuthError} />

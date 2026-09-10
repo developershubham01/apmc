@@ -1,10 +1,10 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import { Maximize2 } from "lucide-react";
 import {
-  galleryItems,
+  galleryItems as defaultGalleryItems,
   galleryFilters,
   type GalleryItem,
   type GalleryCategory,
@@ -19,16 +19,34 @@ type GalleryGridProps = {
 };
 
 export function GalleryGrid({
-  items = galleryItems,
+  items = defaultGalleryItems,
   filters = galleryFilters,
   className,
 }: GalleryGridProps) {
   const [active, setActive] = useState<"ALL" | GalleryCategory>("ALL");
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const [liveItems, setLiveItems] = useState<GalleryItem[]>(items);
+
+  useEffect(() => {
+    let isMounted = true;
+    fetch("/api/gallery")
+      .then((res) => res.json())
+      .then((data) => {
+        if (isMounted && data.items && Array.isArray(data.items) && data.items.length > 0) {
+          setLiveItems(data.items);
+        }
+      })
+      .catch((err) => {
+        console.warn("Could not fetch live gallery items, using defaults:", err);
+      });
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   const filtered = useMemo(
-    () => (active === "ALL" ? items : items.filter((i) => i.category === active)),
-    [active, items]
+    () => (active === "ALL" ? liveItems : liveItems.filter((i) => i.category === active)),
+    [active, liveItems]
   );
 
   const lightboxItems: LightboxItem[] = useMemo(

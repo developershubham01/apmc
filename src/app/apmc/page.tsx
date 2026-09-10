@@ -131,8 +131,7 @@ export default function ApmcPage() {
       </section>
 
       {/* Market Categories */}
-      <section className="relative bg-mist py-16 lg:py-24">
-        <div aria-hidden className="absolute inset-0 bg-heritage-grid opacity-50" />
+      <section id="markets" className="scroll-mt-28 relative bg-mist py-16 lg:py-24">
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="Market Categories"

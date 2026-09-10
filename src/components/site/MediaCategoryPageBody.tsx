@@ -1,9 +1,13 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ArrowRight, Info } from "lucide-react";
 import {
   mediaCategories,
   entriesFor,
   type MediaCategorySlug,
+  type MediaEntry,
 } from "@/data/media";
 import { MediaCategoryBar } from "./MediaCategoryBar";
 import { MediaEntryCard } from "./MediaEntryCard";
@@ -20,9 +24,28 @@ type Props = {
  */
 export function MediaCategoryPageBody({ slug }: Props) {
   const category = mediaCategories.find((c) => c.slug === slug);
+  const defaultEntries = entriesFor(slug);
+  const [entries, setEntries] = useState<MediaEntry[]>(defaultEntries);
+
+  useEffect(() => {
+    let isMounted = true;
+    fetch(`/api/media?category=${encodeURIComponent(slug)}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (isMounted && data.items && Array.isArray(data.items) && data.items.length > 0) {
+          setEntries(data.items);
+        }
+      })
+      .catch((err) => {
+        console.warn("Could not fetch live media, using defaults:", err);
+      });
+    return () => {
+      isMounted = false;
+    };
+  }, [slug]);
+
   if (!category) return null;
 
-  const entries = entriesFor(slug);
   const others = mediaCategories.filter((c) => c.slug !== slug);
 
   return (

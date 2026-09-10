@@ -31,7 +31,6 @@ export function OrganizationCard({
 
         {/* Header band */}
         <div className="relative overflow-hidden bg-navy px-6 py-7">
-          <div aria-hidden className="absolute inset-0 bg-navy-grid opacity-50" />
           <div
             aria-hidden
             className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-gold/10 blur-2xl"

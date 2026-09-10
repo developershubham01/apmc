@@ -103,11 +103,15 @@ export default function OrganizationsPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-12">
           {organizations.map((org, i) => (
             <ScrollReveal key={org.slug} variant="up">
-              <div className="overflow-hidden rounded-3xl border border-border bg-white shadow-premium">
+              <div
+                id={org.shortName.toLowerCase()}
+                className="scroll-mt-28 overflow-hidden rounded-3xl border border-border bg-white shadow-premium"
+              >
+                {/* Secondary anchor for full slug */}
+                <span id={org.slug} className="scroll-mt-28 block h-0 w-0" aria-hidden />
                 <div className="grid lg:grid-cols-12">
                   {/* Left branding banner */}
                   <div className="lg:col-span-4 relative overflow-hidden bg-navy p-8 lg:p-10 text-white flex flex-col justify-between">
-                    <div aria-hidden className="absolute inset-0 bg-navy-grid opacity-40" />
                     <div
                       aria-hidden
                       className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-gold/10 blur-2xl"

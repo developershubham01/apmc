@@ -40,8 +40,13 @@ export function ScrollReveal({
     const node = ref.current;
     if (!node) return;
 
-    // For reduced motion, the CSS @media rule already forces visibility,
-    // so no JS state change is needed — just observe for the general case.
+    // Immediately show if already within viewport on mount
+    const rect = node.getBoundingClientRect();
+    if (rect.top < window.innerHeight && rect.bottom >= 0) {
+      setVisible(true);
+      if (once) return;
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -53,7 +58,7 @@ export function ScrollReveal({
           }
         });
       },
-      { threshold, rootMargin: "0px 0px -60px 0px" }
+      { threshold: 0.05, rootMargin: "50px 0px 0px 0px" }
     );
 
     observer.observe(node);

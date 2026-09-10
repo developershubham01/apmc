@@ -48,10 +48,6 @@ export function CTASection({
             {/* Decorative */}
             <div
               aria-hidden
-              className={cn("absolute inset-0", isNavy ? "bg-navy-grid opacity-40" : "bg-heritage-grid opacity-60")}
-            />
-            <div
-              aria-hidden
               className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-gold/15 blur-3xl"
             />
             <div

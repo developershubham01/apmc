@@ -4,6 +4,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const routes = [
     "",
     "/about",
+    "/about/chamber",
+    "/about/bombay-mudibazar",
     "/business",
     "/organizations",
     "/apmc",

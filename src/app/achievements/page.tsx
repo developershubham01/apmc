@@ -141,12 +141,12 @@ export default function AchievementsPage() {
         </div>
       </section>
 
-      {/* Verified Photo Showcase Gallery */}
-      <section className="bg-mist py-16 lg:py-24">
+      {/* Verified Photo Showcase Gallery & Policy Milestones */}
+      <section id="milestones" className="scroll-mt-28 bg-mist py-16 lg:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
-            eyebrow="Event Photography & Memorabilia"
-            title="Photographic Record of Leadership"
+            eyebrow="Event Photography & Policy Milestones"
+            title="Photographic Record of Leadership & Policy Reforms"
             description="Verified photographs capturing international felicitations, national trade summits at Bharat Mandapam, and merchant leadership meetings."
           />
 
@@ -183,7 +183,7 @@ export default function AchievementsPage() {
       </section>
 
       {/* 11 Official Awards & Felicitations Section */}
-      <section className="bg-white py-16 lg:py-24">
+      <section id="awards" className="scroll-mt-28 bg-white py-16 lg:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-10 lg:grid-cols-3 items-start">
             <div className="lg:sticky lg:top-24">

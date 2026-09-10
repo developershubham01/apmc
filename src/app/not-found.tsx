@@ -5,7 +5,6 @@ import { navLinks } from "@/data/site";
 export default function NotFound() {
   return (
     <section className="relative flex min-h-[70vh] items-center justify-center overflow-hidden bg-navy px-4 py-20 text-white">
-      <div aria-hidden className="absolute inset-0 bg-navy-grid opacity-40" />
       <div
         aria-hidden
         className="absolute -right-24 -top-24 h-80 w-80 rounded-full bg-royal/30 blur-3xl"

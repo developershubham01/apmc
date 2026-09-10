@@ -168,7 +168,6 @@ export default function HomePage() {
 
       {/* Salient Features Highlight Banner */}
       <section className="relative overflow-hidden bg-gradient-to-r from-navy via-navy-800 to-royal py-14 text-white">
-        <div aria-hidden className="absolute inset-0 bg-navy-grid opacity-30" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-8 lg:grid-cols-12">
             <div className="lg:col-span-7">
@@ -232,7 +231,6 @@ export default function HomePage() {
 
       {/* 7. APMC Market + 8. Market Categories */}
       <section className="relative bg-mist py-16 lg:py-24">
-        <div aria-hidden className="absolute inset-0 bg-heritage-grid opacity-50" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="APMC Market"
@@ -458,7 +456,6 @@ function AboutSection() {
   ];
   return (
     <section className="relative overflow-hidden bg-white py-16 lg:py-24">
-      <div aria-hidden className="absolute inset-0 bg-heritage-grid opacity-40" />
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid items-center gap-10 lg:gap-14 lg:grid-cols-2">
           {/* LEFT — portrait */}
@@ -556,15 +553,13 @@ function AboutSection() {
 function BusinessSection() {
   return (
     <section className="relative overflow-hidden bg-navy py-16 lg:py-24 text-white">
-      <div aria-hidden className="absolute inset-0 bg-navy-grid opacity-40" />
       <div
         aria-hidden
-        className="absolute -right-24 top-10 h-80 w-80 rounded-full bg-royal/30 blur-3xl"
-      />
-      <div
-        aria-hidden
-        className="absolute -left-20 bottom-0 h-72 w-72 rounded-full bg-gold/15 blur-3xl"
-      />
+        className="pointer-events-none absolute inset-0 overflow-hidden"
+      >
+        <div className="absolute -right-1/4 top-0 h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle,rgba(22,78,154,0.25)_0%,transparent_70%)]" />
+        <div className="absolute -left-1/4 bottom-0 h-[450px] w-[450px] rounded-full bg-[radial-gradient(circle,rgba(201,162,39,0.15)_0%,transparent_70%)]" />
+      </div>
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid items-center gap-10 lg:gap-14 lg:grid-cols-2">
           <ScrollReveal variant="left">
@@ -635,7 +630,6 @@ function BusinessSection() {
 function GoldenMemoriesSection() {
   return (
     <section className="relative overflow-hidden bg-mist py-16 lg:py-24">
-      <div aria-hidden className="absolute inset-0 bg-heritage-grid opacity-50" />
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           eyebrow="Golden Memories"

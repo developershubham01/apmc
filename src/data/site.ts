@@ -33,15 +33,15 @@ export type NavLink = {
 
 export const navLinks: NavLink[] = [
   { label: "Home", href: "/", icon: Home },
-  { label: "About", href: "/about", icon: User },
-  { label: "Business", href: "/business", icon: Briefcase },
-  { label: "Organizations", href: "/organizations", icon: Building2 },
-  { label: "APMC", href: "/apmc", icon: Store },
-  { label: "Achievements", href: "/achievements", icon: Award },
-  { label: "Board", href: "/board", icon: Users },
-  { label: "Gallery", href: "/gallery", icon: Images },
-  { label: "Media", href: "/media", icon: Newspaper },
-  { label: "Contact", href: "/contact", icon: Mail },
+  { label: "About Shri Kirti Rana", href: "/about", icon: User },
+  { label: "Agro Business", href: "/business", icon: Briefcase },
+  { label: "Trade Organizations", href: "/organizations", icon: Building2 },
+  { label: "APMC Markets", href: "/apmc", icon: Store },
+  { label: "Honours & Awards", href: "/achievements", icon: Award },
+  { label: "Board of Directors", href: "/board", icon: Users },
+  { label: "Photo Gallery", href: "/gallery", icon: Images },
+  { label: "Media & News", href: "/media", icon: Newspaper },
+  { label: "Contact Us", href: "/contact", icon: Mail },
 ];
 
 export const footerQuickLinks = navLinks;
@@ -49,4 +49,6 @@ export const footerQuickLinks = navLinks;
 export const footerOrganizations = [
   "Navi Mumbai Merchants Chamber",
   "Bombay Mudibazar Kariana Merchants Association",
+  "Grain, Rice & Oilseeds Merchants Association (GROMA)",
+  "Federation of Associations of Maharashtra (FAM)",
 ];
