@@ -1,12 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 
-/** Validate the admin key supplied via the `x-admin-key` header. */
-function isAuthorized(req: NextRequest): boolean {
-  const adminKey = process.env.ADMIN_KEY ?? "";
-  if (!adminKey) return false;
-  return req.headers.get("x-admin-key") === adminKey;
-}
+import { isAuthorized } from "@/lib/adminAuth";
 
 // ---------------------------------------------------------------------------
 // DELETE — remove a single subscriber by id.

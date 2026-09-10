@@ -2,13 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { db } from "@/lib/db";
 import { boardMembers as defaultBoardMembers, determineBoardCategory } from "@/data/boardMembers";
-
-function isAuthorized(req: NextRequest): boolean {
-  const headerKey = req.headers.get("x-admin-key");
-  const configuredKey = process.env.ADMIN_KEY;
-  if (!configuredKey) return false;
-  return headerKey === configuredKey;
-}
+import { isAuthorized } from "@/lib/adminAuth";
 
 const boardMemberSchema = z.object({
   name: z.string().trim().min(2, "Member name is required"),

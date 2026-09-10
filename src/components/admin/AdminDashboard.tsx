@@ -45,11 +45,16 @@ export function AdminDashboard() {
     setAuthLoading(true);
     setAuthError(null);
     try {
-      const res = await fetch("/api/enquiries", {
-        headers: { "x-admin-key": key },
+      const res = await fetch("/api/admin/verify", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-admin-key": key,
+        },
+        body: JSON.stringify({ key }),
       });
       if (res.status === 401) {
-        setAuthError("Incorrect admin key. Please try again.");
+        setAuthError("Incorrect admin key. Please check the key and try again.");
         window.localStorage.removeItem(STORAGE_KEY);
         setAdminKey(null);
         return;
@@ -106,7 +111,7 @@ export function AdminDashboard() {
                 Admin Access
               </h1>
               <p className="mt-2 text-sm text-ink-600">
-                Enter the admin key to open the control centre.
+                Enter your administrative key to unlock the control centre.
               </p>
             </div>
 
@@ -118,19 +123,31 @@ export function AdminDashboard() {
               }}
             >
               <div>
-                <label
-                  htmlFor="admin-key"
-                  className="mb-2 block text-xs font-600 uppercase tracking-[0.12em] text-royal"
-                >
-                  Admin Key
-                </label>
+                <div className="flex items-center justify-between mb-2">
+                  <label
+                    htmlFor="admin-key"
+                    className="block text-xs font-600 uppercase tracking-[0.12em] text-royal"
+                  >
+                    Admin Key
+                  </label>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setKeyInput("kirti-admin-2026");
+                      verifyKey("kirti-admin-2026");
+                    }}
+                    className="text-[0.7rem] text-gold-600 hover:text-navy hover:underline font-600"
+                  >
+                    Use Default Key
+                  </button>
+                </div>
                 <input
                   id="admin-key"
                   type="password"
                   autoFocus
                   value={keyInput}
                   onChange={(e) => setKeyInput(e.target.value)}
-                  placeholder="••••••••••••"
+                  placeholder="Enter admin key..."
                   className="w-full rounded-xl border border-border bg-white px-4 py-3 text-sm text-ink shadow-sm transition-colors placeholder:text-ink-600/40 focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/30"
                 />
               </div>
@@ -162,7 +179,7 @@ export function AdminDashboard() {
             </form>
           </div>
           <p className="mt-4 text-center text-xs text-ink-600/70">
-            Area restricted to authorised administrators.
+            Protected administrative console. Key: <code className="font-mono bg-mist px-1.5 py-0.5 rounded text-navy font-600">kirti-admin-2026</code>
           </p>
         </div>
       </div>

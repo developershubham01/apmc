@@ -2,13 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { writeFile, mkdir } from "fs/promises";
 import { join } from "path";
 import { existsSync } from "fs";
-
-function isAuthorized(req: NextRequest): boolean {
-  const headerKey = req.headers.get("x-admin-key");
-  const configuredKey = process.env.ADMIN_KEY;
-  if (!configuredKey) return false;
-  return headerKey === configuredKey;
-}
+import { isAuthorized } from "@/lib/adminAuth";
 
 const ALLOWED_MIME_TYPES = new Set([
   "image/jpeg",
@@ -72,16 +66,22 @@ export async function POST(req: NextRequest) {
     const timestamp = Date.now();
     const filename = `${cleanBaseName}-${timestamp}.${extension}`;
 
-    // Target upload directory
-    const uploadsDir = join(process.cwd(), "public", "uploads");
-    if (!existsSync(uploadsDir)) {
-      await mkdir(uploadsDir, { recursive: true });
+    let publicUrl = "";
+
+    try {
+      // Attempt local filesystem storage if writable
+      const uploadsDir = join(process.cwd(), "public", "uploads");
+      if (!existsSync(uploadsDir)) {
+        await mkdir(uploadsDir, { recursive: true });
+      }
+      const filePath = join(uploadsDir, filename);
+      await writeFile(filePath, buffer);
+      publicUrl = `/uploads/${filename}`;
+    } catch (fsErr) {
+      // Serverless (Vercel) read-only filesystem fallback: inline Base64 data URL
+      console.warn("[POST /api/upload] Filesystem read-only, falling back to base64 Data URL:", fsErr);
+      publicUrl = `data:${file.type};base64,${buffer.toString("base64")}`;
     }
-
-    const filePath = join(uploadsDir, filename);
-    await writeFile(filePath, buffer);
-
-    const publicUrl = `/uploads/${filename}`;
 
     return NextResponse.json(
       {
@@ -94,7 +94,7 @@ export async function POST(req: NextRequest) {
       { status: 201 }
     );
   } catch (err) {
-    console.error("[POST /api/upload] Error writing file:", err);
+    console.error("[POST /api/upload] Error processing file:", err);
     return NextResponse.json(
       { error: "Failed to process and save image file." },
       { status: 500 }

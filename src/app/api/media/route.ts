@@ -2,13 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { db } from "@/lib/db";
 import { mediaEntries as defaultMediaEntries } from "@/data/media";
-
-function isAuthorized(req: NextRequest): boolean {
-  const headerKey = req.headers.get("x-admin-key");
-  const configuredKey = process.env.ADMIN_KEY;
-  if (!configuredKey) return false;
-  return headerKey === configuredKey;
-}
+import { isAuthorized } from "@/lib/adminAuth";
 
 const mediaItemSchema = z.object({
   slug: z.string().trim().min(2, "Slug is required"),

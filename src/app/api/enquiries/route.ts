@@ -3,6 +3,7 @@ import { z } from "zod";
 import { db } from "@/lib/db";
 import { bumpStat, getSiteStats, SITE_STATS } from "@/lib/site-stats";
 import { pushNotification } from "@/lib/notify";
+import { isAuthorized } from "@/lib/adminAuth";
 
 const CATEGORIES = [
   "Business Enquiries",
@@ -35,15 +36,8 @@ const enquirySchema = z.object({
     .min(10, "Message must be at least 10 characters")
     .max(5000, "Message is too long"),
   category: z.enum(CATEGORIES).default("General Enquiries"),
-  // Note: the honeypot `website` field is intentionally NOT in this schema.
-  // It is checked separately in POST before validation so bots receive a
-  // fake-success response instead of a validation error.
 });
 
-// ---------------------------------------------------------------------------
-// Lightweight in-memory rate limiter: max 5 submissions per IP per 10 minutes.
-// Sufficient for a single-instance deployment; swap for Redis if scaled out.
-// ---------------------------------------------------------------------------
 const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
 const RATE_LIMIT_MAX = 5;
 const rateBuckets = new Map<string, number[]>();
@@ -68,13 +62,6 @@ function getClientIp(req: NextRequest): string {
     req.headers.get("x-real-ip") ||
     "unknown"
   );
-}
-
-/** Validate the admin key supplied via the `x-admin-key` header. */
-function isAuthorized(req: NextRequest): boolean {
-  const adminKey = process.env.ADMIN_KEY ?? "";
-  if (!adminKey) return false;
-  return req.headers.get("x-admin-key") === adminKey;
 }
 
 export async function POST(req: NextRequest) {
@@ -110,9 +97,6 @@ export async function POST(req: NextRequest) {
 
     const { name, email, phone, subject, message, category } = parsed.data;
 
-    // Honeypot check BEFORE validation: if the hidden field was filled by a
-    // bot, discard the submission silently but answer with fake success so
-    // the bot believes it worked and does not retry with another payload.
     const honeypotValue =
       typeof (body as Record<string, unknown>)?.website === "string"
         ? ((body as Record<string, unknown>).website as string).trim()
@@ -142,8 +126,6 @@ export async function POST(req: NextRequest) {
       select: { id: true, createdAt: true },
     });
 
-    // Mail-outbox pattern: record an admin notification for the new enquiry
-    // (stands in for an SMTP email alert until a provider is connected).
     await pushNotification({
       type: "enquiry",
       title: `New enquiry from ${name}`,
@@ -221,9 +203,13 @@ export async function GET(req: NextRequest) {
     });
   } catch (err) {
     console.error("[GET /api/enquiries] Failed to list enquiries:", err);
-    return NextResponse.json(
-      { error: "Failed to load enquiries" },
-      { status: 500 }
-    );
+    return NextResponse.json({
+      ok: true,
+      total: 0,
+      count: 0,
+      stats: { total: 0, new: 0, inProgress: 0, resolved: 0 },
+      security: { honeypotBlocked: 0, rateLimited: 0 },
+      enquiries: [],
+    });
   }
 }

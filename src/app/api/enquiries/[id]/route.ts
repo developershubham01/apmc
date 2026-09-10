@@ -8,11 +8,7 @@ const patchSchema = z.object({
   status: z.enum(STATUSES),
 });
 
-function isAuthorized(req: NextRequest): boolean {
-  const adminKey = process.env.ADMIN_KEY ?? "";
-  if (!adminKey) return false;
-  return req.headers.get("x-admin-key") === adminKey;
-}
+import { isAuthorized } from "@/lib/adminAuth";
 
 type RouteContext = { params: Promise<{ id: string }> };
 

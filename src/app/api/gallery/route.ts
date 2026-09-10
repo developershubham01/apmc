@@ -2,13 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { db } from "@/lib/db";
 import { galleryItems as defaultGalleryItems } from "@/data/gallery";
-
-function isAuthorized(req: NextRequest): boolean {
-  const headerKey = req.headers.get("x-admin-key");
-  const configuredKey = process.env.ADMIN_KEY;
-  if (!configuredKey) return false;
-  return headerKey === configuredKey;
-}
+import { isAuthorized } from "@/lib/adminAuth";
 
 const galleryItemSchema = z.object({
   src: z.string().trim().min(1, "Image URL or path is required"),
