@@ -101,17 +101,17 @@ export function CookieConsent() {
           aria-label="Cookie Consent Banner"
           className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 w-[calc(100%-2rem)] sm:w-[350px] animate-in fade-in-0 slide-in-from-bottom-5 duration-300"
         >
-          <div className="relative overflow-hidden rounded-2xl border-2 border-amber-400/50 bg-[#060e22]/95 p-4 shadow-[0_16px_50px_rgba(0,0,0,0.85)] backdrop-blur-xl">
+          <div className="relative overflow-hidden rounded-2xl border-2 border-amber-500/50 bg-[#060e22]/95 p-4 shadow-[0_16px_50px_rgba(0,0,0,0.85)] backdrop-blur-xl">
             {/* Ambient gold glow */}
             <div
               aria-hidden
-              className="pointer-events-none absolute -right-6 -top-6 h-24 w-24 rounded-full bg-amber-400/15 blur-xl"
+              className="pointer-events-none absolute -right-6 -top-6 h-24 w-24 rounded-full bg-amber-500/15 blur-xl"
             />
 
             {/* Header: Icon + Title + Close button */}
             <div className="flex items-center justify-between gap-2 border-b border-white/10 pb-2.5">
               <div className="flex items-center gap-2.5">
-                <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border border-amber-400/60 bg-amber-400/15 text-amber-400">
+                <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border border-amber-500/60 bg-amber-500/15 text-amber-400">
                   <Cookie className="h-4 w-4" />
                 </div>
                 <h3 className="font-heading text-xs font-bold text-white uppercase tracking-wider">
@@ -158,7 +158,7 @@ export function CookieConsent() {
                 <button
                   type="button"
                   onClick={handleAcceptAll}
-                  className="inline-flex items-center gap-1 rounded-lg bg-gradient-to-r from-amber-400 to-amber-500 px-3.5 py-1.5 text-[0.72rem] font-black text-slate-950 shadow-md hover:brightness-110 transition-all"
+                  className="inline-flex items-center gap-1 rounded-lg bg-gradient-to-r from-amber-500 to-yellow-500 px-3.5 py-1.5 text-[0.72rem] font-bold text-slate-950 shadow-md hover:brightness-110 transition-all"
                 >
                   <Check className="h-3 w-3 stroke-[3]" />
                   <span>{t("cookies.acceptAll", "Accept All")}</span>
@@ -171,10 +171,10 @@ export function CookieConsent() {
 
       {/* Detailed Cookie Preferences Modal */}
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-        <DialogContent className="border-2 border-amber-400/50 bg-[#07132a] text-white sm:max-w-xl shadow-[0_20px_60px_rgba(0,0,0,0.9)]">
+        <DialogContent className="border-2 border-amber-500/50 bg-[#07132a] text-white sm:max-w-xl shadow-[0_20px_60px_rgba(0,0,0,0.9)]">
           <DialogHeader>
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-amber-400/60 bg-amber-400/15 text-amber-400">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-amber-500/60 bg-amber-500/15 text-amber-400">
                 <Cookie className="h-5 w-5" />
               </div>
               <div>
@@ -190,7 +190,7 @@ export function CookieConsent() {
 
           <div className="mt-4 space-y-3.5 max-h-[60vh] overflow-y-auto pr-1">
             {/* 1. Necessary Cookies */}
-            <div className="rounded-xl border border-amber-400/30 bg-white/5 p-3.5 backdrop-blur-sm">
+            <div className="rounded-xl border border-amber-500/30 bg-white/5 p-3.5 backdrop-blur-sm">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <ShieldCheck className="h-4 w-4 text-emerald-400" />
@@ -211,7 +211,7 @@ export function CookieConsent() {
             </div>
 
             {/* 2. Analytics & Performance */}
-            <div className="rounded-xl border border-white/10 bg-white/5 p-3.5 transition-colors hover:border-amber-400/30">
+            <div className="rounded-xl border border-white/10 bg-white/5 p-3.5 transition-colors hover:border-amber-500/30">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <Info className="h-4 w-4 text-amber-400" />
@@ -222,7 +222,7 @@ export function CookieConsent() {
                 <Switch
                   checked={analyticsEnabled}
                   onCheckedChange={setAnalyticsEnabled}
-                  className="data-[state=checked]:bg-amber-400"
+                  className="data-[state=checked]:bg-amber-500"
                   aria-label="Toggle Analytics Cookies"
                 />
               </div>
@@ -235,7 +235,7 @@ export function CookieConsent() {
             </div>
 
             {/* 3. Personalization & Preferences */}
-            <div className="rounded-xl border border-white/10 bg-white/5 p-3.5 transition-colors hover:border-amber-400/30">
+            <div className="rounded-xl border border-white/10 bg-white/5 p-3.5 transition-colors hover:border-amber-500/30">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <Settings2 className="h-4 w-4 text-royal-300" />
@@ -246,7 +246,7 @@ export function CookieConsent() {
                 <Switch
                   checked={preferencesEnabled}
                   onCheckedChange={setPreferencesEnabled}
-                  className="data-[state=checked]:bg-amber-400"
+                  className="data-[state=checked]:bg-amber-500"
                   aria-label="Toggle Personalization Cookies"
                 />
               </div>
@@ -271,14 +271,14 @@ export function CookieConsent() {
             <button
               type="button"
               onClick={handleSavePreferences}
-              className="rounded-xl border border-amber-400/60 bg-amber-400/10 px-4 py-2 text-xs font-bold text-amber-300 transition-all hover:bg-amber-400/20"
+              className="rounded-xl border border-amber-500/60 bg-amber-500/10 px-4 py-2 text-xs font-bold text-amber-300 transition-all hover:bg-amber-500/20"
             >
               {t("cookies.save", "Save Choices")}
             </button>
             <button
               type="button"
               onClick={handleAcceptAll}
-              className="rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 px-5 py-2 text-xs font-black text-slate-950 shadow-md transition-all hover:brightness-110"
+              className="rounded-xl bg-gradient-to-r from-amber-500 to-yellow-500 px-5 py-2 text-xs font-bold text-slate-950 shadow-md transition-all hover:brightness-110"
             >
               {t("cookies.acceptAll", "Accept All")}
             </button>

@@ -670,7 +670,7 @@ export function BoardPanel({ adminKey, onAuthError }: Props) {
       {/* QUICK PHOTO UPLOAD MODAL */}
       {quickUploadMember && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-navy-950/70 p-4 backdrop-blur-sm animate-in fade-in">
-          <div className="w-full max-w-md rounded-3xl border border-gold/40 bg-white p-6 shadow-2xl">
+          <div className="w-full max-w-md max-h-[90vh] overflow-y-auto scrollbar-premium rounded-3xl border border-gold/40 bg-white p-6 shadow-2xl">
             <div className="flex items-center justify-between border-b border-border pb-3">
               <div className="flex items-center gap-2.5">
                 <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gold/20 text-gold-600 ring-1 ring-gold/40">
@@ -827,7 +827,7 @@ export function BoardPanel({ adminKey, onAuthError }: Props) {
       {/* FULL ADD / EDIT BOARD MEMBER MODAL */}
       {showMemberModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-navy-950/70 p-4 backdrop-blur-sm animate-in fade-in">
-          <div className="w-full max-w-lg rounded-3xl border border-gold/40 bg-white p-6 sm:p-8 shadow-2xl">
+          <div className="w-full max-w-lg max-h-[90vh] overflow-y-auto scrollbar-premium rounded-3xl border border-gold/40 bg-white p-6 sm:p-8 shadow-2xl">
             <div className="flex items-center justify-between border-b border-border pb-4">
               <div className="flex items-center gap-2.5">
                 <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-navy text-gold ring-1 ring-gold/40">

@@ -4,34 +4,56 @@
 @custom-variant dark (&:is(.dark *));
 
 /* ============================================================
-   KIRTI RANA — Brand Design System
-   Deep Navy #0B1F3A · Royal Blue #164E9A · Gold #C9A227 · Saffron #F28C28
+   GREEN & WHITE DESIGN SYSTEM (Agriculture & Commerce Theme)
+   Emerald Green #059669 · Deep Forest #042017 · Soft Mint #ECFDF5 · Pure White #FFFFFF
    ============================================================ */
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-inter);
-  --font-heading: var(--font-poppins);
+  --font-sans: var(--font-jakarta), var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-heading: var(--font-jakarta), var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-jakarta: var(--font-jakarta);
   --font-devanagari: var(--font-noto-devanagari);
 
-  /* Brand palette */
-  --color-navy: #0B1F3A;
-  --color-navy-700: #122A4D;
-  --color-navy-600: #1A3A63;
-  --color-royal: #164E9A;
-  --color-royal-600: #1A5BB0;
-  --color-royal-50: #EEF4FC;
-  --color-gold: #C9A227;
-  --color-gold-600: #B08D1F;
-  --color-gold-50: #FBF6E6;
-  --color-saffron: #F28C28;
-  --color-saffron-600: #D9771A;
-  --color-mist: #F7F8FA;
-  --color-ink: #111827;
-  --color-ink-600: #374151;
+  /* Emerald & Forest Green Palette */
+  --color-meta-blue: #059669;
+  --color-meta-blue-deep: #047857;
+  --color-meta-blue-soft: #10B981;
+  --color-meta-link: #047857;
+  --color-fb-blue: #059669;
+  
+  --color-ink-deep: #042017;
+  --color-ink: #06281E;
+  --color-charcoal: #374151;
+  --color-slate: #4B5563;
+  --color-steel: #4B5563;
+  --color-stone: #6B7280;
 
-  /* shadcn-compatible tokens (mapped to brand) */
+  --color-canvas: #FFFFFF;
+  --color-surface-soft: #F0FDF4;
+  --color-hairline: #D1E7DD;
+  --color-hairline-soft: #E2E8F0;
+
+  --color-meta-success: #059669;
+  --color-meta-warning: #F59E0B;
+  --color-meta-attention: #D97706;
+  --color-meta-critical: #E11D48;
+
+  /* Aliased theme colors for backward-compatible Tailwind classes */
+  --color-gold: #059669;
+  --color-gold-600: #047857;
+  --color-gold-50: #ECFDF5;
+  --color-amber-gold: #059669;
+  --color-navy: #042017;
+  --color-navy-700: #02120D;
+  --color-navy-600: #06281E;
+  --color-royal: #059669;
+  --color-royal-600: #047857;
+  --color-royal-50: #ECFDF5;
+  --color-mist: #F0FDF4;
+
+  /* shadcn-compatible tokens */
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -75,38 +97,38 @@
 }
 
 :root {
-  --radius: 0.75rem;
+  --radius: 1.5rem;
   --background: #FFFFFF;
-  --foreground: #111827;
+  --foreground: #042017;
   --card: #FFFFFF;
-  --card-foreground: #111827;
+  --card-foreground: #042017;
   --popover: #FFFFFF;
-  --popover-foreground: #111827;
-  --primary: #0B1F3A;
+  --popover-foreground: #042017;
+  --primary: #059669;
   --primary-foreground: #FFFFFF;
-  --secondary: #F7F8FA;
-  --secondary-foreground: #0B1F3A;
-  --muted: #F1F3F7;
+  --secondary: #F0FDF4;
+  --secondary-foreground: #042017;
+  --muted: #F0FDF4;
   --muted-foreground: #4B5563;
-  --accent: #C9A227;
-  --accent-foreground: #0B1F3A;
-  --destructive: #B91C1C;
-  --border: #E5E7EB;
-  --input: #E5E7EB;
-  --ring: #164E9A;
-  --chart-1: #164E9A;
-  --chart-2: #C9A227;
-  --chart-3: #F28C28;
-  --chart-4: #0B1F3A;
-  --chart-5: #374151;
-  --sidebar: #0B1F3A;
+  --accent: #059669;
+  --accent-foreground: #FFFFFF;
+  --destructive: #E11D48;
+  --border: #D1E7DD;
+  --input: #D1E7DD;
+  --ring: #059669;
+  --chart-1: #059669;
+  --chart-2: #042017;
+  --chart-3: #10B981;
+  --chart-4: #4B5563;
+  --chart-5: #34D399;
+  --sidebar: #042017;
   --sidebar-foreground: #FFFFFF;
-  --sidebar-primary: #C9A227;
-  --sidebar-primary-foreground: #0B1F3A;
-  --sidebar-accent: #122A4D;
+  --sidebar-primary: #059669;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #06281E;
   --sidebar-accent-foreground: #FFFFFF;
-  --sidebar-border: #1A3A63;
-  --sidebar-ring: #C9A227;
+  --sidebar-border: #D1E7DD;
+  --sidebar-ring: #059669;
 }
 
 @layer base {
@@ -119,7 +141,7 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+    font-family: var(--font-jakarta), var(--font-inter), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -151,10 +173,14 @@
    Typography helpers
    ============================================================ */
 .font-heading {
-  font-family: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-jakarta), system-ui, sans-serif;
+  letter-spacing: -0.02em;
+}
+.font-sans {
+  font-family: var(--font-jakarta), var(--font-inter), system-ui, sans-serif;
 }
 .font-devanagari {
-  font-family: var(--font-noto-devanagari), var(--font-inter), sans-serif;
+  font-family: var(--font-noto-devanagari), var(--font-jakarta), sans-serif;
 }
 
 /* ============================================================
@@ -167,9 +193,20 @@
   text-wrap: pretty;
 }
 
-/* Gold gradient text with high luminosity and dark backdrop contrast */
-.text-gold-gradient {
-  background: linear-gradient(135deg, #FFF1B8 0%, #FBBF24 35%, #F59E0B 70%, #D97706 100%);
+/* Green & White gradients & typography */
+.text-gold-gradient,
+.text-meta-gradient,
+.text-brand-gradient,
+.text-green-gradient {
+  background: linear-gradient(135deg, #059669 0%, #10B981 50%, #34D399 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.text-royal-gradient {
+  background: linear-gradient(135deg, #042017 0%, #064E3B 60%, #059669 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -178,39 +215,164 @@
 
 /* Premium section eyebrow */
 .eyebrow {
-  font-family: var(--font-poppins), sans-serif;
+  font-family: var(--font-inter), sans-serif;
   text-transform: uppercase;
-  letter-spacing: 0.22em;
-  font-weight: 600;
-  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  font-weight: 700;
+  font-size: 0.75rem;
 }
 
-/* Pattern backgrounds (Clean solid/gradient backgrounds, no grid lines) */
-.bg-heritage-grid {
-  background-image: none;
-}
-
-.bg-navy-grid {
-  background-image: none;
-}
-
-/* Gold hairline */
-.gold-hairline {
-  height: 3px;
-  width: 64px;
-  background: linear-gradient(90deg, #C9A227 0%, #F28C28 100%);
+/* Green & White hairlines */
+.gold-hairline,
+.brand-hairline,
+.meta-hairline,
+.green-hairline {
+  height: 2px;
+  width: 48px;
+  background: #059669;
   border-radius: 9999px;
 }
 
-/* Premium card shadow */
+/* Card & Component Styles */
+.card-meta {
+  background-color: #FFFFFF;
+  border-radius: 28px;
+  border: 1px solid #D1E7DD;
+  padding: 24px;
+  transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.4, 1), box-shadow 0.2s cubic-bezier(0.2, 0.8, 0.4, 1), border-color 0.2s ease;
+}
+
+.card-meta:hover {
+  transform: translateY(-2px);
+  border-color: #059669;
+  box-shadow: 0 12px 32px -8px rgba(4, 32, 23, 0.08);
+}
+
+.card-meta-photo {
+  background-color: #FFFFFF;
+  border-radius: 32px;
+  overflow: hidden;
+  border: 1px solid #D1E7DD;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card-meta-photo:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 40px -10px rgba(4, 32, 23, 0.12);
+}
+
+/* Meta Pill Buttons */
+.btn-meta-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000000;
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 0.875rem;
+  border-radius: 9999px;
+  padding: 12px 28px;
+  transition: background-color 0.18s ease, transform 0.18s ease;
+}
+.btn-meta-primary:hover {
+  background-color: #1C1E21;
+  transform: translateY(-1px);
+}
+
+.btn-meta-buy {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #059669;
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 0.875rem;
+  border-radius: 9999px;
+  padding: 12px 28px;
+  transition: background-color 0.18s ease, transform 0.18s ease;
+}
+.btn-meta-buy:hover {
+  background-color: #047857;
+  transform: translateY(-1px);
+}
+
+.btn-meta-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  color: #042017;
+  font-weight: 700;
+  font-size: 0.875rem;
+  border: 2px solid #042017;
+  border-radius: 9999px;
+  padding: 10px 26px;
+  transition: background-color 0.18s ease, color 0.18s ease;
+}
+.btn-meta-secondary:hover {
+  background-color: #042017;
+  color: #FFFFFF;
+}
+
+/* Meta Pill Category Tabs */
+.pill-tab-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 9999px;
+  padding: 8px 18px;
+  font-size: 0.875rem;
+  font-weight: 700;
+  background-color: #FFFFFF;
+  color: #042017;
+  border: 1px solid #D1E7DD;
+  transition: all 0.18s ease;
+}
+.pill-tab-meta:hover {
+  background-color: #F0FDF4;
+}
+.pill-tab-meta.active {
+  background-color: #042017;
+  color: #FFFFFF;
+  border-color: #042017;
+}
+
+/* Meta Badges */
+.badge-meta-blue {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #ECFDF5;
+  color: #047857;
+  border-radius: 9999px;
+  font-weight: 700;
+  font-size: 0.75rem;
+  padding: 4px 12px;
+}
+
+.badge-meta-dark {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #042017;
+  color: #FFFFFF;
+  border-radius: 9999px;
+  font-weight: 700;
+  font-size: 0.75rem;
+  padding: 4px 12px;
+}
+
+/* Premium shadows */
 .shadow-premium {
-  box-shadow: 0 1px 2px rgba(11, 31, 58, 0.04), 0 8px 24px -8px rgba(11, 31, 58, 0.12);
+  box-shadow: 0 1px 4px rgba(4, 32, 23, 0.04), 0 8px 24px -6px rgba(4, 32, 23, 0.08);
 }
 .shadow-premium-lg {
-  box-shadow: 0 1px 3px rgba(11, 31, 58, 0.05), 0 20px 48px -16px rgba(11, 31, 58, 0.22);
+  box-shadow: 0 1px 6px rgba(4, 32, 23, 0.06), 0 20px 48px -12px rgba(4, 32, 23, 0.12);
 }
-.shadow-gold-glow {
-  box-shadow: 0 10px 40px -12px rgba(201, 162, 39, 0.45);
+.shadow-gold-glow,
+.shadow-brand-glow,
+.shadow-meta-glow {
+  box-shadow: 0 8px 30px -6px rgba(5, 150, 105, 0.35);
 }
 
 /* ============================================================
@@ -328,7 +490,7 @@
   left: 1rem;
   top: -100px;
   z-index: 100;
-  background: #0B1F3A;
+  background: #042017;
   color: #fff;
   padding: 0.6rem 1rem;
   border-radius: 0.5rem;
@@ -339,7 +501,7 @@
 }
 
 :focus-visible {
-  outline: 2px solid #C9A227;
+  outline: 2px solid #059669;
   outline-offset: 2px;
   border-radius: 2px;
 }

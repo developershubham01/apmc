@@ -24,6 +24,7 @@ import { PageHeader } from "@/components/site/PageHeader";
 import { SectionHeading } from "@/components/site/SectionHeading";
 import { ScrollReveal } from "@/components/site/ScrollReveal";
 import { CTASection } from "@/components/site/CTASection";
+import { LightboxImage } from "@/components/site/LightboxImage";
 
 export const metadata: Metadata = {
   title: "Navi Mumbai Merchants Chamber | Apex APMC Trade Body",
@@ -109,57 +110,73 @@ export default function ChamberAboutPage() {
           { label: "About", href: "/about" },
           { label: "Navi Mumbai Merchants Chamber" },
         ]}
+        backgroundImage="/images/hero/chamber-headquarters-hero.jpg"
+        imageOpacity={90}
       />
 
-      {/* Overview Section with Architectural Focus */}
-      <section className="bg-white py-16 lg:py-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      {/* Overview Section with Architectural Focus & High Visibility Background */}
+      <section className="relative overflow-hidden bg-white py-16 lg:py-24 border-b border-[#D1E7DD]">
+        {/* Subtle Architectural Watermark */}
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+          <Image
+            src="/images/hero/chamber-headquarters-hero.jpg"
+            alt="Chamber Complex Background"
+            fill
+            className="object-cover object-center opacity-[0.08]"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-transparent to-white/60" />
+        </div>
+
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <ScrollReveal variant="left">
               <div>
-                <span className="eyebrow text-gold font-bold">ESTABLISHED 30+ YEARS</span>
-                <h2 className="mt-2 font-heading text-2xl sm:text-3xl lg:text-4xl font-extrabold text-navy leading-tight">
+                <span className="eyebrow inline-flex items-center gap-2 text-[#059669] font-bold">
+                  <Building2 className="h-4 w-4" />
+                  ESTABLISHED 30+ YEARS
+                </span>
+                <h2 className="mt-2 font-heading text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#042017] leading-tight">
                   The Apex Commercial Voice of Wholesale Agri-Trade
                 </h2>
-                <div className="mt-4 gold-hairline" />
-                <p className="mt-6 text-base text-ink-600 leading-relaxed">
-                  The <strong className="text-navy font-bold">Navi Mumbai Merchants Chamber</strong> stands as the principal governing commercial organization representing over 400 wholesale enterprises, exporters, and processing units at the Agricultural Produce Market Committee (APMC) complex in Turbhe, Navi Mumbai.
+                <div className="mt-4 h-1 w-16 rounded-full bg-[#059669]" />
+                <p className="mt-6 text-base text-[#4B5563] leading-relaxed">
+                  The <strong className="text-[#042017] font-bold">Navi Mumbai Merchants Chamber</strong> stands as the principal governing commercial organization representing over 400 wholesale enterprises, exporters, and processing units at the Agricultural Produce Market Committee (APMC) complex in Turbhe, Navi Mumbai.
                 </p>
-                <p className="mt-4 text-sm sm:text-base text-ink-600 leading-relaxed">
-                  Under the visionary leadership of <strong className="text-navy font-semibold">President Shri Kirti Rana</strong>, the Chamber serves as the vital bridge between grassroots agricultural producers, wholesale distributors, international trade buyers, and government statutory bodies.
+                <p className="mt-4 text-sm sm:text-base text-[#4B5563] leading-relaxed">
+                  Under the visionary leadership of <strong className="text-[#042017] font-bold">President Shri Kirti Rana</strong>, the Chamber serves as the vital bridge between grassroots agricultural producers, wholesale distributors, international trade buyers, and government statutory bodies.
                 </p>
 
                 {/* Quick Chamber Highlights */}
-                <div className="mt-8 grid grid-cols-2 gap-4 border-t border-border pt-6">
-                  <div className="rounded-xl bg-mist p-4 border border-border/80">
-                    <span className="block font-heading text-2xl sm:text-3xl font-black text-royal">
+                <div className="mt-8 grid grid-cols-2 gap-4 border-t border-[#D1E7DD] pt-6">
+                  <div className="rounded-xl bg-[#F0FDF4] p-4 border border-[#D1E7DD]">
+                    <span className="block font-heading text-2xl sm:text-3xl font-black text-[#042017]">
                       400+
                     </span>
-                    <span className="text-xs font-semibold uppercase tracking-wider text-ink-600 mt-1 block">
+                    <span className="text-xs font-bold uppercase tracking-wider text-[#047857] mt-1 block">
                       Member Enterprises
                     </span>
                   </div>
-                  <div className="rounded-xl bg-mist p-4 border border-border/80">
-                    <span className="block font-heading text-2xl sm:text-3xl font-black text-gold-600">
+                  <div className="rounded-xl bg-[#F0FDF4] p-4 border border-[#D1E7DD]">
+                    <span className="block font-heading text-2xl sm:text-3xl font-black text-[#059669]">
                       50 Acres
                     </span>
-                    <span className="text-xs font-semibold uppercase tracking-wider text-ink-600 mt-1 block">
+                    <span className="text-xs font-bold uppercase tracking-wider text-[#047857] mt-1 block">
                       Trade Complex Area
                     </span>
                   </div>
-                  <div className="rounded-xl bg-mist p-4 border border-border/80">
-                    <span className="block font-heading text-2xl sm:text-3xl font-black text-navy">
+                  <div className="rounded-xl bg-[#F0FDF4] p-4 border border-[#D1E7DD]">
+                    <span className="block font-heading text-2xl sm:text-3xl font-black text-[#042017]">
                       5 Hubs
                     </span>
-                    <span className="text-xs font-semibold uppercase tracking-wider text-ink-600 mt-1 block">
+                    <span className="text-xs font-bold uppercase tracking-wider text-[#047857] mt-1 block">
                       APMC Commodity Markets
                     </span>
                   </div>
-                  <div className="rounded-xl bg-mist p-4 border border-border/80">
-                    <span className="block font-heading text-2xl sm:text-3xl font-black text-emerald-600">
+                  <div className="rounded-xl bg-[#F0FDF4] p-4 border border-[#D1E7DD]">
+                    <span className="block font-heading text-2xl sm:text-3xl font-black text-[#059669]">
                       30+ Yrs
                     </span>
-                    <span className="text-xs font-semibold uppercase tracking-wider text-ink-600 mt-1 block">
+                    <span className="text-xs font-bold uppercase tracking-wider text-[#047857] mt-1 block">
                       Institutional Legacy
                     </span>
                   </div>
@@ -168,15 +185,15 @@ export default function ChamberAboutPage() {
                 <div className="mt-8 flex flex-wrap gap-4">
                   <Link
                     href="/board"
-                    className="inline-flex items-center gap-2 rounded-xl bg-navy px-6 py-3 text-sm font-bold text-white shadow-premium hover:bg-navy-700 transition-all hover:-translate-y-0.5"
+                    className="inline-flex items-center gap-2 rounded-full bg-[#059669] px-7 py-3.5 text-sm font-bold text-white shadow-md transition-all hover:bg-[#047857] hover:-translate-y-0.5"
                   >
-                    <Users className="h-4 w-4 text-gold" />
+                    <Users className="h-4 w-4" />
                     <span>Governing Board of Directors</span>
                     <ArrowRight className="h-4 w-4" />
                   </Link>
                   <Link
                     href="/apmc"
-                    className="inline-flex items-center gap-2 rounded-xl border border-royal/30 bg-royal-50 px-6 py-3 text-sm font-bold text-royal hover:bg-royal/10 transition-all"
+                    className="inline-flex items-center gap-2 rounded-full border-2 border-[#042017] bg-white px-7 py-3.5 text-sm font-bold text-[#042017] transition-all hover:bg-[#042017] hover:text-white hover:-translate-y-0.5"
                   >
                     <Store className="h-4 w-4" />
                     <span>Explore 50-Acre Complex</span>
@@ -187,17 +204,18 @@ export default function ChamberAboutPage() {
 
             <ScrollReveal variant="right">
               <div className="relative mx-auto max-w-lg">
-                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl border border-amber-400/40 shadow-2xl">
-                  <Image
+                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-3xl border-2 border-[#059669] shadow-2xl bg-white">
+                  <LightboxImage
                     src="/images/hero/chamber-headquarters-hero.jpg"
                     alt="Navi Mumbai Merchants Chamber Headquarters and APMC Trade Center"
-                    fill
+                    caption="Navi Mumbai Merchants Chamber Central Secretariat — APMC Trade Center Turbhe"
                     priority
-                    className="object-cover"
+                    className="h-full w-full rounded-none border-0 ring-0"
+                    imgClassName="object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-transparent to-transparent" />
-                  <div className="absolute bottom-4 left-4 right-4 rounded-2xl bg-navy-950/90 p-4 backdrop-blur-md border border-white/10 text-white">
-                    <p className="text-[0.7rem] font-bold uppercase tracking-widest text-gold">
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#042017]/90 via-transparent to-transparent" />
+                  <div className="pointer-events-none absolute bottom-4 left-4 right-4 rounded-2xl bg-[#042017]/90 p-4 backdrop-blur-md border border-white/10 text-white z-10">
+                    <p className="text-[0.7rem] font-bold uppercase tracking-widest text-[#10B981]">
                       APMC Trade Center • Turbhe
                     </p>
                     <p className="text-sm font-bold text-white mt-0.5">
@@ -212,7 +230,7 @@ export default function ChamberAboutPage() {
       </section>
 
       {/* Core Objectives & Key Pillars */}
-      <section className="bg-mist py-16 lg:py-24 border-y border-border">
+      <section className="bg-[#F0FDF4] py-16 lg:py-24 border-b border-[#D1E7DD]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="Key Responsibilities"
@@ -227,15 +245,15 @@ export default function ChamberAboutPage() {
               return (
                 <div
                   key={pillar.title}
-                  className="rounded-2xl border border-border bg-white p-7 shadow-premium transition-all duration-200 hover:-translate-y-1 hover:border-gold/60 hover:shadow-premium-lg"
+                  className="rounded-2xl border border-[#D1E7DD] bg-white p-7 shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-[#059669] hover:shadow-md"
                 >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-royal-50 text-royal ring-1 ring-royal/20 mb-5">
-                    <Icon className="h-6 w-6 text-gold-600" />
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#042017] text-[#10B981] ring-1 ring-[#059669]/30 mb-5">
+                    <Icon className="h-6 w-6" />
                   </div>
-                  <h3 className="font-heading text-lg font-bold text-navy">
+                  <h3 className="font-heading text-lg font-bold text-[#042017]">
                     {pillar.title}
                   </h3>
-                  <p className="mt-2.5 text-sm text-ink-600 leading-relaxed">
+                  <p className="mt-2.5 text-sm text-[#4B5563] leading-relaxed">
                     {pillar.description}
                   </p>
                 </div>
@@ -246,7 +264,7 @@ export default function ChamberAboutPage() {
       </section>
 
       {/* Chamber Institutional Milestones */}
-      <section className="bg-white py-16 lg:py-24">
+      <section className="bg-white py-16 lg:py-24 border-b border-[#D1E7DD]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="Historical Journey"
@@ -259,20 +277,20 @@ export default function ChamberAboutPage() {
             {milestones.map((m, idx) => (
               <div
                 key={m.year}
-                className="relative rounded-2xl border border-border bg-mist/60 p-6 transition-all hover:bg-white hover:border-gold/50 hover:shadow-md"
+                className="relative rounded-2xl border border-[#D1E7DD] bg-[#F0FDF4] p-6 transition-all hover:bg-white hover:border-[#059669] hover:shadow-md"
               >
                 <div className="flex items-center justify-between mb-3">
-                  <span className="font-heading text-xl font-black text-royal">
+                  <span className="font-heading text-xl font-bold text-[#042017]">
                     {m.year}
                   </span>
-                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-gold/15 text-gold-600 text-xs font-bold">
+                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-[#059669] text-white text-xs font-bold shadow-sm">
                     0{idx + 1}
                   </span>
                 </div>
-                <h4 className="font-heading text-base font-bold text-navy">
+                <h4 className="font-heading text-base font-bold text-[#042017]">
                   {m.title}
                 </h4>
-                <p className="mt-2 text-xs sm:text-sm text-ink-600 leading-relaxed">
+                <p className="mt-2 text-xs sm:text-sm text-[#4B5563] leading-relaxed">
                   {m.description}
                 </p>
               </div>
@@ -282,72 +300,72 @@ export default function ChamberAboutPage() {
       </section>
 
       {/* Leadership & Secretariat Contact Box */}
-      <section className="bg-[#050b1a] text-white py-16 lg:py-20 border-t border-amber-500/30">
+      <section className="bg-[#F0FDF4] text-[#042017] py-16 lg:py-20 border-t border-[#D1E7DD]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-10 lg:grid-cols-3">
             <div className="lg:col-span-2">
-              <span className="text-xs font-bold uppercase tracking-widest text-gold">
+              <span className="text-xs font-bold uppercase tracking-widest text-[#047857]">
                 Chamber Secretariat
               </span>
-              <h3 className="mt-2 font-heading text-2xl sm:text-3xl font-extrabold text-white">
+              <h3 className="mt-2 font-heading text-2xl sm:text-3xl font-extrabold text-[#042017]">
                 Official Head Office &amp; Administration
               </h3>
-              <p className="mt-4 text-sm sm:text-base text-slate-300 leading-relaxed max-w-2xl">
+              <p className="mt-4 text-sm sm:text-base text-[#4B5563] leading-relaxed max-w-2xl">
                 The administrative secretariat operates daily to serve registered merchants, process trade dispute applications, coordinate with APMC authorities, and issue trade advisories.
               </p>
 
               <div className="mt-8 grid gap-4 sm:grid-cols-2">
-                <div className="flex items-start gap-3 rounded-2xl bg-white/5 p-4 border border-white/10">
-                  <MapPin className="h-5 w-5 text-gold shrink-0 mt-0.5" />
-                  <div className="text-xs sm:text-sm text-slate-200">
-                    <strong className="block text-white font-bold mb-0.5">Secretariat Address</strong>
+                <div className="flex items-start gap-3 rounded-2xl bg-white p-4 border border-[#D1E7DD] shadow-sm">
+                  <MapPin className="h-5 w-5 text-[#059669] shrink-0 mt-0.5" />
+                  <div className="text-xs sm:text-sm text-[#4B5563]">
+                    <strong className="block text-[#042017] font-bold mb-0.5">Secretariat Address</strong>
                     Central Facility Building, APMC Market-I, Phase-II, Sector 19, Turbhe, Navi Mumbai - 400705
                   </div>
                 </div>
-                <div className="flex items-start gap-3 rounded-2xl bg-white/5 p-4 border border-white/10">
-                  <Mail className="h-5 w-5 text-gold shrink-0 mt-0.5" />
-                  <div className="text-xs sm:text-sm text-slate-200">
-                    <strong className="block text-white font-bold mb-0.5">Contact &amp; Helpdesk</strong>
+                <div className="flex items-start gap-3 rounded-2xl bg-white p-4 border border-[#D1E7DD] shadow-sm">
+                  <Mail className="h-5 w-5 text-[#059669] shrink-0 mt-0.5" />
+                  <div className="text-xs sm:text-sm text-[#4B5563]">
+                    <strong className="block text-[#042017] font-bold mb-0.5">Contact &amp; Helpdesk</strong>
                     <span>chamber@nmmc-apmc.org</span>
-                    <span className="block text-slate-400 mt-1">+91 (022) 2788-1000</span>
+                    <span className="block text-[#047857] font-bold mt-1">+91 (022) 2788-1000</span>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Related Navigation Links */}
-            <div className="rounded-3xl border border-amber-500/30 bg-navy-900/80 p-6 flex flex-col justify-between">
+            <div className="rounded-3xl border border-[#D1E7DD] bg-white p-6 flex flex-col justify-between shadow-sm">
               <div>
-                <h4 className="font-heading text-base font-bold text-white mb-4 flex items-center gap-2">
-                  <Sparkles className="h-4 w-4 text-gold" />
+                <h4 className="font-heading text-base font-bold text-[#042017] mb-4 flex items-center gap-2">
+                  <Sparkles className="h-4 w-4 text-[#059669]" />
                   <span>Related Sections</span>
                 </h4>
                 <ul className="space-y-2.5 text-xs sm:text-sm">
                   <li>
                     <Link
                       href="/about"
-                      className="flex items-center justify-between rounded-xl bg-white/5 p-3 text-slate-200 hover:bg-white/10 hover:text-gold transition-colors"
+                      className="flex items-center justify-between rounded-xl bg-[#F0FDF4] p-3 text-[#042017] hover:bg-[#ECFDF5] hover:text-[#059669] transition-colors border border-[#D1E7DD]"
                     >
                       <span>About Shri Kirti Rana</span>
-                      <ChevronRight className="h-4 w-4 text-gold" />
+                      <ChevronRight className="h-4 w-4 text-[#059669]" />
                     </Link>
                   </li>
                   <li>
                     <Link
                       href="/about/bombay-mudibazar"
-                      className="flex items-center justify-between rounded-xl bg-white/5 p-3 text-slate-200 hover:bg-white/10 hover:text-gold transition-colors"
+                      className="flex items-center justify-between rounded-xl bg-[#F0FDF4] p-3 text-[#042017] hover:bg-[#ECFDF5] hover:text-[#059669] transition-colors border border-[#D1E7DD]"
                     >
                       <span>Bombay Mudibazar Kariana Association</span>
-                      <ChevronRight className="h-4 w-4 text-gold" />
+                      <ChevronRight className="h-4 w-4 text-[#059669]" />
                     </Link>
                   </li>
                   <li>
                     <Link
                       href="/board"
-                      className="flex items-center justify-between rounded-xl bg-white/5 p-3 text-slate-200 hover:bg-white/10 hover:text-gold transition-colors"
+                      className="flex items-center justify-between rounded-xl bg-[#F0FDF4] p-3 text-[#042017] hover:bg-[#ECFDF5] hover:text-[#059669] transition-colors border border-[#D1E7DD]"
                     >
                       <span>Governing Board Directory</span>
-                      <ChevronRight className="h-4 w-4 text-gold" />
+                      <ChevronRight className="h-4 w-4 text-[#059669]" />
                     </Link>
                   </li>
                 </ul>
@@ -355,7 +373,7 @@ export default function ChamberAboutPage() {
 
               <Link
                 href="/contact"
-                className="mt-6 inline-flex items-center justify-center gap-2 rounded-xl bg-gold px-5 py-3 text-xs font-bold text-navy shadow-gold-glow hover:bg-gold-400 transition-colors uppercase tracking-wider"
+                className="mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-[#059669] px-6 py-3.5 text-xs font-bold text-white shadow-md hover:bg-[#047857] transition-all uppercase tracking-wider"
               >
                 <span>Connect With Chamber</span>
                 <ArrowRight className="h-3.5 w-3.5" />

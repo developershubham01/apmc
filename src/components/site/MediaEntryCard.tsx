@@ -47,7 +47,7 @@ export function MediaEntryCard({ entry, index, flip = false }: Props) {
             )}
           >
             <div className="flex flex-wrap items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-gold-50 px-3 py-1 text-[0.68rem] font-700 uppercase tracking-[0.12em] text-gold-600 ring-1 ring-gold/30">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-50 px-3 py-1 text-[0.68rem] font-700 uppercase tracking-[0.12em] text-amber-700 ring-1 ring-amber-200">
                 <CalendarDays className="h-3 w-3" />
                 {entry.date}
               </span>
@@ -72,7 +72,7 @@ export function MediaEntryCard({ entry, index, flip = false }: Props) {
                   key={point}
                   className="flex items-start gap-2.5 text-sm text-ink"
                 >
-                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-gold-600" />
+                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-amber-600" />
                   {point}
                 </li>
               ))}

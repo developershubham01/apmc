@@ -49,12 +49,12 @@ export function NewsletterForm() {
     return (
       <div
         role="status"
-        className="flex items-start gap-3 rounded-xl bg-white/5 p-4 ring-1 ring-gold/30"
+        className="flex items-start gap-3 rounded-2xl bg-white/5 p-4 ring-1 ring-[#059669]/30"
       >
-        <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-gold" />
+        <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#10B981]" />
         <div>
-          <p className="text-sm font-600 text-white">You are on the list.</p>
-          <p className="mt-0.5 text-xs leading-relaxed text-white/60">{message}</p>
+          <p className="text-sm font-bold text-white">You are on the list.</p>
+          <p className="mt-0.5 text-xs leading-relaxed text-white/70">{message}</p>
         </div>
       </div>
     );
@@ -81,7 +81,7 @@ export function NewsletterForm() {
             }}
             placeholder="Your email address"
             autoComplete="email"
-            className="w-full rounded-xl border border-white/15 bg-white/10 py-3 pl-10 pr-4 text-sm text-white placeholder:text-white/40 transition-colors focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/30"
+            className="w-full rounded-full border border-white/15 bg-white/10 py-3 pl-10 pr-4 text-sm text-white placeholder:text-white/40 transition-colors focus:border-[#059669] focus:outline-none focus:ring-2 focus:ring-[#059669]/30"
           />
         </div>
         {/* Honeypot — invisible to humans, catnip for bots */}
@@ -98,7 +98,7 @@ export function NewsletterForm() {
         <button
           type="submit"
           disabled={state === "loading"}
-          className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 px-6 py-3 text-sm font-black text-slate-950 shadow-md transition-all hover:brightness-110 active:scale-95 disabled:opacity-60"
+          className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-[#059669] px-6 py-3 text-sm font-bold text-white shadow-sm transition-all hover:bg-[#047857] active:scale-95 disabled:opacity-60"
         >
           {state === "loading" ? (
             <>

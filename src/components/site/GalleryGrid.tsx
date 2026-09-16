@@ -71,8 +71,8 @@ export function GalleryGrid({
             className={cn(
               "rounded-full px-4 py-2 text-xs font-600 uppercase tracking-[0.12em] transition-all",
               active === f
-                ? "bg-navy text-white shadow-premium"
-                : "bg-mist text-ink-600 ring-1 ring-border hover:bg-royal-50 hover:text-royal"
+                ? "bg-gradient-to-r from-amber-500 to-yellow-500 text-slate-950 shadow-gold-glow"
+                : "bg-mist text-ink-600 ring-1 ring-border hover:bg-amber-50 hover:text-amber-700"
             )}
           >
             {f}
@@ -88,7 +88,7 @@ export function GalleryGrid({
             type="button"
             onClick={() => setLightboxIndex(idx)}
             className={cn(
-              "group relative overflow-hidden rounded-xl bg-mist shadow-premium ring-1 ring-border transition-all duration-300 hover:shadow-premium-lg focus-visible:ring-2 focus-visible:ring-gold",
+              "group relative overflow-hidden rounded-xl bg-mist shadow-premium ring-1 ring-border transition-all duration-300 hover:shadow-premium-lg focus-visible:ring-2 focus-visible:ring-amber-500",
               item.span === "wide" && "sm:col-span-2",
               item.span === "tall" && "sm:row-span-2"
             )}
@@ -111,7 +111,7 @@ export function GalleryGrid({
             </span>
             {/* Caption */}
             <div className="absolute inset-x-0 bottom-0 p-3 text-left">
-              <p className="text-[0.62rem] uppercase tracking-[0.14em] text-gold/90">
+              <p className="text-[0.62rem] uppercase tracking-[0.14em] text-amber-400 font-bold">
                 {item.category}
               </p>
               <p className="mt-0.5 line-clamp-2 text-xs font-500 text-white">

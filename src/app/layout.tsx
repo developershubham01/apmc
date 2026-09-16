@@ -12,7 +12,7 @@ import { CopyProtection } from "@/components/site/CopyProtection";
 import { CookieConsent } from "@/components/site/CookieConsent";
 
 const jakartaSans = Plus_Jakarta_Sans({
-  variable: "--font-poppins",
+  variable: "--font-jakarta",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
   display: "swap",

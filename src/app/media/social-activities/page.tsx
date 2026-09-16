@@ -22,6 +22,8 @@ export default function MediaSocialActivitiesPage() {
           { label: "Social Activities" },
         ]}
         icon={HeartHandshake}
+        backgroundImage="/images/events/community.jpg"
+        imageOpacity={90}
       />
       <MediaCategoryPageBody slug="social-activities" />
     </>

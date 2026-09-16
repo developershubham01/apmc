@@ -19,6 +19,8 @@ export default function MediaNewsPage() {
         description="Announcements, press mentions and updates from the chamber, the associations and the APMC trade ecosystem."
         crumbs={[{ label: "Media", href: "/media" }, { label: "News" }]}
         icon={Megaphone}
+        backgroundImage="/images/events/bharatiya-vyapar-mahotsav-2026.jpg"
+        imageOpacity={90}
       />
       <MediaCategoryPageBody slug="news" />
     </>

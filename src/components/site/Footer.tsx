@@ -65,13 +65,7 @@ export function Footer() {
   const { t } = useLanguage();
 
   return (
-    <footer className="mt-auto relative bg-[#040816] text-white border-t border-amber-500/30">
-      {/* Radiant Top Gold Accent Line */}
-      <div
-        aria-hidden
-        className="h-1.5 w-full bg-gradient-to-r from-amber-500 via-amber-300 to-amber-500 shadow-[0_0_15px_rgba(245,158,11,0.5)]"
-      />
-
+    <footer className="mt-auto relative bg-[#042017] text-white border-t border-white/10">
       <div>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14 lg:py-16">
           <div className="grid gap-10 lg:gap-8 md:grid-cols-2 lg:grid-cols-4">
@@ -80,7 +74,7 @@ export function Footer() {
               <Link href="/" className="group flex items-center gap-3">
                 <div className="flex items-center gap-2 shrink-0">
                   {/* Left Emblem: Navi Mumbai Merchants Chamber */}
-                  <div className="relative h-11 w-11 sm:h-12 sm:w-12 shrink-0 rounded-full bg-white shadow-md border-2 border-amber-400 overflow-hidden transition-transform group-hover:scale-105">
+                  <div className="relative h-11 w-11 sm:h-12 sm:w-12 shrink-0 rounded-full bg-white shadow-md border border-[#D1E7DD] overflow-hidden transition-transform group-hover:scale-105">
                     <Image
                       src="/images/nmmc-logo.png"
                       alt="Navi Mumbai Merchants Chamber Logo"
@@ -89,7 +83,7 @@ export function Footer() {
                     />
                   </div>
                   {/* Right Emblem: Association Crest */}
-                  <div className="relative h-11 w-11 sm:h-12 sm:w-12 shrink-0 rounded-full bg-white shadow-md border-2 border-amber-400 overflow-hidden transition-transform group-hover:scale-105">
+                  <div className="relative h-11 w-11 sm:h-12 sm:w-12 shrink-0 rounded-full bg-white shadow-md border border-[#D1E7DD] overflow-hidden transition-transform group-hover:scale-105">
                     <Image
                       src="/images/association-crest.png"
                       alt="Bombay Mudibazar Kariana Merchants Association Emblem"
@@ -99,10 +93,10 @@ export function Footer() {
                   </div>
                 </div>
                 <div className="leading-tight">
-                  <p className="font-heading text-base sm:text-lg font-extrabold tracking-tight text-white group-hover:text-amber-300 transition-colors">
+                  <p className="font-heading text-base sm:text-lg font-bold tracking-tight text-white group-hover:text-[#10B981] transition-colors">
                     {t("hero.chamberTitle", "Navi Mumbai Merchants Chamber")}
                   </p>
-                  <p className="text-[0.68rem] uppercase tracking-[0.14em] text-amber-400 font-bold mt-0.5">
+                  <p className="text-[0.68rem] uppercase tracking-[0.14em] text-[#10B981] font-bold mt-0.5">
                     Shri Kirti Rana • Apex Voice of APMC
                   </p>
                 </div>
@@ -115,15 +109,15 @@ export function Footer() {
               {/* Location & Contact Info */}
               <div className="mt-4 space-y-2 text-xs text-slate-300">
                 <p className="flex items-start gap-2">
-                  <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-amber-400" />
+                  <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#10B981]" />
                   <span>{siteConfig.location}</span>
                 </p>
                 <p className="flex items-center gap-2">
-                  <Phone className="h-3.5 w-3.5 shrink-0 text-amber-400" />
+                  <Phone className="h-3.5 w-3.5 shrink-0 text-[#10B981]" />
                   <span>+91 (022) 2788-1000 / APMC Secretariat</span>
                 </p>
                 <p className="flex items-center gap-2">
-                  <Mail className="h-3.5 w-3.5 shrink-0 text-amber-400" />
+                  <Mail className="h-3.5 w-3.5 shrink-0 text-[#10B981]" />
                   <span>contact@kirtirana.in</span>
                 </p>
               </div>
@@ -137,7 +131,7 @@ export function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`Visit Chamber ${social.name}`}
-                    className="inline-flex h-8 w-8 items-center justify-center rounded-xl bg-white/10 text-white/90 hover:bg-amber-400 hover:text-slate-950 transition-all duration-200 border border-white/15"
+                    className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-white/10 text-white/90 hover:bg-[#059669] hover:text-white transition-all duration-200 border border-white/15"
                   >
                     {social.icon}
                   </a>
@@ -147,7 +141,7 @@ export function Footer() {
 
             {/* Column 2: Quick Links */}
             <div>
-              <h3 className="font-heading text-sm font-bold uppercase tracking-[0.16em] text-amber-400 flex items-center gap-1.5">
+              <h3 className="font-heading text-sm font-bold uppercase tracking-[0.16em] text-[#10B981] flex items-center gap-1.5">
                 <span>Quick Links</span>
               </h3>
               <ul className="mt-5 grid grid-cols-2 gap-x-3 gap-y-2.5">
@@ -155,11 +149,11 @@ export function Footer() {
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="group inline-flex items-center gap-1 text-xs sm:text-sm text-slate-300 transition-colors hover:text-amber-300"
+                      className="group inline-flex items-center gap-1 text-xs sm:text-sm text-slate-300 transition-colors hover:text-white"
                     >
                       <span
                         aria-hidden
-                        className="h-px w-0 bg-amber-400 transition-all duration-300 group-hover:w-2.5"
+                        className="h-px w-0 bg-[#059669] transition-all duration-300 group-hover:w-2.5"
                       />
                       {link.label}
                     </Link>
@@ -168,11 +162,11 @@ export function Footer() {
                 <li>
                   <Link
                     href="/board"
-                    className="group inline-flex items-center gap-1 text-xs sm:text-sm text-slate-300 transition-colors hover:text-amber-300"
+                    className="group inline-flex items-center gap-1 text-xs sm:text-sm text-slate-300 transition-colors hover:text-white"
                   >
                     <span
                       aria-hidden
-                      className="h-px w-0 bg-amber-400 transition-all duration-300 group-hover:w-2.5"
+                      className="h-px w-0 bg-[#059669] transition-all duration-300 group-hover:w-2.5"
                     />
                     Board of Directors
                   </Link>
@@ -180,11 +174,11 @@ export function Footer() {
                 <li>
                   <Link
                     href="/achievements"
-                    className="group inline-flex items-center gap-1 text-xs sm:text-sm text-slate-300 transition-colors hover:text-amber-300"
+                    className="group inline-flex items-center gap-1 text-xs sm:text-sm text-slate-300 transition-colors hover:text-white"
                   >
                     <span
                       aria-hidden
-                      className="h-px w-0 bg-amber-400 transition-all duration-300 group-hover:w-2.5"
+                      className="h-px w-0 bg-[#059669] transition-all duration-300 group-hover:w-2.5"
                     />
                     Honours & Awards
                   </Link>
@@ -194,7 +188,7 @@ export function Footer() {
 
             {/* Column 3: Organizations & Federations */}
             <div>
-              <h3 className="font-heading text-sm font-bold uppercase tracking-[0.16em] text-amber-400 flex items-center gap-1.5">
+              <h3 className="font-heading text-sm font-bold uppercase tracking-[0.16em] text-[#10B981] flex items-center gap-1.5">
                 <Building2 className="h-4 w-4" />
                 <span>Trade Bodies</span>
               </h3>
@@ -203,9 +197,9 @@ export function Footer() {
                   <li key={org}>
                     <Link
                       href="/organizations"
-                      className="group flex items-start gap-2 text-xs sm:text-sm text-slate-300 transition-colors hover:text-amber-300"
+                      className="group flex items-start gap-2 text-xs sm:text-sm text-slate-300 transition-colors hover:text-white"
                     >
-                      <ArrowUpRight className="mt-0.5 h-3.5 w-3.5 shrink-0 text-amber-400/80 group-hover:text-amber-300 group-hover:translate-x-0.5 transition-transform" />
+                      <ArrowUpRight className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#10B981] group-hover:text-white group-hover:translate-x-0.5 transition-transform" />
                       <span>{org}</span>
                     </Link>
                   </li>
@@ -213,9 +207,9 @@ export function Footer() {
                 <li>
                   <Link
                     href="/business"
-                    className="group flex items-start gap-2 text-xs sm:text-sm text-slate-300 transition-colors hover:text-amber-300"
+                    className="group flex items-start gap-2 text-xs sm:text-sm text-slate-300 transition-colors hover:text-white"
                   >
-                    <ArrowUpRight className="mt-0.5 h-3.5 w-3.5 shrink-0 text-amber-400/80 group-hover:text-amber-300 group-hover:translate-x-0.5 transition-transform" />
+                    <ArrowUpRight className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#10B981] group-hover:text-white group-hover:translate-x-0.5 transition-transform" />
                     <span>Kisan Kirti Agro Pvt. Ltd.</span>
                   </Link>
                 </li>
@@ -224,7 +218,7 @@ export function Footer() {
 
             {/* Column 4: Official APMC Resources & Secretariat */}
             <div>
-              <h3 className="font-heading text-sm font-bold uppercase tracking-[0.16em] text-amber-400 flex items-center gap-1.5">
+              <h3 className="font-heading text-sm font-bold uppercase tracking-[0.16em] text-[#10B981] flex items-center gap-1.5">
                 <Store className="h-4 w-4" />
                 <span>APMC Portal</span>
               </h3>
@@ -234,9 +228,9 @@ export function Footer() {
                     href={siteConfig.mumbaiApmcUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex items-start gap-2 text-xs sm:text-sm text-slate-300 transition-colors hover:text-amber-300"
+                    className="group flex items-start gap-2 text-xs sm:text-sm text-slate-300 transition-colors hover:text-white"
                   >
-                    <Store className="mt-0.5 h-3.5 w-3.5 shrink-0 text-amber-400" />
+                    <Store className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#10B981]" />
                     <span className="flex items-center gap-1">
                       Mumbai APMC Official Portal
                       <ExternalLink className="h-3 w-3 text-slate-400" />
@@ -246,20 +240,20 @@ export function Footer() {
                 <li>
                   <Link
                     href="/apmc#market-rates"
-                    className="group flex items-start gap-2 text-xs sm:text-sm text-slate-300 transition-colors hover:text-amber-300"
+                    className="group flex items-start gap-2 text-xs sm:text-sm text-slate-300 transition-colors hover:text-white"
                   >
-                    <TrendingUp className="mt-0.5 h-3.5 w-3.5 shrink-0 text-emerald-400" />
+                    <TrendingUp className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#34D399]" />
                     <span className="flex items-center gap-1">
                       Daily Wholesale Rates Board
-                      <ArrowUpRight className="h-3 w-3 text-amber-400" />
+                      <ArrowUpRight className="h-3 w-3 text-[#10B981]" />
                     </span>
                   </Link>
                 </li>
               </ul>
 
               {/* APMC Complex Location Box */}
-              <div className="mt-5 rounded-2xl bg-white/5 p-3.5 border border-amber-400/20 backdrop-blur-sm">
-                <p className="text-[0.66rem] uppercase tracking-[0.16em] text-amber-400 font-extrabold flex items-center gap-1">
+              <div className="mt-5 rounded-2xl bg-white/5 p-3.5 border border-white/10 backdrop-blur-sm">
+                <p className="text-[0.66rem] uppercase tracking-[0.16em] text-[#10B981] font-bold flex items-center gap-1">
                   <ShieldCheck className="h-3.5 w-3.5" />
                   APMC Secretariat Turbhe
                 </p>
@@ -270,18 +264,18 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Newsletter Subscription Band */}
-          <div className="mt-12 overflow-hidden rounded-3xl bg-gradient-to-r from-navy-950 via-[#071533] to-navy-950 border border-amber-400/30 shadow-2xl">
+          {/* Newsletter Subscription Band in Meta rounded-[28px] style */}
+          <div className="mt-12 overflow-hidden rounded-[28px] bg-[#06281E] border border-white/10 shadow-xl">
             <div className="grid gap-6 p-6 sm:p-8 lg:grid-cols-[1.1fr_1.4fr] lg:items-center lg:gap-10">
               <div className="flex items-start gap-4">
                 <span
                   aria-hidden
-                  className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-amber-400/15 border border-amber-400/30 text-amber-400 sm:flex shadow-inner"
+                  className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white/10 border border-white/15 text-[#10B981] sm:flex shadow-sm"
                 >
                   <Newspaper className="h-6 w-6" />
                 </span>
                 <div>
-                  <h3 className="font-heading text-base font-extrabold text-white sm:text-lg tracking-tight">
+                  <h3 className="font-heading text-base font-bold text-white sm:text-lg tracking-tight">
                     APMC Market Bulletins &amp; Chamber Circulars
                   </h3>
                   <p className="mt-1 text-xs sm:text-sm leading-relaxed text-slate-300">
@@ -291,10 +285,6 @@ export function Footer() {
               </div>
               <NewsletterForm />
             </div>
-            <div
-              aria-hidden
-              className="h-1 w-full bg-gradient-to-r from-transparent via-amber-400/70 to-transparent"
-            />
           </div>
 
           {/* Bottom Copyright & Legal Bar */}
@@ -310,15 +300,15 @@ export function Footer() {
                     window.dispatchEvent(new CustomEvent("open-cookie-preferences"));
                   }
                 }}
-                className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-300 hover:text-amber-300 transition-colors"
+                className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-300 hover:text-white transition-colors"
                 aria-label="Cookie & Privacy Preferences"
               >
-                <Cookie className="h-3.5 w-3.5 text-amber-400" />
+                <Cookie className="h-3.5 w-3.5 text-[#10B981]" />
                 <span>Cookie Preferences</span>
               </button>
               <Link
                 href="/admin"
-                className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-400/80 hover:text-amber-300 transition-colors"
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-[#10B981] hover:text-white transition-colors"
                 aria-label="Admin Control Centre"
               >
                 <span>Admin Portal</span>

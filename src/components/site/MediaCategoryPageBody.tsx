@@ -73,8 +73,8 @@ export function MediaCategoryPageBody({ slug }: Props) {
           </div>
 
           {/* Honesty note, consistent with the /media page tone */}
-          <div className="mt-10 flex items-start gap-3 rounded-2xl border border-gold/30 bg-gold-50/50 p-5">
-            <Info className="mt-0.5 h-5 w-5 shrink-0 text-gold-600" />
+          <div className="mt-10 flex items-start gap-3 rounded-2xl border border-amber-500/30 bg-amber-50/50 p-5">
+            <Info className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" />
             <p className="text-sm text-ink-600">
               Programme details are indicative and are being compiled for the
               archive. Verified dates, venues and photographs will be added as
@@ -88,10 +88,10 @@ export function MediaCategoryPageBody({ slug }: Props) {
               <Link
                 key={other.slug}
                 href={`/media/${other.slug}`}
-                className="group flex items-center justify-between gap-4 rounded-2xl border border-border bg-mist/60 p-5 transition-all hover:border-gold/50 hover:bg-gold-50/50 hover:shadow-premium"
+                className="group flex items-center justify-between gap-4 rounded-2xl border border-border bg-mist/60 p-5 transition-all hover:border-amber-500/50 hover:bg-amber-50/30 hover:shadow-premium"
               >
                 <div>
-                  <p className="text-[0.66rem] font-700 uppercase tracking-[0.16em] text-royal">
+                  <p className="text-[0.66rem] font-700 uppercase tracking-[0.16em] text-amber-600">
                     {other.eyebrow}
                   </p>
                   <p className="mt-1 font-heading text-lg font-700 text-navy transition-colors group-hover:text-royal">
@@ -99,7 +99,7 @@ export function MediaCategoryPageBody({ slug }: Props) {
                   </p>
                   <p className="mt-1 text-xs text-ink-600">{other.tagline}</p>
                 </div>
-                <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-navy text-gold ring-1 ring-gold/30 transition-transform group-hover:translate-x-1">
+                <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-navy text-amber-400 ring-1 ring-amber-500/30 transition-transform group-hover:translate-x-1">
                   <ArrowRight className="h-4 w-4" />
                 </span>
               </Link>

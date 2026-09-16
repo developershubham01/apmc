@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { LightboxImage } from "./LightboxImage";
 import { getInitials, type BoardMember } from "@/data/boardMembers";
 import { MonogramAvatar } from "./MonogramAvatar";
 import { ScrollReveal } from "./ScrollReveal";
@@ -23,71 +23,63 @@ export function BoardMemberCard({ member, index = 0 }: BoardMemberCardProps) {
     <ScrollReveal variant="up" delay={(index % 4) * 80} className="h-full">
       <article
         className={cn(
-          "group relative flex h-full flex-col items-center overflow-hidden rounded-2xl border bg-white p-6 text-center shadow-premium transition-all duration-300 hover:-translate-y-1 hover:shadow-premium-lg",
-          chair ? "border-gold/50 ring-1 ring-gold/20" : "border-border"
+          "group relative flex h-full flex-col items-center justify-between rounded-[28px] border bg-white p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:border-[#059669] hover:shadow-[0_12px_32px_-8px_rgba(4,32,23,0.08)]",
+          chair ? "border-[#059669]/40 shadow-sm ring-1 ring-[#059669]/20" : "border-[#D1E7DD]"
         )}
       >
-        {/* Decorative top corner */}
-        <span
-          aria-hidden
-          className={cn(
-            "absolute right-0 top-0 h-16 w-16 rounded-bl-[2rem] opacity-80",
-            chair
-              ? "bg-gradient-to-br from-gold/15 to-transparent"
-              : "bg-gradient-to-br from-royal-50 to-transparent"
-          )}
-        />
-
-        {/* Badge for chair */}
+        {/* Badge for chair / office */}
         {chair && (
-          <span className="absolute left-4 top-4 inline-flex items-center gap-1 rounded-full bg-gold px-2.5 py-1 text-[0.62rem] font-700 uppercase tracking-[0.14em] text-navy">
-            Chair
+          <span className="absolute left-4 top-4 inline-flex items-center gap-1 rounded-full bg-[#042017] px-2.5 py-0.5 text-[0.65rem] font-bold uppercase tracking-wider text-white shadow-sm z-10">
+            Chairman
           </span>
         )}
 
-        {/* Avatar */}
-        <div className="relative mt-2">
-          {member.image ? (
-            <div className="img-zoom relative h-24 w-24 overflow-hidden rounded-2xl ring-2 ring-gold/30">
-              <Image
-                src={member.image}
-                alt={member.name}
-                fill
-                sizes="96px"
-                className="object-cover"
+        <div className="flex flex-col items-center w-full">
+          {/* Avatar */}
+          <div className="relative mt-2">
+            {member.image ? (
+              <div className="relative h-28 w-28 overflow-hidden rounded-2xl border border-[#D1E7DD] shadow-sm">
+                <LightboxImage
+                  src={member.image}
+                  alt={member.name}
+                  caption={`${member.name} — ${member.designation}`}
+                  sizes="112px"
+                  className="h-full w-full rounded-2xl border-0 ring-0"
+                  imgClassName="object-cover object-top"
+                />
+              </div>
+            ) : (
+              <MonogramAvatar
+                initials={initials}
+                name={member.name}
+                designation={member.designation}
+                size="lg"
               />
-            </div>
-          ) : (
-            <MonogramAvatar
-              initials={initials}
-              name={member.name}
-              designation={member.designation}
-              size="lg"
-            />
-          )}
+            )}
+          </div>
+
+          {/* Name + designation */}
+          <h3 className="mt-4 font-heading text-base font-bold tracking-tight text-[#042017]">
+            {member.name}
+          </h3>
+          <p
+            className={cn(
+              "mt-2 inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold",
+              chair
+                ? "bg-[#ECFDF5] text-[#047857] font-bold"
+                : office
+                  ? "bg-[#ECFDF5] text-[#047857] font-semibold"
+                  : "bg-[#F0FDF4] text-[#4B5563]"
+            )}
+          >
+            {member.designation}
+          </p>
         </div>
 
-        {/* Name + designation */}
-        <h3 className="mt-5 font-heading text-base font-700 leading-tight text-navy">
-          {member.name}
-        </h3>
-        <p
-          className={cn(
-            "mt-1.5 inline-block rounded-full px-3 py-1 text-xs font-600",
-            chair
-              ? "bg-gold-50 text-gold-600 ring-1 ring-gold/30"
-              : office
-                ? "bg-royal-50 text-royal ring-1 ring-royal/20"
-                : "bg-mist text-ink-600 ring-1 ring-border"
-          )}
-        >
-          {member.designation}
-        </p>
-
-        {/* Hover line */}
+        {/* Green subtle hairline hover indicator */}
         <span
           aria-hidden
-          className="mt-4 h-0.5 w-8 rounded-full bg-gold transition-all duration-300 group-hover:w-16"
+          className="mt-4 h-0.5 w-6 rounded-full bg-[#059669] opacity-0 transition-all duration-300 group-hover:w-12 group-hover:opacity-100"
         />
       </article>
     </ScrollReveal>

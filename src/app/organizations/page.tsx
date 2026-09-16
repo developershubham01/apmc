@@ -54,6 +54,8 @@ export default function OrganizationsPage() {
         title="Merchant Organizations & Leadership"
         description="Shri Kirti Rana holds apex leadership roles across premier merchant chambers, state commercial forums, and national trader federations."
         crumbs={[{ label: "Organizations" }]}
+        backgroundImage="/images/hero/hero-chamber-bg.jpg"
+        imageOpacity={90}
       />
 
       {/* Overview Cards */}
@@ -81,7 +83,7 @@ export default function OrganizationsPage() {
               return (
                 <ScrollReveal key={f.title} variant="up" delay={i * 90} className="h-full">
                   <div className="group h-full rounded-2xl border border-border bg-mist p-6 transition-all duration-300 hover:-translate-y-1 hover:bg-white hover:shadow-premium-lg">
-                    <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-navy text-gold ring-1 ring-gold/30 transition-colors group-hover:bg-royal">
+                    <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-navy text-amber-400 ring-1 ring-amber-500/30 transition-colors group-hover:bg-royal">
                       <Icon className="h-6 w-6" />
                     </span>
                     <h3 className="mt-5 font-heading text-lg font-700 text-navy">
@@ -114,21 +116,21 @@ export default function OrganizationsPage() {
                   <div className="lg:col-span-4 relative overflow-hidden bg-navy p-8 lg:p-10 text-white flex flex-col justify-between">
                     <div
                       aria-hidden
-                      className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-gold/10 blur-2xl"
+                      className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-amber-500/10 blur-2xl"
                     />
                     <div className="relative">
-                      <span className="inline-flex h-14 w-14 items-center justify-center rounded-xl bg-white/5 text-gold ring-1 ring-gold/40">
+                      <span className="inline-flex h-14 w-14 items-center justify-center rounded-xl bg-white/5 text-amber-400 ring-1 ring-amber-500/40">
                         <Building2 className="h-7 w-7" />
                       </span>
-                      <p className="mt-5 text-[0.66rem] uppercase tracking-[0.18em] text-gold/90">
+                      <p className="mt-5 text-[0.66rem] uppercase tracking-[0.18em] text-amber-400 font-bold">
                         {org.shortName}
                       </p>
                       <h3 className="mt-1 font-heading text-2xl font-700 leading-tight">
                         {org.name}
                       </h3>
-                      <div className="mt-5 inline-flex items-center gap-2 rounded-full bg-gold/15 px-3 py-1.5 ring-1 ring-gold/30">
-                        <Crown className="h-3.5 w-3.5 text-gold" />
-                        <span className="text-xs font-600 text-gold">
+                      <div className="mt-5 inline-flex items-center gap-2 rounded-full bg-amber-500/20 px-3 py-1.5 ring-1 ring-amber-500/40">
+                        <Crown className="h-3.5 w-3.5 text-amber-400" />
+                        <span className="text-xs font-700 text-amber-300">
                           {org.designation} • Kirti Rana
                         </span>
                       </div>
@@ -161,10 +163,10 @@ export default function OrganizationsPage() {
                           {org.stats.map((st) => (
                             <div
                               key={st.label}
-                              className="rounded-xl border border-gold/30 bg-gold-50/40 p-3 text-center"
+                              className="rounded-xl border border-amber-500/30 bg-amber-50/40 p-3 text-center"
                             >
                               <p className="font-heading text-lg font-700 text-navy">{st.value}</p>
-                              <p className="text-[0.7rem] uppercase tracking-wider text-royal font-600">
+                              <p className="text-[0.7rem] uppercase tracking-wider text-amber-600 font-700">
                                 {st.label}
                               </p>
                             </div>
@@ -173,7 +175,7 @@ export default function OrganizationsPage() {
                       )}
 
                       <div className="mt-6">
-                        <p className="text-xs uppercase tracking-[0.14em] text-royal font-600">
+                        <p className="text-xs uppercase tracking-[0.14em] text-amber-600 font-700">
                           Key Highlights &amp; Mandate
                         </p>
                         <ul className="mt-3 grid gap-2.5 sm:grid-cols-2">
@@ -182,7 +184,7 @@ export default function OrganizationsPage() {
                               key={h}
                               className="flex items-start gap-2.5 text-sm text-ink"
                             >
-                              <span className="mt-0.5 inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-gold-50 text-gold-600 ring-1 ring-gold/30">
+                              <span className="mt-0.5 inline-flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-amber-50 text-amber-600 ring-1 ring-amber-200">
                                 <Check className="h-3 w-3" />
                               </span>
                               {h}
@@ -192,7 +194,7 @@ export default function OrganizationsPage() {
                       </div>
 
                       <div className="mt-6">
-                        <p className="text-xs uppercase tracking-[0.14em] text-royal font-600">
+                        <p className="text-xs uppercase tracking-[0.14em] text-amber-600 font-700">
                           Focus Areas
                         </p>
                         <div className="mt-3 flex flex-wrap gap-2">
@@ -211,14 +213,14 @@ export default function OrganizationsPage() {
                     <div className="mt-8 flex flex-wrap gap-3 pt-6 border-t border-border">
                       <Link
                         href="/board"
-                        className="group inline-flex items-center gap-2 rounded-xl bg-navy px-5 py-3 text-sm font-600 text-white transition-all hover:bg-navy-700 hover:-translate-y-0.5"
+                        className="group inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-amber-500 to-yellow-500 px-5 py-3 text-sm font-700 text-slate-950 shadow-gold-glow transition-all hover:from-amber-400 hover:to-yellow-400 hover:-translate-y-0.5"
                       >
                         View Board of Directors
                         <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                       </Link>
                       <Link
                         href="/contact"
-                        className="group inline-flex items-center gap-2 rounded-xl border border-border bg-white px-5 py-3 text-sm font-600 text-navy transition-all hover:border-gold hover:text-royal hover:-translate-y-0.5"
+                        className="group inline-flex items-center gap-2 rounded-xl border border-border bg-white px-5 py-3 text-sm font-600 text-navy transition-all hover:border-amber-500 hover:text-amber-700 hover:-translate-y-0.5"
                       >
                         Chamber Enquiries
                       </Link>

@@ -39,7 +39,7 @@ export function LightboxImage({
         type="button"
         onClick={() => setOpen(true)}
         className={cn(
-          "group relative block w-full overflow-hidden rounded-2xl ring-1 ring-border focus-visible:ring-2 focus-visible:ring-gold",
+          "group relative block w-full overflow-hidden rounded-2xl ring-1 ring-border focus-visible:ring-2 focus-visible:ring-[#059669]",
           className
         )}
         aria-label={`Open image: ${alt}`}

@@ -93,7 +93,7 @@ export function AdminDashboard() {
   if (!booted) {
     return (
       <div className="flex min-h-[70vh] items-center justify-center">
-        <Loader2 className="h-6 w-6 animate-spin text-royal" />
+        <Loader2 className="h-6 w-6 animate-spin text-[#059669]" />
       </div>
     );
   }
@@ -102,15 +102,15 @@ export function AdminDashboard() {
     return (
       <div className="flex min-h-[70vh] items-center justify-center px-4 pt-28 pb-16 sm:pt-32">
         <div className="w-full max-w-md">
-          <div className="rounded-2xl border border-border bg-white p-8 shadow-premium-lg">
+          <div className="rounded-2xl border border-[#D1E7DD] bg-white p-8 shadow-md">
             <div className="text-center">
-              <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-navy to-royal text-gold shadow-premium ring-1 ring-gold/40">
+              <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-[#042017] text-[#10B981] shadow-sm ring-1 ring-[#059669]/40">
                 <Lock className="h-6 w-6" />
               </span>
-              <h1 className="mt-5 font-heading text-2xl font-700 text-navy">
+              <h1 className="mt-5 font-heading text-2xl font-bold text-[#042017]">
                 Admin Access
               </h1>
-              <p className="mt-2 text-sm text-ink-600">
+              <p className="mt-2 text-sm text-[#4B5563]">
                 Enter your administrative key to unlock the control centre.
               </p>
             </div>
@@ -126,7 +126,7 @@ export function AdminDashboard() {
                 <div className="flex items-center justify-between mb-2">
                   <label
                     htmlFor="admin-key"
-                    className="block text-xs font-600 uppercase tracking-[0.12em] text-royal"
+                    className="block text-xs font-bold uppercase tracking-[0.12em] text-[#047857]"
                   >
                     Admin Key
                   </label>
@@ -136,7 +136,7 @@ export function AdminDashboard() {
                       setKeyInput("kirti-admin-2026");
                       verifyKey("kirti-admin-2026");
                     }}
-                    className="text-[0.7rem] text-gold-600 hover:text-navy hover:underline font-600"
+                    className="text-[0.7rem] text-[#059669] hover:text-[#042017] hover:underline font-bold"
                   >
                     Use Default Key
                   </button>
@@ -148,12 +148,12 @@ export function AdminDashboard() {
                   value={keyInput}
                   onChange={(e) => setKeyInput(e.target.value)}
                   placeholder="Enter admin key..."
-                  className="w-full rounded-xl border border-border bg-white px-4 py-3 text-sm text-ink shadow-sm transition-colors placeholder:text-ink-600/40 focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/30"
+                  className="w-full rounded-xl border border-[#D1E7DD] bg-white px-4 py-3 text-sm text-[#042017] shadow-sm transition-colors placeholder:text-slate-400 focus:border-[#059669] focus:outline-none focus:ring-2 focus:ring-[#059669]/30"
                 />
               </div>
 
               {authError && (
-                <p className="flex items-center gap-2 rounded-xl bg-red-50 px-3.5 py-2.5 text-xs font-500 text-red-700 ring-1 ring-red-200">
+                <p className="flex items-center gap-2 rounded-xl bg-red-50 px-3.5 py-2.5 text-xs font-semibold text-red-700 ring-1 ring-red-200">
                   <ShieldAlert className="h-4 w-4 shrink-0" />
                   {authError}
                 </p>
@@ -162,7 +162,7 @@ export function AdminDashboard() {
               <button
                 type="submit"
                 disabled={authLoading || !keyInput.trim()}
-                className="flex w-full items-center justify-center gap-2 rounded-xl bg-navy px-6 py-3.5 text-sm font-600 text-white shadow-premium transition-all hover:bg-navy-700 disabled:opacity-60"
+                className="flex w-full items-center justify-center gap-2 rounded-full bg-[#059669] px-6 py-3.5 text-sm font-bold text-white shadow-md transition-all hover:bg-[#047857] disabled:opacity-60"
               >
                 {authLoading ? (
                   <>
@@ -178,8 +178,8 @@ export function AdminDashboard() {
               </button>
             </form>
           </div>
-          <p className="mt-4 text-center text-xs text-ink-600/70">
-            Protected administrative console. Key: <code className="font-mono bg-mist px-1.5 py-0.5 rounded text-navy font-600">kirti-admin-2026</code>
+          <p className="mt-4 text-center text-xs text-slate-500">
+            Protected administrative console. Key: <code className="font-mono bg-[#ECFDF5] px-2 py-0.5 rounded text-[#047857] font-bold border border-[#D1E7DD]">kirti-admin-2026</code>
           </p>
         </div>
       </div>
@@ -190,16 +190,16 @@ export function AdminDashboard() {
   return (
     <div className="min-h-[70vh]">
       {/* Header bar */}
-      <div className="bg-navy pt-24 sm:pt-28">
+      <div className="bg-[#042017] pt-24 sm:pt-28 border-b border-white/10">
         <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-8 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
           <div>
-            <p className="text-xs uppercase tracking-[0.18em] text-gold">
+            <p className="text-xs uppercase tracking-[0.18em] text-[#10B981] font-bold">
               Administration
             </p>
-            <h1 className="mt-1 font-heading text-2xl font-700 text-white sm:text-3xl">
+            <h1 className="mt-1 font-heading text-2xl font-bold text-white sm:text-3xl">
               Control Centre
             </h1>
-            <p className="mt-1 text-sm text-white/60">
+            <p className="mt-1 text-sm text-slate-300">
               Photos, news broadcasts, market rates, enquiries and newsletter subscribers.
             </p>
           </div>
@@ -207,7 +207,7 @@ export function AdminDashboard() {
             <button
               type="button"
               onClick={logout}
-              className="inline-flex items-center gap-2 rounded-xl bg-white/10 px-4 py-2.5 text-xs font-600 text-white ring-1 ring-white/20 transition hover:bg-white/20"
+              className="inline-flex items-center gap-2 rounded-full bg-white/10 px-5 py-2.5 text-xs font-bold text-white ring-1 ring-white/20 transition hover:bg-white/20"
             >
               <LogOut className="h-4 w-4" />
               Lock
@@ -221,7 +221,7 @@ export function AdminDashboard() {
         <div
           role="tablist"
           aria-label="Admin sections"
-          className="flex flex-wrap gap-1.5 rounded-2xl bg-mist p-1.5 ring-1 ring-border"
+          className="flex overflow-x-auto sm:flex-wrap gap-1.5 rounded-2xl bg-[#F0FDF4] p-1.5 ring-1 ring-[#D1E7DD] scrollbar-premium"
         >
           {tabs.map(({ id, label, Icon }) => (
             <button
@@ -230,13 +230,13 @@ export function AdminDashboard() {
               aria-selected={tab === id}
               onClick={() => setTab(id)}
               className={cn(
-                "inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-xs font-700 transition-all sm:text-sm",
+                "inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-xs font-bold transition-all sm:text-sm",
                 tab === id
-                  ? "bg-navy text-white shadow-premium"
-                  : "text-ink-600 hover:text-royal"
+                  ? "bg-[#042017] text-white shadow-sm"
+                  : "text-[#4B5563] hover:text-[#059669] hover:bg-white"
               )}
             >
-              <Icon className={cn("h-4 w-4", tab === id && "text-gold")} />
+              <Icon className={cn("h-4 w-4", tab === id ? "text-[#10B981]" : "text-[#059669]")} />
               {label}
             </button>
           ))}

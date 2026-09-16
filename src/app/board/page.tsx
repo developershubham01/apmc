@@ -46,13 +46,21 @@ export default async function BoardPage() {
   );
   const officeBearers = members.filter(
     (m) =>
-      m.category === "office-bearer" ||
-      (!/chairman/i.test(m.designation) && /secretary|treasurer|vice/i.test(m.designation))
+      !/chairman/i.test(m.designation) &&
+      /secretary|treasurer|vice/i.test(m.designation)
   );
   const directors = members.filter(
     (m) =>
-      m.category === "director" ||
-      (!/chairman/i.test(m.designation) && !/secretary|treasurer|vice/i.test(m.designation))
+      !/chairman/i.test(m.designation) &&
+      !/secretary|treasurer|vice/i.test(m.designation) &&
+      !/co[\s.-]*op/i.test(m.designation) &&
+      !/invitee/i.test(m.designation)
+  );
+  const coOpDirectors = members.filter(
+    (m) => /co[\s.-]*op/i.test(m.designation)
+  );
+  const invitees = members.filter(
+    (m) => /invitee/i.test(m.designation)
   );
 
   return (
@@ -60,8 +68,10 @@ export default async function BoardPage() {
       <PageHeader
         eyebrow="Board of Directors"
         title="Board of Directors"
-        description="The leadership body of the Navi Mumbai Merchants Chamber, chaired by Kirti Rana — comprising Vice-Chairmen, Secretaries, the Treasurer and Directors."
+        description="The governing leadership body of the Navi Mumbai Merchants Chamber, chaired by Shri Kirti Rana — comprising Office Bearers, Directors, Co-Opted Directors and Special Invitees."
         crumbs={[{ label: "Board" }]}
+        backgroundImage="/images/events/board-meeting.jpg"
+        imageOpacity={90}
       />
 
       {/* Intro */}
@@ -73,24 +83,24 @@ export default async function BoardPage() {
                 align="left"
                 eyebrow="Navi Mumbai Merchants Chamber"
                 title="Leadership & Governance"
-                description="The Board of Directors guides the Chamber's mission of representing and supporting the merchant community of Navi Mumbai."
+                description="The Board of Directors guides the Chamber's mission of representing and supporting 400+ member enterprises across the 50-acre APMC complex."
               />
             </ScrollReveal>
             <ScrollReveal variant="up" delay={120}>
               <div className="grid grid-cols-3 gap-3">
                 <Stat value={chairman.length} label="Chairman" />
                 <Stat value={officeBearers.length} label="Office Bearers" />
-                <Stat value={directors.length} label="Directors" />
+                <Stat value={directors.length + coOpDirectors.length + invitees.length} label="Directors & Invitees" />
               </div>
             </ScrollReveal>
           </div>
 
           {/* Verification / Leadership notice */}
           <ScrollReveal variant="up" className="mt-10">
-            <div className="flex items-start gap-3 rounded-2xl border border-gold/30 bg-gold-50/50 p-5">
-              <Info className="h-5 w-5 shrink-0 text-gold-600" />
-              <p className="text-sm text-ink-600">
-                Official leadership body of the Navi Mumbai Merchants Chamber. All board members are elected to champion wholesale merchant welfare, trade facilitation, and market development across Navi Mumbai APMC.
+            <div className="flex items-start gap-3 rounded-2xl border border-[#D1E7DD] bg-[#F0FDF4] p-5">
+              <Info className="h-5 w-5 shrink-0 text-[#059669]" />
+              <p className="text-sm text-[#4B5563] leading-relaxed">
+                Official governing council of the Navi Mumbai Merchants Chamber. All board members are seasoned leaders dedicated to trade ethics, merchant welfare, dispute redressal, and market modernization across Maharashtra.
               </p>
             </div>
           </ScrollReveal>
@@ -98,12 +108,12 @@ export default async function BoardPage() {
       </section>
 
       {/* Chairman */}
-      <section className="bg-mist py-12 lg:py-16">
+      <section className="bg-[#F0FDF4] py-12 lg:py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <ScrollReveal variant="up">
             <div className="mb-8 flex items-center gap-3">
-              <Crown className="h-6 w-6 text-gold" />
-              <h2 className="font-heading text-2xl font-700 text-navy">
+              <Crown className="h-6 w-6 text-[#059669]" />
+              <h2 className="font-heading text-2xl font-bold tracking-tight text-[#042017]">
                 Chairman
               </h2>
             </div>
@@ -121,8 +131,8 @@ export default async function BoardPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <ScrollReveal variant="up">
             <div className="mb-8 flex items-center gap-3">
-              <Users className="h-6 w-6 text-royal" />
-              <h2 className="font-heading text-2xl font-700 text-navy">
+              <Users className="h-6 w-6 text-[#059669]" />
+              <h2 className="font-heading text-2xl font-bold tracking-tight text-[#042017]">
                 Office Bearers
               </h2>
             </div>
@@ -136,23 +146,44 @@ export default async function BoardPage() {
       </section>
 
       {/* Directors */}
-      <section className="bg-mist py-12 lg:py-16">
+      <section className="bg-[#F0FDF4] py-12 lg:py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <ScrollReveal variant="up">
             <div className="mb-8 flex items-center gap-3">
-              <Users className="h-6 w-6 text-royal" />
-              <h2 className="font-heading text-2xl font-700 text-navy">
+              <Users className="h-6 w-6 text-[#059669]" />
+              <h2 className="font-heading text-2xl font-bold tracking-tight text-[#042017]">
                 Directors
               </h2>
             </div>
           </ScrollReveal>
-          <div className="grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
             {directors.map((m, i) => (
               <BoardMemberCard key={m.id || m.name} member={m} index={i} />
             ))}
           </div>
         </div>
       </section>
+
+      {/* Co-Opted Directors & Special Invitees */}
+      {(coOpDirectors.length > 0 || invitees.length > 0) && (
+        <section className="bg-white py-12 lg:py-16">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <ScrollReveal variant="up">
+              <div className="mb-8 flex items-center gap-3">
+                <Users className="h-6 w-6 text-[#059669]" />
+                <h2 className="font-heading text-2xl font-bold tracking-tight text-[#042017]">
+                  Co-Opted Directors &amp; Special Invitees
+                </h2>
+              </div>
+            </ScrollReveal>
+            <div className="grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-5">
+              {[...coOpDirectors, ...invitees].map((m, i) => (
+                <BoardMemberCard key={m.id || m.name} member={m} index={i} />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       <CTASection
         variant="navy"
@@ -170,9 +201,9 @@ export default async function BoardPage() {
 
 function Stat({ value, label }: { value: number; label: string }) {
   return (
-    <div className="rounded-xl border border-border bg-white p-4 text-center shadow-premium">
-      <p className="font-heading text-2xl font-800 text-navy">{value}</p>
-      <p className="mt-1 text-[0.66rem] uppercase tracking-[0.12em] text-royal font-600">
+    <div className="rounded-[24px] border border-[#D1E7DD] bg-white p-4 text-center shadow-sm">
+      <p className="font-heading text-2xl sm:text-3xl font-bold text-[#042017] tracking-tight">{value}</p>
+      <p className="mt-1 text-[0.66rem] uppercase tracking-wider text-[#059669] font-bold">
         {label}
       </p>
     </div>

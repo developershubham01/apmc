@@ -34,7 +34,7 @@ export function BackToTop() {
       onClick={scrollToTop}
       aria-label="Back to top"
       className={cn(
-        "group fixed bottom-5 right-5 z-40 flex h-12 w-12 items-center justify-center rounded-full bg-navy text-white shadow-premium-lg ring-1 ring-gold/50 transition-all duration-300 hover:-translate-y-1 hover:bg-navy-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold sm:bottom-6 sm:right-6",
+        "group fixed bottom-5 right-5 z-40 flex h-12 w-12 items-center justify-center rounded-full bg-[#042017] text-white shadow-xl ring-1 ring-[#D1E7DD]/30 transition-all duration-300 hover:-translate-y-1 hover:bg-[#06281E] hover:shadow-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#059669] sm:bottom-6 sm:right-6",
         visible
           ? "pointer-events-auto translate-y-0 opacity-100"
           : "pointer-events-none translate-y-4 opacity-0"
@@ -61,12 +61,12 @@ export function BackToTop() {
           fill="none"
           strokeWidth="2.5"
           strokeLinecap="round"
-          className="stroke-gold transition-[stroke-dashoffset] duration-150"
+          className="stroke-[#059669] transition-[stroke-dashoffset] duration-150"
           strokeDasharray={circumference}
           strokeDashoffset={circumference * (1 - progress)}
         />
       </svg>
-      <ArrowUp className="relative h-5 w-5 transition-transform duration-300 group-hover:-translate-y-0.5" />
+      <ArrowUp className="relative h-5 w-5 text-[#10B981] transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:text-white" />
     </button>
   );
 }

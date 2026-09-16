@@ -1,8 +1,8 @@
-import Image from "next/image";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import type { Market } from "@/data/markets";
 import { ScrollReveal } from "./ScrollReveal";
+import { LightboxImage } from "./LightboxImage";
 
 type MarketCardProps = {
   market: Market;
@@ -18,23 +18,20 @@ export function MarketCard({ market, index = 0 }: MarketCardProps) {
         className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-white shadow-premium scroll-mt-28 transition-all duration-300 hover:-translate-y-1 hover:shadow-premium-lg"
       >
         {/* Image */}
-        <div className="img-zoom relative aspect-[16/10] w-full overflow-hidden">
-          <Image
+        <div className="relative aspect-[16/10] w-full overflow-hidden">
+          <LightboxImage
             src={market.image}
             alt={market.title}
-            fill
+            caption={`${market.title} — ${market.description}`}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            className="object-cover transition-transform duration-700 group-hover:scale-106"
-          />
-          <div
-            aria-hidden
-            className="absolute inset-0 bg-gradient-to-t from-navy/70 via-navy/10 to-transparent"
+            className="h-full w-full rounded-none border-0 ring-0"
+            imgClassName="object-cover"
           />
           {/* Icon chip */}
-          <div className="absolute left-4 top-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-white/95 text-royal shadow-premium ring-1 ring-white/60 backdrop-blur">
-            <Icon className="h-5 w-5" />
+          <div className="pointer-events-none absolute left-4 top-4 z-10 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-white/95 text-royal shadow-premium ring-1 ring-white/60 backdrop-blur">
+            <Icon className="h-5 w-5 text-[#059669]" />
           </div>
-          <div className="absolute bottom-3 left-4 right-4">
+          <div className="pointer-events-none absolute bottom-3 left-4 right-4 z-10">
             <h3 className="font-heading text-lg font-700 text-white drop-shadow">
               {market.title}
             </h3>

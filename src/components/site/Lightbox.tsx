@@ -108,7 +108,7 @@ export function Lightbox({ items, index, onClose, onNavigate }: LightboxProps) {
         className="relative mx-auto flex max-h-[88vh] w-full max-w-5xl flex-col items-center px-4 animate-[fade-in_0.3s_ease]"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl ring-1 ring-gold/30">
+        <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl ring-1 ring-[#059669]/40 shadow-2xl">
           <Image
             key={current.src}
             src={current.src}

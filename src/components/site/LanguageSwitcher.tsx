@@ -45,8 +45,8 @@ export function LanguageSwitcher({
           className
         )}
       >
-        <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-amber-400">
-          <Globe className="h-3.5 w-3.5 text-amber-400" />
+        <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#10B981]">
+          <Globe className="h-3.5 w-3.5 text-[#10B981]" />
           <span>Select Language / भाषा</span>
         </div>
         <div className="grid grid-cols-2 gap-2">
@@ -60,8 +60,8 @@ export function LanguageSwitcher({
                 className={cn(
                   "flex items-center justify-between rounded-xl px-3 py-2 text-xs font-bold transition-all",
                   isSelected
-                    ? "border border-amber-500/70 bg-amber-500/20 text-amber-400 shadow-sm"
-                    : "border border-white/10 bg-navy-900/60 text-white/80 hover:border-white/20 hover:text-white"
+                    ? "border border-[#059669] bg-[#059669]/20 text-[#10B981] shadow-sm"
+                    : "border border-white/10 bg-[#042017]/60 text-white/80 hover:border-white/20 hover:text-white"
                 )}
               >
                 <div className="flex flex-col text-left leading-none">
@@ -71,7 +71,7 @@ export function LanguageSwitcher({
                   </span>
                 </div>
                 {isSelected && (
-                  <Check className="h-3.5 w-3.5 text-amber-400 shrink-0 ml-1" />
+                  <Check className="h-3.5 w-3.5 text-[#10B981] shrink-0 ml-1" />
                 )}
               </button>
             );
@@ -81,10 +81,10 @@ export function LanguageSwitcher({
     );
   }
 
-  // Institutional look matching the University / Government portal style in the image
+  // Institutional look for light-themed top bar
   return (
     <div ref={dropdownRef} className={cn("relative inline-block", className)}>
-      {/* Trigger Button */}
+      {/* Trigger Button — Dark text on light background */}
       <button
         type="button"
         onClick={() => setOpen((prev) => !prev)}
@@ -92,18 +92,19 @@ export function LanguageSwitcher({
         aria-haspopup="true"
         aria-label="Select Language"
         className={cn(
-          "inline-flex items-center gap-1.5 rounded-md border border-white/20 bg-white/10 px-2.5 py-0.5 text-[0.72rem] font-semibold text-white shadow-sm backdrop-blur-sm transition-all duration-150 hover:border-amber-400/70 hover:bg-white/15 focus:outline-none focus:ring-1 focus:ring-amber-400/50",
-          open && "border-amber-400 bg-amber-500/20 text-amber-300"
+          "inline-flex items-center gap-1.5 rounded-full border border-[#D1E7DD] bg-white px-3 py-1 text-[0.72rem] font-bold text-[#042017] shadow-sm transition-all duration-150 hover:border-[#059669] hover:bg-[#ECFDF5] focus:outline-none focus:ring-1 focus:ring-[#059669]/50",
+          open && "border-[#059669] bg-[#ECFDF5] text-[#059669]"
         )}
       >
-        <span className="text-white/90">
+        <Globe className="h-3 w-3 text-[#059669]" />
+        <span>
           {currentLanguage.code === "en"
             ? "Select Language"
             : `${currentLanguage.native} (${currentLanguage.short})`}
         </span>
         <ChevronDown
           className={cn(
-            "h-3 w-3 text-amber-400 transition-transform duration-200",
+            "h-3 w-3 text-[#059669] transition-transform duration-200",
             open && "rotate-180"
           )}
         />
@@ -111,9 +112,9 @@ export function LanguageSwitcher({
 
       {/* Dropdown Menu */}
       {open && (
-        <div className="absolute right-0 top-full z-[120] mt-1.5 w-48 rounded-xl border border-amber-500/30 bg-[#090e1d]/98 p-1.5 shadow-2xl backdrop-blur-xl animate-in fade-in-0 zoom-in-95">
-          <div className="px-3 py-1.5 border-b border-white/10 mb-1">
-            <p className="text-[0.62rem] font-bold uppercase tracking-wider text-amber-400/90">
+        <div className="absolute right-0 top-full z-[120] mt-1.5 w-48 rounded-2xl border border-[#D1E7DD] bg-white p-1.5 shadow-xl animate-in fade-in-0 zoom-in-95">
+          <div className="px-3 py-1.5 border-b border-[#D1E7DD] mb-1">
+            <p className="text-[0.62rem] font-bold uppercase tracking-wider text-[#059669]">
               Select Language
             </p>
           </div>
@@ -126,24 +127,24 @@ export function LanguageSwitcher({
                   type="button"
                   onClick={() => handleSelect(lang.code)}
                   className={cn(
-                    "flex w-full items-center justify-between rounded-lg px-2.5 py-1.5 text-xs font-semibold transition-colors text-left",
+                    "flex w-full items-center justify-between rounded-xl px-2.5 py-1.5 text-xs font-semibold transition-colors text-left",
                     isSelected
-                      ? "bg-amber-500/20 text-amber-300 font-bold"
-                      : "text-white/80 hover:bg-white/10 hover:text-white"
+                      ? "bg-[#ECFDF5] text-[#059669] font-bold border border-[#059669]/20"
+                      : "text-[#042017] hover:bg-[#F0FDF4] hover:text-[#059669]"
                   )}
                 >
                   <div className="flex items-center gap-2">
-                    <span className="inline-flex h-4.5 w-5.5 items-center justify-center rounded bg-white/10 text-[0.62rem] font-black text-amber-400">
+                    <span className="inline-flex h-4.5 w-5.5 items-center justify-center rounded bg-[#ECFDF5] text-[0.62rem] font-black text-[#059669] border border-[#D1E7DD]">
                       {lang.short}
                     </span>
                     <div className="flex flex-col leading-none">
                       <span className="text-xs">{lang.native}</span>
-                      <span className="text-[0.6rem] text-slate-400 font-normal mt-0.5">
+                      <span className="text-[0.6rem] text-[#4B5563] font-normal mt-0.5">
                         {lang.label}
                       </span>
                     </div>
                   </div>
-                  {isSelected && <Check className="h-3.5 w-3.5 text-amber-400" />}
+                  {isSelected && <Check className="h-3.5 w-3.5 text-[#059669]" />}
                 </button>
               );
             })}

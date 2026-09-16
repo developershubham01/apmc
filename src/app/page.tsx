@@ -129,11 +129,11 @@ export default function HomePage() {
       <Hero />
 
       {/* 3. Introduction */}
-      <section className="bg-mist py-16 lg:py-20">
+      <section className="bg-mist py-16 lg:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="Introduction"
-            title="A Multifaceted Business Presence"
+            title="SOME SALIENT FEATURES OF OUR ASSOCIATION"
             description="Shri Kirti Rana's work spans merchant community leadership, agricultural trade, national trade advocacy and business development — anchored in Navi Mumbai's commercial ecosystem."
           />
           <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -141,19 +141,19 @@ export default function HomePage() {
               const Icon = card.icon;
               return (
                 <ScrollReveal key={card.title} variant="up" delay={i * 90} className="h-full">
-                  <div className="group h-full rounded-2xl border border-border bg-white p-6 shadow-premium transition-all duration-300 hover:-translate-y-1 hover:shadow-premium-lg">
-                    <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-navy text-gold ring-1 ring-gold/30 transition-colors group-hover:bg-royal">
+                  <div className="group h-full rounded-2xl border border-[#D1E7DD] bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#059669] hover:shadow-md">
+                    <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-[#042017] text-[#10B981] ring-1 ring-[#059669]/30 transition-colors group-hover:bg-[#059669] group-hover:text-white">
                       <Icon className="h-6 w-6" />
                     </span>
-                    <h3 className="mt-5 font-heading text-lg font-700 text-navy">
+                    <h3 className="mt-5 font-heading text-lg font-bold text-[#042017]">
                       {card.title}
                     </h3>
-                    <p className="mt-2 text-sm leading-relaxed text-ink-600">
+                    <p className="mt-2 text-sm leading-relaxed text-[#4B5563]">
                       {card.description}
                     </p>
                     <span
                       aria-hidden
-                      className="mt-4 block h-0.5 w-8 rounded-full bg-gold transition-all duration-300 group-hover:w-14"
+                      className="mt-4 block h-0.5 w-8 rounded-full bg-[#059669] transition-all duration-300 group-hover:w-14"
                     />
                   </div>
                 </ScrollReveal>
@@ -167,32 +167,41 @@ export default function HomePage() {
       <AboutSection />
 
       {/* Salient Features Highlight Banner */}
-      <section className="relative overflow-hidden bg-gradient-to-r from-navy via-navy-800 to-royal py-14 text-white">
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <section className="relative overflow-hidden bg-white py-16 text-[#042017] border-y border-[#D1E7DD]">
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+          <Image
+            src="/images/hero/chamber-headquarters-hero.jpg"
+            alt="Navi Mumbai Merchants Chamber 50-Acre Complex"
+            fill
+            className="object-cover object-center opacity-[0.08]"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-transparent to-white/60" />
+        </div>
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-8 lg:grid-cols-12">
             <div className="lg:col-span-7">
-              <span className="eyebrow inline-flex items-center gap-2 text-gold">
+              <span className="eyebrow inline-flex items-center gap-2 text-[#059669] font-bold">
                 <Building2 className="h-4 w-4" />
                 Apex Merchant Body
               </span>
-              <h2 className="mt-3 font-heading text-2xl sm:text-3xl lg:text-4xl font-700 leading-tight">
+              <h2 className="mt-3 font-heading text-2xl sm:text-3xl lg:text-4xl font-extrabold leading-tight text-[#042017]">
                 Navi Mumbai Merchants&apos; Chamber
               </h2>
-              <p className="mt-3 text-sm sm:text-base text-white/80 leading-relaxed">
+              <p className="mt-3 text-sm sm:text-base text-[#4B5563] leading-relaxed">
                 A 30+ year old association of 400+ spice processors, specialists, exporters, wholesalers, distributors, retailers and cold chain owners operating across a dedicated 50-acre complex for domestic and international trade.
               </p>
               <div className="mt-6 flex flex-wrap gap-4">
-                <div className="rounded-xl border border-white/15 bg-white/10 px-4 py-2 backdrop-blur">
-                  <p className="font-heading text-xl font-800 text-gold">30+ Years</p>
-                  <p className="text-xs text-white/70">Established Legacy</p>
+                <div className="rounded-2xl border border-[#D1E7DD] bg-[#F0FDF4] px-4 py-2.5 shadow-sm">
+                  <p className="font-heading text-xl font-bold text-[#042017]">30+ Years</p>
+                  <p className="text-xs text-[#047857] font-semibold">Established Legacy</p>
                 </div>
-                <div className="rounded-xl border border-white/15 bg-white/10 px-4 py-2 backdrop-blur">
-                  <p className="font-heading text-xl font-800 text-gold">400+</p>
-                  <p className="text-xs text-white/70">Member Network</p>
+                <div className="rounded-2xl border border-[#D1E7DD] bg-[#F0FDF4] px-4 py-2.5 shadow-sm">
+                  <p className="font-heading text-xl font-bold text-[#059669]">400+</p>
+                  <p className="text-xs text-[#047857] font-semibold">Member Network</p>
                 </div>
-                <div className="rounded-xl border border-white/15 bg-white/10 px-4 py-2 backdrop-blur">
-                  <p className="font-heading text-xl font-800 text-gold">50 Acres</p>
-                  <p className="text-xs text-white/70">Dedicated Trade Complex</p>
+                <div className="rounded-2xl border border-[#D1E7DD] bg-[#F0FDF4] px-4 py-2.5 shadow-sm">
+                  <p className="font-heading text-xl font-bold text-[#042017]">50 Acres</p>
+                  <p className="text-xs text-[#047857] font-semibold">Dedicated Trade Complex</p>
                 </div>
               </div>
             </div>
@@ -202,7 +211,7 @@ export default function HomePage() {
                 alt="Navi Mumbai Merchants Chamber Salient Features Slide"
                 caption="Salient Features of Navi Mumbai Merchants Chamber"
                 overlay
-                className="aspect-[16/10] rounded-2xl border-2 border-gold/40 ring-0 shadow-2xl"
+                className="aspect-[16/10] rounded-2xl border-2 border-[#059669] ring-0 shadow-lg bg-white"
                 imgClassName="object-cover"
               />
             </div>
@@ -230,7 +239,7 @@ export default function HomePage() {
       <BusinessSection />
 
       {/* 7. APMC Market + 8. Market Categories */}
-      <section className="relative bg-mist py-16 lg:py-24">
+      <section className="relative bg-[#F0FDF4] py-16 lg:py-24 border-y border-[#D1E7DD]">
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="APMC Market"
@@ -240,15 +249,15 @@ export default function HomePage() {
 
           {/* Location card */}
           <ScrollReveal variant="up" className="mt-10">
-            <div className="mx-auto flex max-w-3xl flex-col items-center gap-4 rounded-2xl border border-border bg-white p-6 text-center shadow-premium sm:flex-row sm:text-left">
-              <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-royal-50 text-royal ring-1 ring-royal/20">
+            <div className="mx-auto flex max-w-3xl flex-col items-center gap-4 rounded-2xl border border-[#D1E7DD] bg-white p-6 text-center shadow-sm sm:flex-row sm:text-left">
+              <span className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[#ECFDF5] text-[#059669] ring-1 ring-[#059669]/20">
                 <MapPin className="h-6 w-6" />
               </span>
               <div>
-                <p className="text-xs uppercase tracking-[0.16em] text-royal font-600">
+                <p className="text-xs uppercase tracking-[0.16em] text-[#047857] font-bold">
                   Location
                 </p>
-                <p className="mt-1 text-sm font-500 text-ink">
+                <p className="mt-1 text-sm font-semibold text-[#042017]">
                   {siteConfig.apmcAddress}
                 </p>
               </div>
@@ -264,18 +273,18 @@ export default function HomePage() {
             <ScrollReveal variant="up" delay={markets.length * 90} className="h-full">
               <Link
                 href="/apmc"
-                className="group flex h-full flex-col items-center justify-center gap-3 rounded-2xl border-2 border-dashed border-navy/20 bg-white p-8 text-center transition-all hover:border-gold hover:bg-gold-50/40"
+                className="group flex h-full flex-col items-center justify-center gap-3 rounded-2xl border-2 border-dashed border-[#059669]/40 bg-white p-8 text-center transition-all hover:border-[#059669] hover:bg-[#ECFDF5] shadow-sm"
               >
-                <span className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-navy text-gold ring-1 ring-gold/30 transition-transform group-hover:scale-110">
+                <span className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-[#042017] text-[#10B981] ring-1 ring-[#059669]/30 transition-transform group-hover:scale-110">
                   <Store className="h-7 w-7" />
                 </span>
-                <span className="font-heading text-lg font-700 text-navy">
+                <span className="font-heading text-lg font-bold text-[#042017]">
                   Explore APMC in Detail
                 </span>
-                <span className="text-sm text-ink-600">
+                <span className="text-sm text-[#4B5563]">
                   Market overview, commodity rates &amp; resources
                 </span>
-                <span className="mt-2 inline-flex items-center gap-1 text-sm font-600 text-royal">
+                <span className="mt-2 inline-flex items-center gap-1 text-sm font-bold text-[#059669]">
                   View APMC Page
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </span>
@@ -318,26 +327,26 @@ export default function HomePage() {
 
           {/* Top 3 Award Cards */}
           <div className="mt-10 grid gap-6 md:grid-cols-3">
-            <div className="rounded-2xl border-2 border-gold/40 bg-gold-50/30 p-6 shadow-sm">
-              <span className="text-xs uppercase font-700 text-gold-700 tracking-wider">Girnar Award (2008)</span>
-              <h3 className="mt-2 font-heading text-xl font-700 text-navy">Best Businessman Award</h3>
-              <p className="mt-2 text-xs text-ink-600 leading-relaxed">
+            <div className="rounded-2xl border-2 border-[#D1E7DD] bg-[#F0FDF4] p-6 shadow-sm">
+              <span className="text-xs uppercase font-bold text-[#047857] tracking-wider">Girnar Award (2008)</span>
+              <h3 className="mt-2 font-heading text-xl font-bold text-[#042017]">Best Businessman Award</h3>
+              <p className="mt-2 text-xs text-[#4B5563] leading-relaxed">
                 Conferred by Bruhad Mumbai Gujarati Samaj Mumbai for outstanding business leadership.
               </p>
             </div>
 
-            <div className="rounded-2xl border-2 border-navy/20 bg-navy text-white p-6 shadow-sm">
-              <span className="text-xs uppercase font-700 text-gold tracking-wider">Dubai (2025)</span>
-              <h3 className="mt-2 font-heading text-xl font-700 text-white">Global Business ICON</h3>
-              <p className="mt-2 text-xs text-white/80 leading-relaxed">
+            <div className="rounded-2xl border-2 border-[#059669] bg-[#042017] text-white p-6 shadow-sm">
+              <span className="text-xs uppercase font-bold text-[#10B981] tracking-wider">Dubai (2025)</span>
+              <h3 className="mt-2 font-heading text-xl font-bold text-white">Global Business ICON</h3>
+              <p className="mt-2 text-xs text-white/85 leading-relaxed">
                 Conferred at Glimpses Global Business ICON Awards in Dubai with international dignitaries.
               </p>
             </div>
 
-            <div className="rounded-2xl border-2 border-royal/20 bg-royal-50/50 p-6 shadow-sm">
-              <span className="text-xs uppercase font-700 text-royal tracking-wider">CAIT New Delhi</span>
-              <h3 className="mt-2 font-heading text-xl font-700 text-navy">Trade Development Award</h3>
-              <p className="mt-2 text-xs text-ink-600 leading-relaxed">
+            <div className="rounded-2xl border-2 border-[#D1E7DD] bg-[#F0FDF4] p-6 shadow-sm">
+              <span className="text-xs uppercase font-bold text-[#047857] tracking-wider">CAIT New Delhi</span>
+              <h3 className="mt-2 font-heading text-xl font-bold text-[#042017]">Trade Development Award</h3>
+              <p className="mt-2 text-xs text-[#4B5563] leading-relaxed">
                 Honored by CAIT Research & Trade Development Society for leadership in national commerce.
               </p>
             </div>
@@ -349,7 +358,7 @@ export default function HomePage() {
           <div className="mt-10 text-center">
             <Link
               href="/achievements"
-              className="group inline-flex items-center gap-2 rounded-xl bg-navy px-6 py-3.5 text-sm font-600 text-white shadow-premium transition-all hover:bg-navy-700 hover:-translate-y-0.5"
+              className="group inline-flex items-center gap-2 rounded-full bg-[#059669] px-7 py-3.5 text-sm font-bold text-white shadow-md transition-all hover:bg-[#047857] hover:-translate-y-0.5"
             >
               View All 11 Verified Awards &amp; Citations
               <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -377,7 +386,7 @@ export default function HomePage() {
           <div className="mt-10 text-center">
             <Link
               href="/board"
-              className="group inline-flex items-center gap-2 rounded-xl bg-navy px-6 py-3.5 text-sm font-600 text-white shadow-premium transition-all hover:bg-navy-700 hover:-translate-y-0.5"
+              className="group inline-flex items-center gap-2 rounded-full bg-[#042017] px-7 py-3.5 text-sm font-bold text-white shadow-md transition-all hover:bg-[#059669] hover:-translate-y-0.5"
             >
               View Full Board
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -390,7 +399,7 @@ export default function HomePage() {
       <MediaPreviewSection />
 
       {/* 14. Gallery Preview */}
-      <section className="bg-mist py-16 lg:py-24">
+      <section className="bg-[#F0FDF4] py-16 lg:py-24 border-y border-[#D1E7DD]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="Gallery"
@@ -403,7 +412,7 @@ export default function HomePage() {
           <div className="mt-10 text-center">
             <Link
               href="/gallery"
-              className="group inline-flex items-center gap-2 rounded-xl border border-navy/15 bg-white px-6 py-3.5 text-sm font-600 text-navy transition-all hover:border-gold hover:text-royal hover:-translate-y-0.5"
+              className="group inline-flex items-center gap-2 rounded-full border-2 border-[#059669] bg-white px-7 py-3.5 text-sm font-bold text-[#042017] transition-all hover:bg-[#059669] hover:text-white hover:-translate-y-0.5 shadow-sm"
             >
               <Images className="h-4 w-4" />
               Open Full Gallery
@@ -449,53 +458,67 @@ function AboutSection() {
       icon: Users,
     },
     {
-      role: "Business Venture",
+      role: "Commercial Enterprise",
       org: "Kisan Kirti Agro Pvt. Ltd.",
       icon: Wheat,
     },
   ];
   return (
-    <section className="relative overflow-hidden bg-white py-16 lg:py-24">
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section className="relative overflow-hidden bg-white py-16 lg:py-24 border-b border-[#D1E7DD]">
+      {/* Subtle Architectural Watermark */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <Image
+          src="/images/hero/chamber-headquarters-hero.jpg"
+          alt="Navi Mumbai Merchants Chamber Complex"
+          fill
+          className="object-cover object-center opacity-[0.08]"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-transparent to-white/60" />
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid items-center gap-10 lg:gap-14 lg:grid-cols-2">
-          {/* LEFT — portrait */}
+          {/* LEFT — portrait with 100% visual clarity */}
           <ScrollReveal variant="left">
             <div className="relative mx-auto max-w-md">
               <div
                 aria-hidden
-                className="absolute -inset-3 rounded-[2rem] bg-gradient-to-br from-gold/30 to-royal/20 blur-xl"
+                className="absolute -inset-3 rounded-[2.5rem] bg-gradient-to-br from-[#059669]/30 to-[#10B981]/20 blur-xl"
               />
-              <div className="relative overflow-hidden rounded-[1.75rem] border-2 border-gold/40 bg-navy shadow-premium-lg">
-                <div className="relative aspect-[4/5] w-full overflow-hidden">
-                  <Image
+              <div className="relative overflow-hidden rounded-[2rem] border-2 border-[#059669] bg-[#042017] shadow-xl">
+                <div className="relative aspect-[4/5] w-full overflow-hidden bg-white">
+                  <LightboxImage
                     src="/images/kirti-rana/portrait-lead.jpg"
                     alt="Shri Kirti Rana"
-                    fill
-                    className="object-cover object-top transition-transform duration-700 hover:scale-105"
+                    caption="Shri Kirti Rana — President, Navi Mumbai Merchants Chamber"
                     sizes="(max-width: 1024px) 100vw, 50vw"
+                    priority
+                    className="h-full w-full rounded-none border-0 ring-0"
+                    imgClassName="object-cover object-top"
                   />
+                  {/* Subtle clean bottom gradient for name readability only */}
                   <div
                     aria-hidden
-                    className="absolute inset-0 bg-gradient-to-t from-navy via-navy/20 to-transparent"
+                    className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#042017]/95 via-[#042017]/50 to-transparent"
                   />
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <p className="font-heading text-2xl font-700 text-white">
+                  <div className="pointer-events-none absolute bottom-3 left-4 right-4 z-10">
+                    <p className="font-heading text-2xl font-extrabold text-white drop-shadow">
                       Shri Kirti Rana
                     </p>
-                    <p className="text-xs uppercase tracking-[0.18em] text-gold font-600">
+                    <p className="text-xs uppercase tracking-[0.18em] text-[#10B981] font-bold mt-0.5">
                       President — Navi Mumbai Merchants Chamber
                     </p>
                   </div>
                 </div>
-                <div className="flex items-center justify-between border-t border-white/10 bg-black/40 px-6 py-3.5 backdrop-blur-md">
+                <div className="flex items-center justify-between border-t border-white/15 bg-[#042017] px-6 py-3.5">
                   <div className="flex items-center gap-2">
-                    <Wheat className="h-4 w-4 text-gold" />
-                    <span className="text-[0.7rem] uppercase tracking-[0.2em] text-white/80 font-500">
+                    <Wheat className="h-4 w-4 text-[#10B981]" />
+                    <span className="text-[0.7rem] uppercase tracking-[0.2em] text-white/90 font-semibold">
                       Navi Mumbai • Maharashtra
                     </span>
                   </div>
-                  <span className="rounded-full bg-gold/20 px-2.5 py-0.5 text-[0.68rem] font-700 text-gold uppercase tracking-wider">
-                    30+ Yrs
+                  <span className="rounded-full bg-[#059669]/30 border border-[#059669]/50 px-3 py-0.5 text-[0.68rem] font-bold text-[#34D399] uppercase tracking-wider">
+                    30+ Yrs Legacy
                   </span>
                 </div>
               </div>
@@ -509,9 +532,9 @@ function AboutSection() {
               eyebrow="Profile"
               title="About Shri Kirti Rana"
             />
-            <p className="mt-5 text-pretty text-base sm:text-lg leading-relaxed text-ink-600">
+            <p className="mt-5 text-pretty text-base sm:text-lg leading-relaxed text-[#4B5563]">
               Shri Kirti Rana is an esteemed leader in India&apos;s trade and agricultural
-              ecosystem. Serving as President of the <strong>Navi Mumbai Merchants Chamber</strong> (a 30+ year old association of 400+ spice processors and traders with a dedicated 50-acre complex) and Chairman of the <strong>Bombay Mudibazar Kariana Merchants Association</strong>, he actively champions trader welfare, fair market practices, and the national retail sector through CAIT.
+              ecosystem. Serving as President of the <strong className="text-[#042017] font-bold">Navi Mumbai Merchants Chamber</strong> (a 30+ year old association of 400+ spice processors and traders with a dedicated 50-acre complex) and Chairman of the <strong className="text-[#042017] font-bold">Bombay Mudibazar Kariana Merchants Association</strong>, he actively champions trader welfare, fair market practices, and the national retail sector through CAIT.
             </p>
 
             <ul className="mt-7 space-y-3">
@@ -520,16 +543,16 @@ function AboutSection() {
                 return (
                   <li
                     key={h.org}
-                    className="flex items-center gap-4 rounded-xl border border-border bg-mist p-3.5 transition-colors hover:border-gold/40"
+                    className="flex items-center gap-4 rounded-2xl border border-[#D1E7DD] bg-[#F0FDF4] p-3.5 transition-colors hover:border-[#059669]"
                   >
-                    <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-navy text-gold ring-1 ring-gold/30">
+                    <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#042017] text-[#10B981] ring-1 ring-[#059669]/30">
                       <Icon className="h-5 w-5" />
                     </span>
                     <div>
-                      <p className="text-xs uppercase tracking-[0.14em] text-royal font-600">
+                      <p className="text-xs uppercase tracking-[0.14em] text-[#047857] font-bold">
                         {h.role}
                       </p>
-                      <p className="text-sm font-600 text-navy">{h.org}</p>
+                      <p className="text-sm font-bold text-[#042017]">{h.org}</p>
                     </div>
                   </li>
                 );
@@ -538,7 +561,7 @@ function AboutSection() {
 
             <Link
               href="/about"
-              className="group mt-8 inline-flex items-center gap-2 rounded-xl bg-navy px-6 py-3.5 text-sm font-600 text-white shadow-premium transition-all hover:bg-navy-700 hover:-translate-y-0.5"
+              className="group mt-8 inline-flex items-center gap-2 rounded-full bg-[#059669] px-7 py-3.5 text-sm font-bold text-white shadow-md transition-all hover:bg-[#047857] hover:-translate-y-0.5"
             >
               Read Full Biography
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -552,44 +575,48 @@ function AboutSection() {
 
 function BusinessSection() {
   return (
-    <section className="relative overflow-hidden bg-navy py-16 lg:py-24 text-white">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 overflow-hidden"
-      >
-        <div className="absolute -right-1/4 top-0 h-[500px] w-[500px] rounded-full bg-[radial-gradient(circle,rgba(22,78,154,0.25)_0%,transparent_70%)]" />
-        <div className="absolute -left-1/4 bottom-0 h-[450px] w-[450px] rounded-full bg-[radial-gradient(circle,rgba(201,162,39,0.15)_0%,transparent_70%)]" />
+    <section className="relative overflow-hidden bg-white py-16 lg:py-24 text-[#042017] border-y border-[#D1E7DD]">
+      {/* Subtle Architectural Watermark */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <Image
+          src="/images/hero/hero-trading-bg.jpg"
+          alt="Commodity Trade Complex"
+          fill
+          className="object-cover object-center opacity-[0.08]"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-transparent to-white/60" />
       </div>
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid items-center gap-10 lg:gap-14 lg:grid-cols-2">
           <ScrollReveal variant="left">
-            <span className="eyebrow inline-flex items-center gap-2 text-gold">
-              <span aria-hidden className="inline-block h-px w-6 bg-gold/60" />
+            <span className="eyebrow inline-flex items-center gap-2 text-[#059669] font-bold">
+              <span aria-hidden className="inline-block h-0.5 w-6 rounded-full bg-[#059669]" />
               Business
             </span>
-            <h2 className="mt-4 font-heading text-3xl sm:text-4xl lg:text-[2.6rem] font-700 leading-tight">
+            <h2 className="mt-4 font-heading text-3xl sm:text-4xl lg:text-[2.6rem] font-extrabold leading-tight text-[#042017]">
               Kisan Kirti Agro Pvt. Ltd.
             </h2>
-            <span aria-hidden className="mt-4 block gold-hairline" />
-            <p className="mt-5 text-pretty text-base sm:text-lg leading-relaxed text-white/75">
+            <span aria-hidden className="mt-4 block h-1 w-16 rounded-full bg-[#059669]" />
+            <p className="mt-5 text-pretty text-base sm:text-lg leading-relaxed text-[#4B5563]">
               Kisan Kirti Agro Pvt. Ltd. is the commercial agricultural enterprise
               associated with Kirti Rana, operating within the wholesale commodity and
               APMC trading ecosystem of Navi Mumbai.
             </p>
 
-            <div className="mt-7 rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur">
-              <p className="flex items-center gap-2 text-sm font-600 text-gold">
-                <Sprout className="h-4 w-4" />
+            <div className="mt-7 rounded-2xl border border-[#D1E7DD] bg-[#F0FDF4] p-5 shadow-sm">
+              <p className="flex items-center gap-2 text-sm font-bold text-[#042017]">
+                <Sprout className="h-4 w-4 text-[#059669]" />
                 Agricultural Enterprise
               </p>
-              <p className="mt-2 text-sm text-white/70">
+              <p className="mt-2 text-sm text-[#4B5563]">
                 Engaged in wholesale supply chains, agricultural partnerships, and merchant trade facilitation across Maharashtra and Gujarat belts.
               </p>
             </div>
 
             <Link
               href="/business"
-              className="group mt-8 inline-flex items-center gap-2 rounded-xl bg-gold px-6 py-3.5 text-sm font-600 text-navy shadow-gold-glow transition-all hover:bg-gold-600 hover:-translate-y-0.5"
+              className="group mt-8 inline-flex items-center gap-2 rounded-full bg-[#059669] px-7 py-3.5 text-sm font-bold text-white shadow-md transition-all hover:bg-[#047857] hover:-translate-y-0.5"
             >
               View Business Details
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -597,25 +624,26 @@ function BusinessSection() {
           </ScrollReveal>
 
           <ScrollReveal variant="right">
-            <div className="relative overflow-hidden rounded-2xl ring-1 ring-white/15">
-              <div className="img-zoom relative aspect-[4/3]">
-                <Image
+            <div className="relative overflow-hidden rounded-3xl border-2 border-[#059669] shadow-xl bg-white">
+              <div className="relative aspect-[4/3]">
+                <LightboxImage
                   src="/images/kirti-rana/agriculture.jpg"
                   alt="Agriculture and trade — golden wheat field at sunrise"
-                  fill
+                  caption="Rooted in India's agricultural heritage — Agriculture & Trade"
                   sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover"
+                  className="h-full w-full rounded-none border-0 ring-0"
+                  imgClassName="object-cover"
                 />
                 <div
                   aria-hidden
-                  className="absolute inset-0 bg-gradient-to-t from-navy/80 via-navy/20 to-transparent"
+                  className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#042017]/80 via-transparent to-transparent"
                 />
               </div>
-              <div className="absolute bottom-0 left-0 right-0 p-6">
-                <p className="text-xs uppercase tracking-[0.18em] text-gold">
+              <div className="pointer-events-none absolute bottom-0 left-0 right-0 p-6 z-10">
+                <p className="text-xs uppercase tracking-[0.18em] text-[#10B981] font-bold">
                   Agriculture &amp; Trade
                 </p>
-                <p className="mt-1 font-heading text-xl font-700 text-white">
+                <p className="mt-1 font-heading text-xl font-bold text-white">
                   Rooted in India&apos;s agricultural heritage
                 </p>
               </div>
@@ -629,7 +657,7 @@ function BusinessSection() {
 
 function GoldenMemoriesSection() {
   return (
-    <section className="relative overflow-hidden bg-mist py-16 lg:py-24">
+    <section className="relative overflow-hidden bg-[#F0FDF4] py-16 lg:py-24 border-b border-[#D1E7DD]">
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           eyebrow="Golden Memories"
@@ -667,9 +695,9 @@ function GoldenMemoriesSection() {
         </div>
 
         <ScrollReveal variant="up" className="mt-8">
-          <div className="flex items-start gap-3 rounded-2xl border border-gold/30 bg-gold-50/60 p-5">
-            <Quote className="h-5 w-5 shrink-0 text-gold-600" />
-            <p className="text-sm text-ink-600">
+          <div className="flex items-start gap-3 rounded-2xl border border-[#D1E7DD] bg-white p-5 shadow-sm">
+            <Quote className="h-5 w-5 shrink-0 text-[#059669]" />
+            <p className="text-sm text-[#4B5563]">
               Capturing momentous occasions from Dubai to New Delhi and Mumbai — celebrating decades of dedicated service to India&apos;s merchant community.
             </p>
           </div>
@@ -701,37 +729,37 @@ function MediaPreviewSection() {
               />
             </div>
             <div className="md:col-span-3">
-              <span className="inline-flex items-center gap-2 rounded-full bg-gold-50 px-3 py-1.5 text-xs font-600 text-gold-600 ring-1 ring-gold/30">
+              <span className="inline-flex items-center gap-2 rounded-full bg-[#ECFDF5] px-3 py-1.5 text-xs font-bold text-[#047857] ring-1 ring-[#059669]/30">
                 <Newspaper className="h-3.5 w-3.5" />
                 National Trade Initiative
               </span>
-              <h3 className="mt-4 font-heading text-2xl font-700 text-navy">
+              <h3 className="mt-4 font-heading text-2xl font-bold text-[#042017]">
                 Bharatiya Vyapar Mahotsav 2026
               </h3>
-              <p className="mt-3 text-sm leading-relaxed text-ink-600">
+              <p className="mt-3 text-sm leading-relaxed text-[#4B5563]">
                 A premier multi-sector trade festival organized jointly by ITPO and CAIT at <strong>Bharat Mandapam, Pragati Maidan, New Delhi</strong> (12–15 August 2026), championing Aatmanirbhar Bharat and India&apos;s retail &amp; wholesale enterprise.
               </p>
               <dl className="mt-6 grid grid-cols-2 gap-4">
-                <div className="rounded-xl border border-border bg-mist p-4">
-                  <dt className="flex items-center gap-1.5 text-xs uppercase tracking-[0.14em] text-royal font-600">
+                <div className="rounded-xl border border-[#D1E7DD] bg-[#F0FDF4] p-4">
+                  <dt className="flex items-center gap-1.5 text-xs uppercase tracking-[0.14em] text-[#047857] font-bold">
                     <Building2 className="h-3.5 w-3.5" /> Venue
                   </dt>
-                  <dd className="mt-1 text-sm font-600 text-navy">
+                  <dd className="mt-1 text-sm font-bold text-[#042017]">
                     Bharat Mandapam, New Delhi
                   </dd>
                 </div>
-                <div className="rounded-xl border border-border bg-mist p-4">
-                  <dt className="flex items-center gap-1.5 text-xs uppercase tracking-[0.14em] text-royal font-600">
+                <div className="rounded-xl border border-[#D1E7DD] bg-[#F0FDF4] p-4">
+                  <dt className="flex items-center gap-1.5 text-xs uppercase tracking-[0.14em] text-[#047857] font-bold">
                     <CalendarDays className="h-3.5 w-3.5" /> Dates
                   </dt>
-                  <dd className="mt-1 text-sm font-600 text-navy">
+                  <dd className="mt-1 text-sm font-bold text-[#042017]">
                     12 to 15 August 2026
                   </dd>
                 </div>
               </dl>
               <Link
                 href="/media"
-                className="group mt-6 inline-flex items-center gap-2 text-sm font-600 text-royal transition hover:text-navy"
+                className="group mt-6 inline-flex items-center gap-2 text-sm font-bold text-[#059669] transition hover:text-[#047857]"
               >
                 View Full Media &amp; Events Page
                 <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />

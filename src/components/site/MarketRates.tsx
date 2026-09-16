@@ -16,9 +16,9 @@ import { cn } from "@/lib/utils";
 import { rateGroups as bundledGroups, ratesUpdatedAt, formatINR, type RateGroup } from "@/data/rates";
 
 const trendMeta = {
-  up: { Icon: TrendingUp, className: "text-green-700 bg-green-100", label: "Rising" },
-  down: { Icon: TrendingDown, className: "text-red-700 bg-red-100", label: "Falling" },
-  steady: { Icon: Minus, className: "text-ink-600 bg-mist", label: "Steady" },
+  up: { Icon: TrendingUp, className: "text-[#31A24C] bg-[#E8F8EE]", label: "Rising" },
+  down: { Icon: TrendingDown, className: "text-[#E41E3F] bg-[#FDE8E8]", label: "Falling" },
+  steady: { Icon: Minus, className: "text-[#5D6C7B] bg-[#F1F4F7]", label: "Steady" },
 } as const;
 
 function formatUpdatedAt(iso: string | null): string {
@@ -66,12 +66,12 @@ export function MarketRates() {
   const group = groups[Math.min(active, groups.length - 1)];
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-border bg-white shadow-premium">
-      {/* Tab bar */}
+    <div className="overflow-hidden rounded-[28px] border border-[#D1E7DD] bg-white shadow-sm">
+      {/* Meta Pill Tab bar */}
       <div
         role="tablist"
         aria-label="Market rate sections"
-        className="flex gap-1 overflow-x-auto border-b border-border bg-navy px-3 py-2.5 scrollbar-premium"
+        className="flex gap-2 overflow-x-auto border-b border-[#D1E7DD] bg-[#042017] p-3 scrollbar-premium"
       >
         {groups.map((g, i) => (
           <button
@@ -80,10 +80,10 @@ export function MarketRates() {
             aria-selected={i === active}
             onClick={() => setActive(i)}
             className={cn(
-              "whitespace-nowrap rounded-lg px-4 py-2 text-xs font-600 transition-all sm:text-sm",
+              "whitespace-nowrap rounded-full px-4 py-2 text-xs font-bold transition-all sm:text-sm tracking-tight",
               i === active
-                ? "bg-gold text-navy shadow-premium"
-                : "text-white/70 hover:bg-white/10 hover:text-white"
+                ? "bg-[#059669] text-white shadow-sm"
+                : "bg-white/10 text-white/80 hover:bg-white/20 hover:text-white"
             )}
           >
             {g.label}
@@ -92,18 +92,18 @@ export function MarketRates() {
       </div>
 
       {/* Panel meta */}
-      <div className="flex flex-col gap-2 border-b border-border bg-mist/60 px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-6">
+      <div className="flex flex-col gap-2 border-b border-[#D1E7DD] bg-[#F0FDF4] px-4 py-3 sm:flex-row sm:items-center sm:justify-between sm:px-6">
         <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
-          <p className="flex items-center gap-2 text-xs font-500 text-ink-600">
-            <CalendarDays className="h-3.5 w-3.5 text-gold-600" />
-            Indicative rates updated <span className="font-700 text-navy">{formatUpdatedAt(updatedAt)}</span>
+          <p className="flex items-center gap-2 text-xs font-semibold text-[#4B5563]">
+            <CalendarDays className="h-3.5 w-3.5 text-[#059669]" />
+            Indicative rates updated <span className="font-bold text-[#042017]">{formatUpdatedAt(updatedAt)}</span>
           </p>
           <span
             className={cn(
-              "inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[0.68rem] font-700 ring-1",
+              "inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-[0.68rem] font-bold",
               source === "database"
-                ? "bg-green-50 text-green-700 ring-green-600/25"
-                : "bg-mist text-ink-600 ring-border"
+                ? "bg-[#ECFDF5] text-[#059669]"
+                : "bg-white text-[#4B5563] border border-[#D1E7DD]"
             )}
           >
             {loading ? (
@@ -120,7 +120,7 @@ export function MarketRates() {
           href="https://www.mumbaiapmc.org/en/market-price-en/daily-market-price-en"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex w-fit items-center gap-1.5 text-xs font-600 text-royal transition-colors hover:text-navy"
+          className="inline-flex w-fit items-center gap-1.5 text-xs font-bold text-[#059669] transition-colors hover:text-[#047857]"
         >
           Official daily rates
           <ExternalLink className="h-3.5 w-3.5" />
@@ -131,23 +131,23 @@ export function MarketRates() {
       <div className="overflow-x-auto scrollbar-premium" role="tabpanel">
         <table className="w-full min-w-[640px] text-sm">
           <thead>
-            <tr className="border-b border-border bg-white text-left">
-              <th scope="col" className="px-4 py-3 text-xs font-700 uppercase tracking-[0.1em] text-royal sm:px-6">
+            <tr className="border-b border-[#D1E7DD] bg-white text-left">
+              <th scope="col" className="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-[#042017] sm:px-6">
                 Commodity
               </th>
-              <th scope="col" className="px-4 py-3 text-xs font-700 uppercase tracking-[0.1em] text-royal">
+              <th scope="col" className="px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-[#4B5563]">
                 Unit
               </th>
-              <th scope="col" className="px-4 py-3 text-right text-xs font-700 uppercase tracking-[0.1em] text-royal">
+              <th scope="col" className="px-4 py-3.5 text-right text-xs font-bold uppercase tracking-wider text-[#4B5563]">
                 Min
               </th>
-              <th scope="col" className="px-4 py-3 text-right text-xs font-700 uppercase tracking-[0.1em] text-royal">
+              <th scope="col" className="px-4 py-3.5 text-right text-xs font-bold uppercase tracking-wider text-[#4B5563]">
                 Max
               </th>
-              <th scope="col" className="px-4 py-3 text-right text-xs font-700 uppercase tracking-[0.1em] text-royal">
+              <th scope="col" className="px-4 py-3.5 text-right text-xs font-bold uppercase tracking-wider text-[#059669]">
                 Modal
               </th>
-              <th scope="col" className="px-4 py-3 text-center text-xs font-700 uppercase tracking-[0.1em] text-royal sm:px-6">
+              <th scope="col" className="px-4 py-3.5 text-center text-xs font-bold uppercase tracking-wider text-[#4B5563] sm:px-6">
                 Trend
               </th>
             </tr>
@@ -159,26 +159,26 @@ export function MarketRates() {
               return (
                 <tr
                   key={`${row.commodity}-${row.variety}`}
-                  className="border-b border-border/70 transition-colors last:border-0 hover:bg-royal-50/60"
+                  className="border-b border-[#D1E7DD]/60 transition-colors last:border-0 hover:bg-[#F0FDF4]/60"
                 >
                   <td className="px-4 py-3.5 sm:px-6">
-                    <p className="font-600 text-ink">{row.commodity}</p>
-                    <p className="mt-0.5 text-xs text-ink-600/80">{row.variety}</p>
+                    <p className="font-bold text-[#042017]">{row.commodity}</p>
+                    <p className="mt-0.5 text-xs text-[#4B5563]">{row.variety}</p>
                   </td>
-                  <td className="px-4 py-3.5 text-xs text-ink-600">{row.unit}</td>
-                  <td className="px-4 py-3.5 text-right tabular-nums text-ink-600">
+                  <td className="px-4 py-3.5 text-xs text-[#4B5563]">{row.unit}</td>
+                  <td className="px-4 py-3.5 text-right tabular-nums text-[#4B5563]">
                     {formatINR(row.min)}
                   </td>
-                  <td className="px-4 py-3.5 text-right tabular-nums text-ink-600">
+                  <td className="px-4 py-3.5 text-right tabular-nums text-[#4B5563]">
                     {formatINR(row.max)}
                   </td>
-                  <td className="px-4 py-3.5 text-right font-700 tabular-nums text-navy">
+                  <td className="px-4 py-3.5 text-right font-bold tabular-nums text-[#042017]">
                     {formatINR(row.modal)}
                   </td>
-                  <td className="px-4 py-3.5 sm:px-6">
+                  <td className="px-4 py-3.5 sm:px-6 text-center">
                     <span
                       className={cn(
-                        "mx-auto inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[0.7rem] font-600",
+                        "inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[0.7rem] font-bold",
                         trend.className
                       )}
                     >
@@ -194,10 +194,10 @@ export function MarketRates() {
       </div>
 
       {/* Disclaimer */}
-      <div className="flex items-start gap-2 border-t border-border bg-gold-50/50 px-4 py-3 sm:px-6">
-        <Info className="mt-0.5 h-3.5 w-3.5 shrink-0 text-gold-600" />
-        <p className="text-xs leading-relaxed text-ink-600">
-          <span className="font-600 text-navy">Note:</span> {group.note} These
+      <div className="flex items-start gap-2 border-t border-[#D1E7DD] bg-[#F0FDF4] px-4 py-3.5 sm:px-6">
+        <Info className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#059669]" />
+        <p className="text-xs leading-relaxed text-[#4B5563]">
+          <span className="font-bold text-[#042017]">Note:</span> {group.note} These
           figures are indicative sample bands for orientation only — always
           verify live auction prices through the official Mumbai APMC portal
           before trade decisions.

@@ -27,7 +27,7 @@ export function MediaCategorySelect({ current }: Props) {
     <div className="flex items-center gap-2.5">
       <Compass
         aria-hidden
-        className="h-4 w-4 shrink-0 text-gold-600"
+        className="h-4 w-4 shrink-0 text-amber-600"
       />
       <Select
         value={current}
@@ -39,7 +39,7 @@ export function MediaCategorySelect({ current }: Props) {
       >
         <SelectTrigger
           aria-label="Choose a media section"
-          className="w-full gap-2 rounded-xl border-border bg-white px-3.5 py-2.5 text-sm font-600 text-navy shadow-sm transition-colors hover:border-gold focus:ring-2 focus:ring-gold/30 focus:ring-offset-0 data-[state=open]:border-gold sm:w-[240px]"
+          className="w-full gap-2 rounded-xl border-border bg-white px-3.5 py-2.5 text-sm font-600 text-navy shadow-sm transition-colors hover:border-amber-500 focus:ring-2 focus:ring-amber-500/30 focus:ring-offset-0 data-[state=open]:border-amber-500 sm:w-[240px]"
         >
           <SelectValue placeholder="Jump to a section…" />
         </SelectTrigger>
@@ -48,7 +48,7 @@ export function MediaCategorySelect({ current }: Props) {
             <SelectItem
               key={category.slug}
               value={category.slug}
-              className="rounded-lg text-sm font-600 text-ink data-[highlighted]:bg-gold-50 data-[highlighted]:text-navy data-[state=checked]:text-royal data-[state=checked]:font-700"
+              className="rounded-lg text-sm font-600 text-ink data-[highlighted]:bg-amber-50 data-[highlighted]:text-navy data-[state=checked]:text-amber-700 data-[state=checked]:font-700"
             >
               {category.label}
             </SelectItem>

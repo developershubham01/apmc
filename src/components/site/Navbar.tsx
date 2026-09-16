@@ -330,49 +330,49 @@ export function Navbar() {
         className={cn(
           "sticky top-0 z-50 transition-all duration-300 font-sans",
           scrolled || open
-            ? "shadow-[0_10px_35px_rgba(0,0,0,0.55)] backdrop-blur-md"
+            ? "shadow-md backdrop-blur-md"
             : ""
         )}
       >
         {/* =========================================================
-            TIER 1: Institutional Top Bar (Black / Dark Slate Strip)
-            Matches user's reference image with Announcements & Controls
+            TIER 1: Institutional Top Bar (Luminous White & Mint Strip)
+            Meta-styled announcement strip & language controls
             ========================================================= */}
-        <div className="bg-[#050914] text-white border-b border-white/10 text-xs select-none">
+        <div className="bg-[#F0FDF4] text-[#042017] border-b border-[#D1E7DD] text-xs select-none">
           <div className="mx-auto flex w-full max-w-[1536px] items-center justify-between px-3 sm:px-6 h-9 sm:h-10">
             {/* Left: Announcements Pill Badge + Live Cycling Ticker */}
             <div className="flex items-center gap-2 sm:gap-3 flex-1 min-w-0 mr-2 sm:mr-4">
-              {/* Gradient Pill Button */}
+              {/* Meta Pill Button */}
               <button
                 type="button"
                 onClick={() => {
                   setSelectedNotice(null);
                   setIsModalOpen(true);
                 }}
-                className="group inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-rose-500 via-pink-600 to-amber-500 hover:from-rose-400 hover:to-amber-400 text-white font-extrabold text-[0.68rem] sm:text-[0.72rem] tracking-wide px-2.5 sm:px-3.5 py-1 shadow-md transition-all duration-200 hover:scale-[1.03] active:scale-95 shrink-0"
+                className="group inline-flex items-center gap-1.5 rounded-full bg-[#059669] hover:bg-[#047857] text-white font-bold text-[0.68rem] sm:text-[0.72rem] tracking-wide px-3 sm:px-3.5 py-1 shadow-sm transition-all duration-200 hover:scale-[1.02] active:scale-95 shrink-0"
                 aria-label="View all official chamber announcements"
               >
                 <Megaphone className="h-3 w-3 sm:h-3.5 sm:w-3.5 animate-bounce text-white drop-shadow" />
                 <span>Announcements</span>
-                <ChevronDown className="h-3 w-3 text-white/90 group-hover:translate-y-0.5 transition-transform" />
+                <ChevronDown className="h-3 w-3 text-white group-hover:translate-y-0.5 transition-transform" />
               </button>
 
-              {/* Ticker Content with Pulsating Red Indicator */}
+              {/* Ticker Content with Pulsating Indicator */}
               <div className="flex items-center gap-2 min-w-0 overflow-hidden cursor-pointer">
-                {/* Red Pulse Dot */}
+                {/* Emerald Green Pulse Dot */}
                 <span className="relative flex h-2 w-2 shrink-0">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#059669] opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[#059669]"></span>
                 </span>
 
                 {/* Animated Notice Headline */}
                 <button
                   type="button"
                   onClick={() => handleOpenNotice(currentNotice)}
-                  className="truncate text-left text-[0.72rem] sm:text-xs font-semibold text-amber-300 hover:text-white transition-colors duration-200"
+                  className="truncate text-left text-[0.72rem] sm:text-xs font-semibold text-[#042017] hover:text-[#059669] transition-colors duration-200"
                   title={currentNotice.title}
                 >
-                  <span className="font-bold text-white/90 mr-1.5 hidden md:inline">
+                  <span className="font-bold text-[#047857] mr-1.5 hidden md:inline">
                     [{currentNotice.categoryLabel}]
                   </span>
                   <span>{currentNotice.title}</span>
@@ -383,7 +383,7 @@ export function Navbar() {
             {/* Right: Social Links + Language Selector + Font Scaler */}
             <div className="flex items-center gap-2 sm:gap-3 shrink-0">
               {/* Social Media Round Icons */}
-              <div className="hidden lg:flex items-center gap-1 border-r border-white/15 pr-2.5">
+              <div className="hidden lg:flex items-center gap-1 border-r border-[#D1E7DD] pr-2.5">
                 {socialLinks.map((social) => (
                   <a
                     key={social.name}
@@ -391,7 +391,7 @@ export function Navbar() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`Visit Chamber ${social.name}`}
-                    className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-white/10 text-white/80 hover:bg-amber-500 hover:text-slate-950 transition-all duration-200"
+                    className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-white text-[#042017] hover:bg-[#059669] hover:text-white border border-[#D1E7DD] transition-all duration-200"
                   >
                     {social.icon}
                   </a>
@@ -410,19 +410,19 @@ export function Navbar() {
         </div>
 
         {/* =========================================================
-            TIER 1: Apex Branding & Institutional Identity Header
+            TIER 1: Apex Branding & Institutional Identity Header (Pure White)
             Prominent dual-identity banner: Navi Mumbai Merchants Chamber (Left) & BMKMA (Right)
             ========================================================= */}
-        <div className="bg-gradient-to-r from-[#030917] via-[#081d45] to-[#030917] border-b border-white/10 text-white py-2.5 sm:py-3.5 px-3 sm:px-6 shadow-md">
-          <div className="mx-auto flex w-full max-w-[1536px] items-center justify-between gap-3">
+        <div className="bg-white border-b border-[#D1E7DD] text-[#042017] py-2.5 sm:py-3.5 px-3 sm:px-6">
+          <div className="mx-auto flex w-full max-w-[1536px] items-center justify-between gap-2 sm:gap-4">
             {/* Left: Navi Mumbai Merchants Chamber Logo & Crest */}
             <Link
               href="/"
-              className="group flex items-center gap-2.5 sm:gap-3.5 shrink-0 min-w-0"
+              className="group flex items-center gap-2.5 sm:gap-3.5 shrink min-w-0"
               aria-label="Navi Mumbai Merchants Chamber — Home"
             >
               {/* Chamber Official Crest */}
-              <div className="relative h-11 w-11 sm:h-13 sm:w-13 md:h-14 md:w-14 shrink-0 rounded-full bg-white shadow-lg border-2 border-amber-400 overflow-hidden transition-transform duration-300 group-hover:scale-105">
+              <div className="relative h-11 w-11 sm:h-13 sm:w-13 md:h-14 md:w-14 shrink-0 rounded-full bg-white shadow-sm border-2 border-[#059669] overflow-hidden transition-transform duration-300 group-hover:scale-105">
                 <Image
                   src="/images/nmmc-logo.png"
                   alt="Navi Mumbai Merchants Chamber Official Logo"
@@ -434,13 +434,13 @@ export function Navbar() {
 
               {/* Chamber Title & Leadership Subtitle */}
               <div className="flex flex-col justify-center text-left leading-tight min-w-0">
-                <span className="font-heading font-extrabold text-white text-[0.95rem] sm:text-lg md:text-xl xl:text-2xl tracking-tight group-hover:text-amber-300 transition-colors drop-shadow truncate">
+                <span className="font-heading font-extrabold text-[#042017] text-[0.92rem] sm:text-lg md:text-xl xl:text-2xl tracking-tight group-hover:text-[#059669] transition-colors truncate">
                   {t("hero.chamberTitle", "Navi Mumbai Merchants Chamber")}
                 </span>
-                <span className="text-[0.62rem] sm:text-[0.72rem] md:text-xs font-bold uppercase tracking-[0.14em] text-amber-400 flex items-center gap-1.5 mt-0.5">
+                <span className="text-[0.62rem] sm:text-[0.72rem] md:text-xs font-bold uppercase tracking-[0.12em] text-[#059669] flex items-center gap-1.5 mt-0.5 truncate">
                   <span>Shri Kirti Rana</span>
-                  <span className="text-white/40">•</span>
-                  <span className="text-slate-200 font-semibold">Apex Voice of APMC</span>
+                  <span className="text-slate-300">•</span>
+                  <span className="text-[#4B5563] font-semibold hidden sm:inline">Apex Voice of APMC</span>
                 </span>
               </div>
             </Link>
@@ -448,22 +448,22 @@ export function Navbar() {
             {/* Right: Bombay Mudibazar Kariana Merchants Association Partner Identity */}
             <Link
               href="/about/bombay-mudibazar"
-              className="group flex items-center gap-2.5 sm:gap-3.5 text-right shrink-0 min-w-0"
+              className="group flex items-center gap-2 sm:gap-3.5 text-right shrink-0"
               aria-label="Bombay Mudibazar Kariana Merchants Association"
               title="Bombay Mudibazar Kariana Merchants Association"
             >
-              {/* Association Title & Subtitle */}
-              <div className="flex flex-col justify-center text-right leading-tight min-w-0">
-                <span className="font-heading font-extrabold text-amber-300 text-[0.85rem] sm:text-base md:text-lg xl:text-xl tracking-tight group-hover:text-white transition-colors drop-shadow truncate">
+              {/* Association Title & Subtitle (hidden on mobile to prevent squishing, visible on tablet & laptop) */}
+              <div className="hidden md:flex flex-col justify-center text-right leading-tight min-w-0 max-w-[260px] lg:max-w-none">
+                <span className="font-heading font-extrabold text-[#042017] text-xs sm:text-sm md:text-base xl:text-lg tracking-tight group-hover:text-[#059669] transition-colors truncate">
                   {t("hero.bmkmaTitle", "Bombay Mudibazar Kariana Merchants Association")}
                 </span>
-                <span className="text-[0.58rem] sm:text-[0.68rem] md:text-xs font-semibold uppercase tracking-[0.1em] text-slate-300 group-hover:text-amber-400 transition-colors mt-0.5">
+                <span className="text-[0.58rem] sm:text-[0.68rem] md:text-xs font-bold uppercase tracking-[0.1em] text-[#047857] group-hover:text-[#059669] transition-colors mt-0.5">
                   Estd. 1969 • Premier APMC Body
                 </span>
               </div>
 
               {/* Association Crest */}
-              <div className="relative h-11 w-11 sm:h-13 sm:w-13 md:h-14 md:w-14 shrink-0 rounded-full bg-white shadow-lg border-2 border-amber-400 overflow-hidden transition-transform duration-300 group-hover:scale-105">
+              <div className="relative h-11 w-11 sm:h-13 sm:w-13 md:h-14 md:w-14 shrink-0 rounded-full bg-white shadow-sm border-2 border-[#059669] overflow-hidden transition-transform duration-300 group-hover:scale-105">
                 <Image
                   src="/images/association-crest.png"
                   alt="Bombay Mudibazar Kariana Merchants Association Crest"
@@ -476,14 +476,13 @@ export function Navbar() {
         </div>
 
         {/* =========================================================
-            TIER 2: Main Navigation Bar Ribbon
-            Clean full-width menu bar with Home icon, dropdowns & Admin portal
+            TIER 2: Main Navigation Bar Ribbon (Pure White Meta Pill Tab Strip)
             ========================================================= */}
-        <div className="bg-[#050e24] border-b border-amber-500/30 text-white shadow-xl">
+        <div className="bg-white border-b border-[#D1E7DD] text-[#042017] shadow-sm">
           <div className="mx-auto flex w-full max-w-[1536px] items-center justify-between px-3 sm:px-6 h-12 sm:h-13">
             {/* Left: Main Navigation Menu with Home Icon */}
             <nav
-              className="hidden xl:flex items-center gap-1 lg:gap-2"
+              className="hidden xl:flex items-center gap-1.5 lg:gap-2"
               aria-label="Chamber Institutional Navigation"
             >
               {/* Circular Home Icon Button */}
@@ -491,16 +490,16 @@ export function Navbar() {
                 href="/"
                 aria-label="Home"
                 className={cn(
-                  "inline-flex h-8 w-8 items-center justify-center rounded-full transition-all duration-200 mr-1.5 shadow-sm",
+                  "inline-flex h-8 w-8 items-center justify-center rounded-full transition-all duration-200 mr-1 shadow-sm",
                   pathname === "/"
-                    ? "bg-amber-500 text-slate-950 font-bold ring-2 ring-amber-400/50 shadow-md"
-                    : "bg-white/10 text-white/90 hover:bg-white/20 hover:text-amber-300 border border-white/15"
+                    ? "bg-[#059669] text-white font-bold ring-2 ring-[#059669]/30 shadow-sm"
+                    : "bg-[#F0FDF4] text-[#042017] hover:bg-[#ECFDF5] hover:text-[#059669] border border-[#D1E7DD]"
                 )}
               >
                 <Home className="h-4 w-4" />
               </Link>
 
-              {/* Dropdown & Nav Links */}
+              {/* Dropdown & Nav Links Styled as Meta Pill Tabs */}
               {mainNavItems.map((item) => {
                 const active = isLinkActive(item.href);
                 const hasDropdown = Boolean(item.items && item.items.length > 0);
@@ -519,20 +518,21 @@ export function Navbar() {
                       aria-expanded={hasDropdown ? isOpen : undefined}
                       aria-haspopup={hasDropdown ? "true" : undefined}
                       className={cn(
-                        "inline-flex items-center gap-1 text-[0.82rem] xl:text-[0.86rem] font-bold px-3 py-1.5 rounded-lg transition-all duration-150 tracking-normal",
+                        "inline-flex items-center gap-1.5 text-[0.82rem] xl:text-[0.86rem] font-bold px-3.5 py-1.5 rounded-full transition-all duration-150 tracking-tight",
                         active
-                          ? "bg-amber-400/20 text-amber-300 border border-amber-400/50 shadow-sm"
+                          ? "bg-[#059669] text-white shadow-sm"
                           : isOpen
-                          ? "bg-white/15 text-white"
-                          : "text-white/95 hover:text-amber-300 hover:bg-white/10"
+                          ? "bg-[#ECFDF5] text-[#059669]"
+                          : "text-[#042017] hover:text-[#059669] hover:bg-[#F0FDF4]"
                       )}
                     >
                       <span>{label}</span>
                       {hasDropdown && (
                         <ChevronDown
                           className={cn(
-                            "h-3.5 w-3.5 text-amber-400/90 transition-transform duration-200",
-                            isOpen && "rotate-180 text-amber-300"
+                            "h-3.5 w-3.5 text-[#4B5563] transition-transform duration-200",
+                            isOpen && "rotate-180 text-[#059669]",
+                            active && "text-white"
                           )}
                         />
                       )}
@@ -548,12 +548,12 @@ export function Navbar() {
                             : "pointer-events-none opacity-0 translate-y-2"
                         )}
                       >
-                        <div className="w-[380px] max-h-[80vh] overflow-y-auto scrollbar-premium rounded-2xl border border-amber-500/30 bg-[#070e24]/98 p-2 shadow-2xl backdrop-blur-xl">
-                          <div className="border-b border-white/10 bg-white/5 px-3.5 py-2 rounded-xl mb-1.5 flex items-center justify-between">
-                            <span className="text-[0.64rem] font-bold uppercase tracking-[0.16em] text-amber-400">
+                        <div className="w-[380px] max-h-[80vh] overflow-y-auto scrollbar-premium rounded-[24px] border border-[#D1E7DD] bg-white p-2.5 shadow-2xl">
+                          <div className="border-b border-[#D1E7DD] bg-[#F0FDF4] px-3.5 py-2 rounded-xl mb-1.5 flex items-center justify-between">
+                            <span className="text-[0.64rem] font-bold uppercase tracking-[0.16em] text-[#047857]">
                               {label}
                             </span>
-                            <span className="text-[0.62rem] text-slate-400 font-medium">
+                            <span className="text-[0.62rem] text-[#4B5563] font-medium">
                               Chamber Directory
                             </span>
                           </div>
@@ -570,11 +570,11 @@ export function Navbar() {
                                   className={cn(
                                     "flex items-start gap-2.5 rounded-xl p-2.5 transition-colors text-left",
                                     isSubActive
-                                      ? "bg-amber-500/20 text-amber-300"
-                                      : "hover:bg-white/10 text-white/90 hover:text-white"
+                                      ? "bg-[#ECFDF5] text-[#059669]"
+                                      : "hover:bg-[#F0FDF4] text-[#042017] hover:text-[#059669]"
                                   )}
                                 >
-                                  <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-amber-500/15 text-amber-400 ring-1 ring-amber-500/30">
+                                  <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-[#ECFDF5] text-[#059669] ring-1 ring-[#059669]/30">
                                     <SubIcon className="h-3.5 w-3.5" />
                                   </span>
                                   <div className="flex flex-col">
@@ -582,7 +582,7 @@ export function Navbar() {
                                       {sub.title}
                                     </span>
                                     {sub.description && (
-                                      <span className="text-[0.65rem] text-slate-400 leading-tight mt-0.5 line-clamp-1">
+                                      <span className="text-[0.65rem] text-[#4B5563] leading-tight mt-0.5 line-clamp-1">
                                         {sub.description}
                                       </span>
                                     )}
@@ -601,19 +601,19 @@ export function Navbar() {
 
             {/* Mobile Nav Brand text fallback when menu collapsed */}
             <div className="xl:hidden flex items-center gap-2">
-              <span className="text-xs font-bold text-amber-400 uppercase tracking-wider">
+              <span className="text-xs font-bold text-[#059669] uppercase tracking-wider">
                 MENU & SERVICES
               </span>
             </div>
 
-            {/* Right: Admin Pill Button & Mobile Hamburger */}
+            {/* Right: Meta Admin Pill Button & Mobile Hamburger */}
             <div className="flex items-center gap-2 sm:gap-3 shrink-0">
-              {/* Admin Portal Pill */}
+              {/* Admin Portal Meta Pill */}
               <Link
                 href="/admin"
-                className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-[#e6a838] to-[#f4be4e] hover:from-[#f3b648] hover:to-[#ffd166] text-slate-950 font-black text-[0.72rem] sm:text-xs tracking-wider px-3.5 sm:px-4 py-1.5 shadow-md uppercase transition-all duration-200 hover:scale-[1.03] active:scale-95 shrink-0"
+                className="inline-flex items-center gap-1.5 rounded-full bg-[#059669] hover:bg-[#047857] text-white font-bold text-[0.72rem] sm:text-xs tracking-wider px-4 sm:px-5 py-1.5 shadow-sm uppercase transition-all duration-200 hover:scale-[1.02] active:scale-95 shrink-0"
               >
-                <Lock className="h-3.5 w-3.5 text-slate-950 stroke-[2.5]" />
+                <Lock className="h-3.5 w-3.5 text-white stroke-[2.5]" />
                 <span className="hidden sm:inline">{t("nav.admin", "ADMIN PORTAL")}</span>
                 <span className="sm:hidden">{t("nav.admin", "ADMIN")}</span>
               </Link>
@@ -622,37 +622,37 @@ export function Navbar() {
               <button
                 type="button"
                 onClick={() => setOpen((v) => !v)}
-                className="xl:hidden inline-flex h-9 w-9 items-center justify-center rounded-xl bg-white/10 text-white hover:bg-white/20 transition-colors border border-white/15"
+                className="xl:hidden inline-flex h-9 w-9 items-center justify-center rounded-full bg-[#F0FDF4] text-[#042017] hover:bg-[#ECFDF5] transition-colors border border-[#D1E7DD]"
                 aria-label={open ? "Close menu" : "Open menu"}
                 aria-expanded={open}
                 aria-controls="mobile-nav-drawer"
               >
-                {open ? <X className="h-5 w-5 text-amber-400" /> : <Menu className="h-5 w-5" />}
+                {open ? <X className="h-5 w-5 text-[#059669]" /> : <Menu className="h-5 w-5" />}
               </button>
             </div>
           </div>
         </div>
 
         {/* =========================================================
-            MOBILE NAVIGATION DRAWER
+            MOBILE NAVIGATION DRAWER (Clean White)
             Categorized accordion navigation with notices, tools & links
             ========================================================= */}
         <div
           id="mobile-nav-drawer"
           className={cn(
-            "xl:hidden overflow-hidden transition-all duration-300 ease-out bg-[#050c1e]/98 backdrop-blur-xl border-t border-amber-500/30",
+            "xl:hidden overflow-hidden transition-all duration-300 ease-out bg-white border-t border-[#D1E7DD]",
             open ? "max-h-[calc(100vh-100px)] opacity-100 shadow-2xl" : "max-h-0 opacity-0"
           )}
         >
-          <div className="flex flex-col px-4 py-4 gap-3.5 max-h-[calc(100vh-115px)] overflow-y-auto scrollbar-premium text-white">
+          <div className="flex flex-col px-4 py-4 gap-3.5 max-h-[calc(100vh-115px)] overflow-y-auto scrollbar-premium text-[#042017]">
             {/* Mobile Partner Association Quick Link */}
             <Link
               href="/about/bombay-mudibazar"
               onClick={() => setOpen(false)}
-              className="flex items-center justify-between rounded-2xl border border-amber-500/30 bg-white/5 p-2.5 text-left hover:bg-white/10 transition-colors"
+              className="flex items-center justify-between rounded-2xl border border-[#D1E7DD] bg-[#F0FDF4] p-2.5 text-left hover:bg-[#ECFDF5] transition-colors"
             >
               <div className="flex items-center gap-2.5">
-                <div className="relative h-8 w-8 shrink-0 rounded-full bg-white border border-amber-400 overflow-hidden">
+                <div className="relative h-8 w-8 shrink-0 rounded-full bg-white border border-[#059669] overflow-hidden">
                   <Image
                     src="/images/association-crest.png"
                     alt="Bombay Mudibazar Kariana Merchants Association"
@@ -661,15 +661,15 @@ export function Navbar() {
                   />
                 </div>
                 <div>
-                  <span className="block text-xs font-bold text-amber-300 leading-snug">
+                  <span className="block text-xs font-bold text-[#042017] leading-snug">
                     {t("hero.bmkmaTitle", "Bombay Mudibazar Kariana Merchants Association")}
                   </span>
-                  <span className="block text-[0.64rem] text-slate-300 font-medium">
+                  <span className="block text-[0.64rem] text-[#059669] font-bold">
                     Estd. 1969 • APMC Market
                   </span>
                 </div>
               </div>
-              <ChevronRight className="h-4 w-4 text-amber-400" />
+              <ChevronRight className="h-4 w-4 text-[#059669]" />
             </Link>
 
             {/* Mobile Announcements Quick Bar */}
@@ -679,44 +679,44 @@ export function Navbar() {
                 setOpen(false);
                 setIsModalOpen(true);
               }}
-              className="flex items-center justify-between rounded-2xl border border-rose-500/40 bg-gradient-to-r from-rose-950/60 to-navy-900/90 p-3 text-left"
+              className="flex items-center justify-between rounded-2xl border border-[#059669]/30 bg-[#ECFDF5] p-3 text-left transition-all hover:bg-[#D1E7DD]/50"
             >
               <div className="flex items-center gap-2.5">
-                <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-rose-500/20 text-rose-400">
+                <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#059669] text-white shadow-sm">
                   <Megaphone className="h-4 w-4" />
                 </span>
                 <div>
-                  <span className="block text-xs font-bold text-white">
+                  <span className="block text-xs font-bold text-[#042017]">
                     Official Announcements
                   </span>
-                  <span className="block text-[0.68rem] text-slate-300">
+                  <span className="block text-[0.68rem] text-[#4B5563]">
                     {chamberAnnouncements.length} Active Circulars Available
                   </span>
                 </div>
               </div>
-              <ChevronRight className="h-4 w-4 text-amber-400" />
+              <ChevronRight className="h-4 w-4 text-[#059669]" />
             </button>
 
             {/* Mobile Language Switcher */}
             <LanguageSwitcher variant="mobile" />
 
             {/* Mobile Navigation Links */}
-            <div className="flex flex-col gap-1 border-t border-white/10 pt-2">
+            <div className="flex flex-col gap-1 border-t border-[#D1E7DD] pt-2">
               <Link
                 href="/"
                 onClick={() => setOpen(false)}
                 className={cn(
-                  "flex items-center justify-between rounded-xl px-4 py-2.5 text-xs font-bold uppercase tracking-wider transition-colors",
+                  "flex items-center justify-between rounded-full px-4 py-2.5 text-xs font-bold uppercase tracking-wider transition-colors",
                   pathname === "/"
-                    ? "bg-amber-500/20 text-amber-300 border border-amber-400/40"
-                    : "text-white/85 hover:bg-white/5 hover:text-white"
+                    ? "bg-[#059669] text-white shadow-sm"
+                    : "text-[#042017] hover:bg-[#F0FDF4] hover:text-[#059669]"
                 )}
               >
                 <div className="flex items-center gap-2.5">
-                  <Home className="h-4 w-4 text-amber-400" />
+                  <Home className="h-4 w-4" />
                   <span>HOME</span>
                 </div>
-                <ChevronRight className="h-4 w-4 text-white/40" />
+                <ChevronRight className="h-4 w-4 text-slate-400" />
               </Link>
 
               {mainNavItems.map((item) => {
@@ -732,14 +732,14 @@ export function Navbar() {
                       href={item.href}
                       onClick={() => setOpen(false)}
                       className={cn(
-                        "flex items-center justify-between rounded-xl px-4 py-2.5 text-xs font-bold uppercase tracking-wider transition-colors",
+                        "flex items-center justify-between rounded-full px-4 py-2.5 text-xs font-bold uppercase tracking-wider transition-colors",
                         active
-                          ? "bg-amber-500/20 text-amber-300 border border-amber-400/40"
-                          : "text-white/85 hover:bg-white/5 hover:text-white"
+                          ? "bg-[#059669] text-white shadow-sm"
+                          : "text-[#042017] hover:bg-[#F0FDF4] hover:text-[#059669]"
                       )}
                     >
                       <span>{label}</span>
-                      <ChevronRight className="h-4 w-4 text-white/40" />
+                      <ChevronRight className="h-4 w-4 text-slate-400" />
                     </Link>
                   );
                 }
@@ -752,16 +752,16 @@ export function Navbar() {
                         setMobileExpanded((prev) => (prev === item.key ? null : item.key))
                       }
                       className={cn(
-                        "flex items-center justify-between rounded-xl px-4 py-2.5 text-xs font-bold uppercase tracking-wider transition-colors",
+                        "flex items-center justify-between rounded-full px-4 py-2.5 text-xs font-bold uppercase tracking-wider transition-colors",
                         active || isExpanded
-                          ? "bg-white/10 text-amber-300"
-                          : "text-white/85 hover:bg-white/5 hover:text-white"
+                          ? "bg-[#ECFDF5] text-[#059669]"
+                          : "text-[#042017] hover:bg-[#F0FDF4] hover:text-[#059669]"
                       )}
                     >
                       <span>{label}</span>
                       <ChevronDown
                         className={cn(
-                          "h-4 w-4 transition-transform duration-200 text-amber-400",
+                          "h-4 w-4 transition-transform duration-200 text-[#059669]",
                           isExpanded && "rotate-180"
                         )}
                       />
@@ -769,17 +769,17 @@ export function Navbar() {
 
                     {/* Accordion Submenu */}
                     {isExpanded && item.items && (
-                      <div className="ml-3 my-1 flex flex-col gap-1 border-l-2 border-amber-400/40 pl-3 py-1">
+                      <div className="ml-3 my-1 flex flex-col gap-1 border-l-2 border-[#059669]/50 pl-3 py-1">
                         {item.items.map((sub) => (
                           <Link
                             key={sub.href}
                             href={sub.href}
                             onClick={() => setOpen(false)}
-                            className="flex flex-col rounded-lg px-3 py-2 text-xs font-medium text-white/80 hover:bg-white/10 hover:text-amber-300 transition-colors"
+                            className="flex flex-col rounded-xl px-3 py-2 text-xs font-medium text-[#4B5563] hover:bg-[#F0FDF4] hover:text-[#059669] transition-colors"
                           >
-                            <span className="font-bold text-white text-xs">{sub.title}</span>
+                            <span className="font-bold text-[#042017] text-xs">{sub.title}</span>
                             {sub.description && (
-                              <span className="text-[0.65rem] text-slate-400 line-clamp-1 mt-0.5">
+                              <span className="text-[0.65rem] text-[#4B5563] line-clamp-1 mt-0.5">
                                 {sub.description}
                               </span>
                             )}
@@ -793,7 +793,7 @@ export function Navbar() {
             </div>
 
             {/* Mobile Footer & Socials */}
-            <div className="border-t border-white/10 pt-3 flex items-center justify-between">
+            <div className="border-t border-[#D1E7DD] pt-3 flex items-center justify-between">
               <div className="flex items-center gap-2">
                 {socialLinks.map((social) => (
                   <a
@@ -801,7 +801,8 @@ export function Navbar() {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-white/10 text-white/80 hover:bg-amber-400 hover:text-slate-950 transition-colors"
+                    aria-label={`Visit Chamber ${social.name}`}
+                    className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-[#F0FDF4] text-[#042017] hover:bg-[#059669] hover:text-white border border-[#D1E7DD] transition-colors"
                   >
                     {social.icon}
                   </a>

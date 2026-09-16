@@ -52,10 +52,10 @@ export function AchievementsGallery({
               type="button"
               onClick={() => setActive(c)}
               className={cn(
-                "rounded-full px-4 py-2 text-xs font-600 uppercase tracking-[0.12em] transition-all",
+                "rounded-full px-4 py-2 text-xs font-bold uppercase tracking-wider transition-all",
                 active === c
-                  ? "bg-navy text-white shadow-premium"
-                  : "bg-mist text-ink-600 ring-1 ring-border hover:bg-royal-50 hover:text-royal"
+                  ? "bg-[#042017] text-white shadow-sm"
+                  : "bg-[#F0FDF4] text-[#042017] border border-[#D1E7DD] hover:bg-white hover:border-[#059669]"
               )}
             >
               {c}
@@ -69,7 +69,7 @@ export function AchievementsGallery({
             key={`${img.src}-${idx}`}
             type="button"
             onClick={() => setIndex(idx)}
-            className="group relative mb-4 block w-full overflow-hidden rounded-2xl bg-mist shadow-premium ring-1 ring-border transition-all duration-300 hover:shadow-premium-lg focus-visible:ring-2 focus-visible:ring-gold break-inside-avoid"
+            className="group relative mb-4 block w-full overflow-hidden rounded-[28px] bg-white border border-[#D1E7DD] transition-all duration-300 hover:border-[#059669] hover:shadow-[0_16px_40px_-10px_rgba(4,32,23,0.12)] focus-visible:ring-2 focus-visible:ring-[#059669] break-inside-avoid"
             aria-label={`Open image: ${img.alt}`}
           >
             <div className="relative aspect-[4/3]">
@@ -82,20 +82,20 @@ export function AchievementsGallery({
               />
               <div
                 aria-hidden
-                className="absolute inset-0 bg-gradient-to-t from-navy/85 via-navy/10 to-transparent opacity-80 transition-opacity group-hover:opacity-95"
+                className="absolute inset-0 bg-gradient-to-t from-[#042017]/90 via-[#042017]/20 to-transparent opacity-80 transition-opacity group-hover:opacity-95"
               />
               <span
                 className={cn(
-                  "absolute left-3 top-3 rounded-full bg-gold/95 px-2.5 py-1 text-[0.62rem] font-700 uppercase tracking-[0.14em] text-navy"
+                  "absolute left-4 top-4 rounded-full bg-[#042017]/90 px-3 py-1 text-[0.65rem] font-bold uppercase tracking-wider text-white shadow-sm backdrop-blur-md"
                 )}
               >
                 {img.category}
               </span>
-              <span className="absolute right-3 top-3 inline-flex h-8 w-8 items-center justify-center rounded-lg bg-white/15 text-white opacity-0 ring-1 ring-white/25 backdrop-blur transition-all duration-300 group-hover:opacity-100">
+              <span className="absolute right-4 top-4 inline-flex h-8 w-8 items-center justify-center rounded-full bg-white/20 text-white opacity-0 ring-1 ring-white/30 backdrop-blur transition-all duration-300 group-hover:opacity-100">
                 <Maximize2 className="h-4 w-4" />
               </span>
-              <div className="absolute inset-x-0 bottom-0 p-4 text-left">
-                <p className="text-sm font-600 text-white">{img.caption}</p>
+              <div className="absolute inset-x-0 bottom-0 p-5 text-left">
+                <p className="text-sm font-bold text-white tracking-tight">{img.caption}</p>
               </div>
             </div>
           </button>

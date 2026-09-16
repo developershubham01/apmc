@@ -33,14 +33,14 @@ export function SectionHeading({
         <span
           className={cn(
             "eyebrow inline-flex items-center gap-2",
-            light ? "text-gold" : "text-royal"
+            light ? "text-[#10B981] font-bold" : "text-[#059669] font-bold"
           )}
         >
           <span
             aria-hidden
             className={cn(
-              "inline-block h-px w-6",
-              light ? "bg-gold/60" : "bg-gold"
+              "inline-block h-0.5 w-5 rounded-full",
+              light ? "bg-[#10B981]" : "bg-[#059669]"
             )}
           />
           {eyebrow}
@@ -48,18 +48,18 @@ export function SectionHeading({
       )}
       <h2
         className={cn(
-          "font-heading font-700 text-balance text-3xl sm:text-4xl lg:text-[2.6rem] leading-[1.1]",
-          light ? "text-white" : "text-navy"
+          "font-heading font-bold text-balance text-3xl sm:text-4xl lg:text-[2.6rem] leading-[1.14] tracking-tight",
+          light ? "text-white" : "text-[#042017]"
         )}
       >
         {title}
       </h2>
-      <span aria-hidden className="gold-hairline" />
+      <span aria-hidden className="meta-hairline" />
       {description && (
         <p
           className={cn(
             "max-w-2xl text-pretty text-base sm:text-lg leading-relaxed",
-            light ? "text-white/75" : "text-ink-600"
+            light ? "text-slate-200" : "text-[#4B5563]"
           )}
         >
           {description}

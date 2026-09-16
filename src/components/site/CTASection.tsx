@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ExternalLink, type LucideIcon } from "lucide-react";
 import { ScrollReveal } from "./ScrollReveal";
@@ -17,6 +18,7 @@ type CTASectionProps = {
   buttons?: CTAButton[];
   icon?: LucideIcon;
   variant?: "navy" | "light" | "gradient";
+  backgroundImage?: string;
   className?: string;
   children?: React.ReactNode;
 };
@@ -28,70 +30,54 @@ export function CTASection({
   buttons = [],
   icon: Icon,
   variant = "navy",
+  backgroundImage = "/images/hero/hero-trading-bg.jpg",
   className,
   children,
 }: CTASectionProps) {
-  const isNavy = variant === "navy" || variant === "gradient";
-
   return (
-    <section className={cn("relative", className)}>
+    <section className={cn("relative bg-white", className)}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14 lg:py-20">
         <ScrollReveal variant="scale">
-          <div
-            className={cn(
-              "relative overflow-hidden rounded-3xl px-6 py-12 sm:px-12 sm:py-16 lg:px-16",
-              isNavy
-                ? "bg-gradient-to-br from-navy via-navy-700 to-royal text-white shadow-premium-lg"
-                : "bg-white text-navy shadow-premium ring-1 ring-border"
-            )}
-          >
-            {/* Decorative */}
+          <div className="relative overflow-hidden rounded-[32px] px-6 py-12 sm:px-12 sm:py-16 lg:px-16 bg-white text-[#042017] border-2 border-[#D1E7DD] shadow-md">
+            {/* Subtle Architectural Watermark */}
+            <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+              <Image
+                src={backgroundImage}
+                alt="Chamber Trade Network"
+                fill
+                className="object-cover object-center opacity-[0.08]"
+              />
+              <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-transparent to-white/60" />
+            </div>
+
+            {/* Decorative Glows */}
             <div
               aria-hidden
-              className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-gold/15 blur-3xl"
+              className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-[#059669]/10 blur-3xl z-0"
             />
             <div
               aria-hidden
-              className="absolute -left-16 -bottom-16 h-56 w-56 rounded-full bg-royal/20 blur-3xl"
+              className="pointer-events-none absolute -left-16 -bottom-16 h-56 w-56 rounded-full bg-[#10B981]/10 blur-3xl z-0"
             />
 
-            <div className="relative flex flex-col items-center gap-6 text-center lg:flex-row lg:justify-between lg:text-left">
+            <div className="relative z-10 flex flex-col items-center gap-6 text-center lg:flex-row lg:justify-between lg:text-left">
               <div className="max-w-2xl">
                 {Icon && (
-                  <span
-                    className={cn(
-                      "mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl",
-                      isNavy ? "bg-white/10 text-gold ring-1 ring-gold/30" : "bg-royal-50 text-royal"
-                    )}
-                  >
+                  <span className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[#ECFDF5] text-[#059669] ring-1 ring-[#059669]/30 shadow-sm">
                     <Icon className="h-6 w-6" />
                   </span>
                 )}
                 {eyebrow && (
-                  <span
-                    className={cn(
-                      "eyebrow",
-                      isNavy ? "text-gold" : "text-royal"
-                    )}
-                  >
+                  <span className="eyebrow inline-flex items-center gap-1.5 text-[#059669] font-bold uppercase tracking-wider text-xs">
+                    <span aria-hidden className="inline-block h-1.5 w-1.5 rounded-full bg-[#059669]" />
                     {eyebrow}
                   </span>
                 )}
-                <h3
-                  className={cn(
-                    "mt-3 font-heading text-2xl sm:text-3xl lg:text-4xl font-700 leading-tight text-balance",
-                    isNavy ? "text-white" : "text-navy"
-                  )}
-                >
+                <h3 className="mt-3 font-heading text-2xl sm:text-3xl lg:text-4xl font-extrabold leading-tight text-balance tracking-tight text-[#042017]">
                   {title}
                 </h3>
                 {description && (
-                  <p
-                    className={cn(
-                      "mt-4 text-pretty text-base sm:text-lg leading-relaxed",
-                      isNavy ? "text-white/75" : "text-ink-600"
-                    )}
-                  >
+                  <p className="mt-4 text-pretty text-base sm:text-lg leading-relaxed text-[#4B5563]">
                     {description}
                   </p>
                 )}
@@ -104,14 +90,10 @@ export function CTASection({
                     const primary = btn.variant !== "secondary";
                     const external = btn.external;
                     const cls = cn(
-                      "group inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3.5 text-sm font-600 transition-all hover:-translate-y-0.5",
-                      isNavy
-                        ? primary
-                          ? "bg-gold text-navy hover:bg-gold-600 shadow-gold-glow"
-                          : "bg-white/10 text-white ring-1 ring-white/25 hover:bg-white/20"
-                        : primary
-                          ? "bg-navy text-white hover:bg-navy-700 shadow-premium"
-                          : "border border-navy/15 bg-white text-navy hover:border-gold hover:text-royal"
+                      "group inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-bold transition-all hover:-translate-y-0.5",
+                      primary
+                        ? "bg-[#059669] text-white hover:bg-[#047857] shadow-md"
+                        : "border-2 border-[#042017] bg-white text-[#042017] hover:bg-[#042017] hover:text-white shadow-sm"
                     );
                     if (external) {
                       return (

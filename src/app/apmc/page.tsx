@@ -15,6 +15,7 @@ import {
 import { PageHeader } from "@/components/site/PageHeader";
 import { SectionHeading } from "@/components/site/SectionHeading";
 import { ScrollReveal } from "@/components/site/ScrollReveal";
+import { LightboxImage } from "@/components/site/LightboxImage";
 import { MarketCard } from "@/components/site/MarketCard";
 import { MarketRates } from "@/components/site/MarketRates";
 import { CTASection } from "@/components/site/CTASection";
@@ -55,6 +56,8 @@ export default function ApmcPage() {
         title="Navi Mumbai APMC Market"
         description="APMC Market in Turbhe, Navi Mumbai, is a major wholesale agricultural trading ecosystem serving fruits, vegetables, grains, spices and onion-potato commodities."
         crumbs={[{ label: "APMC" }]}
+        backgroundImage="/images/apmc/market-yard.jpg"
+        imageOpacity={90}
       />
 
       {/* Market Overview */}
@@ -86,14 +89,14 @@ export default function ApmcPage() {
                   href={siteConfig.dailyRatesUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-2 rounded-xl bg-navy px-5 py-3 text-sm font-600 text-white transition-all hover:bg-navy-700 hover:-translate-y-0.5"
+                  className="group inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-amber-500 to-yellow-500 px-5 py-3 text-sm font-bold text-slate-950 shadow-gold-glow transition-all hover:from-amber-400 hover:to-yellow-400 hover:-translate-y-0.5"
                 >
                   <ExternalLink className="h-4 w-4" />
                   Daily Market Rates
                 </a>
                 <Link
                   href="#market-information"
-                  className="inline-flex items-center gap-2 rounded-xl border border-navy/15 bg-white px-5 py-3 text-sm font-600 text-navy transition-all hover:border-gold hover:text-royal"
+                  className="inline-flex items-center gap-2 rounded-xl border border-navy/15 bg-white px-5 py-3 text-sm font-600 text-navy transition-all hover:border-amber-500 hover:text-amber-700"
                 >
                   Market Information
                   <ArrowRight className="h-4 w-4" />
@@ -102,26 +105,27 @@ export default function ApmcPage() {
             </ScrollReveal>
 
             <ScrollReveal variant="right">
-              <div className="relative overflow-hidden rounded-2xl ring-1 ring-border shadow-premium-lg">
-                <div className="img-zoom relative aspect-[4/3]">
-                  <Image
+              <div className="relative overflow-hidden rounded-3xl border-2 border-[#059669] shadow-xl bg-white">
+                <div className="relative aspect-[4/3]">
+                  <LightboxImage
                     src="/images/apmc/market-yard.jpg"
                     alt="Navi Mumbai APMC market yard"
-                    fill
+                    caption="Navi Mumbai APMC Market Yard Complex — Turbhe"
                     sizes="(max-width: 1024px) 100vw, 50vw"
-                    className="object-cover"
+                    className="h-full w-full rounded-none border-0 ring-0"
+                    imgClassName="object-cover"
                   />
                   <div
                     aria-hidden
-                    className="absolute inset-0 bg-gradient-to-t from-navy/80 via-navy/20 to-transparent"
+                    className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#042017]/80 via-transparent to-transparent"
                   />
                 </div>
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <p className="text-xs uppercase tracking-[0.18em] text-gold">
-                    APMC Turbhe
+                <div className="pointer-events-none absolute bottom-3 left-4 right-4 z-10">
+                  <p className="font-heading text-lg font-bold text-white drop-shadow">
+                    Navi Mumbai APMC Wholesale Hub
                   </p>
-                  <p className="mt-1 font-heading text-xl font-700 text-white">
-                    Navi Mumbai Wholesale Market Yard
+                  <p className="text-xs text-[#10B981] font-bold">
+                    50-Acre Trade Yard • Turbhe
                   </p>
                 </div>
               </div>
@@ -193,8 +197,8 @@ export default function ApmcPage() {
                   </div>
                 </ScrollReveal>
                 <ScrollReveal variant={reverse ? "left" : "right"} className={reverse ? "lg:order-1" : ""}>
-                  <span className="eyebrow inline-flex items-center gap-2 text-royal">
-                    <span aria-hidden className="inline-block h-px w-6 bg-gold" />
+                  <span className="eyebrow inline-flex items-center gap-2 text-amber-600">
+                    <span aria-hidden className="inline-block h-px w-6 bg-amber-600" />
                     Market {String(i + 1).padStart(2, "0")}
                   </span>
                   <h3 className="mt-3 font-heading text-2xl sm:text-3xl font-700 text-navy">
@@ -205,7 +209,7 @@ export default function ApmcPage() {
                     {market.longDescription}
                   </p>
                   <div className="mt-5">
-                    <p className="text-xs uppercase tracking-[0.14em] text-royal font-600">
+                    <p className="text-xs uppercase tracking-[0.14em] text-amber-600 font-700">
                       Traded Commodities
                     </p>
                     <div className="mt-3 flex flex-wrap gap-2">
@@ -261,7 +265,7 @@ export default function ApmcPage() {
             <div className="overflow-hidden rounded-2xl border border-border bg-white shadow-premium">
               <div className="border-b border-border bg-navy px-6 py-4">
                 <h3 className="flex items-center gap-2 font-heading text-base font-700 text-white">
-                  <Store className="h-5 w-5 text-gold" />
+                  <Store className="h-5 w-5 text-amber-400" />
                   Official Resources
                 </h3>
               </div>
@@ -290,7 +294,7 @@ export default function ApmcPage() {
                   className="group flex items-center justify-between gap-4 px-6 py-5 transition-colors hover:bg-mist"
                 >
                   <div className="flex items-center gap-4">
-                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-gold-50 text-gold-600 ring-1 ring-gold/30">
+                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-amber-50 text-amber-600 ring-1 ring-amber-200">
                       <ExternalLink className="h-5 w-5" />
                     </span>
                     <div>
@@ -306,8 +310,8 @@ export default function ApmcPage() {
 
           {/* Disclaimer */}
           <ScrollReveal variant="up" className="mt-8">
-            <div className="flex items-start gap-3 rounded-2xl border border-gold/30 bg-gold-50/60 p-5">
-              <Info className="h-5 w-5 shrink-0 text-gold-600" />
+            <div className="flex items-start gap-3 rounded-2xl border border-amber-500/30 bg-amber-50/60 p-5">
+              <Info className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" />
               <p className="text-sm text-ink-600">
                 This is a static informational website. Market timings, holidays
                 and daily prices are subject to change — always confirm with the

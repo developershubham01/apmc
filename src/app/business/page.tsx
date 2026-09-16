@@ -23,6 +23,7 @@ import {
 import { PageHeader } from "@/components/site/PageHeader";
 import { SectionHeading } from "@/components/site/SectionHeading";
 import { ScrollReveal } from "@/components/site/ScrollReveal";
+import { LightboxImage } from "@/components/site/LightboxImage";
 import { CTASection } from "@/components/site/CTASection";
 import { siteConfig } from "@/data/site";
 
@@ -137,6 +138,8 @@ export default function BusinessPage() {
         title="Business Enterprises & Merchant Services"
         description="Comprehensive commercial infrastructure, agro-commodity export desk, dispute redressal cell, and corporate ventures under Shri Kirti Rana."
         crumbs={[{ label: "Business" }]}
+        backgroundImage="/images/hero/hero-trading-bg.jpg"
+        imageOpacity={90}
       />
 
       {/* 1. Overview & Kisan Kirti Agro */}
@@ -159,22 +162,22 @@ export default function BusinessPage() {
               <div className="mt-7 flex flex-wrap gap-3">
                 <Link
                   href="#export"
-                  className="inline-flex items-center gap-2 rounded-xl bg-navy px-5 py-3 text-sm font-bold text-white shadow-md transition-all hover:bg-royal hover:-translate-y-0.5"
+                  className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-amber-500 to-yellow-500 px-5 py-3 text-sm font-bold text-slate-950 shadow-gold-glow transition-all hover:from-amber-400 hover:to-yellow-400 hover:-translate-y-0.5"
                 >
-                  <Globe2 className="h-4 w-4 text-gold" />
+                  <Globe2 className="h-4 w-4 text-slate-950" />
                   Export Desk
-                  <ArrowRight className="h-4 w-4 text-gold" />
+                  <ArrowRight className="h-4 w-4 text-slate-950" />
                 </Link>
                 <Link
                   href="#dispute"
-                  className="inline-flex items-center gap-2 rounded-xl border border-navy/20 bg-mist px-5 py-3 text-sm font-bold text-navy transition-all hover:border-gold hover:text-royal hover:bg-white"
+                  className="inline-flex items-center gap-2 rounded-xl border border-navy/20 bg-mist px-5 py-3 text-sm font-bold text-navy transition-all hover:border-amber-500 hover:text-amber-700 hover:bg-white"
                 >
                   <Scale className="h-4 w-4 text-royal" />
                   Dispute Redressal
                 </Link>
                 <Link
                   href="#services"
-                  className="inline-flex items-center gap-2 rounded-xl border border-navy/20 bg-mist px-5 py-3 text-sm font-bold text-navy transition-all hover:border-gold hover:text-royal hover:bg-white"
+                  className="inline-flex items-center gap-2 rounded-xl border border-navy/20 bg-mist px-5 py-3 text-sm font-bold text-navy transition-all hover:border-amber-500 hover:text-amber-700 hover:bg-white"
                 >
                   <ShieldCheck className="h-4 w-4 text-emerald-600" />
                   Merchant Welfare
@@ -183,26 +186,27 @@ export default function BusinessPage() {
             </ScrollReveal>
 
             <ScrollReveal variant="right">
-              <div className="relative overflow-hidden rounded-3xl ring-1 ring-border shadow-premium-lg">
-                <div className="img-zoom relative aspect-[4/3]">
-                  <Image
+              <div className="relative overflow-hidden rounded-3xl border-2 border-[#059669] shadow-xl bg-white">
+                <div className="relative aspect-[4/3]">
+                  <LightboxImage
                     src="/images/kirti-rana/agriculture.jpg"
                     alt="Agriculture and trade — golden wheat field at sunrise"
-                    fill
+                    caption="Agro-Commodity Leadership — Agriculture & Trade"
                     sizes="(max-width: 1024px) 100vw, 50vw"
-                    className="object-cover"
+                    className="h-full w-full rounded-none border-0 ring-0"
+                    imgClassName="object-cover"
                   />
                   <div
                     aria-hidden
-                    className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/30 to-transparent"
+                    className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#042017]/90 via-[#042017]/30 to-transparent"
                   />
                 </div>
-                <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 text-white">
-                  <p className="text-xs uppercase tracking-[0.2em] text-gold font-bold">
+                <div className="pointer-events-none absolute bottom-0 left-0 right-0 p-6 sm:p-8 text-white z-10">
+                  <p className="text-xs uppercase tracking-[0.2em] text-[#10B981] font-bold">
                     Agro-Commodity Leadership
                   </p>
-                  <p className="mt-1 font-heading text-xl sm:text-2xl font-extrabold text-white">
-                    Connecting Indian Agriculture to Global Markets
+                  <p className="mt-1 font-heading text-xl sm:text-2xl font-bold">
+                    Bridging Agriculture &amp; Commerce
                   </p>
                 </div>
               </div>
@@ -224,7 +228,7 @@ export default function BusinessPage() {
             {exportServices.map((service, i) => (
               <ScrollReveal key={service.title} variant="up" delay={i * 80} className="h-full">
                 <div className="h-full rounded-2xl border border-border bg-white p-6 shadow-premium transition-all duration-300 hover:-translate-y-1 hover:shadow-premium-lg">
-                  <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-navy text-gold ring-1 ring-gold/30">
+                  <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-navy text-amber-400 ring-1 ring-amber-500/30">
                     <Globe2 className="h-6 w-6" />
                   </span>
                   <h3 className="mt-5 font-heading text-lg font-bold text-navy">
@@ -246,8 +250,8 @@ export default function BusinessPage() {
           <div className="grid items-center gap-12 lg:grid-cols-12">
             <div className="lg:col-span-5">
               <ScrollReveal variant="left">
-                <span className="eyebrow inline-flex items-center gap-2 text-royal">
-                  <Scale className="h-4 w-4 text-gold" />
+                <span className="eyebrow inline-flex items-center gap-2 text-amber-600">
+                  <Scale className="h-4 w-4 text-amber-600" />
                   Arbitration Tribunal
                 </span>
                 <h2 className="mt-3 font-heading text-3xl sm:text-4xl font-extrabold text-navy leading-tight">
@@ -257,9 +261,9 @@ export default function BusinessPage() {
                 <p className="mt-5 text-base leading-relaxed text-ink-600">
                   Established under the auspices of the Navi Mumbai Merchants Chamber and Bombay Mudibazar Kariana Merchants Association, the Dispute Redressal Cell provides an authoritative, neutral commercial arbitration forum for wholesale traders across Maharashtra and Gujarat.
                 </p>
-                <div className="mt-6 rounded-2xl border border-gold/40 bg-gold-50/50 p-5">
+                <div className="mt-6 rounded-2xl border border-amber-500/40 bg-amber-50/50 p-5">
                   <p className="font-heading text-sm font-bold text-navy flex items-center gap-2">
-                    <CheckCircle2 className="h-4 w-4 text-gold-600" />
+                    <CheckCircle2 className="h-4 w-4 text-amber-600" />
                     Over 95% Amicable Resolution Rate
                   </p>
                   <p className="mt-1 text-xs text-ink-600 leading-relaxed">
@@ -273,7 +277,7 @@ export default function BusinessPage() {
               {disputeFeatures.map((item, i) => (
                 <ScrollReveal key={item.title} variant="up" delay={i * 80}>
                   <div className="rounded-2xl border border-border bg-mist p-5 transition-all hover:bg-white hover:shadow-premium">
-                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-navy text-gold">
+                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-navy text-amber-400">
                       <Scale className="h-5 w-5" />
                     </span>
                     <h3 className="mt-3.5 font-heading text-base font-bold text-navy">
@@ -322,12 +326,12 @@ export default function BusinessPage() {
             <div className="overflow-hidden rounded-3xl border border-border bg-white shadow-premium">
               <div className="border-b border-border bg-navy px-6 sm:px-8 py-4 flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <Building2 className="h-5 w-5 text-gold" />
+                  <Building2 className="h-5 w-5 text-amber-400" />
                   <h3 className="font-heading text-base sm:text-lg font-bold text-white">
                     Corporate Register — Kisan Kirti Agro Pvt. Ltd.
                   </h3>
                 </div>
-                <span className="rounded-full bg-gold/20 px-3 py-1 text-xs font-bold text-gold uppercase tracking-wider">
+                <span className="rounded-full bg-amber-500/20 px-3 py-1 text-xs font-bold text-amber-300 uppercase tracking-wider">
                   Verified
                 </span>
               </div>

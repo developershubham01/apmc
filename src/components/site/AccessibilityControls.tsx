@@ -38,7 +38,7 @@ export function AccessibilityControls() {
 
   return (
     <div
-      className="inline-flex items-center gap-0.5 rounded-md bg-white/10 p-0.5 border border-white/15 backdrop-blur-sm"
+      className="inline-flex items-center gap-0.5 rounded-full bg-white p-0.5 border border-[#D1E7DD] shadow-sm"
       role="group"
       aria-label="Text Size Adjustment"
     >
@@ -47,10 +47,10 @@ export function AccessibilityControls() {
         onClick={() => handleSetSize("sm")}
         title="Decrease Font Size (A-)"
         aria-label="Decrease Font Size"
-        className={`h-5 px-1.5 rounded text-[0.68rem] font-bold transition-all ${
+        className={`h-5 px-2 rounded-full text-[0.68rem] font-bold transition-all ${
           fontSize === "sm"
-            ? "bg-amber-400 text-slate-950 shadow-sm"
-            : "text-white/80 hover:text-white hover:bg-white/10"
+            ? "bg-[#059669] text-white shadow-sm"
+            : "text-[#042017] hover:text-[#059669] hover:bg-[#ECFDF5]"
         }`}
       >
         A-
@@ -60,10 +60,10 @@ export function AccessibilityControls() {
         onClick={() => handleSetSize("base")}
         title="Reset Font Size (A)"
         aria-label="Default Font Size"
-        className={`h-5 px-1.5 rounded text-[0.68rem] font-bold transition-all ${
+        className={`h-5 px-2 rounded-full text-[0.68rem] font-bold transition-all ${
           fontSize === "base"
-            ? "bg-amber-400 text-slate-950 shadow-sm"
-            : "text-white/80 hover:text-white hover:bg-white/10"
+            ? "bg-[#059669] text-white shadow-sm"
+            : "text-[#042017] hover:text-[#059669] hover:bg-[#ECFDF5]"
         }`}
       >
         A
@@ -73,10 +73,10 @@ export function AccessibilityControls() {
         onClick={() => handleSetSize("lg")}
         title="Increase Font Size (A+)"
         aria-label="Increase Font Size"
-        className={`h-5 px-1.5 rounded text-[0.68rem] font-bold transition-all ${
+        className={`h-5 px-2 rounded-full text-[0.68rem] font-bold transition-all ${
           fontSize === "lg"
-            ? "bg-amber-400 text-slate-950 shadow-sm"
-            : "text-white/80 hover:text-white hover:bg-white/10"
+            ? "bg-[#059669] text-white shadow-sm"
+            : "text-[#042017] hover:text-[#059669] hover:bg-[#ECFDF5]"
         }`}
       >
         A+

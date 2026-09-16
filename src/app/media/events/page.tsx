@@ -19,6 +19,8 @@ export default function MediaEventsPage() {
         description="Trade meets, interactive sessions and chamber programmes that bring merchants, farmers and office-bearers onto one platform."
         crumbs={[{ label: "Media", href: "/media" }, { label: "Events" }]}
         icon={CalendarRange}
+        backgroundImage="/images/events/trade-meeting.jpg"
+        imageOpacity={90}
       />
       <MediaCategoryPageBody slug="events" />
     </>

@@ -18,7 +18,7 @@ const sizeMap = {
 /**
  * Elegant monogram avatar used in place of a photograph when a
  * verified image is not yet available. Designed to look intentional
- * and premium — not like a broken image.
+ * and premium in Green and White theme.
  */
 export function MonogramAvatar({
   initials,
@@ -31,28 +31,28 @@ export function MonogramAvatar({
     <div
       className={cn(
         "relative inline-flex items-center justify-center rounded-2xl",
-        "bg-gradient-to-br from-navy via-navy-700 to-royal text-white",
-        "shadow-premium ring-1 ring-gold/30",
+        "bg-[#042017] text-white",
+        "shadow-sm ring-1 ring-[#059669]/30",
         sizeMap[size],
         className
       )}
       role="img"
       aria-label={name ? `${name}${designation ? `, ${designation}` : ""}` : initials}
     >
-      {/* Decorative gold corner */}
+      {/* Decorative mint corner */}
       <span
         aria-hidden
         className="pointer-events-none absolute inset-0 rounded-2xl opacity-60"
         style={{
           background:
-            "radial-gradient(120% 80% at 0% 0%, rgba(201,162,39,0.28) 0%, transparent 45%)",
+            "radial-gradient(120% 80% at 0% 0%, rgba(16,185,129,0.28) 0%, transparent 45%)",
         }}
       />
       <span
         aria-hidden
-        className="pointer-events-none absolute right-1.5 top-1.5 h-2 w-2 rounded-full bg-gold"
+        className="pointer-events-none absolute right-1.5 top-1.5 h-2 w-2 rounded-full bg-[#10B981]"
       />
-      <span className="font-heading font-700 tracking-tight text-gold-gradient">
+      <span className="font-heading font-bold tracking-tight text-[#10B981]">
         {initials}
       </span>
     </div>

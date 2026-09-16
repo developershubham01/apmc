@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ChevronRight, Home } from "lucide-react";
 import { ScrollReveal } from "./ScrollReveal";
@@ -14,8 +15,12 @@ type PageHeaderProps = {
   description?: React.ReactNode;
   crumbs?: Crumb[];
   align?: "left" | "center";
-  /** Optional lucide icon rendered as a gold chip beside the heading. */
+  /** Optional lucide icon rendered as a chip beside the heading. */
   icon?: React.ComponentType<{ className?: string }>;
+  /** Optional background image path (e.g. /images/hero/chamber-headquarters-hero.jpg) */
+  backgroundImage?: string;
+  /** Image opacity percentage between 10 and 100 (defaults to 85) */
+  imageOpacity?: number;
 };
 
 export function PageHeader({
@@ -25,37 +30,48 @@ export function PageHeader({
   crumbs = [],
   align = "left",
   icon: Icon,
+  backgroundImage = "/images/hero/chamber-headquarters-hero.jpg",
+  imageOpacity = 85,
 }: PageHeaderProps) {
   return (
-    <section className="relative overflow-hidden bg-navy text-white">
-      {/* Background layers */}
+    <section className="relative overflow-hidden bg-white text-[#042017] border-b border-[#D1E7DD] min-h-[260px] sm:min-h-[300px] flex items-center">
+      {/* Subtle Architectural Watermark — visible but separate from content */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <Image
+          src={backgroundImage}
+          alt="Navi Mumbai Merchants Chamber Architectural Background"
+          fill
+          priority
+          className="object-cover object-center opacity-[0.08]"
+        />
+
+        {/* Gentle directional scrim */}
+        <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-transparent to-white/60" />
+      </div>
+
+      {/* Radial Lighting Highlights */}
       <div
         aria-hidden
-        className="absolute -right-24 -top-24 h-80 w-80 rounded-full bg-royal/30 blur-3xl"
+        className="pointer-events-none absolute -right-24 -top-24 h-96 w-96 rounded-full bg-[#059669]/10 blur-3xl z-0"
       />
       <div
         aria-hidden
-        className="absolute -left-20 bottom-0 h-72 w-72 rounded-full bg-gold/15 blur-3xl"
-      />
-      {/* Bottom gold accent */}
-      <div
-        aria-hidden
-        className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-gold via-saffron to-gold"
+        className="pointer-events-none absolute -left-20 bottom-0 h-80 w-80 rounded-full bg-[#10B981]/10 blur-3xl z-0"
       />
 
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-32 pb-14 lg:pt-36 lg:pb-20">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-24 pb-12 lg:pt-28 lg:pb-16 w-full">
         {/* Breadcrumbs */}
-        <nav aria-label="Breadcrumb" className="mb-6">
+        <nav aria-label="Breadcrumb" className="mb-5">
           <ol
             className={cn(
-              "flex flex-wrap items-center gap-1.5 text-xs text-white/60",
+              "flex flex-wrap items-center gap-1.5 text-xs text-[#4B5563]",
               align === "center" && "justify-center"
             )}
           >
             <li>
               <Link
                 href="/"
-                className="inline-flex items-center gap-1 transition-colors hover:text-gold"
+                className="inline-flex items-center gap-1 font-medium transition-colors hover:text-[#059669]"
               >
                 <Home className="h-3.5 w-3.5" />
                 Home
@@ -63,16 +79,16 @@ export function PageHeader({
             </li>
             {crumbs.map((c) => (
               <li key={c.label} className="inline-flex items-center gap-1.5">
-                <ChevronRight className="h-3.5 w-3.5 text-white/40" />
+                <ChevronRight className="h-3.5 w-3.5 text-slate-400" />
                 {c.href ? (
                   <Link
                     href={c.href}
-                    className="transition-colors hover:text-gold"
+                    className="font-medium transition-colors hover:text-[#059669]"
                   >
                     {c.label}
                   </Link>
                 ) : (
-                  <span className="text-gold">{c.label}</span>
+                  <span className="text-[#059669] font-bold">{c.label}</span>
                 )}
               </li>
             ))}
@@ -82,7 +98,7 @@ export function PageHeader({
         <ScrollReveal
           variant="up"
           className={cn(
-            "flex flex-col gap-4",
+            "flex flex-col gap-3 sm:gap-4",
             align === "center" && "items-center text-center"
           )}
         >
@@ -94,29 +110,23 @@ export function PageHeader({
               )}
             >
               {Icon && (
-                <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white/10 text-gold ring-1 ring-gold/40 backdrop-blur-sm">
+                <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-[#ECFDF5] text-[#059669] ring-1 ring-[#059669]/30 shadow-sm">
                   <Icon className="h-5 w-5" />
                 </span>
               )}
               {eyebrow && (
-                <span className="eyebrow inline-flex items-center gap-2 text-gold">
-                  <span aria-hidden className="inline-block h-px w-6 bg-gold/60" />
+                <span className="eyebrow inline-flex items-center gap-1.5 text-[#059669] font-bold uppercase tracking-wider text-xs">
+                  <span aria-hidden className="inline-block h-1.5 w-1.5 rounded-full bg-[#059669]" />
                   {eyebrow}
                 </span>
               )}
             </div>
           )}
-          <h1 className="font-heading font-800 text-4xl sm:text-5xl lg:text-6xl leading-[1.05] text-balance">
+          <h1 className="font-heading font-extrabold text-3xl sm:text-4xl lg:text-5xl leading-[1.12] text-balance tracking-tight text-[#042017]">
             {title}
           </h1>
-          <span aria-hidden className="gold-hairline" />
           {description && (
-            <p
-              className={cn(
-                "max-w-2xl text-pretty text-base sm:text-lg leading-relaxed text-white/75",
-                align === "center" && "mx-auto"
-              )}
-            >
+            <p className="max-w-3xl text-pretty text-sm sm:text-base lg:text-lg leading-relaxed text-[#4B5563]">
               {description}
             </p>
           )}

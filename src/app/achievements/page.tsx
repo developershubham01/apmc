@@ -70,37 +70,39 @@ export default function AchievementsPage() {
         title="Achievements & Official Honours"
         description="A verified archive of business leadership awards, international honours, chamber milestones and community recognitions conferred upon Shri Kirti Rana."
         crumbs={[{ label: "Achievements" }]}
+        backgroundImage="/images/events/conference.jpg"
+        imageOpacity={90}
       />
 
       {/* Featured Award Highlights Banner */}
-      <section className="bg-white py-14 lg:py-18">
+      <section className="bg-white py-14 lg:py-18 border-b border-[#D1E7DD]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-8 lg:grid-cols-2">
             {/* Girnar Best Businessman Award Card */}
             <ScrollReveal variant="left">
-              <div className="relative overflow-hidden rounded-3xl border-2 border-gold/40 bg-gradient-to-br from-amber-50/80 via-white to-gold-50/40 p-8 shadow-premium">
+              <div className="relative overflow-hidden rounded-3xl border-2 border-[#D1E7DD] bg-gradient-to-br from-[#F0FDF4] via-white to-[#ECFDF5] p-8 shadow-sm">
                 <div className="flex items-center gap-3">
-                  <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-gold text-navy shadow-gold-glow">
+                  <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[#042017] text-[#10B981] shadow-sm">
                     <Trophy className="h-6 w-6" />
                   </span>
                   <div>
-                    <span className="text-xs uppercase tracking-widest font-700 text-gold-700">
+                    <span className="text-xs uppercase tracking-widest font-bold text-[#047857]">
                       Best Businessman Award (2008)
                     </span>
-                    <h3 className="font-heading text-2xl font-800 text-navy">
+                    <h3 className="font-heading text-2xl font-extrabold text-[#042017]">
                       Girnar Award
                     </h3>
                   </div>
                 </div>
-                <p className="mt-4 text-sm sm:text-base leading-relaxed text-ink-700">
+                <p className="mt-4 text-sm sm:text-base leading-relaxed text-[#4B5563]">
                   Organized and conferred by <strong>Bruhad Mumbai Gujarati Samaj — Mumbai</strong> in recognition of outstanding commercial enterprise, community integrity, and contribution to Mumbai&apos;s wholesale merchant landscape.
                 </p>
-                <div className="mt-6 flex items-center justify-between border-t border-gold/20 pt-4 text-xs font-600 text-royal">
+                <div className="mt-6 flex items-center justify-between border-t border-[#D1E7DD] pt-4 text-xs font-semibold text-[#047857]">
                   <span className="flex items-center gap-1.5">
-                    <ShieldCheck className="h-4 w-4 text-gold-600" />
+                    <ShieldCheck className="h-4 w-4 text-[#059669]" />
                     Verified Official Honor
                   </span>
-                  <span className="rounded-full bg-gold/20 px-3 py-1 text-gold-800">
+                  <span className="rounded-full bg-[#ECFDF5] px-3 py-1 text-[#047857] border border-[#D1E7DD]">
                     Girnar Award
                   </span>
                 </div>
@@ -109,29 +111,29 @@ export default function AchievementsPage() {
 
             {/* Global Business ICON Award Dubai Card */}
             <ScrollReveal variant="right">
-              <div className="relative overflow-hidden rounded-3xl border-2 border-navy/20 bg-gradient-to-br from-navy via-navy-800 to-royal p-8 text-white shadow-premium">
+              <div className="relative overflow-hidden rounded-3xl border-2 border-[#059669] bg-[#042017] p-8 text-white shadow-xl">
                 <div className="flex items-center gap-3">
-                  <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-gold text-navy shadow-gold-glow">
+                  <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[#059669] text-white shadow-sm">
                     <Globe2 className="h-6 w-6" />
                   </span>
                   <div>
-                    <span className="text-xs uppercase tracking-widest font-700 text-gold">
+                    <span className="text-xs uppercase tracking-widest font-bold text-[#10B981]">
                       International Recognition (2025)
                     </span>
-                    <h3 className="font-heading text-2xl font-800 text-white">
+                    <h3 className="font-heading text-2xl font-extrabold text-white">
                       Global Business ICON Award
                     </h3>
                   </div>
                 </div>
-                <p className="mt-4 text-sm sm:text-base leading-relaxed text-white/80">
+                <p className="mt-4 text-sm sm:text-base leading-relaxed text-slate-200">
                   Conferred at the <strong>Glimpses Global Business ICON Awards in Dubai</strong>, honoring exceptional cross-border trade leadership, agricultural commodity stewardship, and international merchant collaboration.
                 </p>
-                <div className="mt-6 flex items-center justify-between border-t border-white/15 pt-4 text-xs font-600 text-gold">
+                <div className="mt-6 flex items-center justify-between border-t border-white/15 pt-4 text-xs font-semibold text-[#10B981]">
                   <span className="flex items-center gap-1.5">
-                    <Sparkles className="h-4 w-4 text-gold" />
+                    <Sparkles className="h-4 w-4 text-[#10B981]" />
                     Dubai, United Arab Emirates
                   </span>
-                  <span className="rounded-full bg-white/10 px-3 py-1 text-white">
+                  <span className="rounded-full bg-white/10 px-3 py-1 text-white border border-white/20">
                     Global Icon
                   </span>
                 </div>
@@ -142,7 +144,7 @@ export default function AchievementsPage() {
       </section>
 
       {/* Verified Photo Showcase Gallery & Policy Milestones */}
-      <section id="milestones" className="scroll-mt-28 bg-mist py-16 lg:py-24">
+      <section id="milestones" className="scroll-mt-28 bg-[#F0FDF4] py-16 lg:py-24 border-b border-[#D1E7DD]">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeading
             eyebrow="Event Photography & Policy Milestones"
@@ -153,8 +155,8 @@ export default function AchievementsPage() {
           <div className="mt-12 grid gap-8 md:grid-cols-2">
             {featuredPhotoShowcase.map((item, idx) => (
               <ScrollReveal key={item.src} variant="up" delay={idx * 100}>
-                <div className="group overflow-hidden rounded-3xl border border-border bg-white shadow-premium transition-all duration-300 hover:-translate-y-1 hover:shadow-premium-lg">
-                  <div className="relative aspect-[16/10] w-full overflow-hidden bg-navy-900">
+                <div className="group overflow-hidden rounded-3xl border border-[#D1E7DD] bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:border-[#059669]">
+                  <div className="relative aspect-[16/10] w-full overflow-hidden bg-white">
                     <LightboxImage
                       src={item.src}
                       alt={item.alt}
@@ -163,15 +165,15 @@ export default function AchievementsPage() {
                       className="h-full w-full ring-0"
                       imgClassName="object-cover transition-transform duration-700 group-hover:scale-105"
                     />
-                    <div className="absolute top-4 left-4 rounded-full border border-white/20 bg-black/60 px-3.5 py-1 text-xs font-600 text-gold backdrop-blur-md">
+                    <div className="absolute top-4 left-4 rounded-full border border-white/20 bg-[#042017]/80 px-3.5 py-1 text-xs font-bold text-[#10B981] backdrop-blur-md">
                       {item.badge}
                     </div>
                   </div>
                   <div className="p-6 sm:p-7">
-                    <h3 className="font-heading text-xl font-700 text-navy group-hover:text-royal">
+                    <h3 className="font-heading text-xl font-bold text-[#042017] group-hover:text-[#059669]">
                       {item.title}
                     </h3>
-                    <p className="mt-2.5 text-sm leading-relaxed text-ink-600">
+                    <p className="mt-2.5 text-sm leading-relaxed text-[#4B5563]">
                       {item.description}
                     </p>
                   </div>
@@ -188,33 +190,33 @@ export default function AchievementsPage() {
           <div className="grid gap-10 lg:grid-cols-3 items-start">
             <div className="lg:sticky lg:top-24">
               <ScrollReveal variant="left">
-                <span className="eyebrow inline-flex items-center gap-2 text-gold">
+                <span className="eyebrow inline-flex items-center gap-2 text-[#059669] font-bold">
                   <Award className="h-4 w-4" />
                   Official Register
                 </span>
-                <h2 className="mt-4 font-heading text-3xl sm:text-4xl font-700 text-navy leading-tight">
+                <h2 className="mt-4 font-heading text-3xl sm:text-4xl font-bold text-[#042017] leading-tight">
                   11 Major Awards &amp; Recognitions
                 </h2>
-                <span aria-hidden className="mt-4 block gold-hairline" />
-                <p className="mt-5 text-sm sm:text-base leading-relaxed text-ink-600">
+                <span aria-hidden className="mt-4 block h-1 w-16 rounded-full bg-[#059669]" />
+                <p className="mt-5 text-sm sm:text-base leading-relaxed text-[#4B5563]">
                   Transcribed directly from the official achievements archive document, reflecting decades of service across national federations, community trusts, and commerce associations.
                 </p>
 
-                <div className="mt-8 rounded-2xl border border-border bg-mist p-5">
+                <div className="mt-8 rounded-2xl border border-[#D1E7DD] bg-[#F0FDF4] p-5">
                   <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-navy text-gold">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#042017] text-[#10B981]">
                       <Trophy className="h-5 w-5" />
                     </div>
                     <div>
-                      <p className="font-heading text-xl font-700 text-navy">11 Awards</p>
-                      <p className="text-xs uppercase tracking-wider text-royal font-600">Verified Citations</p>
+                      <p className="font-heading text-xl font-bold text-[#042017]">11 Awards</p>
+                      <p className="text-xs uppercase tracking-wider text-[#047857] font-bold">Verified Citations</p>
                     </div>
                   </div>
                 </div>
 
                 {/* Original Document Lightbox Preview */}
                 <div className="mt-6">
-                  <p className="text-xs uppercase tracking-widest font-600 text-ink-500 mb-2">
+                  <p className="text-xs uppercase tracking-widest font-bold text-[#4B5563] mb-2">
                     Original Document Archive:
                   </p>
                   <LightboxImage
@@ -222,7 +224,7 @@ export default function AchievementsPage() {
                     alt="Original Achievements Document Slide"
                     caption="Official Achievements Document — 11 Awards List"
                     overlay
-                    className="aspect-[16/9] rounded-2xl border border-border ring-0"
+                    className="aspect-[16/9] rounded-2xl border border-[#D1E7DD] ring-0 shadow-sm"
                     imgClassName="object-cover"
                   />
                 </div>
@@ -234,31 +236,31 @@ export default function AchievementsPage() {
               {officialAwards.map((award, i) => (
                 <ScrollReveal key={award.id} variant="up" delay={i * 50}>
                   <div
-                    className={`rounded-2xl border p-6 transition-all duration-300 hover:shadow-premium ${
+                    className={`rounded-2xl border p-6 transition-all duration-300 hover:shadow-md ${
                       award.highlight
-                        ? "border-gold/50 bg-gradient-to-r from-gold-50/40 via-white to-white shadow-sm"
-                        : "border-border bg-white hover:border-royal/30"
+                        ? "border-[#059669] bg-[#F0FDF4] shadow-sm"
+                        : "border-[#D1E7DD] bg-white hover:border-[#059669]"
                     }`}
                   >
                     <div className="flex flex-wrap items-center justify-between gap-2">
                       <div className="flex items-center gap-3">
-                        <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-navy text-xs font-700 text-gold">
+                        <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#042017] text-xs font-bold text-[#10B981]">
                           #{award.id}
                         </span>
-                        <h3 className="font-heading text-lg sm:text-xl font-700 text-navy">
+                        <h3 className="font-heading text-lg sm:text-xl font-bold text-[#042017]">
                           {award.title}
                         </h3>
                       </div>
-                      <span className="rounded-full bg-mist px-3 py-1 text-xs font-600 text-royal border border-border">
+                      <span className="rounded-full bg-[#ECFDF5] px-3 py-1 text-xs font-bold text-[#047857] border border-[#D1E7DD]">
                         {award.badge}
                       </span>
                     </div>
 
-                    <p className="mt-2.5 text-sm font-600 text-gold-700">
+                    <p className="mt-2.5 text-sm font-bold text-[#047857]">
                       {award.organization} {award.year && `(${award.year})`}
                     </p>
 
-                    <p className="mt-2 text-sm leading-relaxed text-ink-600">
+                    <p className="mt-2 text-sm leading-relaxed text-[#4B5563]">
                       {award.description}
                     </p>
                   </div>

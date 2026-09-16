@@ -5,18 +5,24 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const badgeVariants = cva(
-  "inline-flex items-center justify-center rounded-md border px-2 py-0.5 text-xs font-medium w-fit whitespace-nowrap shrink-0 [&>svg]:size-3 gap-1 [&>svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive transition-[color,box-shadow] overflow-hidden",
+  "inline-flex items-center justify-center rounded-full border px-3 py-1 text-xs font-bold w-fit whitespace-nowrap shrink-0 [&>svg]:size-3.5 gap-1.5 [&>svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] transition-all duration-150 overflow-hidden",
   {
     variants: {
       variant: {
         default:
-          "border-transparent bg-primary text-primary-foreground [a&]:hover:bg-primary/90",
+          "border-transparent bg-[#042017] text-white [a&]:hover:bg-[#06281E]",
         secondary:
-          "border-transparent bg-secondary text-secondary-foreground [a&]:hover:bg-secondary/90",
+          "border-[#D1E7DD] bg-[#F0FDF4] text-[#042017] [a&]:hover:bg-[#D1E7DD]",
         destructive:
-          "border-transparent bg-destructive text-white [a&]:hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
+          "border-transparent bg-[#E41E3F] text-white [a&]:hover:bg-[#C01533]",
         outline:
-          "text-foreground [a&]:hover:bg-accent [a&]:hover:text-accent-foreground",
+          "border-[#042017] text-[#042017] [a&]:hover:bg-[#042017] [a&]:hover:text-white",
+        metaBlue:
+          "border-transparent bg-[#ECFDF5] text-[#047857] [a&]:hover:bg-[#D1E7DD]",
+        metaDark:
+          "border-transparent bg-[#042017] text-white [a&]:hover:bg-[#06281E]",
+        metaSuccess:
+          "border-transparent bg-[#ECFDF5] text-[#059669] [a&]:hover:bg-[#D1E7DD]",
       },
     },
     defaultVariants: {
