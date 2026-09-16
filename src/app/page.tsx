@@ -16,7 +16,6 @@ import {
   Building2,
   Wheat,
   Award,
-  Trophy,
   Globe2,
   ShieldCheck,
   Sparkles,
@@ -53,16 +52,17 @@ const introCards = [
   },
   {
     icon: Sprout,
-    title: "Agriculture & APMC",
+    title: "Agriculture",
     description:
       "Deeply connected with the wholesale agricultural trading ecosystem at the Navi Mumbai APMC Market, Turbhe.",
   },
   {
-    icon: Trophy,
-    title: "11+ Major Honours",
-    description:
-      "Recognized with prestigious honours including the Girnar Best Businessman Award (2008) and Global Business ICON Award (Dubai 2025).",
-  },
+    icon: Wheat,
+    title: "Farmer Associations",
+    description: "Food Manufacturers,Dry Fruits, Fruits, Vegetables, Retailers and many more."
+
+  }
+
 ];
 
 const achievementImages = [

@@ -122,9 +122,9 @@ export default function ChamberAboutPage() {
             src="/images/hero/chamber-headquarters-hero.jpg"
             alt="Chamber Complex Background"
             fill
-            className="object-cover object-center opacity-[0.08]"
+            className="object-cover object-center opacity-30"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-transparent to-white/60" />
+          <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-white/50 to-white/80" />
         </div>
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
