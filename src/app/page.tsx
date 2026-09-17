@@ -39,30 +39,29 @@ import { officialAwards } from "@/data/awards";
 
 const introCards = [
   {
+    icon: Globe2,
+    title: "Pride of Asia — 250 Acres",
+    description:
+      "Asia's largest Swadeshi APMC Trading Hub spread across 200–250 acres in Navi Mumbai, Maharashtra.",
+  },
+  {
     icon: Users,
-    title: "400+ Spice Specialists",
+    title: "12,000+ License Holders",
     description:
-      "Leading an apex association of 400+ spice processors, exporters, wholesalers, distributors and cold chain operators.",
+      "Empowering 12,000+ licensed merchants & 50,000+ families trading in 400+ spices & agro commodities.",
   },
   {
-    icon: Building2,
-    title: "50-Acre Trade Complex",
+    icon: Store,
+    title: "3,500+ Daily Trucks",
     description:
-      "Guiding operations and trade infrastructure across a dedicated 50-acre domestic & international spice trading complex.",
-  },
-  {
-    icon: Sprout,
-    title: "Agriculture",
-    description:
-      "Deeply connected with the wholesale agricultural trading ecosystem at the Navi Mumbai APMC Market, Turbhe.",
+      "Facilitating daily national & international supply chains for 3,500+ transport trucks and logistics.",
   },
   {
     icon: Wheat,
-    title: "Farmer Associations",
-    description: "Food Manufacturers,Dry Fruits, Fruits, Vegetables, Retailers and many more."
-
-  }
-
+    title: "1 Lakh+ Tons Volume",
+    description:
+      "Handling 100,000+ tons of fruits, spices & herbs — supplying from 0.500g samples to 10-ton bulk orders worldwide.",
+  },
 ];
 
 const achievementImages = [
@@ -85,8 +84,8 @@ const achievementImages = [
     category: "Merchant Meetings",
   },
   {
-    src: "/images/association/salient-features-merchants-chamber.jpg",
-    alt: "Salient Features of Navi Mumbai Merchants Chamber presentation",
+    src: "/images/nmmc-logo.png",
+    alt: "Navi Mumbai Merchants Chamber Official Seal Emblem",
     caption: "Chamber Salient Features & 50-Acre Complex",
     category: "Business Events",
   },
@@ -205,15 +204,16 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
-            <div className="lg:col-span-5">
-              <LightboxImage
-                src="/images/association/salient-features-merchants-chamber.jpg"
-                alt="Navi Mumbai Merchants Chamber Salient Features Slide"
-                caption="Salient Features of Navi Mumbai Merchants Chamber"
-                overlay
-                className="aspect-[16/10] rounded-2xl border-2 border-[#059669] ring-0 shadow-lg bg-white"
-                imgClassName="object-cover"
-              />
+            <div className="lg:col-span-5 flex justify-center items-center">
+              <div className="relative h-60 w-60 sm:h-72 sm:w-72 shrink-0 overflow-hidden rounded-full border-4 border-[#059669] bg-white p-4 shadow-2xl ring-8 ring-[#059669]/10 transition-transform duration-300 hover:scale-105">
+                <Image
+                  src="/images/nmmc-logo.png"
+                  alt="Navi Mumbai Merchants Chamber Official Seal Emblem"
+                  fill
+                  className="object-contain p-2"
+                  priority
+                />
+              </div>
             </div>
           </div>
         </div>

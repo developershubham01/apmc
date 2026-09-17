@@ -26,6 +26,9 @@ export function MediaEntryCard({ entry, index, flip = false }: Props) {
             <LightboxImage
               src={entry.image}
               alt={entry.imageAlt}
+              title={entry.title}
+              description={entry.summary}
+              category={entry.date}
               caption={entry.title}
               overlay
               className="h-full w-full"

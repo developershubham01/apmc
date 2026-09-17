@@ -22,6 +22,9 @@ export function MarketCard({ market, index = 0 }: MarketCardProps) {
           <LightboxImage
             src={market.image}
             alt={market.title}
+            title={market.title}
+            description={market.description}
+            category="APMC WHOLESALE MARKET"
             caption={`${market.title} — ${market.description}`}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="h-full w-full rounded-none border-0 ring-0"

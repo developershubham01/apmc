@@ -55,6 +55,9 @@ export function GalleryGrid({
         src: i.src,
         alt: i.alt,
         caption: i.caption,
+        title: i.title || i.caption || i.alt,
+        description: i.description || (i.title && i.caption !== i.title ? i.caption : undefined) || i.alt,
+        category: i.category,
       })),
     [filtered]
   );

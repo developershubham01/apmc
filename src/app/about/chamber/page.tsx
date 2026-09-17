@@ -208,6 +208,9 @@ export default function ChamberAboutPage() {
                   <LightboxImage
                     src="/images/hero/chamber-headquarters-hero.jpg"
                     alt="Navi Mumbai Merchants Chamber Headquarters and APMC Trade Center"
+                    title="Navi Mumbai Merchants Chamber — Central Secretariat"
+                    description="Official administrative headquarters of the Navi Mumbai Merchants Chamber located at C-64, Masala Market-1, Turbhe APMC, serving as the central hub for 400+ spice and commodity enterprises."
+                    category="CHAMBER HEADQUARTERS"
                     caption="Navi Mumbai Merchants Chamber Central Secretariat — APMC Trade Center Turbhe"
                     priority
                     className="h-full w-full rounded-none border-0 ring-0"

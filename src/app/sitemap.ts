@@ -6,6 +6,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/about",
     "/about/chamber",
     "/about/bombay-mudibazar",
+    "/mudibazar",
     "/business",
     "/organizations",
     "/apmc",

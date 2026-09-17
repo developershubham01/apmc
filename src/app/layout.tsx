@@ -45,7 +45,7 @@ const OG_IMAGE = "/images/kirti-rana/agriculture.jpg";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Kirti Rana | Navi Mumbai Merchants Chamber",
+    default: " Navi Mumbai Merchants Chamber",
     template: "%s | Kirti Rana",
   },
   description:
@@ -118,7 +118,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
       <body
         className={cn(
           jakartaSans.variable,

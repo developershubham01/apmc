@@ -70,18 +70,11 @@ export default function ApmcPage() {
                 eyebrow="Market Overview"
                 title="A Wholesale Trading Ecosystem"
               />
-              <p className="mt-5 text-pretty text-base sm:text-lg leading-relaxed text-ink-600">
-                The Navi Mumbai APMC Market, located at Turbhe along the
-                Thane-Belapur Road, is one of the major wholesale agricultural
-                produce markets serving the Mumbai Metropolitan Region. It
-                brings together farmers, commission agents, wholesalers and
-                retailers across multiple commodity segments.
+              <p className="mt-5 text-pretty text-base sm:text-lg leading-relaxed text-[#4B5563]">
+                Known as the <strong className="text-[#042017] font-bold">&ldquo;Pride of Asia&rdquo;</strong>, the Navi Mumbai APMC Market at Vashi/Turbhe along the Thane-Belapur Road is Asia&apos;s largest Swadeshi professional wholesale agricultural trading hub. Spanning over <strong className="text-[#042017] font-bold">250 acres</strong>, it unites <strong className="text-[#042017] font-bold">12,000+ licensed merchants</strong> and over 50,000 families across international and national supply chains.
               </p>
-              <p className="mt-4 text-pretty text-base leading-relaxed text-ink-600">
-                The market is organised into dedicated sections — fruit,
-                vegetable, grain, spice, and onion &amp; potato — each operating
-                with its own auction and trading rhythm. Daily arrivals and
-                prices are published through the official Mumbai APMC portal.
+              <p className="mt-4 text-pretty text-base leading-relaxed text-[#4B5563]">
+                Facilitating <strong className="text-[#042017] font-bold">3,500+ transport trucks daily</strong>, the complex handles over 100,000 tons of agricultural produce including fruits, spices, herbs, and finished goods — supplying quantities ranging from 0.500g samples to 10-ton bulk shipments across India and globally.
               </p>
 
               <div className="mt-7 flex flex-wrap gap-3">

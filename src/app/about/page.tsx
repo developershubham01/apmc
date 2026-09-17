@@ -119,6 +119,9 @@ export default function AboutPage() {
                     <LightboxImage
                       src="/images/kirti-rana/portrait-lead.jpg"
                       alt="Shri Kirti Rana"
+                      title="Shri Kirti Rana — President & Board Chairman"
+                      description="Official portrait of Shri Kirti Rana, President of the Navi Mumbai Merchants Chamber, guiding apex spice trade and APMC market stewardship for over 30 years."
+                      category="PRESIDENT PROFILE"
                       caption="Shri Kirti Rana — President, Navi Mumbai Merchants Chamber"
                       priority
                       sizes="(max-width: 1024px) 100vw, 50vw"
@@ -226,12 +229,15 @@ export default function AboutPage() {
           <div className="mt-12 grid gap-8 lg:grid-cols-12 items-center">
             <div className="lg:col-span-6">
               <LightboxImage
-                src="/images/association/salient-features-merchants-chamber.jpg"
-                alt="Navi Mumbai Merchants Chamber Salient Features Slide"
-                caption="Official Salient Features Slide — Navi Mumbai Merchants Chamber"
+                src="/images/nmmc-logo.png"
+                alt="Navi Mumbai Merchants Chamber Official Seal Logo"
+                title="Navi Mumbai Merchants Chamber — Official Crest Logo"
+                description="Official emblem of Navi Mumbai Merchants Chamber representing 400+ member firms, 50-acre dedicated masala market, and 30+ year stewardship."
+                category="CHAMBER EMBLEM"
+                caption="Official Emblem — Navi Mumbai Merchants Chamber"
                 overlay
-                className="aspect-[16/10] rounded-2xl border-2 border-[#D1E7DD] ring-0 shadow-md bg-white"
-                imgClassName="object-cover"
+                className="aspect-[16/10] rounded-2xl border-2 border-[#D1E7DD] ring-0 shadow-md bg-white p-4"
+                imgClassName="object-contain"
               />
             </div>
             <div className="lg:col-span-6 space-y-4">

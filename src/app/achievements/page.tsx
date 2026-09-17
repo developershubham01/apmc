@@ -53,8 +53,8 @@ const featuredPhotoShowcase = [
       "State-level coordination and policy dialogue for trader welfare, market infrastructure and commercial reforms across Maharashtra.",
   },
   {
-    src: "/images/association/salient-features-merchants-chamber.jpg",
-    alt: "Salient Features of Navi Mumbai Merchants Chamber presentation",
+    src: "/images/nmmc-logo.png",
+    alt: "Navi Mumbai Merchants Chamber Official Seal Logo",
     title: "Navi Mumbai Merchants Chamber — 30+ Years & 50-Acre Complex",
     badge: "Apex Chamber",
     description:
@@ -160,6 +160,9 @@ export default function AchievementsPage() {
                     <LightboxImage
                       src={item.src}
                       alt={item.alt}
+                      title={item.title}
+                      description={item.description}
+                      category={item.badge}
                       caption={item.title}
                       overlay
                       className="h-full w-full ring-0"
@@ -222,6 +225,9 @@ export default function AchievementsPage() {
                   <LightboxImage
                     src="/images/awards/achievements-awards-record.jpg"
                     alt="Original Achievements Document Slide"
+                    title="Official Achievements Archive — 11 Major Awards"
+                    description="Transcribed directly from the official achievements archive document, detailing 11 state, national, and community awards conferred upon Shri Kirti Rana."
+                    category="Official Archive"
                     caption="Official Achievements Document — 11 Awards List"
                     overlay
                     className="aspect-[16/9] rounded-2xl border border-[#D1E7DD] ring-0 shadow-sm"

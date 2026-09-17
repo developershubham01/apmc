@@ -41,7 +41,7 @@ export const organizations: Organization[] = [
       "Cold chain & logistics",
       "Policy representation",
     ],
-    image: "/images/association/salient-features-merchants-chamber.jpg",
+    image: "/images/nmmc-logo.png",
   },
   {
     slug: "cait-national-trade-board",
@@ -147,7 +147,7 @@ export const organizations: Organization[] = [
       "Trader grievance redressal",
       "Commercial consensus building",
     ],
-    image: "/images/association/salient-features-merchants-chamber.jpg",
+    image: "/images/nmmc-logo.png",
   },
   {
     slug: "grain-rice-oilseeds-merchants-association",

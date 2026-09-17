@@ -33,6 +33,7 @@ import { LanguageSwitcher } from "./LanguageSwitcher";
 import { AccessibilityControls } from "./AccessibilityControls";
 import { chamberAnnouncements, ChamberAnnouncement } from "@/data/announcements";
 import { AnnouncementsModal } from "./AnnouncementsDrawerModal";
+import { MudibazarNavbar } from "./MudibazarNavbar";
 
 // Social links configuration
 const socialLinks = [
@@ -102,9 +103,9 @@ const mainNavItems: NavItem[] = [
         icon: Building2,
       },
       {
-        title: "Bombay Mudibazar Kariana Merchants Association",
-        description: "Century-old historic kariana & spice trade association",
-        href: "/about/bombay-mudibazar",
+        title: "Bombay Mudibazar Dedicated Website",
+        description: "Official standalone website with live rates, arbitration & committee portal",
+        href: "/mudibazar",
         icon: Store,
       },
       {
@@ -258,6 +259,8 @@ const mainNavItems: NavItem[] = [
 ];
 
 export function Navbar() {
+  const pathname = usePathname();
+
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
@@ -266,7 +269,6 @@ export function Navbar() {
   const [selectedNotice, setSelectedNotice] = useState<ChamberAnnouncement | null>(null);
   const [currentTickerIndex, setCurrentTickerIndex] = useState(0);
 
-  const pathname = usePathname();
   const { t } = useLanguage();
   const dropdownTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -298,6 +300,23 @@ export function Navbar() {
     return () => clearInterval(interval);
   }, []);
 
+  const handleNavClick = (href?: string) => {
+    if (typeof window !== "undefined") {
+      if (href && href.includes("#")) {
+        const parts = href.split("#");
+        const hash = parts[1];
+        if (hash) {
+          const target = document.getElementById(hash);
+          if (target) {
+            target.scrollIntoView({ behavior: "smooth" });
+            return;
+          }
+        }
+      }
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
   const handleMouseEnter = (key: string) => {
     if (dropdownTimeoutRef.current) {
       clearTimeout(dropdownTimeoutRef.current);
@@ -328,12 +347,37 @@ export function Navbar() {
     <>
       <header
         className={cn(
-          "sticky top-0 z-50 transition-all duration-300 font-sans",
+          "sticky top-0 z-[120] transition-all duration-300 font-sans",
           scrolled || open
             ? "shadow-md backdrop-blur-md"
             : ""
         )}
       >
+        {/* =========================================================
+            TIER 1: Top Notification Bar — Official Header Strip (High Contrast Navy & Gold)
+            ========================================================= */}
+        <aside className="bg-[#042017] text-slate-100 text-xs py-2 border-b border-[#059669]/40 select-none shadow-inner">
+          <div className="max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap items-center justify-between gap-2">
+            <div className="flex items-center space-x-3">
+              <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-extrabold bg-[#BF2B26] text-white tracking-wider uppercase shadow-sm">
+                Pride of Asia
+              </span>
+              <span className="text-slate-200 font-medium hidden sm:inline">
+                National APMC Trading Hub • 250-Acre Swadeshi Complex • ITPO &amp; CAIT Joint Initiative
+              </span>
+            </div>
+            <div className="flex items-center space-x-4 sm:space-x-6 text-slate-200 text-xs">
+              <span className="flex items-center gap-1.5">
+                <strong className="text-[#F59E0B]">Tel:</strong> <span className="text-white font-semibold">+91 98201 87911 / 022-4974 4533</span>
+              </span>
+              <span className="hidden md:inline text-slate-400">|</span>
+              <span className="hidden md:inline flex items-center gap-1.5">
+                <strong className="text-[#F59E0B]">Email:</strong> <span className="text-white font-semibold">nmmc11992@gmail.com</span>
+              </span>
+            </div>
+          </div>
+        </aside>
+
         {/* =========================================================
             TIER 1: Institutional Top Bar (Luminous White & Mint Strip)
             Meta-styled announcement strip & language controls
@@ -349,7 +393,7 @@ export function Navbar() {
                   setSelectedNotice(null);
                   setIsModalOpen(true);
                 }}
-                className="group inline-flex items-center gap-1.5 rounded-full bg-[#059669] hover:bg-[#047857] text-white font-bold text-[0.68rem] sm:text-[0.72rem] tracking-wide px-3 sm:px-3.5 py-1 shadow-sm transition-all duration-200 hover:scale-[1.02] active:scale-95 shrink-0"
+                className="group inline-flex items-center gap-1.5 rounded-full bg-[#BF2B26] hover:bg-[#9C1E1A] text-white font-bold text-[0.68rem] sm:text-[0.72rem] tracking-wide px-3 sm:px-3.5 py-1 shadow-sm transition-all duration-200 shrink-0"
                 aria-label="View all official chamber announcements"
               >
                 <Megaphone className="h-3 w-3 sm:h-3.5 sm:w-3.5 animate-bounce text-white drop-shadow" />
@@ -359,10 +403,10 @@ export function Navbar() {
 
               {/* Ticker Content with Pulsating Indicator */}
               <div className="flex items-center gap-2 min-w-0 overflow-hidden cursor-pointer">
-                {/* Emerald Green Pulse Dot */}
+                {/* Pulse Dot */}
                 <span className="relative flex h-2 w-2 shrink-0">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#059669] opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[#059669]"></span>
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#BF2B26] opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[#BF2B26]"></span>
                 </span>
 
                 {/* Animated Notice Headline */}
@@ -372,7 +416,7 @@ export function Navbar() {
                   className="truncate text-left text-[0.72rem] sm:text-xs font-semibold text-[#042017] hover:text-[#059669] transition-colors duration-200"
                   title={currentNotice.title}
                 >
-                  <span className="font-bold text-[#047857] mr-1.5 hidden md:inline">
+                  <span className="font-bold text-[#059669] mr-1.5 hidden md:inline">
                     [{currentNotice.categoryLabel}]
                   </span>
                   <span>{currentNotice.title}</span>
@@ -418,6 +462,7 @@ export function Navbar() {
             {/* Left: Navi Mumbai Merchants Chamber Logo & Crest */}
             <Link
               href="/"
+              onClick={() => handleNavClick("/")}
               className="group flex items-center gap-2.5 sm:gap-3.5 shrink min-w-0"
               aria-label="Navi Mumbai Merchants Chamber — Home"
             >
@@ -447,7 +492,8 @@ export function Navbar() {
 
             {/* Right: Bombay Mudibazar Kariana Merchants Association Partner Identity */}
             <Link
-              href="/about/bombay-mudibazar"
+              href="/mudibazar"
+              onClick={() => handleNavClick("/mudibazar")}
               className="group flex items-center gap-2 sm:gap-3.5 text-right shrink-0"
               aria-label="Bombay Mudibazar Kariana Merchants Association"
               title="Bombay Mudibazar Kariana Merchants Association"
@@ -488,6 +534,7 @@ export function Navbar() {
               {/* Circular Home Icon Button */}
               <Link
                 href="/"
+                onClick={() => handleNavClick("/")}
                 aria-label="Home"
                 className={cn(
                   "inline-flex h-8 w-8 items-center justify-center rounded-full transition-all duration-200 mr-1 shadow-sm",
@@ -515,14 +562,13 @@ export function Navbar() {
                   >
                     <Link
                       href={item.href}
+                      onClick={() => handleNavClick(item.href)}
                       aria-expanded={hasDropdown ? isOpen : undefined}
                       aria-haspopup={hasDropdown ? "true" : undefined}
                       className={cn(
                         "inline-flex items-center gap-1.5 text-[0.82rem] xl:text-[0.86rem] font-bold px-3.5 py-1.5 rounded-full transition-all duration-150 tracking-tight",
-                        active
+                        active || isOpen
                           ? "bg-[#059669] text-white shadow-sm"
-                          : isOpen
-                          ? "bg-[#ECFDF5] text-[#059669]"
                           : "text-[#042017] hover:text-[#059669] hover:bg-[#F0FDF4]"
                       )}
                     >
@@ -530,9 +576,9 @@ export function Navbar() {
                       {hasDropdown && (
                         <ChevronDown
                           className={cn(
-                            "h-3.5 w-3.5 text-[#4B5563] transition-transform duration-200",
-                            isOpen && "rotate-180 text-[#059669]",
-                            active && "text-white"
+                            "h-3.5 w-3.5 transition-transform duration-200",
+                            isOpen && "rotate-180 text-white",
+                            active ? "text-white" : "text-[#4B5563]"
                           )}
                         />
                       )}
@@ -549,11 +595,11 @@ export function Navbar() {
                         )}
                       >
                         <div className="w-[380px] max-h-[80vh] overflow-y-auto scrollbar-premium rounded-[24px] border border-[#D1E7DD] bg-white p-2.5 shadow-2xl">
-                          <div className="border-b border-[#D1E7DD] bg-[#F0FDF4] px-3.5 py-2 rounded-xl mb-1.5 flex items-center justify-between">
-                            <span className="text-[0.64rem] font-bold uppercase tracking-[0.16em] text-[#047857]">
+                          <div className="border-b border-[#D1E7DD] bg-[#ECFDF5] px-3.5 py-2 rounded-xl mb-1.5 flex items-center justify-between">
+                            <span className="text-[0.64rem] font-bold uppercase tracking-[0.16em] text-[#059669]">
                               {label}
                             </span>
-                            <span className="text-[0.62rem] text-[#4B5563] font-medium">
+                            <span className="text-[0.62rem] text-[#047857] font-semibold">
                               Chamber Directory
                             </span>
                           </div>
@@ -566,23 +612,47 @@ export function Navbar() {
                                 <Link
                                   key={sub.href}
                                   href={sub.href}
-                                  onClick={() => setActiveDropdown(null)}
+                                  onClick={() => {
+                                    setActiveDropdown(null);
+                                    handleNavClick(sub.href);
+                                  }}
                                   className={cn(
-                                    "flex items-start gap-2.5 rounded-xl p-2.5 transition-colors text-left",
+                                    "group flex items-start gap-2.5 rounded-xl p-2.5 transition-all duration-150 text-left border border-transparent",
                                     isSubActive
-                                      ? "bg-[#ECFDF5] text-[#059669]"
-                                      : "hover:bg-[#F0FDF4] text-[#042017] hover:text-[#059669]"
+                                      ? "bg-[#059669] text-white font-bold shadow-sm"
+                                      : "hover:bg-[#ECFDF5] text-[#042017] hover:text-[#059669] hover:border-[#059669]/30"
                                   )}
                                 >
-                                  <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-lg bg-[#ECFDF5] text-[#059669] ring-1 ring-[#059669]/30">
+                                  <span
+                                    className={cn(
+                                      "mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-lg transition-all duration-150",
+                                      isSubActive
+                                        ? "bg-white/20 text-white"
+                                        : "bg-[#ECFDF5] text-[#059669] group-hover:bg-[#059669] group-hover:text-white ring-1 ring-[#059669]/30"
+                                    )}
+                                  >
                                     <SubIcon className="h-3.5 w-3.5" />
                                   </span>
                                   <div className="flex flex-col">
-                                    <span className="text-xs font-bold leading-snug">
+                                    <span
+                                      className={cn(
+                                        "text-xs font-bold leading-snug transition-colors duration-150",
+                                        isSubActive
+                                          ? "text-white"
+                                          : "text-[#042017] group-hover:text-[#059669]"
+                                      )}
+                                    >
                                       {sub.title}
                                     </span>
                                     {sub.description && (
-                                      <span className="text-[0.65rem] text-[#4B5563] leading-tight mt-0.5 line-clamp-1">
+                                      <span
+                                        className={cn(
+                                          "text-[0.65rem] leading-tight mt-0.5 line-clamp-1 transition-colors duration-150",
+                                          isSubActive
+                                            ? "text-white/80"
+                                            : "text-[#4B5563] group-hover:text-[#047857]"
+                                        )}
+                                      >
                                         {sub.description}
                                       </span>
                                     )}
@@ -602,7 +672,7 @@ export function Navbar() {
             {/* Mobile Nav Brand text fallback when menu collapsed */}
             <div className="xl:hidden flex items-center gap-2">
               <span className="text-xs font-bold text-[#059669] uppercase tracking-wider">
-                MENU & SERVICES
+                MENU &amp; SERVICES
               </span>
             </div>
 
@@ -611,6 +681,7 @@ export function Navbar() {
               {/* Admin Portal Meta Pill */}
               <Link
                 href="/admin"
+                onClick={() => handleNavClick("/admin")}
                 className="inline-flex items-center gap-1.5 rounded-full bg-[#059669] hover:bg-[#047857] text-white font-bold text-[0.72rem] sm:text-xs tracking-wider px-4 sm:px-5 py-1.5 shadow-sm uppercase transition-all duration-200 hover:scale-[1.02] active:scale-95 shrink-0"
               >
                 <Lock className="h-3.5 w-3.5 text-white stroke-[2.5]" />
@@ -648,7 +719,10 @@ export function Navbar() {
             {/* Mobile Partner Association Quick Link */}
             <Link
               href="/about/bombay-mudibazar"
-              onClick={() => setOpen(false)}
+              onClick={() => {
+                setOpen(false);
+                handleNavClick("/about/bombay-mudibazar");
+              }}
               className="flex items-center justify-between rounded-2xl border border-[#D1E7DD] bg-[#F0FDF4] p-2.5 text-left hover:bg-[#ECFDF5] transition-colors"
             >
               <div className="flex items-center gap-2.5">
@@ -704,7 +778,10 @@ export function Navbar() {
             <div className="flex flex-col gap-1 border-t border-[#D1E7DD] pt-2">
               <Link
                 href="/"
-                onClick={() => setOpen(false)}
+                onClick={() => {
+                  setOpen(false);
+                  handleNavClick("/");
+                }}
                 className={cn(
                   "flex items-center justify-between rounded-full px-4 py-2.5 text-xs font-bold uppercase tracking-wider transition-colors",
                   pathname === "/"
@@ -730,7 +807,10 @@ export function Navbar() {
                     <Link
                       key={item.key}
                       href={item.href}
-                      onClick={() => setOpen(false)}
+                      onClick={() => {
+                        setOpen(false);
+                        handleNavClick(item.href);
+                      }}
                       className={cn(
                         "flex items-center justify-between rounded-full px-4 py-2.5 text-xs font-bold uppercase tracking-wider transition-colors",
                         active
@@ -774,7 +854,10 @@ export function Navbar() {
                           <Link
                             key={sub.href}
                             href={sub.href}
-                            onClick={() => setOpen(false)}
+                            onClick={() => {
+                              setOpen(false);
+                              handleNavClick(sub.href);
+                            }}
                             className="flex flex-col rounded-xl px-3 py-2 text-xs font-medium text-[#4B5563] hover:bg-[#F0FDF4] hover:text-[#059669] transition-colors"
                           >
                             <span className="font-bold text-[#042017] text-xs">{sub.title}</span>

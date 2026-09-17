@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { LightboxImage } from "./LightboxImage";
 import { Building2, ChevronRight, Check } from "lucide-react";
@@ -48,16 +49,17 @@ export function OrganizationCard({
           </div>
         </div>
 
-        {/* Optional Image Banner if provided */}
+        {/* Circular Emblem Logo Badge */}
         {organization.image && detailed && (
-          <div className="relative aspect-[16/9] w-full overflow-hidden border-b border-[#D1E7DD] bg-[#042017]">
-            <LightboxImage
-              src={organization.image}
-              alt={organization.name}
-              caption={organization.name}
-              className="h-full w-full rounded-none border-0 ring-0"
-              imgClassName="object-cover"
-            />
+          <div className="flex justify-center py-6 border-b border-[#D1E7DD] bg-[#F0FDF4]">
+            <div className="relative h-32 w-32 shrink-0 overflow-hidden rounded-full border-4 border-[#059669] bg-white p-3 shadow-xl ring-4 ring-[#059669]/15 transition-transform duration-300 group-hover:scale-105">
+              <Image
+                src={organization.image}
+                alt={organization.name}
+                fill
+                className="object-contain p-1"
+              />
+            </div>
           </div>
         )}
 

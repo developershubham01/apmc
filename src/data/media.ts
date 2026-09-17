@@ -130,7 +130,7 @@ export const mediaEntries: MediaEntry[] = [
     title: "Navi Mumbai Merchants Chamber — Annual Members' Meet",
     date: "2026",
     location: "Turbhe, Navi Mumbai",
-    image: "/images/association/salient-features-merchants-chamber.jpg",
+    image: "/images/nmmc-logo.png",
     imageAlt: "Navi Mumbai Merchants Chamber Salient Features Presentation",
     summary:
       "Members of the Navi Mumbai Merchants Chamber convene to review trade conditions across the 50-acre dedicated spice and commodity complex in Turbhe–Vashi.",

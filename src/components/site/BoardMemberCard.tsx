@@ -42,6 +42,9 @@ export function BoardMemberCard({ member, index = 0 }: BoardMemberCardProps) {
                 <LightboxImage
                   src={member.image}
                   alt={member.name}
+                  title={member.name}
+                  description={`${member.designation} — Governing Board of Directors, Navi Mumbai Merchants Chamber`}
+                  category="BOARD MEMBER"
                   caption={`${member.name} — ${member.designation}`}
                   sizes="112px"
                   className="h-full w-full rounded-2xl border-0 ring-0"

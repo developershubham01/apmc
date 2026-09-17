@@ -7,7 +7,6 @@ import {
   Building2,
   ChevronRight,
   ShieldCheck,
-  TrendingUp,
   Store,
   Users,
   Sparkles,
@@ -89,16 +88,16 @@ export function Hero() {
 
         {/* Chamber 3 Core Pillars (Meta Pill Badges) */}
         <ScrollReveal variant="up" delay={240}>
-          <div className="mt-5 flex flex-wrap items-center justify-start gap-2.5 sm:gap-3 max-w-2xl">
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs sm:text-sm font-bold text-white backdrop-blur-xl shadow-sm">
+          <div className="mt-5 flex flex-wrap items-center justify-start gap-2.5 sm:gap-3 max-w-4xl w-full">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs sm:text-sm font-bold text-white backdrop-blur-xl shadow-sm shrink-0 whitespace-nowrap">
               <Users className="h-4 w-4 text-[#10B981] shrink-0" />
               <span>{t("hero.pillar1", "400+ Enterprise Network")}</span>
             </div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs sm:text-sm font-bold text-white backdrop-blur-xl shadow-sm">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs sm:text-sm font-bold text-white backdrop-blur-xl shadow-sm shrink-0 whitespace-nowrap">
               <Building2 className="h-4 w-4 text-[#10B981] shrink-0" />
-              <span>{t("hero.pillar2", "50-Acre Trade Complex")}</span>
+              <span>{t("hero.pillar2", "250-Acre Trade Hub")}</span>
             </div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs sm:text-sm font-bold text-white backdrop-blur-xl shadow-sm">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs sm:text-sm font-bold text-white backdrop-blur-xl shadow-sm shrink-0 whitespace-nowrap">
               <ShieldCheck className="h-4 w-4 text-[#34D399] shrink-0" />
               <span>{t("hero.pillar3", "National Policy Advocacy")}</span>
             </div>
@@ -107,31 +106,21 @@ export function Hero() {
 
         {/* Meta Signature Dual-CTA Pattern */}
         <ScrollReveal variant="up" delay={280}>
-          <div className="mt-8 flex flex-wrap items-center justify-start gap-3.5">
+          <div className="mt-8 flex flex-wrap items-center justify-start gap-3.5 max-w-4xl w-full">
             {/* Meta Primary CTA: Emerald Pill */}
             <Link
               href="/apmc"
-              className="group inline-flex items-center justify-center gap-2 rounded-full bg-[#059669] px-7 py-3.5 text-sm font-bold text-white shadow-lg transition-all hover:bg-[#047857] hover:-translate-y-0.5"
+              className="group inline-flex items-center justify-center gap-2 rounded-full bg-[#059669] px-7 py-3.5 text-sm font-bold text-white shadow-lg transition-all hover:bg-[#047857] hover:-translate-y-0.5 shrink-0 whitespace-nowrap"
             >
               <Store className="h-4 w-4 stroke-[2.5]" />
               {t("hero.exploreChamber", "Explore Trade Hub")}
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1 stroke-[2.5]" />
             </Link>
 
-            {/* Meta Secondary CTA: Outlined Ghost Pill */}
-            <Link
-              href="/apmc#market-rates"
-              className="group inline-flex items-center justify-center gap-2 rounded-full border-2 border-white/90 bg-transparent px-7 py-3 text-sm font-bold text-white shadow-md backdrop-blur-xl transition-all hover:bg-white hover:text-[#042017] hover:-translate-y-0.5"
-            >
-              <TrendingUp className="h-4 w-4" />
-              {t("hero.viewRates", "Daily Wholesale Rates")}
-              <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </Link>
-
             {/* Meta Tertiary CTA */}
             <Link
               href="/organizations"
-              className="group inline-flex items-center justify-center gap-2 rounded-full border border-white/30 bg-white/10 px-6 py-3.5 text-sm font-bold text-white shadow-sm backdrop-blur-xl transition-all hover:bg-white/20 hover:border-white/50 hover:-translate-y-0.5"
+              className="group inline-flex items-center justify-center gap-2 rounded-full border border-white/30 bg-white/10 px-6 py-3.5 text-sm font-bold text-white shadow-sm backdrop-blur-xl transition-all hover:bg-white/20 hover:border-white/50 hover:-translate-y-0.5 shrink-0 whitespace-nowrap"
             >
               <Building2 className="h-4 w-4 text-[#10B981]" />
               {t("nav.organizations", "Organizations")}
@@ -141,10 +130,10 @@ export function Hero() {
 
         {/* Quick Metrics Bar (Meta card-icon-feature tiles) */}
         <ScrollReveal variant="up" delay={320}>
-          <div className="mt-9 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-2xl w-full border-t border-white/15 pt-6">
+          <div className="mt-9 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-4xl w-full border-t border-white/15 pt-6">
             <MetricCard value="30+ Yrs" label={t("hero.statLegacy", "30+ Years Legacy")} />
             <MetricCard value="400+" label={t("hero.statNetwork", "400+ Member Network")} />
-            <MetricCard value="50 Acres" label={t("hero.statComplex", "50-Acre Complex")} />
+            <MetricCard value="250 Acres" label={t("hero.statComplex", "250-Acre Complex")} />
             <MetricCard value="5 Hubs" label={t("hero.statMarkets", "5 APMC Markets")} />
           </div>
         </ScrollReveal>
@@ -167,9 +156,9 @@ export function Hero() {
 
 function MetricCard({ value, label }: { value: string; label: string }) {
   return (
-    <div className="rounded-2xl border border-white/15 bg-white/10 p-4 text-left backdrop-blur-xl shadow-sm transition-all hover:bg-white/15 hover:border-white/30 hover:scale-[1.02]">
-      <p className="font-heading text-xl sm:text-2xl font-black text-white">{value}</p>
-      <p className="mt-1 text-[0.66rem] font-bold uppercase tracking-wider text-slate-200">
+    <div className="rounded-2xl border border-white/15 bg-white/10 px-4 py-3.5 sm:px-5 sm:py-4 text-left backdrop-blur-xl shadow-sm transition-all hover:bg-white/15 hover:border-white/30 hover:scale-[1.02] min-w-0 flex flex-col justify-center">
+      <p className="font-heading text-xl sm:text-2xl font-black text-white shrink-0 leading-none">{value}</p>
+      <p className="mt-1.5 text-[0.68rem] font-extrabold uppercase tracking-wider text-slate-100 leading-tight">
         {label}
       </p>
     </div>

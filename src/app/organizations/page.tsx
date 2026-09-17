@@ -27,22 +27,22 @@ export const metadata: Metadata = {
 
 const focusAreas = [
   {
-    icon: Users,
-    title: "400+ Merchant Network",
+    icon: Building2,
+    title: "17 Constituent Associations",
     description:
-      "Stewardship of 400+ spice processors, exporters, wholesalers, distributors and cold chain owners across Maharashtra.",
+      "Apex body uniting 17 conservator & constituent associations representing over 1,000+ member firms.",
   },
   {
-    icon: Building2,
-    title: "50-Acre Trade Complex",
+    icon: Users,
+    title: "50,000+ Merchant Families",
     description:
-      "Managing world-class specialized infrastructure for domestic and international spice and commodity trade.",
+      "Over 50,000 families engaged in the national & international trade of 400+ spices and agro commodities.",
   },
   {
     icon: Handshake,
-    title: "National Trade Advocacy",
+    title: "ITPO & CAIT Joint Initiative",
     description:
-      "Steering nationwide trade summits like Bharatiya Vyapar Mahotsav 2026 at Bharat Mandapam with ITPO & CAIT.",
+      "Steering national commercial expos including Bharatiya Vyapar Mahotsav 2026 at Bharat Mandapam, New Delhi.",
   },
 ];
 
@@ -137,14 +137,14 @@ export default function OrganizationsPage() {
                     </div>
 
                     {org.image && (
-                      <div className="relative mt-6 overflow-hidden rounded-2xl border border-white/20">
+                      <div className="relative mt-6 overflow-hidden rounded-2xl border border-white/30 bg-white p-4 flex items-center justify-center shadow-lg">
                         <LightboxImage
                           src={org.image}
                           alt={org.name}
                           caption={org.name}
                           overlay
                           className="aspect-[16/10] ring-0"
-                          imgClassName="object-cover"
+                          imgClassName="object-contain"
                         />
                       </div>
                     )}

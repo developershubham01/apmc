@@ -110,15 +110,15 @@ export function Footer() {
               <div className="mt-4 space-y-2 text-xs text-slate-300">
                 <p className="flex items-start gap-2">
                   <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#10B981]" />
-                  <span>{siteConfig.location}</span>
+                  <span>C-64, APMC Masala Market-1 &amp; Market-2, Vashi, Navi Mumbai - 400 703</span>
                 </p>
                 <p className="flex items-center gap-2">
                   <Phone className="h-3.5 w-3.5 shrink-0 text-[#10B981]" />
-                  <span>+91 (022) 2788-1000 / APMC Secretariat</span>
+                  <span>+91 98201 87911 / 022-4974 4533 / 022-4984 1933</span>
                 </p>
                 <p className="flex items-center gap-2">
                   <Mail className="h-3.5 w-3.5 shrink-0 text-[#10B981]" />
-                  <span>contact@kirtirana.in</span>
+                  <span>nmmc11992@gmail.com • mudibazar4u@hotmail.com</span>
                 </p>
               </div>
 

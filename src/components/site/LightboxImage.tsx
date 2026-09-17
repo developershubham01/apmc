@@ -10,6 +10,9 @@ type LightboxImageProps = {
   src: string;
   alt: string;
   caption?: string;
+  title?: string;
+  description?: string;
+  category?: string;
   sizes?: string;
   className?: string;
   imgClassName?: string;
@@ -24,6 +27,9 @@ export function LightboxImage({
   src,
   alt,
   caption,
+  title,
+  description,
+  category,
   sizes = "(max-width: 1024px) 100vw, 50vw",
   className,
   imgClassName,
@@ -31,7 +37,16 @@ export function LightboxImage({
   priority = false,
 }: LightboxImageProps) {
   const [open, setOpen] = useState(false);
-  const items: LightboxItem[] = [{ src, alt, caption }];
+  const items: LightboxItem[] = [
+    {
+      src,
+      alt,
+      caption,
+      title: title || caption || alt,
+      description: description || (title && caption !== title ? caption : undefined),
+      category,
+    },
+  ];
 
   return (
     <>

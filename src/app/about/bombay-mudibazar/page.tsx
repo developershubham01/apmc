@@ -91,6 +91,32 @@ export default function BombayMudibazarPage() {
         imageOpacity={90}
       />
 
+      {/* Dedicated Portal Banner Bar */}
+      <div className="bg-gradient-to-r from-[#042017] via-[#083526] to-[#042017] py-6 px-4 border-b border-[#D97706]/40 text-white">
+        <div className="mx-auto max-w-7xl flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-amber-500/20 border border-amber-400/40 text-amber-400">
+              <Store className="h-5 w-5" />
+            </div>
+            <div>
+              <span className="text-[0.68rem] font-bold uppercase tracking-wider text-amber-400 block">
+                OFFICIAL DEDICATED SITE
+              </span>
+              <h3 className="font-heading text-base font-bold text-white">
+                Looking for the standalone Mudibazar Association Website?
+              </h3>
+            </div>
+          </div>
+          <Link
+            href="/mudibazar"
+            className="inline-flex shrink-0 items-center gap-2 rounded-full bg-gradient-to-r from-[#D97706] to-[#B45309] px-6 py-2.5 text-xs sm:text-sm font-extrabold text-white shadow-md hover:from-amber-500 hover:to-amber-600 transition-all"
+          >
+            <span>Visit Dedicated Mudibazar Website</span>
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+      </div>
+
       {/* Main Profile & History Section with Architectural Focus & High Visibility Background */}
       <section className="relative overflow-hidden bg-white py-16 lg:py-24 border-b border-[#D1E7DD]">
         {/* Subtle Architectural Watermark */}
@@ -177,6 +203,9 @@ export default function BombayMudibazarPage() {
                   <LightboxImage
                     src="/images/kirti-rana/agriculture.jpg"
                     alt="Wholesale Kariana & Spice Commodity Operations"
+                    title="Bombay Mudibazar Kariana Merchants Association"
+                    description="Premier wholesale kariana and spice trade association established in 1969, representing centuries of trading tradition and merchant unity in Mumbai."
+                    category="MUDIBAZAR TRADITION"
                     caption="Bombay Mudibazar Kariana Merchants Association — Wholesale Tradition"
                     priority
                     className="h-full w-full rounded-none border-0 ring-0"
