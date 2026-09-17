@@ -62,18 +62,7 @@ const historicalMilestones = [
   },
 ];
 
-const commodityRates = [
-  { name: "Turmeric (Haldi Rajapuri)", category: "Spices", rate: "₹14,200 - ₹16,500 / Qtl", status: "Stable", trend: "+1.2%" },
-  { name: "Cumin Seeds (Jeera Unjha)", category: "Spices", rate: "₹24,500 - ₹28,000 / Qtl", status: "Bullish", trend: "+2.8%" },
-  { name: "Coriander (Dhania Eagle)", category: "Spices", rate: "₹7,800 - ₹9,200 / Qtl", status: "Steady", trend: "0.0%" },
-  { name: "Black Pepper (Kali Mirch Garbled)", category: "Spices", rate: "₹580 - ₹640 / Kg", status: "Active", trend: "+0.5%" },
-  { name: "Cardamom (Elaichi 8mm Green)", category: "Spices", rate: "₹2,400 - ₹2,750 / Kg", status: "Strong", trend: "+3.4%" },
-  { name: "Almonds (Badam Giri California)", category: "Dry Fruits", rate: "₹620 - ₹680 / Kg", status: "Steady", trend: "-0.4%" },
-  { name: "Cashews (Kaju W240 King)", category: "Dry Fruits", rate: "₹740 - ₹820 / Kg", status: "High Demand", trend: "+1.8%" },
-  { name: "Basmati Rice (1121 Steam)", category: "Grains", rate: "₹88 - ₹108 / Kg", status: "Steady", trend: "+0.2%" },
-  { name: "Toor Dal (Latur Desi Premium)", category: "Pulses", rate: "₹13,800 - ₹14,600 / Qtl", status: "Steady", trend: "-0.1%" },
-  { name: "Mustard Seed (Rai Bold)", category: "Oilseeds", rate: "₹5,400 - ₹5,900 / Qtl", status: "Steady", trend: "0.0%" },
-];
+
 
 const committeeMembers = [
   {
@@ -202,12 +191,7 @@ export default function MudibazarDedicatedWebsitePage() {
             >
               Overview
             </a>
-            <a
-              href="#commodity-rates"
-              className="rounded-full bg-[#F0FDF4] border border-[#D1E7DD] px-3.5 py-1.5 hover:bg-[#059669] hover:text-white transition-all shrink-0"
-            >
-              Wholesale Rates
-            </a>
+
             <a
               href="#history"
               className="rounded-full bg-[#F0FDF4] border border-[#D1E7DD] px-3.5 py-1.5 hover:bg-[#059669] hover:text-white transition-all shrink-0"
@@ -343,68 +327,7 @@ export default function MudibazarDedicatedWebsitePage() {
         </div>
       </section>
 
-      {/* Live Wholesale Commodity Price Ticker Section */}
-      <section id="commodity-rates" className="py-16 bg-[#F0FDF4] border-b border-[#D1E7DD]">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 border-b border-[#D1E7DD] pb-6">
-            <div>
-              <span className="eyebrow text-[#059669] font-bold">DAILY WHOLESALE BENCHMARKS</span>
-              <h2 className="mt-1 font-heading text-2xl sm:text-3xl font-extrabold text-[#042017]">
-                Live Wholesale Commodity Indicative Ticker
-              </h2>
-              <p className="mt-1 text-xs sm:text-sm text-[#4B5563]">
-                Daily price bands for spices, dry fruits, pulses, and oilseeds at Bombay Mudibazar &amp; APMC Turbhe.
-              </p>
-            </div>
-            <span className="inline-flex items-center gap-2 rounded-full bg-white border border-[#D1E7DD] px-3 py-1 text-xs font-bold text-[#047857] self-start sm:self-auto shadow-sm">
-              <span className="h-2 w-2 rounded-full bg-[#059669] animate-pulse" />
-              Live Market Rates
-            </span>
-          </div>
 
-          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-            {commodityRates.map((c) => (
-              <div
-                key={c.name}
-                className="rounded-2xl border border-[#D1E7DD] bg-white p-4 shadow-sm hover:border-[#059669] hover:shadow-md transition-all flex flex-col justify-between"
-              >
-                <div>
-                  <div className="flex items-center justify-between text-[0.68rem] font-bold uppercase tracking-wider text-[#047857]">
-                    <span>{c.category}</span>
-                    <span
-                      className={`px-1.5 py-0.5 rounded text-[0.62rem] font-extrabold ${
-                        c.trend.startsWith("+")
-                          ? "bg-emerald-100 text-emerald-800"
-                          : c.trend.startsWith("-")
-                          ? "bg-rose-100 text-rose-800"
-                          : "bg-slate-100 text-slate-700"
-                      }`}
-                    >
-                      {c.trend}
-                    </span>
-                  </div>
-                  <h4 className="mt-2 font-heading text-sm font-bold text-[#042017] leading-snug">
-                    {c.name}
-                  </h4>
-                </div>
-
-                <div className="mt-4 pt-3 border-t border-slate-100">
-                  <span className="block font-heading text-base font-black text-[#059669]">
-                    {c.rate}
-                  </span>
-                  <span className="text-[0.7rem] text-slate-500 font-medium">
-                    Status: {c.status}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <p className="mt-4 text-[0.75rem] text-slate-500 text-center italic">
-            * Wholesale indicative price bands published for member information. Actual auction transactions depend on quality grade, moisture percentage, and bag sizes at APMC yard.
-          </p>
-        </div>
-      </section>
 
       {/* Historical Milestones & APMC Migration */}
       <section id="history" className="py-16 lg:py-24 bg-white border-b border-[#D1E7DD]">

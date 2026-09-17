@@ -17,7 +17,6 @@ import { SectionHeading } from "@/components/site/SectionHeading";
 import { ScrollReveal } from "@/components/site/ScrollReveal";
 import { LightboxImage } from "@/components/site/LightboxImage";
 import { MarketCard } from "@/components/site/MarketCard";
-import { MarketRates } from "@/components/site/MarketRates";
 import { CTASection } from "@/components/site/CTASection";
 import { markets } from "@/data/markets";
 import { siteConfig } from "@/data/site";
@@ -78,15 +77,6 @@ export default function ApmcPage() {
               </p>
 
               <div className="mt-7 flex flex-wrap gap-3">
-                <a
-                  href={siteConfig.dailyRatesUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-amber-500 to-yellow-500 px-5 py-3 text-sm font-bold text-slate-950 shadow-gold-glow transition-all hover:from-amber-400 hover:to-yellow-400 hover:-translate-y-0.5"
-                >
-                  <ExternalLink className="h-4 w-4" />
-                  Daily Market Rates
-                </a>
                 <Link
                   href="#market-information"
                   className="inline-flex items-center gap-2 rounded-xl border border-navy/15 bg-white px-5 py-3 text-sm font-600 text-navy transition-all hover:border-amber-500 hover:text-amber-700"
@@ -140,20 +130,6 @@ export default function ApmcPage() {
               <MarketCard key={market.slug} market={market} index={i} />
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Daily Indicative Rates */}
-      <section id="market-rates" className="bg-white py-16 lg:py-24 scroll-mt-24">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeading
-            eyebrow="Daily Indicative Rates"
-            title="Today's Wholesale Price Bands"
-            description="Orientation-level indicative price bands across the five commodity markets. Figures are sample data — always confirm live auction prices on the official portal."
-          />
-          <ScrollReveal className="mt-12">
-            <MarketRates />
-          </ScrollReveal>
         </div>
       </section>
 
@@ -280,23 +256,7 @@ export default function ApmcPage() {
                   </div>
                   <ArrowRight className="h-4 w-4 text-royal transition-transform group-hover:translate-x-1" />
                 </a>
-                <a
-                  href={siteConfig.dailyRatesUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-center justify-between gap-4 px-6 py-5 transition-colors hover:bg-mist"
-                >
-                  <div className="flex items-center gap-4">
-                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-amber-50 text-amber-600 ring-1 ring-amber-200">
-                      <ExternalLink className="h-5 w-5" />
-                    </span>
-                    <div>
-                      <p className="text-sm font-600 text-navy">Daily Market Prices</p>
-                      <p className="text-xs text-ink-600">Official daily rates portal</p>
-                    </div>
-                  </div>
-                  <ArrowRight className="h-4 w-4 text-royal transition-transform group-hover:translate-x-1" />
-                </a>
+
               </div>
             </div>
           </ScrollReveal>
@@ -306,9 +266,9 @@ export default function ApmcPage() {
             <div className="flex items-start gap-3 rounded-2xl border border-amber-500/30 bg-amber-50/60 p-5">
               <Info className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" />
               <p className="text-sm text-ink-600">
-                This is a static informational website. Market timings, holidays
-                and daily prices are subject to change — always confirm with the
-                official Mumbai APMC portal before planning a visit or trade.
+                This is a static informational website. Market timings and holidays
+                are subject to change — always confirm with the official Mumbai APMC portal
+                before planning a visit or trade.
               </p>
             </div>
           </ScrollReveal>
@@ -317,20 +277,19 @@ export default function ApmcPage() {
 
       <CTASection
         variant="navy"
-        eyebrow="Daily Rates"
-        icon={Phone}
-        title="Today's APMC Market Rates"
-        description="Market prices are published through the official Mumbai APMC portal. This website does not display live prices."
+        eyebrow="APMC Trading Hub"
+        icon={Building2}
+        title="Navi Mumbai APMC Wholesale Hub"
+        description="Asia's largest Swadeshi agricultural trading hub spanning 250 acres in Turbhe."
         buttons={[
-          {
-            label: "View Official Daily Rates",
-            href: siteConfig.dailyRatesUrl,
-            external: true,
-            variant: "primary",
-          },
           {
             label: "View Gallery",
             href: "/gallery",
+            variant: "primary",
+          },
+          {
+            label: "Contact Us",
+            href: "/contact",
             variant: "secondary",
           },
         ]}

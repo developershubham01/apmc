@@ -38,7 +38,6 @@ export function MudibazarNavbar() {
 
   const navLinks = [
     { label: "Overview", href: "/mudibazar#hero", icon: Store },
-    { label: "Wholesale Rates", href: "/mudibazar#commodity-rates", icon: TrendingUp },
     { label: "Trade Heritage", href: "/mudibazar#history", icon: History },
     { label: "Arbitration Cell", href: "/mudibazar#dispute-cell", icon: Scale },
     { label: "Executive Committee", href: "/mudibazar#committee", icon: Users },

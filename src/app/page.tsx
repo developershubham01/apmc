@@ -282,7 +282,7 @@ export default function HomePage() {
                   Explore APMC in Detail
                 </span>
                 <span className="text-sm text-[#4B5563]">
-                  Market overview, commodity rates &amp; resources
+                  Market overview, categories &amp; resources
                 </span>
                 <span className="mt-2 inline-flex items-center gap-1 text-sm font-bold text-[#059669]">
                   View APMC Page
@@ -293,28 +293,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* 9. Daily Market Rates CTA */}
-      <CTASection
-        variant="navy"
-        eyebrow="Market Rates"
-        icon={TrendingUp}
-        title="APMC Wholesale Commodity Rates"
-        description="View daily indicative rate bands for Fruits, Vegetables, Grains, Spices and Onion-Potato wholesale markets."
-        buttons={[
-          {
-            label: "Explore Market Rates",
-            href: "/apmc",
-            variant: "primary",
-          },
-          {
-            label: "View Official Portal",
-            href: siteConfig.dailyRatesUrl,
-            external: true,
-            variant: "secondary",
-          },
-        ]}
-      />
 
       {/* 10. Achievements */}
       <section className="bg-white py-16 lg:py-24">

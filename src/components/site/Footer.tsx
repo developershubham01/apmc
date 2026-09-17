@@ -237,18 +237,7 @@ export function Footer() {
                     </span>
                   </a>
                 </li>
-                <li>
-                  <Link
-                    href="/apmc#market-rates"
-                    className="group flex items-start gap-2 text-xs sm:text-sm text-slate-300 transition-colors hover:text-white"
-                  >
-                    <TrendingUp className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#34D399]" />
-                    <span className="flex items-center gap-1">
-                      Daily Wholesale Rates Board
-                      <ArrowUpRight className="h-3 w-3 text-[#10B981]" />
-                    </span>
-                  </Link>
-                </li>
+
               </ul>
 
               {/* APMC Complex Location Box */}

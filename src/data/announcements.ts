@@ -13,13 +13,13 @@ export interface ChamberAnnouncement {
 export const chamberAnnouncements: ChamberAnnouncement[] = [
   {
     id: "ann-1",
-    title: "Daily APMC Wholesale Price Bulletin — Spices, Grains, Pulses & Oilseeds",
-    category: "rates",
-    categoryLabel: "Market Rates",
+    title: "Navi Mumbai APMC Market Yard: Wholesale Trade & Sector Operations Advisory",
+    category: "trade",
+    categoryLabel: "Market Hub",
     date: "10 Sep 2026",
     isUrgent: true,
-    href: "/apmc#market-rates",
-    summary: "Updated wholesale auction rates for APMC Market-I and Market-II Turbhe Complex. Check today's price index.",
+    href: "/apmc",
+    summary: "Official operational guidance and logistics protocol for APMC Market-I and Market-II Turbhe Complex.",
     fileSize: "PDF 1.2 MB",
   },
   {

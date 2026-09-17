@@ -140,12 +140,6 @@ const mainNavItems: NavItem[] = [
         icon: Store,
       },
       {
-        title: "Daily APMC Wholesale Rates",
-        description: "Live daily price index for grains, spices & pulses",
-        href: "/apmc#market-rates",
-        icon: TrendingUp,
-      },
-      {
         title: "5 APMC Wholesale Markets",
         description: "Market-I, Market-II, Spices, Grain, Onion & Potato",
         href: "/apmc#markets",
@@ -483,9 +477,8 @@ export function Navbar() {
                   {t("hero.chamberTitle", "Navi Mumbai Merchants Chamber")}
                 </span>
                 <span className="text-[0.62rem] sm:text-[0.72rem] md:text-xs font-bold uppercase tracking-[0.12em] text-[#059669] flex items-center gap-1.5 mt-0.5 truncate">
-                  <span>Shri Kirti Rana</span>
-                  <span className="text-slate-300">•</span>
-                  <span className="text-[#4B5563] font-semibold hidden sm:inline">Apex Voice of APMC</span>
+                  <span>Estd.1993</span>
+
                 </span>
               </div>
             </Link>
@@ -504,7 +497,7 @@ export function Navbar() {
                   {t("hero.bmkmaTitle", "Bombay Mudibazar Kariana Merchants Association")}
                 </span>
                 <span className="text-[0.58rem] sm:text-[0.68rem] md:text-xs font-bold uppercase tracking-[0.1em] text-[#047857] group-hover:text-[#059669] transition-colors mt-0.5">
-                  Estd. 1969 • Premier APMC Body
+                  Estd. 1969
                 </span>
               </div>
 

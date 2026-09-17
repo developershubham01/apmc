@@ -389,10 +389,10 @@ export default function ChamberAboutPage() {
       <CTASection
         variant="navy"
         eyebrow="Merchant Services"
-        title="Access Wholesale Rates, Trade Advisory & Member Facilities"
+        title="Access Trade Advisory & Member Facilities"
         description="Connect with the Navi Mumbai Merchants Chamber for trade disputes, export facilitation, and APMC market operations."
         buttons={[
-          { label: "View Daily Rates", href: "/apmc#market-rates", variant: "primary" },
+          { label: "APMC Market Yard", href: "/apmc", variant: "primary" },
           { label: "Contact Chamber", href: "/contact", variant: "secondary" },
         ]}
       />
