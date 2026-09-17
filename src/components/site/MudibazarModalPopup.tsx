@@ -41,7 +41,7 @@ export function MudibazarModalPopup() {
   const handleGoToMudibazar = () => {
     sessionStorage.setItem("bmkma_portal_prompt_seen", "true");
     setIsOpen(false);
-    router.push("/mudibazar");
+    window.open("https://mudhibazar.vercel.app/", "_blank", "noopener,noreferrer");
   };
 
   const handleStayOnMain = () => {

@@ -105,7 +105,7 @@ const mainNavItems: NavItem[] = [
       {
         title: "Bombay Mudibazar Dedicated Website",
         description: "Official standalone website with live rates, arbitration & committee portal",
-        href: "/mudibazar",
+        href: "https://mudhibazar.vercel.app/",
         icon: Store,
       },
       {
@@ -484,9 +484,10 @@ export function Navbar() {
             </Link>
 
             {/* Right: Bombay Mudibazar Kariana Merchants Association Partner Identity */}
-            <Link
-              href="/mudibazar"
-              onClick={() => handleNavClick("/mudibazar")}
+            <a
+              href="https://mudhibazar.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="group flex items-center gap-2 sm:gap-3.5 text-right shrink-0"
               aria-label="Bombay Mudibazar Kariana Merchants Association"
               title="Bombay Mudibazar Kariana Merchants Association"
@@ -510,7 +511,7 @@ export function Navbar() {
                   className="object-contain p-0.5"
                 />
               </div>
-            </Link>
+            </a>
           </div>
         </div>
 
@@ -601,6 +602,37 @@ export function Navbar() {
                             {item.items.map((sub) => {
                               const SubIcon = sub.icon || ChevronRight;
                               const isSubActive = pathname === sub.href;
+                              const isSubExternal = sub.href.startsWith("http");
+
+                              if (isSubExternal) {
+                                return (
+                                  <a
+                                    key={sub.href}
+                                    href={sub.href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    onClick={() => {
+                                      setActiveDropdown(null);
+                                    }}
+                                    className="group flex items-start gap-2.5 rounded-xl p-2.5 transition-all duration-150 text-left border border-transparent hover:bg-[#ECFDF5] text-[#042017] hover:text-[#059669] hover:border-[#059669]/30"
+                                  >
+                                    <span className="mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-lg transition-all duration-150 bg-[#ECFDF5] text-[#059669] group-hover:bg-[#059669] group-hover:text-white ring-1 ring-[#059669]/30">
+                                      <SubIcon className="h-3.5 w-3.5" />
+                                    </span>
+                                    <div className="flex flex-col">
+                                      <span className="text-xs font-bold leading-snug transition-colors duration-150 text-[#042017] group-hover:text-[#059669]">
+                                        {sub.title}
+                                      </span>
+                                      {sub.description && (
+                                        <span className="text-[0.65rem] leading-tight mt-0.5 line-clamp-1 transition-colors duration-150 text-[#4B5563] group-hover:text-[#047857]">
+                                          {sub.description}
+                                        </span>
+                                      )}
+                                    </div>
+                                  </a>
+                                );
+                              }
+
                               return (
                                 <Link
                                   key={sub.href}
@@ -710,11 +742,12 @@ export function Navbar() {
         >
           <div className="flex flex-col px-4 py-4 gap-3.5 max-h-[calc(100vh-115px)] overflow-y-auto scrollbar-premium text-[#042017]">
             {/* Mobile Partner Association Quick Link */}
-            <Link
-              href="/about/bombay-mudibazar"
+            <a
+              href="https://mudhibazar.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => {
                 setOpen(false);
-                handleNavClick("/about/bombay-mudibazar");
               }}
               className="flex items-center justify-between rounded-2xl border border-[#D1E7DD] bg-[#F0FDF4] p-2.5 text-left hover:bg-[#ECFDF5] transition-colors"
             >
@@ -737,7 +770,7 @@ export function Navbar() {
                 </div>
               </div>
               <ChevronRight className="h-4 w-4 text-[#059669]" />
-            </Link>
+            </a>
 
             {/* Mobile Announcements Quick Bar */}
             <button
@@ -843,24 +876,49 @@ export function Navbar() {
                     {/* Accordion Submenu */}
                     {isExpanded && item.items && (
                       <div className="ml-3 my-1 flex flex-col gap-1 border-l-2 border-[#059669]/50 pl-3 py-1">
-                        {item.items.map((sub) => (
-                          <Link
-                            key={sub.href}
-                            href={sub.href}
-                            onClick={() => {
-                              setOpen(false);
-                              handleNavClick(sub.href);
-                            }}
-                            className="flex flex-col rounded-xl px-3 py-2 text-xs font-medium text-[#4B5563] hover:bg-[#F0FDF4] hover:text-[#059669] transition-colors"
-                          >
-                            <span className="font-bold text-[#042017] text-xs">{sub.title}</span>
-                            {sub.description && (
-                              <span className="text-[0.65rem] text-[#4B5563] line-clamp-1 mt-0.5">
-                                {sub.description}
-                              </span>
-                            )}
-                          </Link>
-                        ))}
+                        {item.items.map((sub) => {
+                          const isSubExternal = sub.href.startsWith("http");
+                          if (isSubExternal) {
+                            return (
+                              <a
+                                key={sub.href}
+                                href={sub.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={() => {
+                                  setOpen(false);
+                                }}
+                                className="flex flex-col rounded-xl px-3 py-2 text-xs font-medium text-[#4B5563] hover:bg-[#F0FDF4] hover:text-[#059669] transition-colors"
+                              >
+                                <span className="font-bold text-[#042017] text-xs">{sub.title}</span>
+                                {sub.description && (
+                                  <span className="text-[0.65rem] text-[#4B5563] line-clamp-1 mt-0.5">
+                                    {sub.description}
+                                  </span>
+                                )}
+                              </a>
+                            );
+                          }
+
+                          return (
+                            <Link
+                              key={sub.href}
+                              href={sub.href}
+                              onClick={() => {
+                                setOpen(false);
+                                handleNavClick(sub.href);
+                              }}
+                              className="flex flex-col rounded-xl px-3 py-2 text-xs font-medium text-[#4B5563] hover:bg-[#F0FDF4] hover:text-[#059669] transition-colors"
+                            >
+                              <span className="font-bold text-[#042017] text-xs">{sub.title}</span>
+                              {sub.description && (
+                                <span className="text-[0.65rem] text-[#4B5563] line-clamp-1 mt-0.5">
+                                  {sub.description}
+                                </span>
+                              )}
+                            </Link>
+                          );
+                        })}
                       </div>
                     )}
                   </div>
